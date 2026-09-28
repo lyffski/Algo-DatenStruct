@@ -201,6 +201,10 @@ svg text{font-family:'JetBrains Mono',monospace}
   table.rt{display:block;overflow-x:auto}
   .hero h1{font-size:1.8rem}
 }
+.codet .tnote{margin-left:1.4em;color:#7d8590;font-style:italic;font-size:.88em;white-space:nowrap}
+.idee{background:#10161f;border:1px solid #30363d;border-left:4px solid #bc8cff;border-radius:8px;padding:10px 14px;margin:10px 0;line-height:1.6}
+.idee b.k{color:#bc8cff}.idee .row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;padding:3px 0}
+@media(max-width:640px){.idee .row{grid-template-columns:1fr;gap:0}}
 </style>
 </head>
 <body>
@@ -331,8 +335,8 @@ svg text{font-family:'JetBrains Mono',monospace}
 <div class="figure anat" id="master">
 <div class="ttl"><span class="n">Master-Anatomie</span> Jede Datenstruktur = Werte + Operationen + Kostenprofil</div>
 <div class="sub">Definition 3.1 (Datentyp) und 4.1 (ADT) in einer Karte, dazu das Kostenprofil, das du in der Prüfung für jede Struktur angeben musst.</div>
-<div class="step" style="text-align:center">\[ \underbrace{\Rule{\text{Datentyp}}}_{\text{Def. 3.1}} = \big(\;\underbrace{\Par{\text{Menge von Werten}}}_{\text{was gespeichert wird}},\;\underbrace{\Chg{\text{Operationen}}}_{\text{was man damit tun darf}}\;\big) \qquad \underbrace{\Rule{\text{ADT}}}_{\text{Def. 4.1}} = \text{Datentyp, } \Cond{\text{nur}}\text{ über ein } \Mem{\text{Interface}}\text{ benutzt} \]</div>
-<div class="step" style="text-align:center">\[ \Res{\text{Kosten einer Operation}} \;=\; \underbrace{\#\,\Mem{\text{verfolgter Links}}}_{\text{Listen, Bäume}} \;+\; \underbrace{\#\,\Chg{\text{verschobener Elemente}}}_{\text{Arrays}} \;+\; \underbrace{\#\,\Idx{\text{Rekursionsaufrufe}}}_{\text{Kap. 5}} \]</div>
+<div class="step" style="text-align:center">\[ \begin{aligned} \Rule{\text{Datentyp}} &= \big(\Par{\text{Menge von Werten}},\ \Chg{\text{Operationen}}\big) && \text{Def. 3.1: was gespeichert wird und was man damit tun darf.} \\ \Rule{\text{ADT}} &= \text{Datentyp} + \Cond{\text{nur}} \text{ Zugriff über ein } \Mem{\text{Interface}} && \text{Def. 4.1: Die Darstellung ist versteckt.} \end{aligned} \]</div>
+<div class="step" style="text-align:center">\[ \begin{aligned} \Res{\text{Kosten}} &= \#\,\Mem{\text{verfolgte Links}} && \text{Listen und Bäume: jeder Schritt } x = x\to next. \\ &\quad + \#\,\Chg{\text{verschobene Elemente}} && \text{Arrays: Nachrücken beim Einfügen oder Löschen.} \\ &\quad + \#\,\Idx{\text{Rekursionsaufrufe}} && \text{Kap. 5: Jeder Aufruf kostet einen Stackframe.} \end{aligned} \]</div>
 <div class="scroll"><table class="rt">
 <tr><th>Struktur</th><th>k-tes Element</th><th>einfügen (Stelle bekannt)</th><th>löschen (Stelle bekannt)</th><th>suchen</th><th>Speicher</th></tr>
 <tr><td class="c-mem">Array (§3.2)</td><td>\(\Res{O(1)}\) · <code class="inl">a[k]</code></td><td>\(O(N)\) · nachrücken</td><td>\(O(N)\) · nachrücken</td><td>\(O(N)\) · sortiert \(O(\lg N)\)</td><td>\(N\) fest (vorab)</td></tr>
@@ -402,13 +406,13 @@ svg text{font-family:'JetBrains Mono',monospace}
 
 <div class="figure anat">
 <div class="ttl"><span class="n">Anatomie</span> Zeiger <code>*</code>, Adresse <code>&amp;</code>, Referenz <code>&amp;</code> im Speicher</div>
-<div class="sub">Beobachte: <code class="inl">*p = …</code> ändert <b>a</b>, obwohl dort nie „a“ steht. Eine Referenz <code class="inl">r</code> ist nur ein zweiter Name für dieselbe Speicherzelle.</div>
+<div class="sub">Beobachte: <code class="inl">*p = 7</code> ändert <b>a</b>, obwohl dort nie „a“ steht. Eine Referenz <code class="inl">r</code> ist nur ein zweiter Name für dieselbe Speicherzelle.</div>
 <div id="trPtr"></div>
 <div class="arow"><span class="s"><span class="c-mem">&amp;</span>a</span><span><b>Adressoperator:</b> liefert die Speicheradresse von <code class="inl">a</code></span></div>
 <div class="arow"><span class="s">int <span class="c-mem">*</span>p</span><span><b>Deklaration:</b> p ist ein Zeiger auf int, speichert also eine Adresse</span></div>
 <div class="arow"><span class="s"><span class="c-chg">*</span>p <span class="c-chg">=</span> 7</span><span><b>Dereferenzierung:</b> „schreibe 7 dorthin, wohin p zeigt“</span></div>
 <div class="arow"><span class="s">int <span class="c-mem">&amp;</span>r = a</span><span><b>Referenz:</b> ein fest verbundener Zweitname, „ein Zeiger, der automatisch dereferenziert wird“</span></div>
-<div class="step">\[ \underbrace{\Chg{*}\Mem{p}}_{\text{Wert}} \;\;\longleftrightarrow\;\; \underbrace{\Mem{p}}_{\text{Adresse}} = \underbrace{\Mem{\&}a}_{\text{Adresse von }a}\qquad\quad \Chg{*}(\Mem{\&}a) \equiv a \]</div>
+<div class="step">\[ \begin{aligned} \Mem{p} &= \Mem{\&}a && \text{p enthält die Adresse von a.} \\ \Chg{*}\Mem{p} &= a && \text{*p ist der Wert an dieser Adresse, also a selbst.} \\ \Chg{*}(\Mem{\&}a) &\equiv a && \text{* und \& heben sich gegenseitig auf.} \end{aligned} \]</div>
 <pre class="cpp" data-roles='{"r":"par","theta":"res","x":"par","y":"par"}'>void polar(float x, float y, float *r, float *theta)   // per Zeiger
   { *r = sqrt(x*x + y*y); *theta = atan2(y, x); }
 void polar(float x, float y, float& r, float& theta)   // per Referenz
@@ -444,15 +448,17 @@ void polar(float x, float y, float& r, float& theta)   // per Referenz
   <text x="280" y="180" fill="#d29922" font-size="12" text-anchor="middle">a + 3  ⇒  *(a+3) ≡ a[3] · ein Rechenschritt, O(1)</text>
   <text x="600" y="170" fill="#f85149" font-size="11.5" text-anchor="middle">Einfügen bei 3 ⇒ a[3..7] je 1 nach rechts: O(N)</text>
 </svg>
-<div class="step">\[ \Mem{\&a[}\Idx{i}\Mem{]} = \Mem{a} + \Idx{i}\cdot\texttt{sizeof(int)} \quad\Longrightarrow\quad \text{Zugriff } \Res{O(1)}, \qquad \text{Einfügen/Löschen in der Mitte: } \Res{O(N)} \]</div>
+<div class="step">\[ \begin{aligned} \Mem{\&a[}\Idx{i}\Mem{]} &= \Mem{a} + \Idx{i}\cdot\texttt{sizeof(int)} && \text{Die Adresse lässt sich direkt berechnen.} \\ \text{Zugriff auf } a[i] &\in \Res{O(1)} && \text{Das ist ein Rechenschritt, egal wie groß } i \text{ ist.} \\ \text{Einfügen/Löschen in der Mitte} &\in \Res{O(N)} && \text{Alle Elemente dahinter müssen nachrücken.} \end{aligned} \]</div>
 <div class="cap"><b>Programmierer-Pflicht:</b> Vor dem Lesen von <code class="inl">a[i]</code> muss dort etwas Sinnvolles stehen, und es muss \(0\le i&lt;N\) gelten. C++ prüft beides <i>nicht</i>. Das sind die zwei häufigsten Array-Fehler (§3.2).</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 3.5</span> Sieb des Eratosthenes — Array-Zugriff per Index</div>
 <div class="sub">Ziel: <code class="inl">a[i] = 1</code> genau dann, wenn i prim ist. Für jede Primzahl i werden die Vielfachen <code class="inl">i·j</code> auf 0 gesetzt (Fig. 3.1).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Ein Array von Ja/Nein-Markierungen. Jede noch markierte Zahl i ist prim und streicht ihre Vielfachen i·2, i·3, …</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Wenn die äußere Schleife bei i ankommt, sind alle Zahlen unter i mit einem kleineren Primteiler schon gestrichen. Deshalb heißt a[i] == 1 dann: i ist prim.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Etwa N ln N Schreibzugriffe, dank Index-Zugriff a[i*j] in O(1).</span></div></div>
 <div id="trSieve"></div>
-<div class="step">\[ \Res{T(N)} \;\propto\; N + \underbrace{\frac N2}_{i=2} + \underbrace{\frac N3}_{i=3} + \underbrace{\frac N5}_{i=5} + \dots \;<\; N\Big(1+\tfrac12+\tfrac13+\dots\Big) = N\,H_N \approx \Res{N\ln N} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Markiere alle Zahlen als prim. Gehe sie der Reihe nach durch. Ist eine noch markiert, streiche alle ihre Vielfachen. Am Ende sind die Primzahlen übrig.“</div>
+<div class="step">\[ \begin{aligned} \Res{T(N)} &\propto N && \text{Initialisierung und Ausgabe: je ein Durchlauf.} \\ &\quad + \tfrac N2 + \tfrac N3 + \tfrac N5 + \dots && \text{Je Primzahl } p \text{ werden } N/p \text{ Vielfache gestrichen.} \\ &< N\big(1+\tfrac12+\tfrac13+\dots+\tfrac1N\big) && \text{Abschätzung: über alle Zahlen statt nur über Primzahlen summieren.} \\ &= N\,H_N \approx \Res{N\ln N} && \text{Harmonische Zahl (Teil 1, Abschnitt 2.3).} \end{aligned} \]</div>
 <div class="cap"><b>Warum ein Array?</b> Die innere Schleife springt in Schritten von <span class="c-idx">i</span> direkt zu <code class="inl">a[i*j]</code>. Mit einer Liste müsste man jedes Mal <code class="inl">i*j</code> Links weit laufen. <b>Die äußere Schleife darf man nicht umdrehen</b>, denn bevor <code class="inl">a[i]</code> geprüft wird, müssen alle kleineren Primzahlen ihre Vielfachen schon gestrichen haben. Die anderen Schleifen dürfen auch rückwärts laufen.</div>
 </div>
 
@@ -461,22 +467,48 @@ void polar(float x, float y, float& r, float& theta)   // per Referenz
 <div class="sub">Stack-Array: Größe zur Compilezeit fest. Heap-Array: Größe erst zur Laufzeit bekannt.</div>
 <div class="exgrid two">
 <div class="excard"><span class="lb k">Prog 3.6 · Heap</span>
-<pre class="cpp" data-roles='{"a":"mem"}'>int main(int argc, char *argv[])
-  { int i, N = atoi(argv[1]);
-    int *a = new int[N];     // Heap, Größe zur Laufzeit
-    if (a == 0)
+<pre class="cpp" data-roles='{"a":"mem"}'>#include &lt;iostream&gt;                 // cout, endl
+#include &lt;stdlib.h&gt;                 // atoi
+using namespace std;
+int main(int argc, char *argv[])      // argv[1] = N als Text von der Kommandozeile
+  { int i, N = atoi(argv[1]);         // Text "1000" → Zahl 1000
+    int *a = new int[N];              // Heap: N ints, Größe erst jetzt bekannt
+    if (a == 0)                       // new hat keinen Speicher bekommen
       { cout &lt;&lt; "out of memory" &lt;&lt; endl; return 0; }
-    ...                      // wie Prog 3.5
+    for (i = 2; i &lt; N; i++) a[i] = 1;             // zuerst: alle Kandidaten „prim“
+    for (i = 2; i &lt; N; i++)                       // für jede Zahl i …
+      if (a[i])                                   // … die noch als prim gilt:
+        for (int j = i; j*i &lt; N; j++) a[i*j] = 0; //   ihre Vielfachen i·j streichen
+    for (i = 2; i &lt; N; i++)                       // Ausgabe
+      if (a[i]) cout &lt;&lt; " " &lt;&lt; i;                //   nur die übrig gebliebenen
+    cout &lt;&lt; endl;
+    delete[] a;                       // Heap-Speicher zurückgeben
   }</pre>
 <p class="small"><span class="c-mem">new int[N]</span> liefert einen <b>Zeiger</b> auf den ersten von N ints. Freigeben mit <code class="inl">delete[] a;</code>. <code class="inl">argv</code> ist selbst ein Array von Strings (§3.7).</p></div>
 <div class="excard"><span class="lb o">Prog 3.7 · Index aus Daten</span>
-<pre class="cpp" data-roles='{"f":"mem","cnt":"res"}'>int heads() { return rand() &lt; RAND_MAX/2; }
-...
-int *f = new int[N+1];
-for (j = 0; j &lt;= N; j++) f[j] = 0;
-for (i = 0; i &lt; M; i++, f[cnt]++)
-  for (cnt = 0, j = 0; j &lt;= N; j++)
-    if (heads()) cnt++;</pre>
+<pre class="cpp" data-roles='{"f":"mem","cnt":"res"}'>#include &lt;iostream&gt;
+#include &lt;stdlib.h&gt;                       // rand, atoi
+using namespace std;
+int heads()                                 // ein Münzwurf:
+  { return rand() &lt; RAND_MAX/2; }           //   1 = Kopf, 0 = Zahl (je 50 %)
+int main(int argc, char *argv[])
+  { int i, j, cnt;
+    int N = atoi(argv[1]);                  // Münzwürfe pro Experiment
+    int M = atoi(argv[2]);                  // Anzahl der Experimente
+    int *f = new int[N+1];                  // f[k] = wie oft genau k-mal Kopf
+    for (j = 0; j &lt;= N; j++) f[j] = 0;      // alle Zähler auf 0
+    for (i = 0; i &lt; M; i++, f[cnt]++)       // nach jedem Experiment: f[cnt] hochzählen
+      for (cnt = 0, j = 0; j &lt;= N; j++)     // ein Experiment: Münzen werfen …
+        if (heads()) cnt++;                 //   … und die Köpfe zählen
+    for (j = 0; j &lt;= N; j++)                // Histogramm ausgeben, eine Zeile je k
+      {
+        if (f[j] == 0) cout &lt;&lt; ".";         // nie vorgekommen: nur ein Punkt
+        for (i = 0; i &lt; f[j]; i += 10)      // je 10 Treffer ein Stern
+          cout &lt;&lt; "*";
+        cout &lt;&lt; endl;
+      }
+    delete[] f;
+  }</pre>
 <p class="small">Das Ergebnis <span class="c-res">cnt</span> eines Experiments wird selbst zum <b>Index</b>: <code class="inl">f[cnt]++</code> zählt Häufigkeiten in O(1). Mit einem Schritt werden N Möglichkeiten „einsortiert“.</p></div>
 </div>
 <div class="controls"><label>N Würfe = <span class="readout"><b id="coinNv">32</b></span></label><input id="coinN" type="range" min="4" max="64" value="32"><label>M Experimente = <span class="readout"><b id="coinMv">1000</b></span></label><input id="coinM" type="range" min="100" max="5000" step="100" value="1000"><button id="coinGo">🎲 neu würfeln</button></div>
@@ -527,21 +559,25 @@ for (i = 0; i &lt; M; i++, f[cnt]++)
 <div class="figure">
 <div class="ttl"><span class="n">Fig 3.3 · 3.4</span> Entfernen und Einfügen, jeweils 2 Zeilen</div>
 <div class="sub">Wähle die Operation und gehe die Zeigerzuweisungen einzeln durch. Die <span class="c-chg">orangefarbenen</span> Links ändern sich gerade.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Eine Liste ändert man, indem man Links umbiegt. Dabei wird kein Element verschoben.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Jeder Knoten ist von head aus erreichbar, und zwar nach jeder einzelnen Zuweisung, wenn die Reihenfolge stimmt.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>2 Zuweisungen, also O(1), egal wie lang die Liste ist.</span></div></div>
 <div id="trInsRem"></div>
-<div class="step">\[ \text{entfernen nach } x:\;\; \Idx{t} \Chg{=} x\Mem{\to next};\;\; x\Mem{\to next} \Chg{=} \Idx{t}\Mem{\to next} \qquad\qquad \text{einfügen } t \text{ nach } x:\;\; t\Mem{\to next} \Chg{=} x\Mem{\to next};\;\; x\Mem{\to next} \Chg{=} t \qquad \Res{O(1)} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Beim Löschen merkt man sich den Knoten und lässt x ihn überspringen. Beim Einfügen hängt man zuerst t an den Rest und erst dann x an t.“</div>
+<div class="step">\[ \begin{aligned} &\textbf{Entfernen nach } x\textbf{:} && \\ \Idx{t} &\Chg{=} x\Mem{\to next} && \text{t merkt sich den Knoten, der verschwinden soll.} \\ x\Mem{\to next} &\Chg{=} \Idx{t}\Mem{\to next} && \text{x überspringt ihn.} \\ &\textbf{Einfügen von } t \textbf{ nach } x\textbf{:} && \\ t\Mem{\to next} &\Chg{=} x\Mem{\to next} && \text{Zuerst hängt t sich an den Rest.} \\ x\Mem{\to next} &\Chg{=} t && \text{Dann zeigt x auf t.} \\ \text{Kosten} &= \Res{O(1)} && \text{Je 2 Zuweisungen, unabhängig von der Listenlänge.} \end{aligned} \]</div>
 <div class="cap"><b>Reihenfolge beim Einfügen ist entscheidend:</b> Setzt man zuerst <code class="inl">x-&gt;next = t</code>, ist der Rest der Liste verloren (niemand zeigt mehr darauf). Deshalb zuerst den neuen Knoten an den Rest hängen, dann umbiegen. Beim Entfernen merkt sich <code class="inl">t</code> den Knoten, damit man ihn danach mit <code class="inl">delete t</code> freigeben kann.</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 3.9</span> Josephus-Problem mit zirkulärer Liste</div>
 <div class="sub">N Personen im Kreis, jede <span class="c-par">M</span>-te scheidet aus. Wer bleibt übrig? Für N = 9, M = 5 ist die Reihenfolge 5 1 7 4 3 6 9 2, und <b>8</b> gewinnt (Fig. 3.5).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Die Personen sitzen in einer zirkulären Liste. Zählen heißt Links folgen, Ausscheiden heißt einen Link überspringen.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>x zeigt immer auf die Person <b>vor</b> der nächsten, die gezählt wird. Deshalb kann man x-&gt;next in O(1) entfernen.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>(N−1)·(M−1) Zählschritte plus N−1 Entfernungen, also O(N·M).</span></div></div>
 <div id="trJos"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Baue einen Kreis aus N Knoten. Solange mehr als einer übrig ist: gehe M−1 Schritte weiter und entferne den nächsten Knoten. Der letzte Knoten ist der Gewinner.“</div>
 <div class="exgrid">
   <div class="excard"><span class="lb o">Aufbau (Z. 11–14)</span>Ein Knoten 1, der auf sich selbst zeigt (<code class="inl">t-&gt;next = t</code>). Dann wird jeder neue Knoten <b>hinter x</b> eingefügt und zeigt zurück auf t. So bleibt der Kreis immer geschlossen.</div>
   <div class="excard"><span class="lb g">Zählen (Z. 17)</span><code class="inl">x = x-&gt;next</code> läuft M−1 Schritte. Danach ist <code class="inl">x-&gt;next</code> die M-te Person.</div>
   <div class="excard"><span class="lb r">Entfernen (Z. 18)</span><code class="inl">x-&gt;next = x-&gt;next-&gt;next</code> überspringt die Person in O(1). Mit einem Array müsste man alle Nachfolger nachrücken lassen.</div>
 </div>
-<div class="step">\[ \Res{T(N,M)} = \underbrace{\Idx{(N-1)}}_{\text{Runden}}\cdot\underbrace{\Par{(M-1)}}_{\text{Schritte je Runde}} + \underbrace{(N-1)}_{\text{Entfernungen à }O(1)} = \Res{O(NM)} \]</div>
+<div class="step">\[ \begin{aligned} \text{Runden} &= \Idx{N-1} && \text{So lange, bis nur eine Person übrig ist.} \\ \text{Schritte je Runde} &= \Par{M-1} && x = x\to next \text{ zählt weiter.} \\ \text{Entfernen je Runde} &= O(1) && \text{Ein einziger Link wird umgehängt.} \\ \Res{T(N,M)} &= (N-1)(M-1) + (N-1) = \Res{O(NM)} && \text{Summe über alle Runden.} \end{aligned} \]</div>
 <div class="cap"><b>Fig. 3.6 (Liste mit Array-Indizes):</b> Rechts im Tracer siehst du dieselbe Liste als Array <code class="inl">next[]</code>. Weil Person i im Index i steht, ist <code class="inl">next[i]</code> die nächste Person. Eine Liste ist eine <span class="c-rule">Abstraktion</span>, und C++-Zeiger sind nur <i>eine</i> Implementierung davon.</div>
 </div>
 
@@ -551,7 +587,7 @@ for (i = 0; i &lt; M; i++, f[cnt]++)
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.4 · Theorie</span> Die rekursive Sicht und die Standard-Schleife</div>
 <div class="sub">Def. 3.3: „A linked list is either a <b>null link</b> or a link to a node that contains an item and a link to a linked list.“</div>
-<div class="step">\[ \Rule{\text{Liste}} \;::=\; \underbrace{\Cond{0}}_{\text{leer (Anker)}} \;\;\big|\;\; \underbrace{\Mem{\text{Knoten}}(\Par{\text{item}},\;\Rule{\text{Liste}})}_{\text{Kopf + Rest}} \qquad\Longrightarrow\qquad \text{Rekursion (Kap. 5) passt wie angegossen} \]</div>
+<div class="step">\[ \begin{aligned} \Rule{\text{Liste}} &::= \Cond{0} && \text{Entweder leer (Null-Link, der Anker)} \\ &\;\;\;\big|\;\; \Mem{\text{Knoten}}(\Par{\text{item}},\ \Rule{\text{Liste}}) && \text{oder ein Knoten, dessen Link wieder auf eine Liste zeigt.} \end{aligned} \]</div>
 <pre class="cpp" data-roles='{"t":"idx","x":"par"}'>for (link t = x; t != 0; t = t-&gt;next) visit(t-&gt;item);   // Traversierung: so häufig wie for (i=0;i&lt;N;i++)</pre>
 <div class="cap"><b>Häufigste Listen-Fehler:</b> ein undefinierter Zeiger (das Gegenstück zum Array-Index außerhalb der Grenzen) und ein Zeiger, der unbemerkt verändert wurde, weil zwei Links auf denselben Knoten zeigen. Deshalb zeichnet man Listen-Code immer als Bild wie Fig. 3.7.</div>
 </div>
@@ -559,16 +595,20 @@ for (i = 0; i &lt; M; i++, f[cnt]++)
 <div class="figure">
 <div class="ttl"><span class="n">Prog 3.10</span> Liste umkehren mit drei Zeigern</div>
 <div class="sub"><span class="c-res">r</span> = schon umgedrehter Teil, <span class="c-idx">y</span> = noch nicht gesehener Teil, <span class="c-par">t</span> = Zwischenspeicher für <code class="inl">y-&gt;next</code>. Der Rumpf ist zur Schrittweise-Anzeige auf 4 Zeilen verteilt, der Code ist derselbe.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Man läuft einmal durch die Liste und dreht dabei jeden Link um.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>r ist immer eine korrekt umgedrehte Liste der schon besuchten Knoten, y der unveränderte Rest. Zusammen enthalten sie alle Knoten.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>4 Zuweisungen je Knoten, also O(N) Zeit und O(1) Zusatzspeicher.</span></div></div>
 <div id="trRev"></div>
-<div class="step">\[ \text{je Knoten genau 4 Zuweisungen}\;\Rightarrow\; \Res{T(N)=4N=O(N)}, \qquad \text{Zusatzspeicher } O(1) \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Merke dir den Nachfolger von y, lass y auf r zeigen, mache y zum neuen Anfang von r und gehe zum gemerkten Nachfolger.“</div>
+<div class="step">\[ \begin{aligned} \text{Zuweisungen je Knoten} &= 4 && t,\ y\to next,\ r,\ y. \\ \Res{T(N)} &= 4N = O(N) && \text{Jeder Knoten wird genau einmal angefasst.} \\ \text{Zusatzspeicher} &= O(1) && \text{Nur die drei Zeiger } t, y, r. \end{aligned} \]</div>
 <div class="cap"><b>Warum t?</b> In Zeile 5 wird <code class="inl">y-&gt;next</code> überschrieben. Ohne vorher gespeichertes <code class="inl">t</code> wäre der Rest der Liste verloren. Das ist dieselbe Denkfigur wie bei <code class="inl">int t = id[p]</code> in Quick-Find (Teil 1).</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 3.11</span> Insertion Sort auf einer Liste (mit Kopfknoten)</div>
 <div class="sub">Nimm den nächsten Knoten aus der Eingabeliste <span class="c-par">a</span>, suche seinen Platz in der sortierten Liste <span class="c-res">b</span> und hänge ihn dort ein (Fig. 3.8).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Zwei Listen: a ist unsortiert, b ist sortiert. Jeder Knoten wandert von a an seinen Platz in b.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Die Liste b ist nach jedem Schritt aufsteigend sortiert. Der Dummy-Kopf headb erspart den Sonderfall „vor dem ersten Element einfügen“.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Im Mittel N²/4 Vergleiche, also O(N²).</span></div></div>
 <div id="trLsort"></div>
-<div class="step">\[ \Res{C_{\text{avg}}} \approx \sum_{k=1}^{N}\frac k2 = \frac{N(N+1)}{4} \approx \Res{\frac{N^2}{4}} \quad(\text{Vergleiche, zufällige Eingabe}) \;\Rightarrow\; O(N^2) \;\;\to\;\text{Kap. 6} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Nimm den nächsten Knoten aus a. Laufe in b so weit, bis der nächste Wert größer ist. Hänge den Knoten dort ein.“</div>
+<div class="step">\[ \begin{aligned} \text{Vergleiche für den } k\text{-ten Knoten} &\approx \tfrac k2 && \text{Im Mittel wird die halbe sortierte Liste durchlaufen.} \\ \Res{C_{\text{avg}}} &\approx \sum_{k=1}^{N}\tfrac k2 = \tfrac{N(N+1)}{4} && \text{Über alle Knoten summieren.} \\ &\approx \Res{\tfrac{N^2}{4}} \in O(N^2) && \text{Quadratisch: das ist Insertion Sort (Kap. 6).} \end{aligned} \]</div>
 <div class="exgrid two">
   <div class="excard"><span class="lb p">Warum Kopfknoten (headb)?</span>Der erste eingefügte Knoten könnte an den Anfang müssen. Ohne Dummy-Kopf bräuchte man einen Sonderfall („Liste leer?“). Mit <code class="inl">headb</code> ist „einfügen nach x“ <b>immer</b> möglich, auch vor dem ersten echten Element.</div>
   <div class="excard"><span class="lb c">Warum u = t-&gt;next?</span>Zeile 10 hängt t in die b-Liste um und überschreibt dabei <code class="inl">t-&gt;next</code>. Der Nachfolger in a muss vorher in <code class="inl">u</code> gerettet werden.</div>
@@ -583,7 +623,9 @@ for (i = 0; i &lt; M; i++, f[cnt]++)
 insert t after x: t-&gt;next = x-&gt;next; x-&gt;next = t;
 remove after x: x-&gt;next = x-&gt;next-&gt;next;
 traversal: t = head;
-  do { ... t = t-&gt;next; } while (t != head);
+  do { visit(t-&gt;item);            // Knoten bearbeiten
+       t = t-&gt;next; }               // weiter zum Nachfolger
+  while (t != head);                // Stopp: wieder am Anfang
 test if one item: if (head-&gt;next == head)</pre></div>
 <div class="excard"><span class="lb r">Kopfzeiger, Null-Ende</span><pre class="cpp">initialize: head = 0;
 insert t after x: if (x == 0) { head = t; head-&gt;next = 0; }
@@ -707,8 +749,10 @@ return a[i] - b[i];</pre></div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 3.15</span> Stringsuche (Brute Force)</div>
 <div class="sub">Für jede Startposition <span class="c-idx">i</span> im Text wird das Muster <span class="c-par">p</span> Zeichen für Zeichen verglichen. Gezeigt ist der Such-Teil des Programms.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Probiere jede Startposition im Text. Vergleiche von dort das Muster Zeichen für Zeichen.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Wenn die innere Schleife bis p[j] == 0 kommt, stimmen alle Zeichen des Musters ab Position i überein.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Höchstens N·M Vergleiche, typisch nur etwa N.</span></div></div>
 <div id="trStr"></div>
-<div class="step">\[ \Res{T} \le \underbrace{\Par{N}}_{\text{Startpositionen}}\cdot\underbrace{\Par{M}}_{\text{Musterlänge}} \quad(\text{typisch fast }N\text{, weil meist schon das 1. Zeichen abweicht}) \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Für jede Stelle im Text: vergleiche so lange, bis ein Zeichen abweicht oder das Muster zu Ende ist. Ist es zu Ende, gib die Stelle aus.“</div>
+<div class="step">\[ \begin{aligned} \text{Startpositionen} &= \Par{N} && \text{Jede Stelle im Text wird probiert.} \\ \text{Vergleiche je Start} &\le \Par{M} && \text{Höchstens die ganze Musterlänge.} \\ \Res{T} &\le N\cdot M && \text{Das ist der Worst Case.} \\ \Res{T} &\approx N && \text{Typisch, weil meist schon das erste Zeichen abweicht.} \end{aligned} \]</div>
 </div>
 
 <div class="figure exam">
@@ -716,7 +760,7 @@ return a[i] - b[i];</pre></div>
 <div class="sub">Der Code ist <b>korrekt</b>, aber quadratisch: <code class="inl">for (i = 0; i &lt; strlen(a); i++)</code> zählt bei <b>jedem</b> Test den ganzen String neu.</div>
 <div class="controls"><label>Länge N = <span class="readout"><b id="slNv">1000</b></span></label><input id="slN" type="range" min="100" max="100000" step="100" value="1000"><span id="slOut" class="readout"></span></div>
 <div id="slPlot" class="plot sm"></div>
-<div class="step">\[ \sum_{i=0}^{N}\underbrace{N}_{\text{strlen}} = \Res{N(N+1)} \;\;\text{vs.}\;\; \underbrace{N}_{\text{einmal: } n = \text{strlen}(a)} + N = \Res{2N} \qquad N=10^6 \Rightarrow 10^{12}\text{ statt }2\cdot10^6 \]</div>
+<div class="step">\[ \begin{aligned} \text{mit strlen in der Bedingung:}\quad \sum_{i=0}^{N} N &= \Res{N(N+1)} && \text{Bei jedem der } N+1 \text{ Tests wird neu gezählt.} \\ \text{Länge vorher merken:}\quad N + N &= \Res{2N} && \text{Einmal zählen, danach nur noch vergleichen.} \\ N = 10^6: \quad 10^{12} &\text{ statt } 2\cdot 10^6 && \text{Das ist ein Faktor von einer halben Million.} \end{aligned} \]</div>
 <div class="cap"><b>Lehre (§3.6):</b> Man muss die Kosten der Bibliotheksfunktionen kennen. Die <code class="inl">string</code>-Klasse der C++-Bibliothek speichert die Länge mit und liefert sie in O(1), andere Operationen werden dafür langsamer. Verschiedene Implementierungen derselben Abstraktion haben verschiedene Kostenprofile.</div>
 </div>
 
@@ -728,7 +772,7 @@ return a[i] - b[i];</pre></div>
 <div class="sub">Klicke eine Zelle an: Du siehst, wo <code class="inl">a[i][j]</code> im linearen Speicher liegt.</div>
 <div class="controls"><label>M = <input type="number" id="m2M" value="3" min="1" max="6" style="width:52px"></label><label>N = <input type="number" id="m2N" value="4" min="1" max="8" style="width:52px"></label><span id="m2Out" class="readout"></span></div>
 <div id="m2Svg"></div>
-<div class="step">\[ \Mem{\&a[}\Idx{i}\Mem{][}\Idx{j}\Mem{]} = \Mem{a} + (\Idx{i}\cdot\Par{N} + \Idx{j})\cdot\texttt{sizeof(int)} \qquad \texttt{c[i][j] += a[i][k]*b[k][j]} \;\equiv\; \texttt{c[N*i+j] += a[N*i+k]*b[N*k+j]} \]</div>
+<div class="step">\[ \begin{aligned} \Mem{\&a[}\Idx{i}\Mem{][}\Idx{j}\Mem{]} &= \Mem{a} + (\Idx{i}\cdot\Par{N} + \Idx{j})\cdot\texttt{sizeof(int)} && i \text{ volle Zeilen der Länge } N \text{ überspringen, dann } j \text{ weiter.} \\ \texttt{c[i][j] += a[i][k]*b[k][j]} &\equiv \texttt{c[N*i+j] += a[N*i+k]*b[N*k+j]} && \text{Dieselbe Rechnung, von Hand im 1D-Array.} \end{aligned} \]</div>
 <div class="exgrid two">
 <div class="excard"><span class="lb k">Prog 3.16 · Array von Arrays</span><pre class="cpp" data-roles='{"t":"mem"}'>int **malloc2d(int r, int c)
   { int **t = new int*[r];      // r Zeilen-Zeiger
@@ -773,7 +817,7 @@ Speicher \(\Res{V+2E}\) · Kante testen: \(O(\text{Grad})\) · alle Nachbarn: \(
 <div class="sub">Frage aus Prog 3.8: Wie viele Punktpaare liegen näher als d beieinander? Die Idee ist, das Einheitsquadrat in G×G Zellen der Breite d zu teilen und in jeder Zelle eine Liste zu halten.</div>
 <div class="controls"><label>N Punkte = <span class="readout"><b id="grNv">300</b></span></label><input id="grN" type="range" min="50" max="1500" step="50" value="300"><label>d = <span class="readout"><b id="grDv">0.10</b></span></label><input id="grD" type="range" min="0.03" max="0.3" step="0.01" value="0.1"><span id="grOut" class="readout"></span></div>
 <div id="grSvg"></div>
-<div class="step">\[ \underbrace{\binom N2 \approx \frac{N^2}{2}}_{\text{Prog 3.8: alle Paare}} \quad\longrightarrow\quad \underbrace{N\cdot 9\cdot\underbrace{N d^2}_{\text{Punkte je Zelle}}}_{\text{Prog 3.20: nur Nachbarzellen}} \;=\; 9\,d^2 N^2 \quad(\text{Faktor } \approx 1/d^2 \text{ schneller}) \]</div>
+<div class="step">\[ \begin{aligned} \text{Prog 3.8 (alle Paare):}\quad \binom N2 &\approx \frac{N^2}{2} && \text{Jeder Punkt wird mit jedem verglichen.} \\ \text{Punkte je Zelle} &\approx N d^2 && \text{Zellenfläche } d^2 \text{ mal Punktdichte } N. \\ \text{Prog 3.20 (Gitter):}\quad N\cdot 9\cdot N d^2 &= 9\,d^2 N^2 && \text{Jeder Punkt nur gegen die 9 Nachbarzellen.} \\ \text{Gewinn} &\propto \frac{1}{d^2} && \text{Das Labor unten zeigt den tatsächlichen Faktor.} \end{aligned} \]</div>
 <pre class="cpp" data-roles='{"grid":"mem","s":"idx","t":"par","cnt":"res"}'>void gridinsert(float x, float y)
   { int X = x*G+1; int Y = y*G+1;
     point p; p.x = x; p.y = y;
@@ -842,7 +886,21 @@ Speicher \(\Res{V+2E}\) · Kante testen: \(O(\text{Grad})\) · alle Nachbarn: \(
         { float dx = x-a.x, dy = y-a.y;             // x = this-&gt;x,  a.x = Argument
           return sqrt(dx*dx + dy*dy); }
   };
-// Client:  POINT *a = new POINT[N];  ...  if (a[i].distance(a[j]) &lt; d) cnt++;</pre>
+</pre>
+<div class="sub" style="margin-top:8px"><b>Prog 4.2 · der Client</b> kennt nur das Interface: Er erzeugt N Punkte und zählt die Paare mit Abstand kleiner als d.</div>
+<pre class="cpp" data-roles='{"a":"mem","d":"par","cnt":"res","N":"par"}'>#include &lt;iostream&gt;
+#include &lt;stdlib.h&gt;                        // atoi, atof
+#include "POINT.cxx"                         // die Klasse von oben
+using namespace std;
+int main(int argc, char *argv[])
+  { float d = atof(argv[2]);                 // Abstandsschwelle, z.B. 0.1
+    int i, cnt = 0, N = atoi(argv[1]);       // Anzahl der Punkte
+    POINT *a = new POINT[N];                 // N-mal der Konstruktor: N Zufallspunkte
+    for (i = 0; i &lt; N; i++)                  // jedes Paar (i, j) mit i &lt; j …
+      for (int j = i+1; j &lt; N; j++)
+        if (a[i].distance(a[j]) &lt; d) cnt++;  // … nur über das Interface vergleichen
+    cout &lt;&lt; cnt &lt;&lt; " pairs within " &lt;&lt; d &lt;&lt; endl;
+  }                                          // Kosten: N(N−1)/2 Aufrufe von distance</pre>
 <div class="arow"><span class="s"><span class="c-rule">private:</span></span><span>Datenrepräsentation. Der Client kann <code class="inl">p.x</code> <b>nicht</b> lesen, und genau deshalb darf man später z.B. auf Polarkoordinaten umstellen</span></div>
 <div class="arow"><span class="s"><span class="c-par">public:</span></span><span>das Interface. Nur diese Funktionen verbinden Client und Implementierung</span></div>
 <div class="arow"><span class="s">p.<span class="c-res">distance</span>(q)</span><span>„Objekt p, berechne deinen Abstand zu q“. Im Rumpf ist <code class="inl">x</code> das von p (<code class="inl">this-&gt;x</code>) und <code class="inl">a.x</code> das von q</span></div>
@@ -891,14 +949,18 @@ class STACK
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.5</span> Postfix-Ausdruck auswerten</div>
 <div class="sub">Zahl: <b>push</b>. Operator: zwei Zahlen <b>pop</b>pen, verknüpfen, Ergebnis <b>push</b>en. Beispiel aus Fig. 4.2: <code class="inl">5 9 8 + 4 6 * * 7 + *</code> = 5·((9+8)·(4·6)+7) = <b>2075</b>.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Bei Postfix stehen die Operanden vor dem Operator. Ein Stack hält die Zahlen, die noch auf ihren Operator warten.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Der Stack enthält immer die Werte der bisher vollständig gelesenen Teilausdrücke, von links nach rechts.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Jedes Zeichen einmal, jede Stack-Operation O(1), zusammen O(N).</span></div></div>
 <div id="trPost"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Eine Zahl kommt auf den Stack. Ein Operator nimmt die obersten zwei, verknüpft sie und legt das Ergebnis zurück. Am Ende liegt das Ergebnis oben.“</div>
 <div class="cap"><b>Warum braucht Postfix keine Klammern?</b> Jeder Operator bezieht sich auf die zwei obersten Werte, und die Reihenfolge der Operatoren legt die Rechenreihenfolge schon eindeutig fest. So arbeiten PostScript (die Sprache, in der das Buch gedruckt wurde) und viele Taschenrechner. Die <code class="inl">while</code>-Schleife (Z. 13–14) liest mehrstellige Zahlen: \(\texttt{wert} = 10\cdot\texttt{wert} + \text{Ziffer}\).</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.6</span> Infix → Postfix umwandeln (vollständig geklammert)</div>
 <div class="sub">Zahl: sofort ausgeben. Operator: auf den Stack. <code class="inl">)</code>: obersten Operator ausgeben. <code class="inl">(</code>: ignorieren (Fig. 4.4).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Bei vollständig geklammertem Infix gehört jeder Operator zur nächsten schließenden Klammer. Der Stack parkt die Operatoren so lange.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Die Ausgabe ist immer ein korrekter Postfix-Ausdruck für alles, was schon geschlossen wurde.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Jedes Zeichen einmal, also O(N).</span></div></div>
 <div id="trIn"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Zahlen sofort ausgeben. Operatoren auf den Stack legen. Bei einer schließenden Klammer den obersten Operator ausgeben.“</div>
 <div class="step">\[ (5*(((9+8)*(4*6))+7)) \;\xrightarrow{\text{Prog 4.6}}\; 5\;9\;8\;+\;4\;6\;*\;*\;7\;+\;* \;\xrightarrow{\text{Prog 4.5}}\; \Res{2075} \]</div>
 <div class="cap"><b>Zwei Stacks, zwei Typen, ein Template:</b> Der Operator-Stack ist <code class="inl">STACK&lt;char&gt;</code>, der Werte-Stack <code class="inl">STACK&lt;int&gt;</code>. Das ist das Schema moderner Compiler: erst in eine <span class="fw">Zwischendarstellung</span> übersetzen (Postfix), dann auf einer abstrakten Stack-Maschine ausführen.</div>
 </div>
@@ -908,12 +970,14 @@ class STACK
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.7 + 4.8</span> Derselbe Client, zwei Implementierungen nebeneinander</div>
 <div class="sub">Folge aus Fig. 4.1: Buchstabe = push, <code class="inl">*</code> = pop. Links ist der Array-Code aktiv, rechts siehst du parallel, was die Listen-Version im Speicher tut.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Ein Array s und ein Zähler N. Oben ist das Ende des belegten Teils.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>s[0..N−1] sind die Elemente in Einfügereihenfolge, s[N−1] ist oben, und s[N] ist die nächste freie Stelle.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>push und pop je O(1) (Eigenschaft 4.1).</span></div></div>
 <div id="trStack"></div>
+<div class="read">📖 <b>Vorlesen:</b> „push schreibt an die Stelle N und erhöht N. pop verringert N und liest die Stelle N.“</div>
 <div class="exgrid two">
 <div class="excard"><span class="lb o">Array (4.7)</span><code class="inl">s[N++] = item</code> schreibt und erhöht danach. <code class="inl">s[--N]</code> erniedrigt zuerst und liest dann. <b>N ist immer die nächste freie Stelle.</b> Der Speicher für maxN Elemente wird vorab reserviert.</div>
 <div class="excard"><span class="lb k">Liste (4.8)</span><code class="inl">head = new node(x, head)</code> hängt vorne an. pop löst den Kopf aus und gibt ihn mit <code class="inl">delete</code> frei. Der Speicher wächst mit, kostet aber einen Link pro Element und Zeit für new/delete.</div>
 </div>
-<div class="step">\[ \textbf{Eigenschaft 4.1:}\quad \Chg{\texttt{push}},\ \Res{\texttt{pop}} \in O(1)\ \text{mit Array oder Liste} \qquad \text{Speicher: Array } \Theta(\Par{\max N}),\ \text{Liste } \Theta(\Idx{N_{\text{aktuell}}})\cdot(1+\text{Link}) \]</div>
+<div class="step">\[ \begin{aligned} &\textbf{Eigenschaft 4.1:} && \\ \Chg{\texttt{push}},\ \Res{\texttt{pop}} &\in O(1) && \text{Mit Array oder Liste wird nur am oberen Ende gearbeitet.} \\ \text{Speicher (Array)} &= \Theta(\Par{\max N}) && \text{Platz für das Maximum wird vorab reserviert.} \\ \text{Speicher (Liste)} &= \Theta(\Idx{N_{\text{aktuell}}})\cdot(\text{Item}+\text{Link}) && \text{Wächst mit, kostet aber einen Link pro Element.} \end{aligned} \]</div>
 <div class="cap"><b>Wann welches?</b> Ein großer Stack, der meist fast voll ist: Array. Ein Stack, dessen Größe stark schwankt, während andere Strukturen den Platz brauchen könnten: Liste. Array-Stacks lassen sich durch <b>Verdoppeln/Halbieren</b> dynamisch machen (Kap. 14). Beachte: Der Array-Stack liegt „von unten nach oben“ im Speicher, der Listen-Stack „von oben nach unten“ (der Kopf ist das zuletzt eingefügte Element). Für den Client ist das gleich.</div>
 </div>
 
@@ -984,8 +1048,10 @@ Kein Verschieben: <code class="inl">head</code> und <code class="inl">tail</code
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.15 + 4.14</span> Ringpuffer und Liste im Gleichschritt</div>
 <div class="sub">Buchstabe = put, <code class="inl">*</code> = get. Beobachte den <b>Wraparound</b>: tail springt am Ende auf 0 (Fig. 4.8).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Ein Array als Ring: tail schreibt hinten, head liest vorne, beide laufen modulo N im Kreis.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Die Elemente stehen von head bis tail−1 (im Kreis gezählt). head % N == tail heißt leer. Eine Zelle bleibt frei, damit voll und leer verschieden sind.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>put und get je O(1) (Eigenschaft 4.2). Es wird nie etwas verschoben.</span></div></div>
 <div id="trQueue"></div>
-<div class="step">\[ \textbf{Eigenschaft 4.2:}\;\; \Chg{\texttt{put}},\,\Res{\texttt{get}}\in O(1) \qquad \texttt{tail} \Chg{\leftarrow} (\texttt{tail}+1)\bmod \Par{N},\;\; \texttt{head} \Chg{\leftarrow} (\texttt{head}+1) \bmod \Par{N} \qquad \Cond{\text{leer}} \iff \texttt{head}\bmod N = \texttt{tail} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „put schreibt an tail und rückt tail im Kreis weiter. get rückt head in den Bereich zurück, liest dort und rückt head weiter.“</div>
+<div class="step">\[ \begin{aligned} &\textbf{Eigenschaft 4.2:} && \\ \Chg{\texttt{put}},\ \Res{\texttt{get}} &\in O(1) && \text{Kein Element wird je verschoben.} \\ \texttt{tail} &\Chg{\leftarrow} (\texttt{tail}+1)\bmod \Par{N} && \text{put schreibt an tail, dann rückt tail im Kreis weiter.} \\ \texttt{head} &\Chg{\leftarrow} (\texttt{head}+1)\bmod \Par{N} && \text{get liest an head, dann rückt head im Kreis weiter.} \\ \Cond{\text{leer}} &\iff \texttt{head}\bmod N = \texttt{tail} && \text{Beide Zeiger stehen auf derselben Stelle.} \end{aligned} \]</div>
 <div class="cap"><b>Stack oder Queue?</b> Beide verschieben Arbeit auf später. Der Stack nimmt die jüngste Aufgabe zuerst (Tiefe zuerst, DFS), die Queue die älteste (Breite zuerst, BFS). In §5.6/5.8 wird genau dieser eine Tausch aus Preorder eine Level-Order-Traversierung und aus DFS eine BFS machen.</div>
 </div>
 
@@ -994,7 +1060,9 @@ Kein Verschieben: <code class="inl">head</code> und <code class="inl">tail</code
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.16</span> Stack ohne Duplikate: ein zweites Array als Anwesenheitsliste</div>
 <div class="sub">Sind die Items ganze Zahlen 0…maxN−1, merkt sich <code class="inl">t[item]</code>, ob item gerade im Stack liegt. Der Test „schon drin?“ kostet dann O(1).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Neben dem Stack gibt es eine Tabelle t, die für jeden Wert speichert, ob er gerade im Stack liegt.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>t[v] == 1 genau dann, wenn v im Stack s liegt. Dadurch liegt kein Wert doppelt im Stack.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>push und pop bleiben O(1), kosten aber zusätzlich eine Tabelle der Größe maxN.</span></div></div>
 <div id="trDup"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Vor dem push nachsehen, ob der Wert schon markiert ist. Wenn ja, ignorieren, wenn nein, pushen und markieren. Beim pop die Markierung löschen.“</div>
 <div class="exgrid">
 <div class="excard"><span class="lb g">ignore-the-new-item</span>Liegt es schon drin, wird der push ignoriert (<code class="inl">if (t[item] == 1) return;</code>). Einfach, und genau das macht Prog 4.16.</div>
 <div class="excard"><span class="lb o">forget-the-old-item</span>Das alte Exemplar wird entfernt und das neue oben eingefügt. Das ist schwieriger, weil man mitten in der Struktur löschen muss (Übung 4.57).</div>
@@ -1067,12 +1135,12 @@ public:
 <div class="sub">Sedgewick erwähnt die formale <span class="fw">Spezifikation</span> nur (§4.2), in deiner Klausur wird sie aber abgefragt (Gedächtnisprotokoll, Aufg. 4: Queue-Axiome). Hier ist das Lese-Schema.</div>
 <div class="exgrid two">
 <div class="excard"><span class="lb b">Stack</span>
-\[ \begin{aligned} &\texttt{new}: \to \text{Stack} \qquad \texttt{push}: \text{Stack}\times T\to\text{Stack}\\ &\texttt{pop}: \text{Stack}\to\text{Stack} \qquad \texttt{top}: \text{Stack}\to T \end{aligned} \]
-\[ \begin{aligned} &\Cond{\texttt{empty}(\texttt{new}())} \qquad \Cond{!\texttt{empty}(\texttt{push}(s,t))}\\ &\Chg{\texttt{pop}(\texttt{push}(s,t))} = s \\ &\Res{\texttt{top}(\texttt{push}(s,t))} = t \end{aligned} \]
+\[ \begin{aligned} \texttt{new} &: \to \text{Stack} && \text{erzeugt einen leeren Stack,} \\ \texttt{push} &: \text{Stack}\times T\to\text{Stack} && \text{legt ein Element oben drauf,} \\ \texttt{pop} &: \text{Stack}\to\text{Stack} && \text{nimmt das oberste weg,} \\ \texttt{top} &: \text{Stack}\to T && \text{liest das oberste.} \end{aligned} \]
+\[ \begin{aligned} &\Cond{\texttt{empty}(\texttt{new}())} && \text{Ein neuer Stack ist leer.} \\ &\Cond{!\texttt{empty}(\texttt{push}(s,t))} && \text{Nach einem push ist er nicht leer.} \\ &\Chg{\texttt{pop}(\texttt{push}(s,t))} = s && \text{pop macht das letzte push rückgängig.} \\ &\Res{\texttt{top}(\texttt{push}(s,t))} = t && \text{top liefert das zuletzt gepushte Element.} \end{aligned} \]
 </div>
 <div class="excard"><span class="lb g">FIFO-Queue (wie in der Klausur)</span>
 \[ \text{Vorbed.: } \texttt{pre(pop(q))} := \,!\texttt{empty}(q),\;\; \texttt{pre(top(q))} := \,!\texttt{empty}(q) \]
-\[ \begin{aligned} &\Chg{\texttt{pop}(\texttt{push}(q,t))} = \Cond{\texttt{empty}(q)}\;?\;q : \texttt{push}(\texttt{pop}(q),\,t)\\ &\Res{\texttt{top}(\texttt{push}(q,t))} = \Cond{\texttt{empty}(q)}\;?\;t : \texttt{top}(q) \end{aligned} \]
+\[ \begin{aligned} \Chg{\texttt{pop}(\texttt{push}(q,t))} &= \Cond{\texttt{empty}(q)}\ ?\ q && \text{War q leer, ist t das älteste Element und fliegt raus.} \\ &\phantom{=}\;:\ \texttt{push}(\texttt{pop}(q),\,t) && \text{Sonst wird innen gelöscht, und t bleibt hinten.} \\ \Res{\texttt{top}(\texttt{push}(q,t))} &= \Cond{\texttt{empty}(q)}\ ?\ t && \text{War q leer, ist t vorne.} \\ &\phantom{=}\;:\ \texttt{top}(q) && \text{Sonst bleibt das bisherige erste Element vorne.} \end{aligned} \]
 </div>
 </div>
 <p><b>Lesen wie Rekursion:</b> Das zuletzt gepushte <span class="c-par">t</span> liegt „außen“. Beim Stack ist es sofort das Ergebnis. Bei der Queue wird es nur zurückgegeben, wenn der Rest <b>leer</b> ist (Anker), sonst steigt man nach innen ab. Probier es an einem Beispiel:</p>
@@ -1096,15 +1164,17 @@ public:
 <div class="excard"><span class="lb c">① Rekursionsanker (Basisfall)</span>wird <b>direkt</b> gelöst, ohne weiteren Aufruf: <code class="inl">if (N == 0) return 1;</code>. Das entspricht dem Induktionsanfang.</div>
 <div class="excard"><span class="lb o">② Jeder Aufruf mit kleinerem Argument</span><code class="inl">return N*factorial(N-1);</code>. Das entspricht dem Induktionsschritt. Ohne „kleiner“ gibt es keinen Beweis, dass das Programm endet (Prog 5.2).</div>
 </div>
-<div class="step">\[ \Res{N!} = \begin{cases} \Cond{1} & \Cond{N = 0}\\ \Par{N}\cdot\Res{(N-1)!} & N\ge 1 \end{cases} \qquad\Longleftrightarrow\qquad \texttt{factorial(N)} \;\;\text{(Prog 5.1)} \]</div>
+<div class="step">\[ \begin{aligned} \Res{N!} &= \Cond{1} && \text{falls } \Cond{N = 0} \text{ (Anker),} \\ \Res{N!} &= \Par{N}\cdot\Res{(N-1)!} && \text{falls } N \ge 1 \text{ (Rückführung auf das kleinere Problem).} \\ &\Longleftrightarrow\ \texttt{factorial(N)} && \text{Programm 5.1 schreibt genau diese Definition ab.} \end{aligned} \]</div>
 <div class="cap"><b>Die versteckten Kosten:</b> Jeder Aufruf legt einen <span class="fw">Stackframe</span> (Argumente, lokale Variablen, Rücksprungadresse) auf den <b>eingebauten Pushdown-Stack</b>. Die <span class="fw">Rekursionstiefe</span> ist die maximale Schachtelung und damit der Speicherbedarf dieses Stacks. Bei <code class="inl">factorial(N)</code> sind das N+1 Frames. Jede Rekursion lässt sich in eine Schleife mit explizitem Stack umwandeln und umgekehrt.</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.1</span> Fakultät: Aufrufstapel wächst, dann wird zurückgerechnet</div>
 <div class="sub">Rechts siehst du den Aufrufstapel. Oben liegt der aktive Frame, rot steht der Rückgabewert, sobald er feststeht.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>N! wird auf (N−1)! zurückgeführt, bis der Anker 0! = 1 erreicht ist.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Jeder Aufruf mit N ≥ 1 ruft sich mit einem echt kleineren Argument auf, also endet die Rekursion.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>N+1 Aufrufe, Rekursionstiefe N+1.</span></div></div>
 <div id="trFact"></div>
-<div class="step">\[ \Res{C(N)} = C(N-1) + 1,\;\; C(0)=1 \;\Rightarrow\; C(N) = N+1 \text{ Aufrufe},\qquad \text{Tiefe } N+1 \;\;(\text{Formel 2.1 mit Kosten 1 statt } N) \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Ist N null, gib 1 zurück. Sonst gib N mal die Fakultät von N−1 zurück.“</div>
+<div class="step">\[ \begin{aligned} \Res{C(N)} &= C(N-1) + 1 && \text{Jeder Aufruf macht genau einen weiteren.} \\ C(0) &= 1 && \text{Der Anker ist selbst ein Aufruf.} \\ C(N) &= N+1 && \text{Also } N+1 \text{ Aufrufe insgesamt.} \\ \text{Tiefe} &= N+1 && \text{Alle liegen gleichzeitig auf dem Stack.} \end{aligned} \]</div>
 </div>
 
 <div class="figure">
@@ -1125,7 +1195,9 @@ public:
     if (n == 0) return m;
     return gcd(n, m % n);
   }</pre>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Euklid: Der ggT von m und n ist derselbe wie der von n und m mod n.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>ggT(m, n) bleibt bei jedem Aufruf gleich, nur die Zahlen werden kleiner. Das zweite Argument sinkt echt, deshalb endet die Rekursion.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Höchstens etwa 2·lg n Aufrufe, weil sich die Zahlen alle zwei Schritte mindestens halbieren.</span></div></div>
 <div id="trGcd"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Ist n null, ist m das Ergebnis. Sonst rechne mit n und dem Rest von m durch n weiter.“</div>
 <p class="small">Idee: \(\gcd(m,n)=\gcd(n,\,m\bmod n)\), denn jeder Teiler von m und n teilt auch \(m - k\cdot n\). Die Tiefe ist <b>logarithmisch</b>: gcd(314159, 271828) braucht nur 10 geschachtelte Aufrufe (Fig. 5.2) und ergibt 1, die Zahlen sind also teilerfremd.</p></div>
 </div>
 </div>
@@ -1133,7 +1205,9 @@ public:
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.4</span> Präfix-Ausdruck rekursiv auswerten (rekursiver Abstieg)</div>
 <div class="sub">Das erste Zeichen entscheidet: <code class="inl">+</code> oder <code class="inl">*</code> bedeutet „werte zwei Teilausdrücke aus“, sonst ist es eine Zahl. Die Rekursion ersetzt den expliziten Stack aus Prog 4.5 (Fig. 5.3).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Präfix: Der Operator steht vorne. eval liest ab Position i genau einen Ausdruck und gibt seinen Wert zurück.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Nach jedem Aufruf steht i direkt hinter dem Ausdruck, den dieser Aufruf gelesen hat.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Jedes Zeichen einmal, also O(N). Die Tiefe entspricht der Schachtelung.</span></div></div>
 <div id="trPre"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Steht ein Operator da, werte zwei Teilausdrücke rekursiv aus und verknüpfe sie. Steht eine Zahl da, lies sie und gib sie zurück.“</div>
 <div class="step">\[ *\;+\;7\;*\;*\;4\;6\;+\;8\;9\;5 \;=\; \big(7 + (4\cdot 6)\cdot(8+9)\big)\cdot 5 \;=\; (7+408)\cdot 5 \;=\; \Res{2075} \]</div>
 <div class="cap"><b>Warum „weiß“ eval, wo ein Operand endet?</b> Es nimmt vom Anfang der Zeichenkette nur so viel, wie es braucht, und rückt den globalen Index <code class="inl">i</code> dabei weiter. Dieser <span class="fw">recursive descent parser</span> ist das Prinzip, mit dem Compiler C++ übersetzen.</div>
 </div>
@@ -1141,7 +1215,9 @@ public:
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.5</span> Rekursive Listenfunktionen: count, traverse, traverseR, remove</div>
 <div class="sub">Wähle die Funktion. <b>traverseR</b> gibt die Liste <i>rückwärts</i> aus, obwohl sie nur vorwärts verlinkt ist. Das erledigt der Aufrufstapel.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Eine Liste ist leer oder ein Knoten plus Rest-Liste (Def. 3.3). Jede Funktion folgt genau dieser Definition.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Der Anker behandelt die leere Liste, der rekursive Fall arbeitet am ersten Knoten und gibt den Rest weiter.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>N+1 Aufrufe, Tiefe N+1 (daher bei langen Listen Stack-Überlauf möglich).</span></div></div>
 <div id="trLrec"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Ist die Liste leer, fertig. Sonst bearbeite den ersten Knoten und rufe die Funktion für den Rest auf, oder umgekehrt bei traverseR.“</div>
 <div class="exgrid">
 <div class="excard"><span class="lb b">count · traverse</span>Die letzte Aktion ist der rekursive Aufruf (<span class="fw">Endrekursion</span>). Ein Compiler kann ihn in eine Schleife verwandeln, sodass keine Stacktiefe entsteht.</div>
 <div class="excard"><span class="lb o">traverseR</span><code class="inl">visit</code> kommt <b>nach</b> dem Aufruf. Deshalb ist keine Endrekursion möglich, und die Tiefe beträgt N. Bei riesigen Listen droht ein Stacküberlauf.</div>
@@ -1154,16 +1230,20 @@ public:
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.6</span> Maximum durch Halbieren: T I N Y E X A M P L E</div>
 <div class="sub">Zwei rekursive Aufrufe auf je einer Hälfte, danach wird das größere Ergebnis zurückgegeben (Fig. 5.4, 5.6).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Teile und herrsche: Das Maximum ist das größere der beiden Maxima der Hälften.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>max(a, l, r) liefert immer das größte Element von a[l..r]. Das Intervall wird bei jedem Aufruf echt kleiner.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>T(N) = T(k) + T(N−k) + 1, also N−1 Aufrufe mit weiterer Teilung (Eigenschaft 5.1).</span></div></div>
 <div id="trMax"></div>
-<div class="step">\[ \textbf{Eigenschaft 5.1:}\quad \Res{T_N} = T_k + T_{N-k} + 1,\;\; \Cond{T_1 = 0} \;\Longrightarrow\; \Res{T_N = N-1} \;(&lt;N) \qquad \text{(zählt die Aufrufe, die weiter teilen: innere Knoten des Aufrufbaums)} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Ist nur ein Element da, ist es das Maximum. Sonst teile in der Mitte, bestimme beide Maxima rekursiv und gib das größere zurück.“</div>
+<div class="step">\[ \begin{aligned} &\textbf{Eigenschaft 5.1:} && \\ \Res{T_N} &= T_k + T_{N-k} + 1 && \text{Zwei Teile der Größen } k \text{ und } N-k \text{, plus der teilende Aufruf selbst.} \\ \Cond{T_1} &\Cond{= 0} && \text{Ein Element wird nicht weiter geteilt.} \\ \Res{T_N} &= N-1 \;(&lt; N) && \text{So viele Aufrufe teilen weiter (innere Knoten des Aufrufbaums).} \end{aligned} \]</div>
 <div class="cap"><b>Linear, genau wie die Schleife</b> <code class="inl">for (t = a[0], i = 1; i &lt; N; i++) if (a[i] &gt; t) t = a[i];</code>. Divide &amp; Conquer lohnt sich hier nicht wegen der Zeit, sondern als <b>Muster</b>. Mergesort, binäre Suche und Quicksort folgen demselben Schema, nur mit mehr (oder weniger) Arbeit pro Aufruf (Formeln 2.2–2.5).</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.7</span> Türme von Hanoi</div>
 <div class="sub">Um N Scheiben einen Stab nach rechts zu schieben: N−1 Scheiben nach <b>links</b>, Scheibe N nach <b>rechts</b>, dann N−1 Scheiben wieder nach <b>links</b> (auf Scheibe N). Die Richtung ist zyklisch: +1 heißt rechts, −1 heißt links.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Um N Scheiben zu bewegen, muss die größte einmal frei liegen. Also erst N−1 Scheiben weg, dann die größte, dann N−1 zurück darauf.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Eine größere Scheibe liegt nie auf einer kleineren, weil Scheibe N erst bewegt wird, wenn alle kleineren auf dem dritten Stab liegen.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>M(N) = 2·M(N−1) + 1, also 2^N − 1 Züge (Eigenschaft 5.2).</span></div></div>
 <div id="trHanoi"></div>
-<div class="step">\[ \textbf{Eigenschaft 5.2:}\quad \Res{M_N} = 2\,M_{N-1} + 1,\;\; \Cond{M_1 = 1} \;\Longrightarrow\; \Res{M_N = 2^N - 1} \qquad N = 40 \text{ Scheiben à 1 s} \;\Rightarrow\; > 348 \text{ Jahrhunderte} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Bewege die N−1 kleineren in die andere Richtung, schiebe Scheibe N, und bewege die N−1 kleineren wieder in die andere Richtung.“</div>
+<div class="step">\[ \begin{aligned} &\textbf{Eigenschaft 5.2:} && \\ \Res{M_N} &= 2\,M_{N-1} + 1 && \text{Zweimal den Turm aus } N-1 \text{ Scheiben bewegen, plus 1 Zug für die größte.} \\ \Cond{M_1} &\Cond{= 1} && \text{Eine Scheibe braucht einen Zug.} \\ \Res{M_N} &= 2^N - 1 && \text{Lösung (Beweis per Induktion unten).} \\ N = 40 &\Rightarrow\ &gt; 348 \text{ Jahrhunderte} && \text{bei einem Zug pro Sekunde.} \end{aligned} \]</div>
 <div class="cap"><b>Beweis per Induktion:</b> \(M(1)=2^1-1=1\). Gilt \(M(k)=2^k-1\) für \(k&lt;N\), dann ist \(M(N)=2(2^{N-1}-1)+1=2^N-1\). Das ist Formel 2.5 in anderer Gestalt. Die Folge der bewegten Scheiben ist <b>exakt dieselbe</b> wie die Folge der Lineal-Markierungen (Prog 5.8) und wie die Anzahl der Endnullen in der Binärdarstellung von 1, 2, 3, … (Fig. 5.9). Nicht-rekursives Rezept: abwechselnd die kleinste Scheibe bewegen und den einzigen anderen erlaubten Zug machen.</div>
 </div>
 
@@ -1214,13 +1294,15 @@ Aufrufe \(\approx\phi^N\), \(\phi\approx1{,}618\). Jedes \(F_{N+1}\) dauert 1,6-
   }</pre>
 Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 </div>
-<div class="step">\[ \textbf{Eigenschaft 5.3:}\;\; \text{DP senkt die Laufzeit auf höchstens die Zeit, } f \text{ für alle Argumente} \le \text{dem gegebenen auszuwerten, wobei ein rekursiver Aufruf als } \Res{O(1)} \text{ zählt.} \]</div>
+<div class="step">\[ \begin{aligned} &\textbf{Eigenschaft 5.3:} && \\ \text{Laufzeit mit DP} &\le \text{Zeit, um } f \text{ für alle kleineren Argumente auszuwerten} && \text{Jeder Wert wird höchstens einmal berechnet.} \\ &\phantom{\le}\ \text{(ein rekursiver Aufruf zählt als } \Res{O(1)}\text{)} && \text{Bekannte Werte kommen sofort aus der Tabelle.} \end{aligned} \]</div>
 </div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.10 ↔ 5.11</span> Aufrufbaum: naiv gegen memoisiert (Fig. 5.14 / 5.15)</div>
 <div class="sub">Umschalten und durchsteppen. Grau sind Aufrufe, die dank <code class="inl">knownF</code> sofort zurückkehren.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Naiv rechnet F(i−1) und F(i−2) getrennt, und dieselben Werte werden immer wieder berechnet. Mit knownF[] wird jeder Wert nur einmal berechnet.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Ist knownF[i] ≠ 0, dann ist es bereits der richtige Wert F(i).</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Naiv etwa φ^N Aufrufe, mit Speicherung (Top-down-DP) nur O(N).</span></div></div>
 <div id="trFib"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Schau zuerst in der Tabelle nach. Steht der Wert dort, gib ihn zurück. Sonst berechne ihn aus den beiden Vorgängern und trag ihn ein.“</div>
 <div id="fibPlot" class="plot sm"></div>
 <div class="cap"><b>Zahlen:</b> Die naive Version braucht für \(F_N\) genau \(2F_{N+1}-1\) Aufrufe, also exponentiell viele. Die memoisierte braucht \(2N-1\), also linear viele. Bei \(F_{30}\) sind das 2.692.537 gegen 59 Aufrufe. <span class="fw">Bottom-up DP</span> rechnet stattdessen in einer Schleife von klein nach groß: <code class="inl">F[0]=0; F[1]=1; for (i = 2; i &lt;= N; i++) F[i] = F[i-1] + F[i-2];</code></div>
 </div>
@@ -1240,7 +1322,7 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
   }</pre>
 <div class="controls"><label>Kapazität M = <span class="readout"><b id="knMv">17</b></span></label><input id="knM" type="range" min="1" max="40" value="17"><span id="knOut" class="readout"></span></div>
 <div id="knTab" class="scroll"></div>
-<div class="step">\[ \Res{\text{knap}(M)} = \max_{\Idx{i}:\ \text{size}_i \le M}\Big(\underbrace{\text{val}_i}_{\text{Item } i\text{ rein}} + \underbrace{\Res{\text{knap}}(M-\text{size}_i)}_{\text{optimaler Rest}}\Big),\qquad \text{Laufzeit mit DP: } \Res{O(N\cdot M)} \]</div>
+<div class="step">\[ \begin{aligned} \Res{\text{knap}(M)} &= \max_{\Idx{i}:\ \text{size}_i \le M} \big(\text{val}_i + \Res{\text{knap}}(M-\text{size}_i)\big) && \text{Jedes passende Item als erstes probieren, den Rest optimal füllen.} \\ \text{knap}(0) &= 0 && \text{Ein leerer Rucksack hat Wert 0.} \\ \text{Laufzeit mit DP} &= \Res{O(N\cdot M)} && M \text{ Kapazitäten, für jede } N \text{ Items probieren.} \end{aligned} \]</div>
 <div class="cap"><b>Prinzip der optimalen Teilstruktur:</b> „Optimal decisions, once made, do not need to be changed.“ Die beste Füllung von M setzt sich aus einem Item und der besten Füllung des Restes zusammen. Die Tabelle zeigt <code class="inl">maxKnown[m]</code> für alle m ≤ M. Grün markiert ist der Pfad über <code class="inl">itemKnown</code>, der die Lösung rekonstruiert. <b>Grenze:</b> Bei riesigem M (etwa 64-Bit-Größen) passt die Tabelle nicht in den Speicher, und dann hilft DP nicht mehr (Teil 8, NP-Vollständigkeit).</div>
 </div>
 
@@ -1339,7 +1421,7 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 <div class="controls"><button id="btReset">↺ leer (1 externer Knoten)</button><button id="btBal">balanciert, N = 10</button><button id="btDeg">entartet, N = 10</button><button id="btRnd">zufällig, N = 10</button><span id="btStat" class="readout"></span></div>
 <div id="btSvg"></div>
 <div class="scroll"><table class="rt" id="btTab"></table></div>
-<div class="step">\[ \begin{aligned} &\textbf{5.5:}\;\; \#\Mem{\text{extern}} = \Par{N}+1 &&\textbf{5.6:}\;\; \underbrace{2N}_{\text{Links}} = \underbrace{N-1}_{\to\text{innen}} + \underbrace{N+1}_{\to\text{extern}}\\ &\textbf{5.7:}\;\; \Res{E} = \Res{I} + 2\Par{N} &&\textbf{5.8:}\;\; \lg N \;\le\; \text{Höhe} \;\le\; N-1 \\ &\textbf{5.9:}\;\; N\lg\tfrac N4 \;\le\; \Res{I} \;\le\; \tfrac{N(N-1)}{2} \end{aligned} \]</div>
+<div class="step">\[ \begin{aligned} &\textbf{5.5:}\;\; \#\Mem{\text{extern}} = \Par{N}+1 && \text{Es gibt einen externen Knoten mehr als innere.} \\ &\textbf{5.6:}\;\; 2N = (N-1) + (N+1) && \text{Links: } N-1 \text{ zu inneren, } N+1 \text{ zu externen Knoten.} \\ &\textbf{5.7:}\;\; \Res{E} = \Res{I} + 2\Par{N} && \text{Äußere Pfadlänge = innere Pfadlänge + } 2N. \\ &\textbf{5.8:}\;\; \lg N \le \text{Höhe} \le N-1 && \text{Von balanciert bis entartet.} \\ &\textbf{5.9:}\;\; N\lg\tfrac N4 \le \Res{I} \le \tfrac{N(N-1)}{2} && \text{Schranken für die innere Pfadlänge.} \end{aligned} \]</div>
 <div class="exgrid">
 <div class="excard"><span class="lb g">Beweis 5.5/5.7 (Konstruktion)</span>Start: ein externer Knoten, I = E = 0. Jeder Schritt ersetzt einen externen Knoten auf Ebene k durch einen inneren: I wächst um <b>k</b>, E um <b>−k + 2(k+1) = k+2</b>. Nach N Schritten ist \(E - I = 2N\), und die Zahl der externen Knoten steigt pro Schritt um 1, also \(N+1\).</div>
 <div class="excard"><span class="lb o">Beweis 5.8 (Höhe)</span>Worst Case: eine Kette mit N−1 Links bis zum tiefsten inneren Knoten. Best Case: vollständig balanciert. Mit Höhe h (externe Ebene) gilt \(2^{h-1} &lt; N+1 \le 2^h\), also \(h = \lceil\lg(N+1)\rceil\). Das Buch zählt in Fig. 5.23 die externen Knoten mit (h = 4 bzw. 10 bei N = 10).</div>
@@ -1352,7 +1434,9 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.14 · 5.15 · 5.16</span> Pre-, In-, Post-, Level-Order am Baum aus Fig. 5.26</div>
 <div class="sub">Rekursiv hängt die Reihenfolge nur davon ab, <b>wo</b> <code class="inl">visit(h)</code> steht. Nicht-rekursiv ergibt ein <b>Stack</b> Preorder und eine <b>Queue</b> Level-Order.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Ein Binärbaum ist leer oder eine Wurzel mit zwei Teilbäumen. Die Traversierung legt nur fest, wann die Wurzel besucht wird.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>Jeder Knoten wird genau einmal besucht. Preorder: Wurzel vor den Teilbäumen. Inorder: dazwischen. Postorder: danach. Mit Stack statt Rekursion ergibt sich Preorder, mit Queue Levelorder.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Θ(N) Besuche. Der Stack ist so groß wie die Höhe des Baums.</span></div></div>
 <div id="trTrav"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Ist der Baum leer, fertig. Sonst besuche die Wurzel und die beiden Teilbäume in der gewählten Reihenfolge.“</div>
 <div class="scroll"><table class="rt">
 <tr><th>Reihenfolge</th><th>Regel</th><th>Ergebnis (Fig. 5.26)</th><th>Verwandt mit</th></tr>
 <tr><td class="c-res">Preorder</td><td>Knoten, links, rechts</td><td class="mono">E D B A C H F G</td><td>Präfix-Ausdruck, Lineal-Variante Fig. 5.11, DFS</td></tr>
@@ -1360,7 +1444,7 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 <tr><td class="c-par">Postorder</td><td>links, rechts, Knoten</td><td class="mono">A C B D G F H E</td><td>Postfix auswerten, Speicher freigeben</td></tr>
 <tr><td class="c-cond">Level-Order</td><td>Ebene für Ebene, links nach rechts</td><td class="mono">E D H B F A C G</td><td>BFS, benutzt eine <b>Queue</b></td></tr>
 </table></div>
-<div class="step">\[ \text{jeder Knoten wird genau einmal besucht} \;\Rightarrow\; \Res{T(N)=\Theta(N)}, \qquad \text{Stackgröße} = \text{Höhe} \in [\lg N,\,N] \]</div>
+<div class="step">\[ \begin{aligned} \text{Besuche} &= N && \text{Jeder Knoten wird genau einmal besucht.} \\ \Res{T(N)} &= \Theta(N) && \text{Die Laufzeit ist linear.} \\ \text{Stackgröße} &= \text{Höhe} \in [\lg N,\ N] && \text{Balanciert klein, entartet so groß wie der Baum.} \end{aligned} \]</div>
 </div>
 
 <!-- ───────────── 5.7 ───────────── -->
@@ -1368,8 +1452,10 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.17</span> Knoten zählen und Höhe berechnen</div>
 <div class="sub">Das Muster: Ergebnis = f(Ergebnis links, Ergebnis rechts). Leerer Baum = Anker (count 0, height −1).</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>Größe und Höhe eines Baums ergeben sich aus den Werten der beiden Teilbäume.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>count(h) ist die Knotenzahl, height(h) die Anzahl der Kanten auf dem längsten Weg nach unten. Der leere Baum hat 0 Knoten und Höhe −1.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Jeder Knoten ein Aufruf, also Θ(N).</span></div></div>
 <div id="trHeight"></div>
-<div class="step">\[ \Res{\text{count}(h)} = \begin{cases}\Cond{0} & h=0\\ \text{count}(l)+\text{count}(r)+1\end{cases} \qquad \Res{\text{height}(h)} = \begin{cases}\Cond{-1} & h=0\\ \max(\text{height}(l),\text{height}(r))+1\end{cases} \]</div>
+<div class="read">📖 <b>Vorlesen:</b> „Leerer Baum: 0 bzw. −1. Sonst: beide Teilbäume ausrechnen, dann addieren und eins dazu, bzw. das Maximum nehmen und eins dazu.“</div>
+<div class="step">\[ \begin{aligned} \Res{\text{count}(h)} &= \Cond{0} && \text{Leerer Baum (Anker).} \\ \Res{\text{count}(h)} &= \text{count}(l)+\text{count}(r)+1 && \text{Sonst: beide Teilbäume plus die Wurzel.} \\ \Res{\text{height}(h)} &= \Cond{-1} && \text{Leerer Baum (Anker).} \\ \Res{\text{height}(h)} &= \max(\text{height}(l),\text{height}(r))+1 && \text{Sonst: der höhere Teilbaum plus eine Ebene.} \end{aligned} \]</div>
 </div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.19 · 5.20</span> Bäume bauen: Turnier und Parse-Baum</div>
@@ -1407,7 +1493,9 @@ link parse()
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.21 · 5.22</span> Tiefensuche (rekursiv) und Breitensuche (Queue) auf dem Graphen aus §3.7</div>
 <div class="sub">Adjazenzlisten wie in Fig. 5.32: 0 → 7 5 2 1 6 · 1 → 7 0 · 2 → 7 0 · 3 → 5 4 · 4 → 6 5 7 3 · 5 → 0 4 3 · 6 → 4 0 · 7 → 1 2 0 4.</div>
+<div class="idee"><div class="row"><b class="k">Idee</b><span>DFS geht mit Rekursion so tief wie möglich. BFS stellt Nachbarn in eine Queue und arbeitet Ebene für Ebene ab.</span></div><div class="row"><b class="k"><span class="c-rule">Invariante</span></b><span>visited[k] == 1 heißt: k wurde schon besucht. Deshalb wird kein Knoten zweimal besucht, auch bei Kreisen im Graphen.</span></div><div class="row"><b class="k"><span class="c-res">Kosten</span></b><span>Mit Adjazenzlisten Zeit ∝ V + E (Eigenschaft 5.10).</span></div></div>
 <div id="trGraph"></div>
+<div class="read">📖 <b>Vorlesen:</b> „Besuche den Knoten und markiere ihn. Gehe dann seine Nachbarliste durch. Bei DFS sofort rekursiv zu jedem unbesuchten, bei BFS hinten in die Queue.“</div>
 <div class="exgrid two">
 <div class="excard"><span class="lb o">DFS · Prog 5.21</span><pre class="cpp" data-roles='{"k":"par","t":"idx","visited":"mem","adj":"mem"}'>void traverse(int k, void visit(int))
   { visit(k); visited[k] = 1;
@@ -1427,7 +1515,7 @@ Ein Sucher geht so tief wie möglich und kehrt erst an Sackgassen um. Die befolg
   }</pre>
 Eine „Armee von Suchern“ fächert Ebene für Ebene auf. Tauscht man die Queue gegen einen Stack, erhält man eine DFS-ähnliche Suche. Jede verallgemeinerte Queue besucht alle Knoten.</div>
 </div>
-<div class="step">\[ \textbf{Eigenschaft 5.10:}\;\; \text{DFS mit Adjazenzlisten braucht Zeit } \Res{\propto V+E} \quad(\text{jeder Listenkopf und jeder Listenknoten wird höchstens einmal berührt}) \]</div>
+<div class="step">\[ \begin{aligned} &\textbf{Eigenschaft 5.10:} && \\ \text{DFS mit Adjazenzlisten} &\propto \Res{V+E} && \text{Die Zeit setzt sich aus zwei Teilen zusammen:} \\ &\phantom{\propto}\ V && \text{Jeder Listenkopf wird einmal angefasst,} \\ &\phantom{\propto}\ + 2E && \text{jeder Listenknoten höchstens einmal (jede Kante steht in 2 Listen).} \end{aligned} \]</div>
 <div class="cap"><b>Zurück zu Kapitel 1:</b> DFS löst das Konnektivitätsproblem in linearer Zeit \(V+E\). Union-Find braucht aber nur Speicher \(\propto V\) statt \(\propto E\) und verarbeitet die Kanten <i>online</i>. Bei riesigen Graphen gewinnt deshalb oft Union-Find. So schließt sich der Kreis zu Teil 1.</div>
 </div>
 
@@ -1438,7 +1526,7 @@ Eine „Armee von Suchern“ fächert Ebene für Ebene auf. Tauscht man die Queu
 </div></div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">Schema</span> Die 4 Schritte (gelten für jede rekursive Funktion im Buch)</div>
-<div class="step">\[ \underbrace{\Cond{\text{1. Anker}}}_{\text{if (…) return}} \;\to\; \underbrace{\Chg{\text{2. Aufrufe}}}_{\text{wie viele, welche Größe}} \;\to\; \underbrace{\Idx{\text{3. Arbeit außerhalb}}}_{\text{Schleifen, Vergleiche}} \;\to\; \underbrace{\Res{\text{4. Rekurrenz lösen}}}_{\text{Formeln 2.1–2.5, Teleskop}} \]</div>
+<div class="step">\[ \begin{aligned} &\Cond{\text{1. Anker}} && \text{Wo endet die Rekursion? (if … return)} \\ &\Chg{\text{2. Aufrufe}} && \text{Wie viele Aufrufe, mit welcher Größe?} \\ &\Idx{\text{3. Arbeit außerhalb}} && \text{Was kostet der Rest (Schleifen, Vergleiche)?} \\ &\Res{\text{4. Rekurrenz lösen}} && \text{Formeln 2.1–2.5 oder Teleskopieren.} \end{aligned} \]</div>
 <div class="exgrid">
 <div class="excard"><span class="lb g">① leicht · count(link x) (Prog 5.5)</span>
 <pre class="cpp" data-roles='{"x":"par","count":"res"}'>if (x == 0) return 0;
@@ -1718,6 +1806,8 @@ LB.stackHTML = function(items, title, newTop){
 };
 
 /* ---------- Tracer ---------- */
+/* Kurzkommentare je Codezeile: Schlüssel = Zeile ohne Einrückung */
+LB.NOTES = { "int a = 5, b = 8;": "zwei ints an festen Adressen", "int *p = &a;": "p speichert die Adresse von a", "*p = 7;": "schreibt über p in a", "p = &b;": "p zeigt jetzt auf b", "*p = *p + 1;": "liest b, schreibt b+1 zurück", "int &r = a;": "r ist nur ein zweiter Name für a", "r = 9;": "ändert a", "#include <iostream>": "cin, cout", "#include <stdlib.h>": "atoi, rand", "#include <string.h>": "strlen", "#include \"STACK.cxx\"": "Stack-Implementierung (Prog 4.7)", "using namespace std;": "cout statt std::cout", "int main()": "Programmstart", "{ int i, a[N];": "a[i] = 1 heißt: i gilt als prim", "for (i = 2; i < N; i++) a[i] = 1;": "erst einmal sind alle Kandidaten", "if (a[i])": "nur Primzahlen streichen", "for (int j = i; j*i < N; j++) a[i*j] = 0;": "Vielfache i·j streichen", "if (a[i]) cout << \" \" << i;": "was übrig ist, ist prim", "cout << endl;": "Zeilenende", "link t = x->next;": "t = der Knoten, der wegfällt", "x->next = t->next;": "x überspringt t", "delete t;": "Speicher von t freigeben", "link t = new node('X', 0);": "neuen Knoten anlegen", "t->next = x->next;": "t hängt sich an den Rest", "x->next = t;": "x zeigt jetzt auf t", "struct node": "ein Listenknoten …", "{ int item; node* next;": "… mit Wert und Link", "node(int x, node* t)": "Konstruktor", "{ item = x; next = t; }": "beide Felder setzen", "typedef node *link;": "link = Zeiger auf node", "int main(int argc, char *argv[])": "Argumente von der Kommandozeile", "{ int i, N = atoi(argv[1]), M = atoi(argv[2]);": "N Personen, jede M-te scheidet aus", "link t = new node(1, 0); t->next = t;": "Person 1 bildet allein einen Kreis", "link x = t;": "x = letzter Knoten", "for (i = 2; i <= N; i++)": "Personen 2 bis N …", "x = (x->next = new node(i, t));": "… hinten einhängen, Link zurück auf 1", "while (x != x->next)": "solange mehr als eine Person übrig ist", "for (i = 1; i < M; i++) x = x->next;": "M−1 Schritte weiterzählen", "x->next = x->next->next;": "die M-te Person entfernen", "cout << x->item << endl;": "der Überlebende", "link reverse(link x)": "Liste umdrehen, neuer Kopf zurück", "{ link t, y = x, r = 0;": "y = Rest (noch alt), r = schon umgedreht", "while (y != 0)": "solange noch Knoten übrig sind", "{ t = y->next;": "Nachfolger merken", "y->next = r;": "Link umdrehen", "r = y;": "y gehört jetzt zum umgedrehten Teil", "y = t; }": "weiter mit dem gemerkten Rest", "return r;": "r ist der neue Kopf", "node heada(0, 0); link a = &heada, t = a;": "Dummy-Kopf der unsortierten Liste", "for (int i = 0; i < N; i++)": "jedes Zeichen einmal", "t = (t->next = new node(rand() % 1000, 0));": "Zufallszahl hinten anhängen", "node headb(0, 0); link u, x, b = &headb;": "Dummy-Kopf der sortierten Liste", "for (t = a->next; t != 0; t = u)": "jeden Knoten von a nehmen", "u = t->next;": "Nachfolger merken, bevor t umgehängt wird", "for (x = b; x->next != 0; x = x->next)": "in b die Einfügestelle suchen", "if (x->next->item > t->item) break;": "erstes größeres Element: hier einfügen", "t->next = x->next; x->next = t;": "t nach x einhängen", "for (i = 0; a[i] != 0; i++)": "jede Startposition im Text", "{ int j;": "j = Position im Muster", "for (j = 0; p[j] != 0; j++)": "Muster Zeichen für Zeichen vergleichen", "if (a[i+j] != p[j]) break;": "Abweichung: diesen Start aufgeben", "if (p[j] == 0) cout << i << \" \";": "ganzes Muster passte: Treffer bei i", "{ char *a = argv[1]; int N = strlen(a);": "Ausdruck als String, N = Länge", "STACK<int> save(N);": "Stack für Zwischenergebnisse", "if (a[i] == '+')": "Plus:", "save.push(save.pop() + save.pop());": "zwei Werte holen, Summe zurücklegen", "if (a[i] == '*')": "Mal:", "save.push(save.pop() * save.pop());": "zwei Werte holen, Produkt zurücklegen", "if ((a[i] >= '0') && (a[i] <= '9'))": "eine Ziffer beginnt:", "save.push(0);": "neue Zahl mit 0 anfangen", "while ((a[i] >= '0') && (a[i] <= '9'))": "solange Ziffern kommen …", "save.push(10*save.pop() + (a[i++]-'0'));": "… Zahl um eine Stelle erweitern", "cout << save.pop() << endl;": "Endergebnis liegt oben", "STACK<char> ops(N);": "Stack für Operatoren", "if (a[i] == ')')": "Klammer zu:", "cout << ops.pop() << \" \";": "obersten Operator ausgeben", "if ((a[i] == '+') || (a[i] == '*'))": "Operator:", "ops.push(a[i]);": "aufheben bis zur Klammer zu", "cout << a[i] << \" \";": "Zahl sofort ausgeben", "template <class Item>": "für beliebigen Elementtyp", "class STACK": "Stack als Array", "class QUEUE": "Queue als Ringpuffer", "private:": "versteckte Darstellung", "public:": "Interface", "Item *s; int N;": "s = Array, N = Anzahl = nächste freie Stelle", "STACK(int maxN)": "Konstruktor", "{ s = new Item[maxN]; N = 0; }": "Platz reservieren, leer starten", "int empty() const": "leer?", "{ return N == 0; }": "leer genau bei N = 0", "void push(Item item)": "oben drauflegen", "{ s[N++] = item; }": "an Stelle N schreiben, dann N+1", "Item pop()": "oben wegnehmen", "{ return s[--N]; }": "erst N−1, dann lesen", "Item *q; int N, head, tail;": "Array + zwei Zeiger", "QUEUE(int maxN)": "Konstruktor", "{ q = new Item[maxN+1];": "eine Zelle mehr, damit voll ≠ leer", "N = maxN+1; head = N; tail = 0; }": "head = N entspricht 0 (mod N)", "{ return head % N == tail; }": "leer, wenn beide Zeiger gleich stehen", "void put(Item item)": "hinten anstellen", "{ q[tail++] = item; tail = tail % N; }": "bei tail schreiben, tail im Kreis weiter", "Item get()": "vorne herausnehmen", "{ head = head % N; return q[head++]; }": "head im Kreis, lesen, weiterrücken", "Item *s, *t; int N;": "s = Stack, t = „schon drin?“-Tabelle", "s = new Item[maxN]; N = 0;": "Stack anlegen", "t = new Item[maxN];": "Markierungstabelle anlegen", "for (int i = 0; i < maxN; i++) t[i] = 0;": "noch nichts markiert", "if (t[item] == 1) return;": "schon im Stack: ignorieren", "s[N++] = item; t[item] = 1;": "pushen und markieren", "{ t[s[--N]] = 0; return s[N]; }": "Markierung löschen, oberstes zurück", "int factorial(int N)": "N! rekursiv", "if (N == 0) return 1;": "Anker: 0! = 1", "return N*factorial(N-1);": "N! = N·(N−1)!", "int gcd(int m, int n)": "größter gemeinsamer Teiler (Euklid)", "if (n == 0) return m;": "Anker: ggT(m, 0) = m", "return gcd(n, m % n);": "ggT(m, n) = ggT(n, m mod n)", "char *a; int i;": "global: Ausdruck und Leseposition", "int eval()": "wertet einen Präfix-Ausdruck ab Position i aus", "{ int x = 0;": "Zahl, falls eine kommt", "while (a[i] == ' ') i++;": "Leerzeichen überspringen", "{ i++; return eval() + eval(); }": "zwei Teilausdrücke rekursiv, dann addieren", "{ i++; return eval() * eval(); }": "zwei Teilausdrücke rekursiv, dann multiplizieren", "x = 10*x + (a[i++]-'0');": "Ziffer anhängen", "return x;": "Zahl ist ein Anker (keine Rekursion)", "int count(link x)": "Knoten der Liste zählen", "if (x == 0) return 0;": "Anker: leere Liste", "return 1 + count(x->next);": "dieser Knoten + Rest", "void traverse(link h, void visit(link))": "jeden Knoten besuchen", "if (h == 0) return;": "Anker: nichts da", "visit(h);": "Knoten bearbeiten", "traverse(h->next, visit);": "dann den Rest", "void traverseR(link h, void visit(link))": "rückwärts besuchen", "traverseR(h->next, visit);": "zuerst den Rest …", "void remove(link& x, Item v)": "alle Knoten mit Wert v löschen", "while (x != 0 && x->item == v)": "solange vorne ein v steht:", "{ link t = x; x = x->next; delete t; }": "aushängen und freigeben", "if (x != 0) remove(x->next, v);": "im Rest weitermachen", "Item max(Item a[], int l, int r)": "Maximum von a[l..r] (Teile und Herrsche)", "if (l == r) return a[l];": "Anker: ein Element", "int m = (l+r)/2;": "in der Mitte teilen", "Item u = max(a, l, m);": "Maximum links", "Item v = max(a, m+1, r);": "Maximum rechts", "if (u > v) return u; else return v;": "das größere gewinnt", "void hanoi(int N, int d)": "N Scheiben in Richtung d bewegen", "if (N == 0) return;": "Anker: keine Scheibe", "hanoi(N-1, -d);": "N−1 kleinere zur Seite (andere Richtung)", "shift(N, d);": "größte Scheibe N einen Platz in Richtung d", "int F(int i)": "i-te Fibonacci-Zahl", "if (i < 1) return 0;": "Anker: F(0) = 0", "if (i == 1) return 1;": "Anker: F(1) = 1", "return F(i-1) + F(i-2);": "zwei Aufrufe: exponentiell viele", "{ static int knownF[maxN];": "Tabelle bekannter Werte (anfangs 0)", "if (knownF[i] != 0) return knownF[i];": "schon berechnet: sofort zurück", "int t = i;": "für i = 0, 1 ist F(i) = i", "if (i < 0) return 0;": "Schutz", "if (i > 1) t = F(i-1) + F(i-2);": "nur neue Werte rekursiv", "return knownF[i] = t;": "merken und zurückgeben", "traverse(h->l, visit);": "linker Teilbaum", "traverse(h->r, visit);": "rechter Teilbaum", "{ STACK<link> s(max);": "expliziter Stack statt Rekursion", "s.push(h);": "Wurzel hinein", "while (!s.empty())": "solange Arbeit übrig ist", "visit(h = s.pop());": "oberen Knoten holen und besuchen", "if (h->r != 0) s.push(h->r);": "rechts zuerst drauf …", "if (h->l != 0) s.push(h->l);": "… damit links zuerst dran ist", "{ QUEUE<link> q(max);": "Queue: Ebene für Ebene", "q.put(h);": "Wurzel hinein", "while (!q.empty())": "solange Knoten warten", "visit(h = q.get());": "ältesten Knoten besuchen", "if (h->l != 0) q.put(h->l);": "Kinder hinten anstellen: links …", "if (h->r != 0) q.put(h->r);": "… dann rechts", "int height(link h)": "Höhe des Baums", "if (h == 0) return -1;": "Anker: leerer Baum hat Höhe −1", "int u = height(h->l), v = height(h->r);": "beide Teilbäume messen", "if (u > v) return u+1; else return v+1;": "höherer Teilbaum + 1", "int count(link h)": "Knoten des Baums zählen", "if (h == 0) return 0;": "Anker: leerer Baum", "return count(h->l) + count(h->r) + 1;": "links + rechts + Wurzel", "void traverse(int k, void visit(int))": "alle von k erreichbaren Knoten besuchen", "{ visit(k); visited[k] = 1;": "k besuchen und markieren", "for (link t = adj[k]; t != 0; t = t->next)": "alle Nachbarn von k", "if (!visited[t->v]) traverse(t->v, visit);": "unbesucht: rekursiv dorthin (Tiefe zuerst)", "QUEUE<int> q(V*V);": "Queue: Breite zuerst", "q.put(k);": "Start hinein", "if (visited[k = q.get()] == 0)": "nächsten holen; nur falls neu:", "visit(k); visited[k] = 1;": "besuchen und markieren", "if (visited[t->v] == 0) q.put(t->v);": "unbesuchte Nachbarn hinten anstellen" };
 LB.Tracer = class {
   constructor(o){
     this.o = o; this.R = $(o.id); if(!this.R) return;
@@ -1775,8 +1865,10 @@ LB.Tracer = class {
     const code = typeof o.code === 'function' ? o.code(inp) : o.code;
     const cost = typeof o.cost === 'function' ? o.cost(inp) : (o.cost || {});
     this.inp = inp;
+    const nt = typeof o.notes === 'function' ? o.notes(inp) : (o.notes || {});
+    const lnNote = (ln, i) => ln.indexOf('//') >= 0 ? '' : (nt[i+1] || nt[ln.trim()] || LB.NOTES[ln.trim()] || '');
     this.q('.tr-code').innerHTML = '<table class="codet"><thead><tr><th>#</th><th>C++-Code</th><th title="wie oft ausgeführt bzw. geprüft">× lief</th><th>Kosten</th></tr></thead><tbody>' +
-      code.map((ln,i) => '<tr><td class="ln">'+(i+1)+'</td><td class="src">'+(LB.hl(ln, o.roles) || ' ')+'</td><td class="cnt"></td><td class="cost">'+(cost[i+1]||'')+'</td></tr>').join('') + '</tbody></table>';
+      code.map((ln,i) => '<tr><td class="ln">'+(i+1)+'</td><td class="src">'+(LB.hl(ln, o.roles) || ' ')+(lnNote(ln,i) ? '<span class="tnote">// '+lnNote(ln,i)+'</span>' : '')+'</td><td class="cnt"></td><td class="cost">'+(cost[i+1]||'')+'</td></tr>').join('') + '</tbody></table>';
     this.rows = Array.from(this.q('.tr-code').querySelectorAll('tbody tr'));
     const rec = new LB.Rec(code.length); let note = '';
     try { o.run(rec, inp); } catch(e){ if(e === 'LIMIT') note = ' <b>(Schritt-Limit erreicht, Eingabe verkleinern)</b>'; else { console.error(e); note = ' (Fehler: '+e+')'; } }
@@ -1856,7 +1948,7 @@ new LB.Tracer({
 
 /* ---------- Prog 3.5 Sieb ---------- */
 new LB.Tracer({
-  id:'trSieve', title:'Programm 3.5: Sieb des Eratosthenes', bigLabel:'⤼ nächstes i',
+  id:'trSieve', notes:{"7": "jede Zahl als möglicher Teiler", "10": "Ausgabe-Schleife"}, title:'Programm 3.5: Sieb des Eratosthenes', bigLabel:'⤼ nächstes i',
   inputs:'N = <input type="number" data-k="N" value="32" min="4" max="60" style="width:60px">',
   parse: T => ({N: LB.clampInt(T.val('N'), 4, 60, 32)}),
   code: inp => ['#include <iostream>','using namespace std;','static const int N = '+inp.N+';','int main()','  { int i, a[N];',

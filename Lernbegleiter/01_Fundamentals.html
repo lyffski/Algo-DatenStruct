@@ -168,6 +168,7 @@
     input[type=text]{min-width:0;width:100%}
     table.rt{display:block;overflow-x:auto}
   }
+.codet .tnote{margin-left:1.4em;color:#8a7f72;font-style:italic;font-size:.88em;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -319,12 +320,12 @@
 <p>Das ist die wichtigste Karte dieser Seite. <b>Alles</b> in Kapitel 2 (und später beim Sortieren und Suchen) ist eine Anwendung davon.</p>
 <div class="callout anat">
   <h3>🔬 Master-Karte: Laufzeit = Summe über alle Zeilen</h3>
-  <div class="step" style="text-align:center;font-size:1.12rem">\[ \Res{T(N)} \;=\; \sum_{\text{Zeile } z}\; \underbrace{\Mem{c_z}}_{\text{Kosten eines Durchlaufs}} \cdot \underbrace{\Idx{h_z(N)}}_{\text{Häufigkeit}} \;\;\xrightarrow{\text{nur größter Term}}\;\; \Rule{\text{führender Term}} \;\;\xrightarrow{\text{Konstante weg}}\;\; O(\dots) \]</div>
+  <div class="step" style="text-align:center;font-size:1.12rem">\[ \begin{aligned} \Res{T(N)} &= \sum_{\text{Zeile } z} \Mem{c_z}\cdot\Idx{h_z(N)} && \text{Laufzeit = Summe über alle Zeilen: Kosten mal Häufigkeit.} \\ \Mem{c_z} &= \text{Kosten eines Durchlaufs von Zeile } z && \text{hängt vom Rechner ab (ns, Befehle).} \\ \Idx{h_z(N)} &= \text{Häufigkeit von Zeile } z && \text{hängt nur vom Algorithmus ab.} \\ \Res{T(N)} &\approx \Rule{\text{führender Term}} && \text{Für großes } N \text{ zählt nur der größte Summand.} \\ \Res{T(N)} &\in O(\dots) && \text{Die Konstante fällt weg, übrig bleibt die Wachstumsklasse.} \end{aligned} \]</div>
   <div class="anat-row"><span class="anat-sym">\(\Res{T(N)}\)</span><span><b>gesuchte Größe:</b> Laufzeit (oder Anzahl einer <span class="fw">abstrakten Operation</span>, z.B. Array-Zugriffe) als Funktion der Eingabegröße</span></div>
   <div class="anat-row"><span class="anat-sym">\(\Par{N}\)</span><span><b>Parameter:</b> Problemgröße (Anzahl Objekte, Tabellengröße …). In Kap. 1 zusätzlich \(\Par{M}\) = Anzahl Paare</span></div>
   <div class="anat-row"><span class="anat-sym">\(\Mem{c_z}\)</span><span><b>Kosten einer Zeile</b> (Maschinenbefehle, ns). Hängt von Rechner und Compiler ab und ist deshalb für die Analyse <i>egal</i></span></div>
   <div class="anat-row"><span class="anat-sym">\(\Idx{h_z(N)}\)</span><span><b>Häufigkeit:</b> wie oft die Zeile läuft. Das ist die <b>Eigenschaft des Algorithmus</b> und steht im Tracer in der gelben Spalte</span></div>
-  <div class="anat-row"><span class="anat-sym">\(\Rule{\text{führender Term}}\)</span><span>für großes N dominiert der größte Summand, meist die <span class="fw">innere Schleife</span> (§2.3)</span></div>
+  <div class="anat-row"><span class="anat-sym">\(\Rule{\text{führender Term}}\)</span><span>für großes N dominiert der größte Summand, meist die <span class="fw">innere Schleife</span> (Abschnitt 2.3)</span></div>
   <p class="anat-read">📖 <b>Vorlesen:</b> „Die Laufzeit ist die Summe über alle Zeilen aus Kosten mal Häufigkeit. Für großes N zählt nur der am schnellsten wachsende Summand, und seine Konstante lässt die O-Notation weg.“</p>
 </div>
 
@@ -337,7 +338,7 @@
 <tr><td>Rumpf</td><td class="mono"><span class="c-mem">id</span>[<span class="c-idx">i</span>] <span class="c-chg">=</span> <span class="c-idx">i</span></td><td>die eigentliche Arbeit: <b>Schreibzugriff</b> ins Array</td><td class="mono"><b>N</b></td></tr>
 <tr><td>Inkrement</td><td class="mono"><span class="c-idx">i</span><span class="c-chg">++</span></td><td>Index weiterschieben</td><td class="mono">N</td></tr>
 </table>
-<div class="step">\[ \Res{T(N)} = \underbrace{c_1\cdot 1}_{\text{Init}} + \underbrace{c_2\,(N+1)}_{\text{Bedingung}} + \underbrace{c_3\,N}_{\text{Rumpf}} + \underbrace{c_4\,N}_{\text{i++}} = (c_2+c_3+c_4)\,N + (c_1+c_2) \;=\; \Rule{O(N)} \]</div>
+<div class="step">\[ \begin{aligned} \Res{T(N)} &= c_1\cdot 1 && \text{Die Initialisierung } i=0 \text{ läuft einmal.} \\ &\quad + c_2\,(N+1) && \text{Die Bedingung } i&lt;N \text{ wird } N+1\text{-mal geprüft.} \\ &\quad + c_3\,N && \text{Der Rumpf läuft } N\text{-mal.} \\ &\quad + c_4\,N && i\texttt{++} \text{ läuft } N\text{-mal.} \\ &= (c_2+c_3+c_4)\,N + (c_1+c_2) && \text{Zusammengefasst: linear in } N \text{ plus eine Konstante.} \\ &\in \Rule{O(N)} && \text{Die Konstanten werden weggelassen.} \end{aligned} \]</div>
 <p>Probier es direkt aus. Das ist der kleinste Tracer der Seite, zum Kennenlernen der Bedienung. Sieh dir an, wie die Zähler zu \(N+1\) und \(N\) werden:</p>
 <div id="trHello"></div>
 </section>
@@ -357,7 +358,7 @@
 </div>
 
 <h3>🏗️ Speicher-Bauplan: wo liegt <code>id[i]</code>?</h3>
-<div class="step">\[ \underbrace{\&\Mem{id}[\Idx{i}]}_{\text{Adresse}} \;=\; \underbrace{\Mem{\texttt{0x1000}}}_{\text{Anfang von id}} \;+\; \underbrace{\Idx{i}}_{\text{Index}} \cdot \underbrace{4}_{\texttt{sizeof(int)}} \qquad\text{z.B. } \&\Mem{id}[\Idx{3}] = \texttt{0x1000} + 3\cdot 4 = \Res{\texttt{0x100C}} \]</div>
+<div class="step">\[ \begin{aligned} \&\Mem{id}[\Idx{i}] &= \Mem{\texttt{0x1000}} + \Idx{i}\cdot 4 && \text{Adresse = Anfang des Arrays + Index mal 4 Byte (sizeof(int)).} \\ \&\Mem{id}[\Idx{3}] &= \texttt{0x1000} + 3\cdot 4 && \text{Beispiel: Index 3 einsetzen.} \\ &= \Res{\texttt{0x100C}} && \text{12 dezimal ist C hexadezimal.} \end{aligned} \]</div>
 <div class="controls"><label>Index i = <span class="readout"><b id="adrIv">3</b></span></label><input id="adrI" type="range" min="0" max="9" value="3"><span id="adrOut" class="mono"></span></div>
 <div id="adrCells" class="arr"></div>
 <p class="muted small">Die Adressen sind vereinfacht (echte Stack-Adressen sehen aus wie <code class="inl">0x7ffe…</code>). Das Prinzip „Anfang + Index·Größe“ ist exakt so.</p>
@@ -377,13 +378,13 @@
 <p class="small"><code class="inl">while (cin &gt;&gt; p &gt;&gt; q)</code>: der Ausdruck liefert den Stream. Der ist <b>false</b>, sobald nichts mehr zu lesen ist (EOF), und dann endet die Schleife.</p>
 <p class="small"><code class="inl">continue;</code> springt sofort zum nächsten Schleifentest, der Rest des Rumpfs wird übersprungen.</p>
 <p class="small"><code class="inl">for (i = p; i != id[i]; i = id[i]) ;</code>: der Rumpf ist <b>leer</b> (<code class="inl">;</code>), die ganze Arbeit steckt im Kopf. Das ist „Zeigern folgen“.</p>
-<p class="small"><code class="inl">N/2</code> mit int ist <b>abgerundet</b> (⌊N/2⌋), <code class="inl">N - N/2</code> ist ⌈N/2⌉ (§2.3).</p>
+<p class="small"><code class="inl">N/2</code> mit int ist <b>abgerundet</b> (⌊N/2⌋), <code class="inl">N - N/2</code> ist ⌈N/2⌉ (Abschnitt 2.3).</p>
 </div>
 </div>
 
 <h3>🏗️ Bauplan: doppelte Indirektion <code>id[id[i]]</code> (kommt in Prog 1.4)</h3>
 <p>Gegeben <code class="inl">id = {0,1,9,4,9,6,6,7,0,9}</code> und <code class="inl">i = 3</code>:</p>
-<div class="step">\[ \Mem{id}\big[\,\underbrace{\Mem{id}[\Idx{3}]}_{=\;4\;\text{(Elternknoten von 3)}}\,\big] \;=\; \underbrace{\Mem{id}[4]}_{=\;9\;\text{(Großelternknoten)}} \;\;\Rightarrow\;\; \Chg{\texttt{id[3] = id[id[3]]}}\;\text{ setzt } \Mem{id}[3] \leftarrow \Res{9} \]</div>
+<div class="step">\[ \begin{aligned} \Mem{id}[\Idx{3}] &= 4 && \text{Innen zuerst: Der Elternknoten von 3 ist 4.} \\ \Mem{id}[\Mem{id}[\Idx{3}]] = \Mem{id}[4] &= 9 && \text{Dann außen: Der Elternknoten von 4 ist 9, also der Großvater von 3.} \\ \Chg{\texttt{id[3] = id[id[3]]}} &\Rightarrow \Mem{id}[3] = \Res{9} && \text{3 zeigt jetzt direkt auf seinen Großvater.} \end{aligned} \]</div>
 <p>Man liest von innen nach außen: erst den <b>Elternknoten</b> holen, dann <b>dessen</b> Elternknoten. Die Zuweisung lässt 3 also einen Schritt überspringen und direkt auf den Großvater zeigen. Genau das ist <span class="fw">Pfad-Halbierung</span>.</p>
 </section>
 
@@ -462,9 +463,9 @@
 <div class="callout key">
   <h3>Eigenschaft 1.1</h3>
   <p>Quick-Find führt bei <span class="c-par">M</span> union-Operationen auf <span class="c-par">N</span> Objekten <b>mindestens M·N</b> Befehle aus.</p>
-  <div class="step">\[ \Res{T} \;\ge\; \underbrace{\Par{M}}_{\text{Unions}} \cdot \underbrace{\Par{N}}_{\text{Durchläufe von Zeile 10}} \cdot \underbrace{1}_{\ge 1\text{ Befehl (Schleifentest)}} \]</div>
+  <div class="step">\[ \begin{aligned} \text{Unions} &= \Par{M} && \text{Es gibt } M \text{ Unions.} \\ \text{Durchläufe von Zeile 10 je Union} &= \Par{N} && \text{Jede Union läuft durch das ganze Array.} \\ \text{Befehle je Durchlauf} &\ge 1 && \text{Mindestens der Schleifentest wird ausgeführt.} \\ \Res{T} &\ge \Par{M}\cdot\Par{N} && \text{Also sind es mindestens } M\cdot N \text{ Befehle.} \end{aligned} \]</div>
   <p><b>Rechnung (Übung 1.10):</b> N = 10⁹ Objekte, M = 10⁶ Paare, 10⁹ Befehle/s, ≥ 10 Befehle pro innerem Durchlauf:</p>
-  <div class="step">\[ \frac{\overbrace{10^6}^{M}\cdot\overbrace{10^9}^{N}\cdot\overbrace{10}^{\text{Befehle}}}{\underbrace{10^9}_{\text{Befehle/s}}} = 10^{7}\,\text{s} \approx \Res{116\ \text{Tage}} \]</div>
+  <div class="step">\[ \begin{aligned} \text{Befehle} &= \underbrace{10^6}_{M}\cdot\underbrace{10^9}_{N}\cdot\underbrace{10}_{\text{je Durchlauf}} = 10^{16} && \text{Anzahl der Befehle insgesamt.} \\ \text{Zeit} &= \frac{10^{16}}{10^9\ \text{Befehle/s}} = 10^{7}\,\text{s} && \text{Durch die Rechengeschwindigkeit teilen.} \\ &\approx \Res{116\ \text{Tage}} && 10^7 \text{ s geteilt durch 86400 s pro Tag.} \end{aligned} \]</div>
 </div>
 </section>
 
@@ -518,7 +519,7 @@ else { id[j] = i; sz[i] += sz[j]; }     // ⑮ sonst j unter i</pre>
   <h3>Eigenschaft 1.3: höchstens lg N Zeiger pro find (von null bewiesen)</h3>
   <p><b>Behauptung:</b> In einem Baum mit k Knoten ist jeder Knoten höchstens \(\lg k\) Schritte von der Wurzel entfernt.</p>
   <p><b>Induktionsschritt:</b> Ein Baum mit \(i\) Knoten wird unter einen mit \(j\) Knoten gehängt, wobei \(i \le j\). Die Knoten des <b>kleinen</b> Baums sind danach genau 1 Schritt tiefer, sitzen aber in einem Baum der Größe \(i+j\):</p>
-  <div class="step">\[ \underbrace{1 + \lg i}_{\text{alte Tiefe}+1} \;=\; \lg(2i) \;=\; \lg(\underbrace{i+i}_{\le\, i+j\ \text{da } i\le j}) \;\le\; \Res{\lg(i+j)} \]</div>
+  <div class="step">\[ \begin{aligned} \text{neue Tiefe} &= 1 + \lg i && \text{Der kleine Baum (} i \text{ Knoten) rutscht eine Ebene tiefer.} \\ &= \lg(2i) && \text{Logarithmusregel: } 1 = \lg 2. \\ &= \lg(i+i) \le \Res{\lg(i+j)} && \text{Weil } i \le j \text{, gilt die Schranke auch für den neuen Baum.} \end{aligned} \]</div>
   <p>Die Tiefe wächst also nur, wenn sich die Baumgröße <b>mindestens verdoppelt</b>. Verdoppeln kann man sich höchstens \(\lg N\)-mal. Daraus folgt \(\Res{T \le c\cdot M \lg N}\).</p>
 </div>
 <h3>👁️ Fig. 1.8: der schlimmste Fall für Weighted, immer gleich große Bäume</h3>
@@ -615,7 +616,7 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <h3>Übung 2.2 als Tracer: „Wie lange dauert es, bis 1 Milliarde zu zählen?“</h3>
 <p>Dreifach verschachtelte Schleife. Beobachte, wie die Zähler der drei Kopfzeilen zu \(N+1\), \(N(N+1)\) und \(N^2(N+1)\) werden und der Rumpf zu \(N^3\).</p>
 <div id="trTriple"></div>
-<div class="step">\[ \Res{\texttt{count}} = \sum_{i=0}^{N-1}\;\sum_{j=0}^{N-1}\;\sum_{k=0}^{N-1} 1 = \underbrace{N}_{i}\cdot\underbrace{N}_{j}\cdot\underbrace{N}_{k} = \Res{N^3} \qquad N=1000 \Rightarrow 10^9 \]</div>
+<div class="step">\[ \begin{aligned} \Res{\texttt{count}} &= \sum_{i=0}^{N-1}\sum_{j=0}^{N-1}\sum_{k=0}^{N-1} 1 && \text{Jede Kombination } (i,j,k) \text{ zählt einmal.} \\ &= N\cdot N\cdot N && \text{Jede Schleife läuft unabhängig } N\text{-mal.} \\ &= \Res{N^3} && \text{Das Wachstum ist kubisch.} \\ N = 1000 &\Rightarrow 10^9 && \text{Also bis eine Milliarde zählen.} \end{aligned} \]</div>
 <h3>🔎 Verdopplungs-Detektor (rückwärts aus Fig. 2.3)</h3>
 <p>Du hast ein Programm gemessen: Laufzeit bei N und bei 2N. Aus dem <b>Verhältnis</b> lässt sich die Wachstumsklasse ablesen:</p>
 <div class="controls"><label>T(N) = <input type="number" id="dbA" value="1.3" step="any" style="width:90px"></label><label>T(2N) = <input type="number" id="dbB" value="10.6" step="any" style="width:90px"></label><span id="dbOut" class="readout"></span></div>
@@ -706,7 +707,7 @@ int b = N - N / 2;   // ⌈N/2⌉
 </div>
 
 <h3>Harmonische Zahlen \(H_N\): die Treppe unter \(1/x\) (Fig. 2.2)</h3>
-<div class="step">\[ \Res{H_N} = 1+\tfrac12+\tfrac13+\dots+\tfrac1N \;\approx\; \ln N + \gamma + \frac{1}{12N},\qquad \gamma = 0{,}57721\ldots\ (\text{Euler-Konstante}) \]</div>
+<div class="step">\[ \begin{aligned} \Res{H_N} &= 1+\tfrac12+\tfrac13+\dots+\tfrac1N && \text{Definition: Summe der Kehrwerte.} \\ &\approx \ln N + \gamma + \frac{1}{12N} && \text{Näherung über die Fläche unter } 1/x. \\ \gamma &= 0{,}57721\ldots && \text{Euler-Konstante, der Unterschied zwischen Treppe und Kurve.} \end{aligned} \]</div>
 <div class="controls"><label>N = <span class="readout"><b id="hNv">10</b></span></label><input id="hN" type="range" min="2" max="40" value="10"><span id="hOut" class="readout"></span></div>
 <div id="hPlot" class="plot sm"></div>
 <p class="small">Wo kommt \(H_N\) im Code vor? In <code class="inl">for (i = 1; i &lt;= N; i++) for (j = i; j &lt;= N; j += i)</code> läuft die innere Schleife \(N/i\)-mal, insgesamt also \(N\cdot H_N \approx N\ln N\) (siehe Beispiel ③ im Schema). Quicksort wird ebenfalls \(2N H_N\) haben (Teil 3).</p>
@@ -729,7 +730,7 @@ int b = N - N / 2;   // ⌈N/2⌉
 <h2>2.4 · Die O-Notation</h2>
 <div class="callout anat">
   <h3>🔬 Anatomie: Definition 2.1</h3>
-  <div class="step" style="text-align:center;font-size:1.1rem">\[ \Res{g(N)} \in O\big(\Rule{f(N)}\big) \;\iff\; \exists\, \Par{c_0}>0,\ \Par{N_0}:\quad \Res{g(N)} \;\Cond{<}\; \Par{c_0}\cdot\Rule{f(N)} \quad \text{für alle } N \Cond{>} \Par{N_0} \]</div>
+  <div class="step" style="text-align:center;font-size:1.1rem">\[ \begin{aligned} \Res{g(N)} \in O\big(\Rule{f(N)}\big) \;&\iff\; \text{es gibt Konstanten } \Par{c_0}>0 \text{ und } \Par{N_0}, && \text{Es gibt eine Konstante und einen Startpunkt,} \\ &\phantom{\iff}\;\; \text{sodass } \Res{g(N)} \Cond{<} \Par{c_0}\cdot\Rule{f(N)} && \text{sodass } g \text{ unter dem } c_0\text{-Fachen von } f \text{ bleibt,} \\ &\phantom{\iff}\;\; \text{für alle } N \Cond{>} \Par{N_0}. && \text{und zwar ab der Stelle } N_0. \end{aligned} \]</div>
   <div class="anat-row"><span class="anat-sym">\(\Res{g(N)}\)</span><span>die <b>echte</b> Kostenfunktion (darf wild schwanken, Fig. 2.4)</span></div>
   <div class="anat-row"><span class="anat-sym">\(\Rule{f(N)}\)</span><span>die einfache <b>Vergleichsfunktion</b> (N, N², N lg N …)</span></div>
   <div class="anat-row"><span class="anat-sym">\(\Par{c_0}\)</span><span>Konstante: „bis auf einen festen Faktor“. <b>Versteckt Implementierungsdetails</b></span></div>
@@ -746,12 +747,12 @@ int b = N - N / 2;   // ⌈N/2⌉
 <div id="oPlot" class="plot sm"></div>
 
 <h3>Rechenregeln: ausmultiplizieren, dann nur den größten O-Term behalten</h3>
-<div class="step">\[ \big(N+O(1)\big)\big(N+O(\log N)+O(1)\big) = N^2 + O(N) + O(N\log N) + O(\log N)+O(N)+O(1) = \Res{N^2 + O(N\log N)} \]</div>
+<div class="step">\[ \begin{aligned} &\big(N+O(1)\big)\big(N+O(\log N)+O(1)\big) && \text{Ausgangsausdruck.} \\ &= N^2 + O(N\log N) + O(N) + O(\log N) + O(N) + O(1) && \text{Wie gewohnt ausmultiplizieren (6 Terme).} \\ &= \Res{N^2 + O(N\log N)} && \text{Nur den größten O-Term behalten.} \end{aligned} \]</div>
 <h3>🏗️ Bauplan: Buch-Beispiel „innere Schleife \(N H_N\)-mal“</h3>
 <p>Nach einer Analyse läuft die innere Schleife im Mittel \(N H_N\)-mal (je \(a_0\) ns, im Buch mit Faktor 2), der äußere Teil N-mal (\(a_1\) ns), die Initialisierung einmal (\(a_2\) ns):</p>
-<div class="step">\[ \Res{T(N)} = \underbrace{2a_0\,N H_N}_{\text{innere Schleife}} + \underbrace{a_1 N}_{\text{außen}} + \underbrace{a_2}_{\text{Init}} = 2a_0 N H_N + O(N) = \Rule{2a_0 N\ln N + O(N)} \]</div>
+<div class="step">\[ \begin{aligned} \Res{T(N)} &= 2a_0\,N H_N && \text{Innere Schleife (so im Buch mit dem Faktor 2).} \\ &\quad + a_1 N && \text{Äußerer Teil: } N \text{ Durchläufe à } a_1 \text{ ns.} \\ &\quad + a_2 && \text{Initialisierung: einmal } a_2 \text{ ns.} \\ &= 2a_0 N H_N + O(N) && \text{Die kleineren Terme wandern in } O(N). \\ &= \Rule{2a_0 N\ln N + O(N)} && \text{Mit } H_N = \ln N + O(1). \end{aligned} \]</div>
 <p><b>Vorhersage ohne \(a_0\) zu kennen:</b></p>
-<div class="step">\[ \frac{T(2N)}{T(N)} = \frac{2a_0(2N)\ln(2N)+O(2N)}{2a_0N\ln N+O(N)} = \frac{2\ln(2N)+O(1)}{\ln N+O(1)} = \Res{2 + O\!\left(\tfrac{1}{\log N}\right)} \]</div>
+<div class="step">\[ \begin{aligned} \frac{T(2N)}{T(N)} &= \frac{2a_0(2N)\ln(2N)+O(2N)}{2a_0N\ln N+O(N)} && 2N \text{ einsetzen.} \\ &= \frac{2\ln(2N)+O(1)}{\ln N+O(1)} && \text{Durch } 2a_0 N \text{ kürzen: } a_0 \text{ fällt weg.} \\ &= \Res{2 + O\!\left(\tfrac{1}{\log N}\right)} && \ln(2N)=\ln N+\ln 2\text{: Doppelte Eingabe heißt ungefähr doppelte Zeit.} \end{aligned} \]</div>
 <div class="grid2">
 <div class="card">
 <h4 style="margin-top:0">Drei Präzisionsstufen (Fig. 2.4 und 2.5)</h4>
@@ -768,7 +769,7 @@ int b = N - N / 2;   // ⌈N/2⌉
 <div class="callout exam">
   <h3>🎯 Prüfungs-Ergänzung: Ω und Θ (in der Klausur gefragt, z.B. „untere Grenze fürs Sortieren“)</h3>
   <p>Sedgewick benutzt hauptsächlich O. In der Prüfung brauchst du alle drei:</p>
-  <div class="step">\[ g\in \Rule{O(f)}:\ g \le c\,f \ (\text{obere Schranke}) \qquad g\in \Res{\Omega(f)}:\ g \ge c\,f\ (\text{untere Schranke}) \qquad g\in \Idx{\Theta(f)}:\ c_1 f\le g\le c_2 f\ (\text{beides}) \]</div>
+  <div class="step">\[ \begin{aligned} g \in \Rule{O(f)} &: \; g \le c\,f && \text{Obere Schranke: } g \text{ wächst höchstens wie } f. \\ g \in \Res{\Omega(f)} &: \; g \ge c\,f && \text{Untere Schranke: } g \text{ wächst mindestens wie } f. \\ g \in \Idx{\Theta(f)} &: \; c_1 f \le g \le c_2 f && \text{Beides zugleich: } g \text{ wächst genau wie } f. \end{aligned} \]</div>
   <p class="small">Beispiele: sequentielle Suche erfolglos: \(\Theta(N)\). Binäre Suche Worst Case: \(\Theta(\log N)\). Quick-Find mit M Unions: \(\Omega(MN)\) (Eigenschaft 1.1 ist eine <b>untere</b> Schranke!). Weighted QU: \(O(M\lg N)\) (Eigenschaft 1.3 ist eine <b>obere</b> Schranke). Vergleichsbasiertes Sortieren: \(\Omega(N\log N)\) (Teil 3).</p>
 </div>
 </section>
@@ -785,7 +786,7 @@ int b = N - N / 2;   // ⌈N/2⌉
   C(N/2);                               // Aufruf 2:  C(N/2)
   for (int i = 0; i &lt; N; i++) work();   // linearer Durchlauf: + N
 }</pre>
-  <div class="step" style="text-align:center">\[ \Res{C_N} = \underbrace{\Chg{2}}_{\text{2 Aufrufe}}\,\underbrace{C_{N/2}}_{\text{halbe Größe}} + \underbrace{\Idx{N}}_{\text{Schleife}}, \qquad \underbrace{C_1 = 0}_{\text{Anker}} \]</div>
+  <div class="step" style="text-align:center">\[ \begin{aligned} \Res{C_N} &= \Chg{2}\,C_{N/2} + \Idx{N} && \text{Zwei Aufrufe mit halber Größe plus } N \text{ für die Schleife.} \\ C_1 &= 0 && \text{Der Anker kostet nichts.} \end{aligned} \]</div>
   <p class="anat-read">📖 <b>Vorlesen:</b> „Die Kosten für N sind zweimal die Kosten für N/2 plus N für den Durchlauf. Bei 1 ist nichts zu tun.“</p>
 </div>
 <h3>👁️ Rekurrenz-Labor: Code, Rekursionsbaum, Teleskop-Rechnung und Graph</h3>
@@ -819,7 +820,7 @@ int b = N - N / 2;   // ⌈N/2⌉
 <div class="callout key">
   <h3>🔍 Der Trick bei Formel 2.4 (von null)</h3>
   <p>Setze \(N=2^n\) und teile durch \(2^n\), dann „teleskopiert“ die Gleichung:</p>
-  <div class="step">\[ C_{2^n} = 2C_{2^{n-1}} + 2^n \;\xrightarrow{\;:2^n\;}\; \frac{C_{2^n}}{2^n} = \frac{C_{2^{n-1}}}{2^{n-1}} + 1 = \frac{C_{2^{n-2}}}{2^{n-2}} + 1 + 1 = \dots = \underbrace{\frac{C_{2^0}}{2^0}}_{=0} + n \;\Rightarrow\; \Res{C_N = N\lg N} \]</div>
+  <div class="step">\[ \begin{aligned} C_{2^n} &= 2C_{2^{n-1}} + 2^n && \text{Formel 2.4 mit } N = 2^n. \\ \frac{C_{2^n}}{2^n} &= \frac{C_{2^{n-1}}}{2^{n-1}} + 1 && \text{Beide Seiten durch } 2^n \text{ teilen.} \\ &= \frac{C_{2^{n-2}}}{2^{n-2}} + 2 && \text{Dieselbe Gleichung noch einmal einsetzen.} \\ &= \dots = \frac{C_{2^0}}{2^0} + n && \text{Nach } n \text{ Schritten ist man beim Anker.} \\ &= 0 + n && C_1 = 0. \\ \Res{C_N} &= \Res{N\lg N} && \text{Mit } 2^n = N \text{ multiplizieren, } n = \lg N. \end{aligned} \]</div>
   <p class="small">Intuitiv im Rekursionsbaum oben: <b>jede Ebene kostet zusammen N</b>, und es gibt \(\lg N\) Ebenen. Bei 2.3 halbieren sich die Ebenenkosten (N + N/2 + N/4 … ≈ 2N), bei 2.5 verdoppelt sich die Knotenzahl pro Ebene (1+2+4+…+N ≈ 2N).</p>
 </div>
 </section>
@@ -834,9 +835,9 @@ int b = N - N / 2;   // ⌈N/2⌉
   <h3>Eigenschaft 2.1 (unsortiert) und 2.2 (sortiert), von null hergeleitet</h3>
   <p><b>Erfolglos</b> (unsortiert): alle \(\Par{N}\) Zahlen werden angesehen, denn erst am Ende steht fest, dass v fehlt.</p>
   <p><b>Erfolgreich</b>: wenn jede Position gleich wahrscheinlich ist:</p>
-  <div class="step">\[ \Res{\bar C} = \frac{\overbrace{1}^{v\text{ an Pos. 1}}+\overbrace{2}^{\text{Pos. 2}}+\dots+\overbrace{N}^{\text{Pos. }N}}{N} = \frac{N(N+1)/2}{N} = \Res{\frac{N+1}{2}} \approx \frac N2 \]</div>
+  <div class="step">\[ \begin{aligned} \Res{\bar C} &= \frac{1+2+\dots+N}{N} && \text{Steht } v \text{ an Position } k \text{, kostet es } k \text{ Vergleiche. Jede Position ist gleich wahrscheinlich.} \\ &= \frac{N(N+1)/2}{N} && \text{Gauß-Summe.} \\ &= \Res{\frac{N+1}{2}} \approx \frac N2 && \text{Im Mittel wird die halbe Tabelle angesehen.} \end{aligned} \]</div>
   <p><b>Sortierte Tabelle</b>: man bricht ab, sobald eine Zahl &gt; v kommt. Eine erfolglose Suche endet gleich wahrscheinlich in einem der \(N+1\) Intervalle:</p>
-  <div class="step">\[ \frac{1+2+\dots+N+\overbrace{N}^{\text{hinter dem Ende}}}{N+1} = \Res{\frac{N+3}{2}} \approx \frac N2 \qquad\Rightarrow\qquad M\text{ Suchen}: \ \propto \Par{M}\Par{N} \]</div>
+  <div class="step">\[ \begin{aligned} \bar C_{\text{erfolglos}} &= \frac{1+2+\dots+N+N}{N+1} && N+1 \text{ mögliche Lücken; die hinter dem Ende kostet } N \text{ Vergleiche.} \\ &= \Res{\frac{N+3}{2}} \approx \frac N2 && \text{Auch erfolglos nur noch die halbe Tabelle.} \\ M \text{ Suchen} &\propto \Par{M}\cdot\Par{N} && \text{Jede Suche kostet } \propto N. \end{aligned} \]</div>
   <p class="small">Mit \(M=10^9\), \(N=10^6\) und c µs pro Vergleich: \(\ge (c/2)\cdot10^9\) s, also etwa <b>16c Jahre</b>. Unbrauchbar.</p>
 </div>
 <h3>Programm 2.2 — binäre Suche (Fig. 2.7: sucht 5025)</h3>
@@ -851,7 +852,7 @@ int b = N - N / 2;   // ⌈N/2⌉
 </div>
 <div class="callout key">
   <h3>Eigenschaft 2.3: binäre Suche braucht nie mehr als ⌊lg N⌋ + 1 Vergleiche</h3>
-  <div class="step">\[ \Res{T_N} \le \underbrace{T_{\lfloor N/2\rfloor}}_{\text{Rest in einer Hälfte}} + \underbrace{1}_{\text{Vergleich mit Mitte}},\quad T_1 = 1 \;\;\overset{\text{Formel 2.2}}{\Longrightarrow}\;\; \Res{T_N \le \lfloor\lg N\rfloor + 1} \]</div>
+  <div class="step">\[ \begin{aligned} \Res{T_N} &\le T_{\lfloor N/2\rfloor} + 1 && \text{Ein Vergleich mit der Mitte, dann bleibt höchstens die halbe Tabelle.} \\ T_1 &= 1 && \text{Ein Element kostet einen Vergleich.} \\ \Res{T_N} &\le \Res{\lfloor\lg N\rfloor + 1} && \text{Lösung wie Formel 2.2 (Anzahl der Bits von } N). \end{aligned} \]</div>
   <p>N = 10⁶ ergibt <b>≤ 20 Vergleiche</b> statt ~500 000. Verdoppelt man N, kommt ein einziger Vergleich dazu.</p>
 </div>
 <h3>👁️ Tabelle 2.4 live: Vergleiche pro Suche bei wachsendem N</h3>
@@ -920,7 +921,7 @@ int b = N - N / 2;   // ⌈N/2⌉
   <div id="trEx3"></div>
   <p><span class="num">①</span> Operation: <code class="inl">cnt++</code>.</p>
   <p><span class="num">②</span> <span class="c-idx">j</span> läuft von i bis N in Schritten von i, also \(\lfloor N/i\rfloor\)-mal:</p>
-  <div class="step">\[ \Res{\texttt{cnt}} = \sum_{i=1}^{N} \left\lfloor \frac Ni \right\rfloor \approx N\underbrace{\left(1+\tfrac12+\tfrac13+\dots+\tfrac1N\right)}_{=\,H_N\ (\S2.3)} \]</div>
+  <div class="step">\[ \begin{aligned} \Res{\texttt{cnt}} &= \sum_{i=1}^{N} \left\lfloor \frac Ni \right\rfloor && \text{Für jedes } i \text{ läuft } j \text{ genau } \lfloor N/i\rfloor\text{-mal.} \\ &\approx N\left(1+\tfrac12+\tfrac13+\dots+\tfrac1N\right) && N \text{ ausklammern.} \\ &= N\,H_N && \text{Die Klammer ist die harmonische Zahl (Abschnitt 2.3).} \end{aligned} \]</div>
   <p><span class="num">③</span> \(H_N\approx \ln N+\gamma\), also \(\Res{\texttt{cnt}\approx N\ln N}\).</p>
   <p><span class="num">④</span> Verdopplung: etwas mehr als ×2.</p>
   <span class="verdict ok">Verdict: Θ(N log N), ungefähr N ln N ≈ 0,69 N lg N. Die harmonischen Zahlen tauchen direkt im Code auf.</span>
@@ -1168,6 +1169,8 @@ LB.forest = function(id, hi, opt){
 LB.depth = function(id){ let mx = 0; for(let i = 0; i < id.length; i++){ let d = 0, x = i; while(id[x] !== x && d < 999){ x = id[x]; d++; } mx = Math.max(mx, d); } return mx; };
 
 /* ---------- Tracer ---------- */
+/* Kurzkommentare je Codezeile: Schlüssel = Zeile ohne Einrückung */
+LB.NOTES = { "int i, id[N];": "N Speicherzellen für die Komponenten-Nummern", "id[i] = i;": "Start: jedes Objekt ist seine eigene Komponente", "#include <iostream>": "für cin und cout", "using namespace std;": "cin statt std::cin", "int main()": "Programmstart", "{ int i, p, q, id[N];": "Laufvariable, Eingabepaar p-q, das Array id", "{ int i, j, p, q, id[N];": "i, j werden die Wurzeln von p und q", "{ int i, j, p, q, id[N], sz[N];": "sz[r] = Knotenzahl des Baums mit Wurzel r", "for (i = 0; i < N; i++) id[i] = i;": "Start: N einzelne Komponenten", "while (cin >> p >> q)": "solange noch ein Paar p-q kommt", "{ int t = id[p];": "t = Komponente von p merken", "if (t == id[q]) continue;": "find: schon verbunden, also nichts tun", "for (i = 0; i < N; i++)": "union: das ganze Array durchlaufen", "if (id[i] == t) id[i] = id[q];": "alle aus der Komponente von p umnummerieren", "cout << \" \" << p << \" \" << q << endl;": "neue Verbindung ausgeben", "for (i = p; i != id[i]; i = id[i]) ;": "von p nach oben laufen bis zur Wurzel i", "for (j = q; j != id[j]; j = id[j]) ;": "von q nach oben laufen bis zur Wurzel j", "if (i == j) continue;": "gleiche Wurzel heißt schon verbunden", "id[i] = j;": "union: Wurzel i unter Wurzel j hängen", "{ id[i] = i; sz[i] = 1; }": "jeder Baum hat anfangs 1 Knoten", "if (sz[i] < sz[j])": "welcher Baum ist kleiner?", "{ id[i] = j; sz[j] += sz[i]; }": "kleinen Baum i unter j hängen, Größe addieren", "else { id[j] = i; sz[i] += sz[j]; }": "sonst j unter i hängen", "for (i = p; i != id[i]; i = id[i])": "Weg von p zur Wurzel …", "id[i] = id[id[i]];": "… und dabei auf den Großvater zeigen (Halbierung)", "for (j = q; j != id[j]; j = id[j])": "Weg von q zur Wurzel …", "id[j] = id[id[j]];": "… ebenfalls halbieren", "int i, j, k, count = 0;": "drei Laufvariablen, ein Zähler", "for (j = 0; j < N; j++)": "N-mal pro i", "for (k = 0; k < N; k++)": "N-mal pro (i, j)", "count++;": "läuft N·N·N-mal", "int lgN;": "Ergebnis: Anzahl der Halbierungen", "for (lgN = 0; N > 0; lgN++, N /= 2) ;": "halbieren, bis nichts übrig ist, und mitzählen", "int lgN, t;": "t verdoppelt sich, lgN zählt mit", "for (lgN = 0, t = 1; t < N; lgN++, t += t) ;": "verdoppeln, bis t ≥ N", "int search(int a[], int v, int l, int r)": "suche v in a[l..r]", "for (int i = l; i <= r; i++)": "jede Position der Reihe nach", "if (v == a[i]) return i;": "gefunden: Position zurückgeben", "return -1;": "nicht gefunden", "while (r >= l)": "solange der Suchbereich nicht leer ist", "{ int m = (l+r)/2;": "Mitte des Bereichs", "if (v == a[m]) return m;": "Treffer in der Mitte", "if (v < a[m]) r = m-1; else l = m+1;": "links oder rechts weitersuchen: halber Bereich", "int cnt = 0;": "Zähler für den innersten Schritt", "for (j = i+1; j < N; j++)": "nur Paare mit j > i", "cnt++;": "zählt, wie oft der Rumpf läuft", "for (i = N; i > 0; i /= 2)": "i = N, N/2, N/4, … (lg N Runden)", "for (j = 0; j < i; j++)": "i Schritte in dieser Runde", "for (i = 1; i <= N; i++)": "jede Schrittweite i", "for (j = i; j <= N; j += i)": "Vielfache von i: N/i Schritte" };
 LB.Tracer = class {
   constructor(o){
     this.o = o; this.R = $(o.id); if(!this.R) return;
@@ -1225,8 +1228,10 @@ LB.Tracer = class {
     const code = typeof o.code === 'function' ? o.code(inp) : o.code;
     const cost = typeof o.cost === 'function' ? o.cost(inp) : (o.cost || {});
     this.inp = inp;
+    const nt = typeof o.notes === 'function' ? o.notes(inp) : (o.notes || {});
+    const lnNote = (ln, i) => ln.indexOf('//') >= 0 ? '' : (nt[i+1] || nt[ln.trim()] || LB.NOTES[ln.trim()] || '');
     this.q('.tr-code').innerHTML = '<table class="codet"><thead><tr><th>#</th><th>C++-Code</th><th title="wie oft ausgeführt bzw. geprüft">× gelaufen</th><th>Kosten-Formel</th></tr></thead><tbody>' +
-      code.map((ln,i) => '<tr><td class="ln">'+(i+1)+'</td><td class="src">'+(LB.hl(ln, o.roles) || ' ')+'</td><td class="cnt"></td><td class="cost">'+(cost[i+1]||'')+'</td></tr>').join('') + '</tbody></table>';
+      code.map((ln,i) => '<tr><td class="ln">'+(i+1)+'</td><td class="src">'+(LB.hl(ln, o.roles) || ' ')+(lnNote(ln,i) ? '<span class="tnote">// '+lnNote(ln,i)+'</span>' : '')+'</td><td class="cnt"></td><td class="cost">'+(cost[i+1]||'')+'</td></tr>').join('') + '</tbody></table>';
     this.rows = Array.from(this.q('.tr-code').querySelectorAll('tbody tr'));
     const rec = new LB.Rec(code.length); let note = '';
     try { o.run(rec, inp); } catch(e){ if(e === 'LIMIT') note = ' <b>(Schritt-Limit erreicht, bitte Eingabe verkleinern)</b>'; else { console.error(e); note = ' (Fehler: '+e+')'; } }
@@ -1279,7 +1284,7 @@ const LB = window.LB, $ = LB.$;
 
 /* ---------- Hallo-Tracer: for-Schleife ---------- */
 new LB.Tracer({
-  id:'trHello', title:'Mini-Tracer: Initialisierung eines Arrays',
+  id:'trHello', notes:{"2": "N-mal"}, title:'Mini-Tracer: Initialisierung eines Arrays',
   inputs:'N = <input type="number" data-k="N" value="5" min="1" max="12" style="width:60px">',
   parse: T => ({N: Math.max(1, Math.min(12, parseInt(T.val('N')) || 5))}),
   code:['int i, id[N];','for (i = 0; i < N; i++)','  id[i] = i;'],
@@ -1484,7 +1489,7 @@ function weightedUnion(rec, st, i, j, lIf, lThen, lElse){
   }
 }
 new LB.Tracer({
-  id:'trWQU', title:'Programm 1.3: Weighted Quick-Union',
+  id:'trWQU', notes:{"6":"Start: N Bäume mit je 1 Knoten"}, title:'Programm 1.3: Weighted Quick-Union',
   inputs: LB.ufInputs(10, FIG11), parse: LB.ufParse, bigLabel:'⤼ nächstes Paar',
   code: inp => W_CODE(inp).concat(['        for (i = p; i != id[i]; i = id[i]) ;','        for (j = q; j != id[j]; j = id[j]) ;','        if (i == j) continue;',
     '        if (sz[i] < sz[j])','          { id[i] = j; sz[j] += sz[i]; }','        else { id[j] = i; sz[i] += sz[j]; }','        cout << " " << p << " " << q << endl;','      }','  }']),
@@ -1516,7 +1521,7 @@ new LB.Tracer({
 
 /* ---------- Programm 1.4 Weighted + Halbierung ---------- */
 new LB.Tracer({
-  id:'trPC', title:'Programm 1.3 + 1.4: Weighted Quick-Union mit Pfad-Halbierung',
+  id:'trPC', notes:{"6":"Start: N Bäume mit je 1 Knoten"}, title:'Programm 1.3 + 1.4: Weighted Quick-Union mit Pfad-Halbierung',
   inputs: LB.ufInputs(8, '0-1 2-3 4-5 6-7 0-2 4-6 0-4 7-0 5-1'), parse: LB.ufParse, bigLabel:'⤼ nächstes Paar',
   code: inp => W_CODE(inp).concat(['        for (i = p; i != id[i]; i = id[i])','          id[i] = id[id[i]];','        for (j = q; j != id[j]; j = id[j])','          id[j] = id[id[j]];',
     '        if (i == j) continue;','        if (sz[i] < sz[j])','          { id[i] = j; sz[j] += sz[i]; }','        else { id[j] = i; sz[i] += sz[j]; }','        cout << " " << p << " " << q << endl;','      }','  }']),
@@ -1694,7 +1699,7 @@ new LB.Tracer({
   function upd(){
     const K = +k.value, fn = F[f.value], N = +nS.value; $('pkV').textContent = K;
     const r = fn(K*N) / (K*fn(N));
-    $('pOut').innerHTML = '\\[ \\frac{T_{neu}}{T_{alt}} = \\frac{f(\\Par{'+K+'}N)\\,/\\,('+K+'\\cdot\\text{Speed})}{f(N)/\\text{Speed}} = \\frac{f('+K+'N)}{'+K+'\\,f(N)}\\Big|_{f='+L[f.value]+',\\,N=10^{'+Math.round(Math.log10(N))+'}} = \\Res{'+(r < 10 ? r.toFixed(3) : r.toFixed(0))+'} \\]' +
+    $('pOut').innerHTML = '\\[ \\begin{aligned} \\frac{T_{neu}}{T_{alt}} &= \\frac{f(\\Par{'+K+'}N)\\,/\\,('+K+'\\cdot\\text{Speed})}{f(N)/\\text{Speed}} && \\text{'+K+'-mal so viele Daten, '+K+'-mal schnellerer Rechner.} \\\\ &= \\frac{f('+K+'N)}{'+K+'\\,f(N)} && \\text{Die Geschwindigkeit kürzt sich weg.} \\\\ &\\text{mit } f='+L[f.value]+',\\ N=10^{'+Math.round(Math.log10(N))+'} && \\text{Die aktuellen Regler einsetzen.} \\\\ &= \\Res{'+(r < 10 ? r.toFixed(3) : r.toFixed(0))+'} && \\text{Das ist der Faktor der neuen Laufzeit.} \\end{aligned} \\]' +
       '<p class="small" style="margin:4px 0 0">'+(r > 1.05 ? 'Der neue Job dauert <b>'+(r < 10 ? r.toFixed(2) : r.toFixed(0))+'-mal so lange</b>, trotz schnellerem Rechner!' : 'Der neue Job dauert <b>etwa gleich lang</b>. Der Algorithmus skaliert mit der Hardware.')+'</p>';
     LB.tex($('pOut'));
   }
@@ -1723,7 +1728,7 @@ LB.human = function(sec){
 
 /* ---------- Übung 2.2: Dreifachschleife ---------- */
 new LB.Tracer({
-  id:'trTriple', title:'Dreifach verschachtelte Schleife: count = N³',
+  id:'trTriple', notes:{"2": "N-mal"}, title:'Dreifach verschachtelte Schleife: count = N³',
   inputs:'N = <input type="number" data-k="N" value="3" min="1" max="5" style="width:60px">',
   parse: T => ({N: clampInt(T.val('N'), 1, 5, 3)}),
   code:['int i, j, k, count = 0;','for (i = 0; i < N; i++)','  for (j = 0; j < N; j++)','    for (k = 0; k < N; k++)','      count++;'],
@@ -1816,7 +1821,7 @@ const FN = [['lg N', n => Math.log2(n), '#0891b2'], ['√N', n => Math.sqrt(n), 
 
 /* ---------- lg N im Code ---------- */
 new LB.Tracer({
-  id:'trLg', title:'Den Logarithmus mit einer Schleife berechnen (§2.3)',
+  id:'trLg', title:'Den Logarithmus mit einer Schleife berechnen (Abschnitt 2.3)',
   inputs:'N = <input type="number" data-k="N" value="13" min="1" max="100000" style="width:90px"> Variante <select data-k="ver"><option value="1">1: N halbieren → ⌊lg N⌋+1</option><option value="2">2: t verdoppeln → ⌈lg N⌉</option></select>',
   parse: T => ({N: clampInt(T.val('N'), 1, 100000, 13), ver: T.val('ver')}),
   code: inp => inp.ver === '1' ? ['int lgN;','for (lgN = 0; N > 0; lgN++, N /= 2) ;'] : ['int lgN, t;','for (lgN = 0, t = 1; t < N; lgN++, t += t) ;'],
@@ -1928,11 +1933,11 @@ new LB.Tracer({
     5:'Zwei Hälften plus konstante Arbeit (Baumdurchlauf, Kap. 5). Pro Ebene <b>verdoppelt</b> sich die Knotenzahl: 1 + 2 + 4 + … + N ≈ 2N.'
   };
   const TELE = {
-    1: String.raw`\[ C_N = C_{N-1}+N = C_{N-2}+(N-1)+N = \dots = \underbrace{1+2+\dots+N}_{\text{Gauß}} = \Res{\frac{N(N+1)}{2}} \approx \frac{N^2}{2} \]`,
-    2: String.raw`\[ C_{2^n} = C_{2^{n-1}}+1 = C_{2^{n-2}}+1+1 = \dots = \underbrace{C_{2^0}}_{=1}+n = \Res{n+1 = \lg N + 1} \]`,
-    3: String.raw`\[ C_N = \underbrace{N + \frac N2 + \frac N4 + \dots + 2}_{\text{geometrische Reihe}} + \underbrace{C_1}_{=0} = 2N-2 \;\approx\; \Res{2N} \]`,
-    4: String.raw`\[ \frac{C_{2^n}}{2^n} = \frac{C_{2^{n-1}}}{2^{n-1}} + 1 = \frac{C_{2^{n-2}}}{2^{n-2}} + 2 = \dots = \underbrace{\frac{C_{2^0}}{2^0}}_{=0} + n \;\Rightarrow\; \Res{C_N = N\lg N} \]`,
-    5: String.raw`\[ C_{2^n} = 2C_{2^{n-1}}+1 = 4C_{2^{n-2}}+2+1 = \dots = 2^n\underbrace{C_1}_{=1} + 2^{n-1}+\dots+1 = \Res{2^{n+1}-1 = 2N-1} \]`
+    1: String.raw`\[ \begin{aligned} C_N &= C_{N-1}+N && \text{Formel einmal anwenden.} \\ &= C_{N-2}+(N-1)+N && \text{Auf } C_{N-1} \text{ noch einmal anwenden.} \\ &= \dots = C_1 + 2+\dots+N && \text{Bis zum Anker } C_1 = 1 \text{ weitermachen.} \\ &= 1+2+\dots+N && \text{Das ist die Gauß-Summe.} \\ &= \Res{\frac{N(N+1)}{2}} \approx \frac{N^2}{2} && \text{Das Wachstum ist quadratisch.} \end{aligned} \]`,
+    2: String.raw`\[ \begin{aligned} C_{2^n} &= C_{2^{n-1}}+1 && N = 2^n \text{ einsetzen, jeder Schritt halbiert.} \\ &= C_{2^{n-2}}+1+1 && \text{Noch einmal einsetzen.} \\ &= \dots = C_{2^0}+n && \text{Nach } n \text{ Halbierungen ist man beim Anker.} \\ &= 1+n && C_1 = 1. \\ \Res{C_N} &= \Res{\lg N + 1} && n = \lg N. \end{aligned} \]`,
+    3: String.raw`\[ \begin{aligned} C_N &= N + C_{N/2} && \text{Einmal } N \text{ Arbeit, dann nur noch die Hälfte.} \\ &= N + \tfrac N2 + \tfrac N4 + \dots + 2 + C_1 && \text{Ganz ausgeschrieben ist das eine geometrische Reihe.} \\ &= 2N - 2 && \text{Reihe } N(1+\tfrac12+\tfrac14+\dots) < 2N, \text{ dazu } C_1 = 0. \\ &\approx \Res{2N} && \text{Linear, obwohl rekursiv.} \end{aligned} \]`,
+    4: String.raw`\[ \begin{aligned} \frac{C_{2^n}}{2^n} &= \frac{C_{2^{n-1}}}{2^{n-1}} + 1 && \text{Formel 2.4 durch } 2^n \text{ geteilt.} \\ &= \frac{C_{2^{n-2}}}{2^{n-2}} + 2 && \text{Noch einmal einsetzen.} \\ &= \dots = \frac{C_{2^0}}{2^0} + n && \text{Beim Anker ankommen.} \\ &= 0 + n && C_1 = 0. \\ \Res{C_N} &= \Res{N\lg N} && \text{Mal } 2^n = N, \text{ mit } n = \lg N. \end{aligned} \]`,
+    5: String.raw`\[ \begin{aligned} C_{2^n} &= 2C_{2^{n-1}}+1 && \text{Zwei Hälften plus 1.} \\ &= 4C_{2^{n-2}}+2+1 && \text{Noch einmal einsetzen.} \\ &= \dots = 2^n C_1 + (2^{n-1}+\dots+2+1) && \text{Nach } n \text{ Schritten.} \\ &= 2^n + 2^n - 1 && C_1 = 1, \text{ und die geometrische Summe ist } 2^n - 1. \\ \Res{C_N} &= \Res{2N-1} && \text{Linear.} \end{aligned} \]`
   };
   const memo = {};
   function exact(f, N){
@@ -2086,7 +2091,7 @@ const box = (on, cur) => '<div style="width:18px;height:18px;border-radius:3px;b
 
 /* ---------- Beispiel ① ---------- */
 new LB.Tracer({
-  id:'trEx1', inputs:'N = <input type="number" data-k="N" value="5" min="2" max="9" style="width:60px">',
+  id:'trEx1', notes:{"2": "N Runden"}, inputs:'N = <input type="number" data-k="N" value="5" min="2" max="9" style="width:60px">',
   parse: T => ({N: clampInt(T.val('N'), 2, 9, 5)}),
   code:['int cnt = 0;','for (i = 0; i < N; i++)','  for (j = i+1; j < N; j++)','    cnt++;'],
   cost:{2:'N+1', 3:'Σ(N−i) = N(N+1)/2', 4:'<b>N(N−1)/2</b>'}, vars:['N','i','j','cnt'], noOut:true,
