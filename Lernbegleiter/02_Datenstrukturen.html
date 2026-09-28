@@ -205,6 +205,72 @@ svg text{font-family:'JetBrains Mono',monospace}
 .idee{background:#10161f;border:1px solid #30363d;border-left:4px solid #bc8cff;border-radius:8px;padding:10px 14px;margin:10px 0;line-height:1.6}
 .idee b.k{color:#bc8cff}.idee .row{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;padding:3px 0}
 @media(max-width:640px){.idee .row{grid-template-columns:1fr;gap:0}}
+
+/* ===== UX-ADDON ===== */
+/* Kopf: nicht sticky, Burger-Menü */
+.lbtop{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.1rem;padding:.8rem 1.4rem;border-bottom:1px solid var(--lbline);background:var(--lbpanel)}
+.lbtop .lbt b{font-size:1.05rem;margin-right:.6rem}
+.lbtop .lbt span{color:var(--lbmuted);font-size:.85rem}
+.lbq{display:flex;flex-wrap:wrap;gap:.3rem .45rem;flex:1 1 520px}
+.lbq a{font-size:.8rem;text-decoration:none;color:var(--lbink);border:1px solid var(--lbline);border-radius:7px;padding:.12rem .5rem;white-space:nowrap}
+.lbq a:hover{border-color:var(--rule);color:var(--rule)}
+.lbq a small{color:var(--lbmuted);margin-left:.3rem}
+.lbburger,.lbfab{font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer;border-radius:9px;border:1px solid var(--lbline);background:var(--lbpanel2);color:var(--lbink);padding:.3rem .75rem}
+.lbfab{position:fixed;right:18px;bottom:18px;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.35);border-radius:50%;width:48px;height:48px;padding:0}
+.lbmenu{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.55);display:none;overflow:auto;padding:2.2rem 2rem}
+body.menu-open .lbmenu{display:block}
+.lbmenu .lbm-in{max-width:1640px;margin:0 auto;background:var(--lbpanel);border:1px solid var(--lbline);border-radius:14px;padding:1.1rem 1.4rem 1.4rem}
+.lbm-head{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem}
+.lbm-head b{font-size:1.15rem}
+.lbm-head button{margin-left:auto}
+.lbm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.9rem 1.4rem}
+.lbm-grid h5{margin:.2rem 0 .3rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rule)}
+.lbm-grid a{display:flex;gap:.5rem;align-items:baseline;text-decoration:none;color:var(--lbink);padding:.16rem .35rem;border-radius:6px;font-size:.9rem;line-height:1.35}
+.lbm-grid a:hover{background:var(--lbpanel2)}
+.lbm-grid a b{white-space:nowrap;font-weight:650}
+.lbm-grid a span{color:var(--lbmuted);font-size:.8rem}
+.lbm-tools{margin-top:.9rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-size:.85rem;color:var(--lbmuted)}
+/* Farbige Schlüsselwörter im Fließtext */
+.kw{font-weight:600}
+.kw-res{color:var(--res)} .kw-chg{color:var(--chg)} .kw-rule{color:var(--rule)} .kw-par{color:var(--par)}
+.kw-idx{color:var(--idx)} .kw-cond{color:var(--cond)} .kw-mem{color:var(--mem)}
+/* Breite für 16:9 und kein Seitwärts-Scrollen */
+pre.cpp .row{white-space:pre-wrap;word-break:break-word;padding-left:calc(2.6em + 1rem);text-indent:calc(-2.6em - 1rem)}
+pre.cpp .lnum{text-indent:0}
+table.codet td.src{white-space:pre-wrap;word-break:break-word}
+.codet .tnote{white-space:normal}
+.cells{flex-wrap:wrap}
+.arr{overflow-x:visible}
+/* Von-null-Karten */
+.vonnull{border:1.5px solid var(--rule)!important}
+.vonnull .vn-task{border-left:4px solid var(--res);background:var(--lbpanel2);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0 .6rem}
+.vonnull details{margin-top:.3rem}
+.vonnull summary{cursor:pointer;font-weight:700;color:var(--rule);padding:.3rem 0}
+.vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.6rem;align-items:start;margin:.45rem 0}
+.vn-step .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--rule);color:#fff;font-weight:700;font-size:.85rem}
+.vn-step b.h{color:var(--lbink)}
+:root{--lbline:var(--border);--lbpanel:#11161d;--lbpanel2:#1c2129;--lbink:var(--text);--lbmuted:var(--muted)}
+.wrap{max-width:1680px!important;padding:1.4rem 1.6rem 5rem!important}
+.hero{margin-top:1rem!important}
+.tr-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+@media(max-width:980px){.tr-grid{grid-template-columns:minmax(0,1fr)}}
+.figure>svg,.figure .scroll>svg{max-width:1150px;margin-left:auto;margin-right:auto}
+.blatt,.figure{scroll-margin-top:12px}
+.tr-extra svg{max-width:100%!important;height:auto}
+/* ===== VN-ADDON ===== */
+.vonnull{border:1.6px solid var(--rule);border-radius:14px;background:var(--lbpanel);padding:1rem 1.2rem .8rem;margin:1.1rem 0 1.4rem;box-shadow:0 0 0 4px color-mix(in srgb, var(--rule) 12%, transparent)}
+.vonnull .vn-ttl{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;font-size:1.22rem;font-weight:700;margin-bottom:.3rem}
+.vonnull .vn-badge{font-family:'JetBrains Mono',Consolas,monospace;font-size:.74rem;font-weight:700;color:#fff;background:var(--rule);border-radius:6px;padding:.16rem .55rem}
+.vonnull .vn-sub{color:var(--lbmuted);font-size:.9rem;margin:0 0 .4rem}
+.vonnull .vn-task{border-left:4px solid var(--res);background:var(--lbpanel2);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0 .6rem;line-height:1.6}
+.vonnull .vn-task b.t{color:var(--res)}
+.vonnull details{margin-top:.2rem}
+.vonnull summary{cursor:pointer;font-weight:700;color:var(--rule);padding:.35rem 0;font-size:.98rem}
+.vonnull .vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.65rem;align-items:start;margin:.55rem 0;line-height:1.6}
+.vonnull .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--rule);color:#fff;font-weight:700;font-size:.85rem}
+.vonnull .vn-step .h{font-weight:700}
+.vonnull .vn-res{display:inline-block;margin:.5rem 0 .2rem;padding:.35rem .8rem;border-radius:8px;font-weight:700;border:1.5px solid var(--idx);color:var(--idx);background:color-mix(in srgb, var(--idx) 10%, transparent)}
+.vonnull code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:5px;padding:0 .3rem}
 </style>
 </head>
 <body>
@@ -222,50 +288,11 @@ svg text{font-family:'JetBrains Mono',monospace}
   <marker id="aW" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#e6edf3"/></marker>
 </defs></svg>
 
-<nav><div class="ni">
-<span class="brand">Teil 2 · Datenstrukturen</span>
-<a href="#start">Start</a>
-<a href="#bruecke">Brücke</a>
-<a href="#master">Master-Anatomie</a>
-<span class="sep">│</span>
-<a href="#k3">Kap 3</a>
-<a href="#s31">3.1 Bausteine</a>
-<a href="#s32">3.2 Arrays</a>
-<a href="#s33">3.3 Listen</a>
-<a href="#s34">3.4 Listen­verarbeitung</a>
-<a href="#s35">3.5 Speicher</a>
-<a href="#s36">3.6 Strings</a>
-<a href="#s37">3.7 Zusammengesetzt</a>
-<span class="sep">│</span>
-<a href="#k4">Kap 4</a>
-<a href="#s40">4.0 ADT &amp; Klasse</a>
-<a href="#s41">4.1 Gen. Queues</a>
-<a href="#s42">4.2–4.3 Stack &amp; Clients</a>
-<a href="#s44">4.4 Stack-Impl.</a>
-<a href="#s45">4.5 UF als ADT</a>
-<a href="#s46">4.6 FIFO-Queue</a>
-<a href="#s47">4.7 Duplikate</a>
-<a href="#s48">4.8 First-Class</a>
-<a href="#axiome">★ Axiome</a>
-<span class="sep">│</span>
-<a href="#k5">Kap 5</a>
-<a href="#s51">5.1 Rekursion</a>
-<a href="#s52">5.2 Divide &amp; Conquer</a>
-<a href="#s53">5.3 Dyn. Progr.</a>
-<a href="#s54">5.4 Bäume</a>
-<a href="#s55">5.5 Baum-Mathe</a>
-<a href="#s56">5.6 Traversierung</a>
-<a href="#s57">5.7 Baum-Rekursion</a>
-<a href="#s58">5.8 Graphen</a>
-<span class="sep">│</span>
-<a href="#schema">📐 Schema</a>
-<a href="#pruefung">🎯 Prüfungstabelle</a>
-<a href="#quiz">Quiz</a>
-<a href="#glossar">Glossar</a>
-<a href="#faden" style="color:var(--pink)">★ Roter Faden</a>
-</div></nav>
+<header class="lbtop"><button id="lbBurger" class="lbburger" title="Inhalt öffnen">☰ Inhalt</button><div class="lbt"><b>Teil 2 · Datenstrukturen</b><span>Sedgewick Kap. 3–5</span></div><div class="lbq"><a href="#start">Start</a><a href="#s31">Kapitel 3 · Bausteine</a><a href="#s40">Kapitel 4 · ADTs</a><a href="#s51">Kapitel 5 · Rekursion & Bäume</a><a href="#schema">Training</a></div></header>
+<div id="lbMenu" class="lbmenu"></div><button id="lbFab" class="lbfab" title="Inhalt">☰</button>
 
-<div class="wrap">
+
+<div class="wrap lb-main">
 <div class="hero" id="start">
   <div class="logo">Sedgewick · Algorithmen in C++ · Teil 2 von 4</div>
   <h1>Datenstrukturen — als Bild und als laufender Code</h1>
@@ -357,6 +384,19 @@ svg text{font-family:'JetBrains Mono',monospace}
 
 <!-- ───────────── 3.1 ───────────── -->
 <div class="blatt" id="s31"><div class="kop"><span class="bn">§3.1</span><h2>Bausteine: Typen, struct, Zeiger, Referenzen</h2><span class="tp">Def. 3.1 · Prog. 3.1–3.4</span></div></div>
+<div class="vonnull" id="vn-3-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.1</span>Variable, Adresse, Zeiger</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Gegeben: <code>int a = 5; int *p = &amp;a; *p = *p + 2;</code> Die Variable a liegt bei Adresse <span class="c-mem">0x1000</span>. Welchen Wert haben a, p und *p am Ende?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Variable von null.</span> Eine Variable ist eine benannte <span class="c-mem">Speicherzelle</span>. Der Name a steht für die Zelle bei 0x1000, ihr Inhalt ist zuerst 5.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Adresse.</span> <code>&amp;a</code> liefert die <span class="c-mem">Adresse</span> der Zelle, also 0x1000, nicht den Inhalt.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Zeiger.</span> <code>int *p</code> ist eine Variable, die eine Adresse speichert. Nach <code>p = &amp;a</code> steht in p die Zahl 0x1000.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Dereferenzieren.</span> <code>*p</code> heißt „die Zelle, deren Adresse in p steht“, also a selbst. <code>*p = *p + 2</code> liest 5 und <span class="c-chg">schreibt</span> 7 nach 0x1000.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Ergebnis.</span> a = <span class="c-res">7</span>, p = 0x1000 (unverändert), *p = 7.</div></div>
+<div class="step">\[ \begin{aligned} \Mem{p} &= \Mem{\&}a = \texttt{0x1000} && \text{p enthält die Adresse.} \\ \Chg{*}\Mem{p} &= a && \text{Stern holt die Zelle.} \\ a &= 5 + 2 = \Res{7} && \text{über den Zeiger geschrieben.} \end{aligned} \]</div>
+<div class="vn-res">✔ a = 7 · p = 0x1000 · *p = 7</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.1 · Theorie</span> Die drei Werkzeuge, aus denen alles gebaut wird</div>
@@ -423,6 +463,19 @@ void polar(float x, float y, float& r, float& theta)   // per Referenz
 
 <!-- ───────────── 3.2 ───────────── -->
 <div class="blatt" id="s32"><div class="kop"><span class="bn">§3.2</span><h2>Arrays</h2><span class="tp">Prog. 3.5 Sieb · 3.6 new · 3.7 Münzwurf · 3.8 nächste Punkte</span></div></div>
+<div class="vonnull" id="vn-3-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.2</span>Array: Adresse und Sieb</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> a) int a[20] beginnt bei <span class="c-mem">0x2000</span>. Wo liegt a[7]? b) Welche Einträge setzt das Sieb des Eratosthenes (Prog 3.5) für N = 20 auf 0, und wie viele Schreibzugriffe sind das?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Array von null.</span> Ein <span class="c-mem">Array</span> ist ein zusammenhängender Block gleich großer Zellen. Die Adresse von a[i] ist Anfang + i · Größe einer Zelle; ein int hat 4 Byte. Deshalb kostet der Zugriff O(1).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Adresse.</span> 0x2000 + 7 · 4 = 0x2000 + 28 = <span class="c-res">0x201C</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Sieb, Idee.</span> Alle Zahlen gelten zuerst als prim (a[i] = 1). Jede noch markierte Zahl i streicht ihre Vielfachen i·j mit j ≥ i.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">i = 2.</span> j = 2 … 9: streicht 4, 6, 8, 10, 12, 14, 16, 18 (8 Schreibzugriffe).</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">i = 3.</span> j = 3 … 6: streicht 9, 12, 15, 18 (4 Schreibzugriffe). Ab i = 5 ist i·i ≥ 20, nichts mehr zu tun.</div></div>
+<div class="step">\[ \begin{aligned} \Mem{\&a[7]} &= \texttt{0x2000} + 7\cdot 4 = \texttt{0x201C} && \text{Anfang + Index mal Größe.} \\ \Chg{\text{Schreibzugriffe}} &= 8 + 4 = 12 && \text{Summe N/p über die Primzahlen p.} \\ \text{übrig} &= 2, 3, 5, 7, 11, 13, 17, 19 && \text{die Primzahlen unter 20.} \end{aligned} \]</div>
+<div class="vn-res">✔ a[7] bei 0x201C · 12 Streichungen · Primzahlen 2 3 5 7 11 13 17 19</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.2 · Theorie</span> Array = zusammenhängender Speicher, Index = Adresse</div>
@@ -518,6 +571,18 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 3.3 ───────────── -->
 <div class="blatt" id="s33"><div class="kop"><span class="bn">§3.3</span><h2>Verkettete Listen</h2><span class="tp">Def. 3.2 · Fig. 3.3/3.4 · Prog. 3.9 Josephus · Fig. 3.6</span></div></div>
+<div class="vonnull" id="vn-3-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.3</span>Josephus mit einer zirkulären Liste</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> N = <span class="c-par">5</span> Personen stehen im Kreis, jede <span class="c-par">M = 2</span>. scheidet aus (Prog 3.9). In welcher Reihenfolge scheiden sie aus, wer bleibt übrig, wie viele Zeigerschritte sind es?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Liste von null.</span> Eine verkettete <span class="c-mem">Liste</span> besteht aus <span class="c-mem">Knoten</span> mit einem Wert und einem <span class="c-mem">Link</span> auf den nächsten Knoten. Zeigt der letzte wieder auf den ersten, ist sie zirkulär.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Entfernen in O(1).</span> Steht x vor dem Opfer, genügt <code>x-&gt;next = x-&gt;next-&gt;next</code>. Es wird nichts verschoben, nur ein Link <span class="c-chg">umgehängt</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Ablauf.</span> x startet bei 5. Ein Schritt nach 1, entferne 2. Schritt nach 3, entferne 4. Schritt nach 5, entferne 1. Schritt nach 3, entferne 5.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ergebnis.</span> Reihenfolge 2, 4, 1, 5. Übrig bleibt <span class="c-res">3</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{Runden} &= N - 1 = 4 && \text{bis einer übrig ist.} \\ \text{Schritte} &= (N-1)(M-1) = 4 && \text{Weiterzählen.} \\ \Res{T} &= 4 + 4 = 8 && \text{plus ein Umhängen pro Runde.} \end{aligned} \]</div>
+<div class="vn-res">✔ Reihenfolge 2 4 1 5 · Überlebender 3 · 8 Schritte</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.3 · Theorie</span> Knoten = Item + Link auf Knoten (selbstbezüglich)</div>
@@ -583,6 +648,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 3.4 ───────────── -->
 <div class="blatt" id="s34"><div class="kop"><span class="bn">§3.4</span><h2>Elementare Listenverarbeitung</h2><span class="tp">Def. 3.3 · Prog. 3.10 Umkehren · 3.11 Insertion Sort · Tab. 3.1 · doppelt verkettet</span></div></div>
+<div class="vonnull" id="vn-3-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.4</span>Liste umkehren mit drei Zeigern</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Kehre die Liste <span class="c-par">1 → 2 → 3</span> mit Prog 3.10 um. Gib r, y und t nach jeder Runde an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Man läuft einmal durch die Liste und dreht jeden <span class="c-mem">Link</span> um. <span class="c-idx">r</span> ist der schon umgedrehte Teil, <span class="c-idx">y</span> der noch unberührte Rest, <span class="c-idx">t</span> merkt sich den Nachfolger.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Start.</span> y = 1, r = 0 (leer).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Runde 1.</span> t = 2, 1-&gt;next = 0, r = 1, y = 2. Umgedreht: 1.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Runde 2.</span> t = 3, 2-&gt;next = 1, r = 2, y = 3. Umgedreht: 2 → 1.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Runde 3.</span> t = 0, 3-&gt;next = 2, r = 3, y = 0: Ende. Neuer Kopf <span class="c-res">3 → 2 → 1</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{Zuweisungen} &= 4 \text{ pro Knoten} && \text{t, y->next, r, y.} \\ \Res{T(N)} &= 4N = 12 && \text{linear, Zusatzspeicher O(1).} \end{aligned} \]</div>
+<div class="vn-res">✔ Ergebnis 3 → 2 → 1 · 12 Zuweisungen</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.4 · Theorie</span> Die rekursive Sicht und die Standard-Schleife</div>
@@ -673,6 +751,19 @@ test if empty: if (head-&gt;next == z)</pre></div>
 
 <!-- ───────────── 3.5 ───────────── -->
 <div class="blatt" id="s35"><div class="kop"><span class="bn">§3.5</span><h2>Speicherverwaltung für Listen</h2><span class="tp">new/delete · Freiliste · Prog. 3.12–3.14</span></div></div>
+<div class="vonnull" id="vn-3-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.5</span>Speicherverwaltung mit einer Freiliste</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ein eigener Allokator hält freie Knoten in einer <span class="c-mem">Freiliste</span> (LIFO). Freie Knoten sind 0 → 1 → 2 → 3. Es folgt: new, new, delete(ersten), new. Welche Knoten werden vergeben?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Heap von null.</span> Mit <code>new</code> fordert ein Programm zur Laufzeit <span class="c-mem">Speicher</span> an, mit <code>delete</code> gibt es ihn zurück. Ein eigener Allokator verwaltet freie Knoten selbst in einer Liste.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">new.</span> nimmt den ersten freien Knoten: <span class="c-res">0</span>. Freiliste 1 → 2 → 3.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">new.</span> nimmt <span class="c-res">1</span>. Freiliste 2 → 3.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">delete(0).</span> Knoten 0 wird <span class="c-chg">vorne eingehängt</span>: Freiliste 0 → 2 → 3.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">new.</span> nimmt wieder <span class="c-res">0</span>: Der zuletzt freigegebene Knoten wird zuerst wiederverwendet.</div></div>
+<div class="step">\[ \begin{aligned} \text{new, delete} &= O(1) && \text{nur am Listenkopf gearbeitet.} \end{aligned} \]</div>
+<div class="vn-res">✔ vergeben werden 0, 1 und dann wieder 0</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.5 · Theorie</span> Die Freiliste ist selbst eine verkettete Liste</div>
 <div class="sub">Sind alle Knoten gleich groß, kann man freie Knoten einfach auf einer Liste sammeln. <code class="inl">newNode</code> nimmt vorne einen weg, <code class="inl">deleteNode</code> legt ihn vorne wieder drauf, jeweils in O(1).</div>
@@ -715,6 +806,18 @@ link remove(link x) { link t = x-&gt;next; x-&gt;next = t-&gt;next; return t; }<
 
 <!-- ───────────── 3.6 ───────────── -->
 <div class="blatt" id="s36"><div class="kop"><span class="bn">§3.6</span><h2>Strings</h2><span class="tp">'\0'-Terminierung · Tab. 3.2 · Prog. 3.15 · Performance-Bug</span></div></div>
+<div class="vonnull" id="vn-3-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.6</span>Strings und die strlen-Falle</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ein C-String hat <span class="c-par">N = 1000</span> Zeichen. Wie viele Zeichen liest <code>for (i = 0; i &lt; strlen(a); i++)</code> insgesamt, wie viele die Variante mit vorher gemerkter Länge? Was liefert strcmp("abc", "abd")?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">String von null.</span> Ein C-String ist ein <span class="c-mem">char-Array</span>, das mit dem Zeichen '\0' endet. Seine Länge ist nirgends gespeichert, strlen muss bis zum Ende zählen: N Schritte.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">In der Bedingung.</span> Die <span class="c-cond">Bedingung</span> wird N+1-mal geprüft, jedes Mal läuft strlen N Zeichen: N(N+1) ≈ 10⁶.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Vorher gemerkt.</span> Einmal zählen (N), dann nur noch vergleichen: 2N = 2000.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">strcmp.</span> Vergleicht Zeichen für Zeichen: a = a, b = b, c &lt; d. Ergebnis <span class="c-res">negativ</span>: "abc" steht lexikographisch vor "abd".</div></div>
+<div class="step">\[ \begin{aligned} \text{in der Bedingung} &= N(N+1) \approx 10^6 && \text{quadratisch: ein Performance-Bug.} \\ \text{gemerkt} &= 2N = 2000 && \text{linear.} \end{aligned} \]</div>
+<div class="vn-res">✔ etwa 1 000 000 gegen 2000 gelesene Zeichen · strcmp < 0</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.6 · Theorie</span> String = char-Array + Endezeichen 0</div>
 <div class="sub">Ein Array hat seine Länge bei der Erzeugung. Ein String hat eine <b>variable</b> Länge, markiert durch das Zeichen <code class="inl">'\0'</code> (Wert 0).</div>
@@ -766,6 +869,18 @@ return a[i] - b[i];</pre></div>
 
 <!-- ───────────── 3.7 ───────────── -->
 <div class="blatt" id="s37"><div class="kop"><span class="bn">§3.7</span><h2>Zusammengesetzte Datenstrukturen</h2><span class="tp">2D-Arrays · Prog. 3.16 · Stringsortierung · Graphen Prog. 3.18/3.19 · Gitter Prog. 3.20</span></div></div>
+<div class="vonnull" id="vn-3-7">
+<div class="vn-ttl"><span class="vn-badge">Von null · §3.7</span>2D-Array und Adjazenzlisten</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> a) int a[4][5] liegt ab <span class="c-mem">0x3000</span> zeilenweise. Wo liegt a[2][3]? b) Ein Graph hat V = 5 Knoten und E = 6 Kanten. Wie viel Platz brauchen Adjazenzmatrix und Adjazenzlisten?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Row-major von null.</span> Der Speicher ist eindimensional. Ein 2D-Array wird Zeile für Zeile hintereinander gelegt: erst alle 5 Einträge von Zeile 0, dann Zeile 1 und so weiter.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Adresse.</span> Vor a[2][3] liegen 2 volle Zeilen (10 Einträge) und 3 weitere: Index 13, also 0x3000 + 13 · 4 = <span class="c-res">0x3034</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Matrix.</span> V × V Einträge: 25, egal wie viele Kanten es gibt.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Listen.</span> V Listenköpfe und für jede Kante zwei Listenknoten (sie steht bei beiden Enden): 5 + 12 = 17.</div></div>
+<div class="step">\[ \begin{aligned} \Mem{\&a[2][3]} &= \texttt{0x3000} + (2\cdot 5 + 3)\cdot 4 && \text{Zeilen überspringen, dann Spalte.} \\  &= \texttt{0x3034} && \text{13 mal 4 = 52 = 0x34.} \\ \text{Listen} &= V + 2E = 17 && \text{Matrix: $V^2 = 25$.} \end{aligned} \]</div>
+<div class="vn-res">✔ a[2][3] bei 0x3034 · Matrix 25 · Listen 17</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§3.7 · Theorie</span> 2D-Array im 1D-Speicher (zeilenweise, row-major)</div>
@@ -839,6 +954,17 @@ Speicher \(\Res{V+2E}\) · Kante testen: \(O(\text{Grad})\) · alle Nachbarn: \(
 
 <!-- ───────────── 4.0 ───────────── -->
 <div class="blatt" id="s40"><div class="kop"><span class="bn">§4 · 4.1</span><h2>ADT = Datentyp hinter einem Interface</h2><span class="tp">Def. 4.1 · Prog. 4.1–4.3 (POINT)</span></div></div>
+<div class="vonnull" id="vn-4-0">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.0</span>ADT: was der Client sehen darf</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Die Klasse POINT speichert x und y als <span class="c-rule">private</span>. Ein Client benutzt nur <code>distance()</code>. Was muss sich am Client ändern, wenn POINT intern auf Polarkoordinaten (r, θ) umgestellt wird? Was passiert, wenn der Client <code>p.x</code> schreibt?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">ADT von null.</span> Ein <span class="c-rule">abstrakter Datentyp</span> ist ein Datentyp, der <span class="c-res">nur</span> über ein <span class="c-rule">Interface</span> benutzt wird. Das Interface ist die Liste der erlaubten Operationen, hier distance().</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Drei Rollen.</span> Das Interface ist der Vertrag, die Implementierung erfüllt ihn, der Client benutzt nur den Vertrag.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Umstellung.</span> Die Implementierung von distance() rechnet jetzt mit r und θ. Der Client ruft weiterhin p.distance(q) auf: <span class="c-res">keine Änderung</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">p.x.</span> x ist private: Der Compiler meldet einen Fehler. Genau das schützt die Freiheit, die Darstellung zu ändern.</div></div>
+<div class="vn-res">✔ Client bleibt unverändert · p.x ist ein Compilerfehler</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">Def 4.1</span> Client · Interface · Implementierung</div>
 <div class="sub">„An abstract data type (ADT) is a data type that is accessed <b>only</b> through an interface.“ Entscheidend ist das Wort <i>only</i>.</div>
@@ -910,6 +1036,17 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 4.1 ───────────── -->
 <div class="blatt" id="s41"><div class="kop"><span class="bn">§4.1</span><h2>Sammlungen: die verallgemeinerte Warteschlange</h2><span class="tp">insert + remove · nur die Entnahme-Regel unterscheidet die ADTs</span></div></div>
+<div class="vonnull" id="vn-4-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.1</span>Welche Queue gibt was zurück?</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Führe insert A, insert B, insert C, remove, insert D, remove, remove aus: a) mit einem Stack, b) mit einer FIFO-Queue. Was wird entnommen?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Verallgemeinerte Queue von null.</span> Alle Varianten haben insert und remove. Sie unterscheiden sich nur in der Regel, <span class="c-res">welches</span> Element remove liefert.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Stack (LIFO).</span> Das zuletzt eingefügte zuerst. Nach A B C: remove → C. insert D: A B D. remove → D, remove → B.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Queue (FIFO).</span> Das am längsten wartende zuerst. Nach A B C: remove → A. insert D: B C D. remove → B, remove → C.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Folgerung.</span> Dieselben Operationen, aber eine andere <span class="c-rule">Regel</span>, ergeben ein anderes Verhalten. Das legt allein das Interface fest.</div></div>
+<div class="vn-res">✔ Stack: C D B · Queue: A B C</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">§4.1 · §4.6</span> Eine Familie von ADTs, die sich nur in der Regel für remove unterscheiden</div>
 <div class="sub">„Generalized queues“: dieselben zwei Operationen <b>insert</b> und <b>remove</b>. Die Regel, <i>welches</i> Element remove liefert, macht jeweils einen eigenen ADT.</div>
@@ -927,6 +1064,18 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 4.2–4.3 ───────────── -->
 <div class="blatt" id="s42"><div class="kop"><span class="bn">§4.2 · 4.3</span><h2>Pushdown-Stack und seine Clients</h2><span class="tp">Def. 4.2 · Prog. 4.4 Interface · 4.5 Postfix · 4.6 Infix→Postfix</span></div></div>
+<div class="vonnull" id="vn-4-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.3</span>Postfix mit einem Stack auswerten</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Werte <span class="c-par">5 1 2 + 4 * + 3 *</span> mit Prog 4.5 aus. Gib den Stack nach jedem Zeichen an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Postfix von null.</span> In <span class="c-rule">Postfix</span> steht der Operator hinter seinen beiden Operanden. Klammern sind unnötig, weil die Reihenfolge alles festlegt.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Regel.</span> Eine Zahl wird <span class="c-chg">gepusht</span>. Ein Operator <span class="c-chg">popt</span> zwei Zahlen, verknüpft sie und pusht das Ergebnis.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Ablauf.</span> 5 → [5]. 1 → [5 1]. 2 → [5 1 2]. + → [5 3]. 4 → [5 3 4]. * → [5 12]. + → [17]. 3 → [17 3]. * → [51].</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ergebnis.</span> Oben liegt <span class="c-res">51</span> = (5 + (1 + 2) · 4) · 3.</div></div>
+<div class="step">\[ \begin{aligned} \text{Kosten} &= O(N) && \text{jedes Zeichen einmal, jede Stack-Operation O(1).} \end{aligned} \]</div>
+<div class="vn-res">✔ Ergebnis 51</div>
+</details>
+</div>
 <div class="figure anat">
 <div class="ttl"><span class="n">Def 4.2 · Prog 4.4</span> Stack-Interface mit Template</div>
 <div class="sub">„A pushdown stack is an ADT that comprises two basic operations: insert (<b>push</b>) a new item, and remove (<b>pop</b>) the item that was most recently inserted.“</div>
@@ -967,6 +1116,19 @@ class STACK
 
 <!-- ───────────── 4.4 ───────────── -->
 <div class="blatt" id="s44"><div class="kop"><span class="bn">§4.4</span><h2>Stack-Implementierungen: Array gegen Liste</h2><span class="tp">Prog. 4.7 · 4.8 · Eigenschaft 4.1</span></div></div>
+<div class="vonnull" id="vn-4-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.4</span>Stack als Array von innen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Stack mit Array (Prog 4.7), maxN = 4: push A, push B, pop, push C, push D. Gib s[] und N nach jedem Schritt an. Wie sähe die Listen-Version aus?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Array-Stack von null.</span> Das Array <span class="c-mem">s</span> hält die Elemente, <span class="c-idx">N</span> zählt sie und ist gleichzeitig die nächste freie Stelle. push: <code>s[N++] = item</code> (erst schreiben, dann N erhöhen). pop: <code>return s[--N]</code> (erst N verkleinern, dann lesen).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">push A, push B.</span> s = A B, N = 2.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">pop.</span> N = 1, Rückgabe <span class="c-res">B</span>. B steht noch in s[1], gilt aber als frei.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">push C, push D.</span> s[1] = C, s[2] = D, N = 3. Inhalt von unten nach oben: A C D.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Liste.</span> Oben ist der Listenkopf: D → C → A. Jedes push erzeugt einen Knoten vorne.</div></div>
+<div class="step">\[ \begin{aligned} \Chg{\text{push, pop}} &= O(1) && \text{Eigenschaft 4.1.} \end{aligned} \]</div>
+<div class="vn-res">✔ Stack A C D (N = 3) · pop lieferte B</div>
+</details>
+</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.7 + 4.8</span> Derselbe Client, zwei Implementierungen nebeneinander</div>
 <div class="sub">Folge aus Fig. 4.1: Buchstabe = push, <code class="inl">*</code> = pop. Links ist der Array-Code aktiv, rechts siehst du parallel, was die Listen-Version im Speicher tut.</div>
@@ -983,6 +1145,18 @@ class STACK
 
 <!-- ───────────── 4.5 ───────────── -->
 <div class="blatt" id="s45"><div class="kop"><span class="bn">§4.5</span><h2>Einen neuen ADT schaffen: Union-Find</h2><span class="tp">Prog. 4.9–4.12 · Teil 1 wird zur Klasse</span></div></div>
+<div class="vonnull" id="vn-4-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.5</span>Union-Find hinter einem Interface</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ein Client nutzt nur das Interface <code>find(p, q)</code> und <code>unite(p, q)</code> (weighted Quick-Union dahinter). Eingabe: 0-1, 2-3, 1-3, 0-2. Welche Paare gibt der Client aus?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Der Client liest Paare und gibt ein Paar nur aus, wenn es zwei bisher <span class="c-res">nicht verbundene</span> Objekte verbindet. Wie find intern arbeitet, weiß er nicht.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">0-1, 2-3.</span> Beide neu: ausgeben und unite.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">1-3.</span> 1 gehört zu {0,1}, 3 zu {2,3}: neu, ausgeben. Jetzt ist {0,1,2,3} eine Menge.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">0-2.</span> find(0, 2) liefert wahr: nicht ausgeben.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Austauschbar.</span> Man könnte Quick-Find oder Pfadkompression einsetzen, ohne den Client zu ändern.</div></div>
+<div class="vn-res">✔ Ausgabe: 0-1, 2-3, 1-3</div>
+</details>
+</div>
 <div class="figure anat">
 <div class="ttl"><span class="n">Prog 4.11</span> Weighted Quick-Union aus Kap. 1 als Klasse UF</div>
 <div class="sub">Dieselben Zeilen wie Prog 1.3, jetzt hinter dem Interface <code class="inl">UF(int)</code>, <code class="inl">find(p,q)</code>, <code class="inl">unite(p,q)</code> versteckt.</div>
@@ -1019,6 +1193,20 @@ class STACK
 
 <!-- ───────────── 4.6 ───────────── -->
 <div class="blatt" id="s46"><div class="kop"><span class="bn">§4.6</span><h2>FIFO-Queue</h2><span class="tp">Def. 4.3 · Prog. 4.14 (Liste) · 4.15 (Ringpuffer) · Eigenschaft 4.2</span></div></div>
+<div class="vonnull" id="vn-4-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.6</span>Ringpuffer Schritt für Schritt</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> FIFO-Queue als Ringpuffer (Prog 4.15) mit maxN = 3, also N = 4 Zellen. Ausführen: put A, put B, put C, get, put D, get, get. Gib head, tail und die Rückgaben an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Ringpuffer von null.</span> Ein Array wird als Kreis benutzt: Nach der letzten Zelle kommt wieder Zelle 0 (Rechnung <span class="c-idx">mod N</span>). tail zeigt auf die nächste freie Zelle, head auf das älteste Element. Eine Zelle bleibt frei, damit „voll“ und „leer“ verschieden aussehen.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Start.</span> head = N = 4 (entspricht 0), tail = 0.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">put A, B, C.</span> q[0] = A, q[1] = B, q[2] = C, tail = 3.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">get.</span> head = 4 mod 4 = 0: Rückgabe <span class="c-res">A</span>, head = 1.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">put D.</span> q[3] = D, tail = 4 mod 4 = 0.</div></div>
+<div class="vn-step"><span class="vnn">6</span><div><span class="h">get, get.</span> Rückgaben <span class="c-res">B</span> und <span class="c-res">C</span>, head = 3. Leer? head mod 4 = 3 ≠ tail = 0: nein, D wartet noch.</div></div>
+<div class="step">\[ \begin{aligned} \texttt{tail} &\Chg{\leftarrow} (\texttt{tail} + 1) \bmod N && \text{put rückt tail im Kreis weiter.} \\ \text{leer} &\iff \texttt{head} \bmod N = \texttt{tail} && \text{beide Zeiger auf derselben Stelle.} \end{aligned} \]</div>
+<div class="vn-res">✔ Rückgaben A B C · D bleibt in der Queue</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">Def 4.3</span> put hinten, get vorne</div>
 <div class="sub">„A FIFO queue is an ADT that comprises two basic operations: insert (<b>put</b>) a new item, and remove (<b>get</b>) the item that was <b>least</b> recently inserted.“ Wie die Warteschlange an der Kasse.</div>
@@ -1057,6 +1245,19 @@ Kein Verschieben: <code class="inl">head</code> und <code class="inl">tail</code
 
 <!-- ───────────── 4.7 ───────────── -->
 <div class="blatt" id="s47"><div class="kop"><span class="bn">§4.7</span><h2>Duplikate und Index-Items</h2><span class="tp">Prog. 4.16 · ignore-the-new-item vs. forget-the-old-item</span></div></div>
+<div class="vonnull" id="vn-4-7">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.7</span>Stack ohne Duplikate</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Stack für Zahlen 0 … 9 mit Tabelle t[] (Prog 4.16): push 3, push 5, push 3, push 7, pop, push 5. Was liegt am Ende im Stack?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Die Zahlen sind selbst <span class="c-idx">Indizes</span>. Eine Tabelle t[v] = 1 merkt sich, ob v gerade im Stack liegt. Der Test kostet O(1).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">push 3, push 5.</span> Stack 3 5, t[3] = t[5] = 1.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">push 3.</span> t[3] = 1: schon drin, wird <span class="c-res">ignoriert</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">push 7, pop.</span> Stack 3 5 7, dann pop liefert 7 und setzt t[7] = 0.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">push 5.</span> t[5] = 1: ignoriert. Stack bleibt <span class="c-res">3 5</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{push, pop} &= O(1) && \text{ein Tabellenzugriff zusätzlich.} \end{aligned} \]</div>
+<div class="vn-res">✔ Stack 3 5</div>
+</details>
+</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 4.16</span> Stack ohne Duplikate: ein zweites Array als Anwesenheitsliste</div>
 <div class="sub">Sind die Items ganze Zahlen 0…maxN−1, merkt sich <code class="inl">t[item]</code>, ob item gerade im Stack liegt. Der Test „schon drin?“ kostet dann O(1).</div>
@@ -1072,6 +1273,18 @@ Kein Verschieben: <code class="inl">head</code> und <code class="inl">tail</code
 
 <!-- ───────────── 4.8 ───────────── -->
 <div class="blatt" id="s48"><div class="kop"><span class="bn">§4.8</span><h2>First-Class ADTs: Kopieren, Zuweisen, Zerstören</h2><span class="tp">Def. 4.4 · Prog. 4.17–4.22 · Speicherleck</span></div></div>
+<div class="vonnull" id="vn-4-8">
+<div class="vn-ttl"><span class="vn-badge">Von null · §4.8</span>Flache Kopie und die Regel der drei</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> STACK s1(10); s1.push(A); s1.push(B); STACK s2 = s1; s2.pop(); s2.push(C); Was steht danach in s1? Was passiert am Programmende?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Kopie von null.</span> Ohne eigenen Kopierkonstruktor kopiert C++ die Datenelemente einfach: den <span class="c-mem">Zeiger</span> s und die Zahl N. Beide Objekte zeigen dann auf <span class="c-res">dasselbe</span> Array (flache Kopie).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">pop auf s2.</span> Nur s2.N wird 1. s1.N bleibt 2.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">push C auf s2.</span> s2 schreibt C in das gemeinsame Array an Stelle 1. s1 liest dort jetzt C statt B: s1 enthält A C, obwohl es nie C gepusht hat.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Programmende.</span> Beide Destruktoren geben dasselbe Array frei: doppeltes delete, undefiniertes Verhalten.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Abhilfe.</span> Kopierkonstruktor, Zuweisungsoperator und Destruktor selbst schreiben (tiefe Kopie). Dann ist der Typ <span class="c-rule">first-class</span>.</div></div>
+<div class="vn-res">✔ s1 enthält A C · am Ende doppeltes delete · Lösung: Regel der drei</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">Def 4.4</span> „Wie ein eingebauter Typ“, und warum Zeiger das kaputt machen</div>
 <div class="sub">„A first-class data type is one which we can use in our programs in the same way as we use built-in data types“: Variablen deklarieren, zuweisen, als Argument oder Rückgabewert übergeben.</div>
@@ -1157,6 +1370,18 @@ public:
 
 <!-- ───────────── 5.1 ───────────── -->
 <div class="blatt" id="s51"><div class="kop"><span class="bn">§5.1</span><h2>Rekursive Algorithmen</h2><span class="tp">Prog. 5.1 Fakultät · 5.2 fragwürdig · 5.3 Euklid · 5.4 Präfix · 5.5 Listen</span></div></div>
+<div class="vonnull" id="vn-5-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.1</span>Rekursion: Anker und kleiner werden</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Wie viele Aufrufe macht factorial(4) (Prog 5.1), und welche Werte kommen zurück? Wie viele Aufrufe macht gcd(24, 16) (Prog 5.3)?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Rekursion von null.</span> Eine Funktion ruft sich selbst mit einem <span class="c-res">kleineren</span> Problem auf. Sie braucht einen <span class="c-cond">Anker</span>, der ohne Selbstaufruf antwortet, sonst endet sie nie.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">factorial(4).</span> Aufrufe mit 4, 3, 2, 1, 0. Der Anker 0! = 1 antwortet, dann geht es zurück: 1·1 = 1, 2·1 = 2, 3·2 = 6, 4·6 = <span class="c-res">24</span>. Fünf Aufrufe, Tiefe 5.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">gcd(24, 16).</span> gcd(16, 24 mod 16 = 8), dann gcd(8, 16 mod 8 = 0). Anker n = 0: Ergebnis <span class="c-res">8</span>. Drei Aufrufe.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Warum endet es?</span> Bei factorial sinkt N um 1, bei gcd sinkt das zweite Argument echt. Beides erreicht den Anker.</div></div>
+<div class="step">\[ \begin{aligned} C(N) &= C(N-1) + 1,\ C(0) = 1 && \text{Aufrufe von factorial.} \\ C(4) &= 5 && \text{also N + 1.} \end{aligned} \]</div>
+<div class="vn-res">✔ 4! = 24 mit 5 Aufrufen · ggT(24, 16) = 8 mit 3 Aufrufen</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">§5.1 · Theorie</span> Rekursion = Induktionsbeweis, der rechnet, und darunter ein Stack</div>
 <div class="sub">„A recursive program cannot call itself always, or it would never stop.“ Jede rekursive Funktion braucht zwei Dinge:</div>
@@ -1227,6 +1452,18 @@ public:
 
 <!-- ───────────── 5.2 ───────────── -->
 <div class="blatt" id="s52"><div class="kop"><span class="bn">§5.2</span><h2>Divide and Conquer (Teile und herrsche)</h2><span class="tp">Prog. 5.6 Maximum · Eigenschaft 5.1 · 5.7 Hanoi · Eigenschaft 5.2 · 5.8/5.9 Lineal</span></div></div>
+<div class="vonnull" id="vn-5-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.2</span>Teile und herrsche: Maximum und Hanoi</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> a) Wie viele Aufrufe macht max(a, 0, 7) aus Prog 5.6 für 8 Elemente? b) Wie viele Züge braucht Hanoi (Prog 5.7) für 3 Scheiben?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Teile und herrsche von null.</span> Das Problem wird in Teile zerlegt, die Teile werden <span class="c-rule">rekursiv</span> gelöst, die Lösungen kombiniert.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">max.</span> Jeder Aufruf mit mehr als einem Element teilt in zwei Hälften. Die Aufrufe bilden einen Binärbaum mit N = 8 Blättern (je ein Element) und N − 1 = 7 inneren Knoten: 15 Aufrufe.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Hanoi.</span> Um N Scheiben zu bewegen: N−1 Scheiben weg, größte Scheibe ziehen, N−1 Scheiben darauf. M<sub>N</sub> = 2M<sub>N−1</sub> + 1 mit M<sub>1</sub> = 1.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Einsetzen.</span> M<sub>2</sub> = 3, M<sub>3</sub> = <span class="c-res">7</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{max-Aufrufe} &= 2N - 1 = 15 && \text{N Blätter + (N - 1) innere Knoten.} \\ M_N &= 2M_{N-1} + 1 = 2^N - 1 && \text{Hanoi, Eigenschaft 5.2.} \end{aligned} \]</div>
+<div class="vn-res">✔ max: 15 Aufrufe · Hanoi mit 3 Scheiben: 7 Züge</div>
+</details>
+</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.6</span> Maximum durch Halbieren: T I N Y E X A M P L E</div>
 <div class="sub">Zwei rekursive Aufrufe auf je einer Hälfte, danach wird das größere Ergebnis zurückgegeben (Fig. 5.4, 5.6).</div>
@@ -1273,6 +1510,18 @@ public:
 
 <!-- ───────────── 5.3 ───────────── -->
 <div class="blatt" id="s53"><div class="kop"><span class="bn">§5.3</span><h2>Dynamische Programmierung</h2><span class="tp">Prog. 5.10/5.11 Fibonacci · 5.12/5.13 Rucksack · Eigenschaft 5.3</span></div></div>
+<div class="vonnull" id="vn-5-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.3</span>Fibonacci naiv gegen gespeichert</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Wie viele Aufrufe braucht die naive rekursive F(6) (Prog 5.10)? Wie viele mit gespeicherten Werten (Prog 5.11)?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Überlappung von null.</span> F(6) ruft F(5) und F(4) auf, F(5) ruft wieder F(4) auf: Dieselben Teilprobleme werden immer wieder gelöst.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Rekurrenz.</span> C<sub>N</sub> = C<sub>N−1</sub> + C<sub>N−2</sub> + 1 mit C<sub>0</sub> = C<sub>1</sub> = 1: C<sub>2</sub> = 3, C<sub>3</sub> = 5, C<sub>4</sub> = 9, C<sub>5</sub> = 15, C<sub>6</sub> = <span class="c-res">25</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Dynamische Programmierung.</span> Einmal berechnete Werte kommen in eine Tabelle. Jeder weitere Aufruf mit bekanntem Argument kostet O(1).</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Gespeichert.</span> Etwa 2N − 1 = <span class="c-res">11</span> Aufrufe: linear statt exponentiell.</div></div>
+<div class="step">\[ \begin{aligned} C_N &= 2F_{N+1} - 1 && \text{naiv: $F_7 = 13$, also 25.} \\ \text{gespeichert} &\approx 2N - 1 = 11 && \text{jeder Wert wird nur einmal berechnet.} \end{aligned} \]</div>
+<div class="vn-res">✔ naiv 25 Aufrufe · gespeichert 11</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">§5.3 · Theorie</span> Überlappende Teilprobleme: einmal rechnen, dann merken</div>
 <div class="sub">Divide &amp; Conquer ist gut, wenn die Teilprobleme <b>unabhängig</b> sind. Überlappen sie, rechnet die naive Rekursion dieselben Werte exponentiell oft neu aus.</div>
@@ -1328,6 +1577,19 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 
 <!-- ───────────── 5.4 ───────────── -->
 <div class="blatt" id="s54"><div class="kop"><span class="bn">§5.4</span><h2>Bäume: Begriffe und Arten</h2><span class="tp">Def. 5.1–5.5 · binär · M-är · geordnet · Wurzelbaum · freier Baum</span></div></div>
+<div class="vonnull" id="vn-5-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.4</span>Baumbegriffe</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ein Binärbaum hat die Wurzel E mit Kindern D und H. D hat das linke Kind B, B hat die Kinder A und C, H hat das linke Kind F, F hat das rechte Kind G. Nenne Wurzel, Blätter, Höhe und die Anzahl externer Knoten.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Baum von null.</span> Ein <span class="c-rule">Baum</span> besteht aus Knoten, die durch Kanten verbunden sind, ohne Kreise. Die <span class="c-res">Wurzel</span> hat keinen Elternknoten. Ein <span class="c-rule">Blatt</span> hat keine Kinder.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Binärbaum.</span> Jeder Knoten hat höchstens ein linkes und ein rechtes Kind. Ein fehlendes Kind denkt man sich als <span class="c-cond">externen Knoten</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Ablesen.</span> Wurzel E. Blätter A, C, G. Innere Knoten: 8.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Höhe.</span> Längster Weg von der Wurzel zu einem Blatt: E → D → B → A hat 3 Kanten.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Externe Knoten.</span> Ein Binärbaum mit N inneren Knoten hat N + 1 externe: 9.</div></div>
+<div class="step">\[ \begin{aligned} \#\text{extern} &= N + 1 = 9 && \text{Eigenschaft 5.5.} \\ \text{Höhe} &= 3 && \text{zwischen lg N und N - 1.} \end{aligned} \]</div>
+<div class="vn-res">✔ Wurzel E · Blätter A C G · Höhe 3 · 9 externe Knoten</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">§5.4 · Theorie</span> Das Vokabular am Beispielbaum</div>
 <div class="sub">Ein Baum ist eine nichtleere Menge von Knoten und Kanten, in der zwischen je zwei Knoten <b>genau ein</b> Pfad existiert.</div>
@@ -1415,6 +1677,18 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 
 <!-- ───────────── 5.5 ───────────── -->
 <div class="blatt" id="s55"><div class="kop"><span class="bn">§5.5</span><h2>Mathematische Eigenschaften von Binärbäumen</h2><span class="tp">Eigenschaften 5.5–5.9 · Def. 5.6 · Fig. 5.23</span></div></div>
+<div class="vonnull" id="vn-5-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.5</span>Pfadlängen: E = I + 2N</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ein Binärbaum hat drei innere Knoten: eine Wurzel mit zwei Kindern. Berechne die innere Pfadlänge I, die äußere Pfadlänge E und prüfe E = I + 2N.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Pfadlänge von null.</span> Die <span class="c-rule">Tiefe</span> eines Knotens ist die Zahl der Kanten von der Wurzel. Die innere Pfadlänge I ist die Summe der Tiefen aller inneren Knoten, die äußere E die Summe über alle externen Knoten.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">I.</span> Wurzel Tiefe 0, zwei Kinder Tiefe 1: I = 0 + 1 + 1 = 2.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">E.</span> Jedes Kind hat zwei externe Knoten der Tiefe 2: 4 · 2 = 8.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Probe.</span> I + 2N = 2 + 6 = <span class="c-res">8</span> = E.</div></div>
+<div class="step">\[ \begin{aligned} I &= 0 + 1 + 1 = 2 && \text{innere Knoten.} \\ E &= 4\cdot 2 = 8 && \text{externe Knoten.} \\ E &= I + 2N && \text{Eigenschaft 5.7.} \end{aligned} \]</div>
+<div class="vn-res">✔ I = 2 · E = 8 = I + 2N</div>
+</details>
+</div>
 <div class="figure theorie">
 <div class="ttl"><span class="n">Baum-Labor</span> Baue einen Binärbaum und prüfe die Eigenschaften live</div>
 <div class="sub">Klicke einen <b>externen Knoten □</b> an: Er wird zu einem inneren Knoten mit zwei neuen externen Kindern. Genau so beweist Sedgewick Eigenschaft 5.7.</div>
@@ -1431,6 +1705,19 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 
 <!-- ───────────── 5.6 ───────────── -->
 <div class="blatt" id="s56"><div class="kop"><span class="bn">§5.6</span><h2>Baum-Traversierung</h2><span class="tp">Prog. 5.14 rekursiv · 5.15 mit Stack · 5.16 Level-Order mit Queue</span></div></div>
+<div class="vonnull" id="vn-5-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.6</span>Die vier Traversierungen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Für den Baum aus §5.4 (E; D mit B(A, C); H mit F(–, G)): Gib Preorder, Inorder, Postorder und Level-Order an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Traversierung von null.</span> Jeder Knoten wird genau einmal besucht. Die Varianten unterscheiden sich nur darin, <span class="c-res">wann</span> die Wurzel eines Teilbaums besucht wird.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Preorder.</span> Wurzel, links, rechts: <span class="c-res">E D B A C H F G</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Inorder.</span> links, Wurzel, rechts: <span class="c-res">A B C D E F G H</span>. Beim Suchbaum ist das die sortierte Folge.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Postorder.</span> links, rechts, Wurzel: <span class="c-res">A C B D G F H E</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Level-Order.</span> Ebene für Ebene mit einer <span class="c-rule">Queue</span>: <span class="c-res">E D H B F A C G</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{Besuche} &= N = 8 && \text{jeder Knoten einmal.} \\ \text{Zeit} &= \Theta(N) && \text{Stack so groß wie die Höhe.} \end{aligned} \]</div>
+<div class="vn-res">✔ Pre E D B A C H F G · In A B C D E F G H · Post A C B D G F H E · Level E D H B F A C G</div>
+</details>
+</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.14 · 5.15 · 5.16</span> Pre-, In-, Post-, Level-Order am Baum aus Fig. 5.26</div>
 <div class="sub">Rekursiv hängt die Reihenfolge nur davon ab, <b>wo</b> <code class="inl">visit(h)</code> steht. Nicht-rekursiv ergibt ein <b>Stack</b> Preorder und eine <b>Queue</b> Level-Order.</div>
@@ -1449,6 +1736,18 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 
 <!-- ───────────── 5.7 ───────────── -->
 <div class="blatt" id="s57"><div class="kop"><span class="bn">§5.7</span><h2>Rekursive Algorithmen auf Binärbäumen</h2><span class="tp">Prog. 5.17 count/height · 5.18 print · 5.19 Turnier · 5.20 Parse-Baum</span></div></div>
+<div class="vonnull" id="vn-5-7">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.7</span>count und height rekursiv</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Berechne count und height (Prog 5.17) für den Baum aus §5.4. Wie oft wird jede Funktion aufgerufen?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Beide Werte ergeben sich aus den Werten der Teilbäume. Der leere Baum ist der <span class="c-cond">Anker</span>: count = 0, height = −1.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">count.</span> count(h) = count(links) + count(rechts) + 1. Für die 8 Knoten ergibt das <span class="c-res">8</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">height.</span> height(h) = max(height(links), height(rechts)) + 1. Blätter haben 0, B hat 1, D hat 2, E hat <span class="c-res">3</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Aufrufe.</span> Jede Funktion wird für jeden der 8 Knoten und jeden der 9 leeren Teilbäume einmal aufgerufen: 17.</div></div>
+<div class="step">\[ \begin{aligned} \text{Aufrufe} &= N + (N+1) = 17 && \text{innere plus externe Knoten.} \end{aligned} \]</div>
+<div class="vn-res">✔ count = 8 · height = 3 · je 17 Aufrufe</div>
+</details>
+</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.17</span> Knoten zählen und Höhe berechnen</div>
 <div class="sub">Das Muster: Ergebnis = f(Ergebnis links, Ergebnis rechts). Leerer Baum = Anker (count 0, height −1).</div>
@@ -1490,6 +1789,18 @@ link parse()
 
 <!-- ───────────── 5.8 ───────────── -->
 <div class="blatt" id="s58"><div class="kop"><span class="bn">§5.8</span><h2>Graph-Traversierung: DFS und BFS</h2><span class="tp">Prog. 5.21 Tiefensuche · 5.22 Breitensuche · Eigenschaft 5.10</span></div></div>
+<div class="vonnull" id="vn-5-8">
+<div class="vn-ttl"><span class="vn-badge">Von null · §5.8</span>Tiefensuche und Breitensuche</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Graph mit den Kanten 0-1, 0-2, 1-3, 2-3, 3-4, Adjazenzlisten aufsteigend. In welcher Reihenfolge besuchen DFS (Prog 5.21) und BFS (Prog 5.22) die Knoten ab 0?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Graph von null.</span> Ein <span class="c-rule">Graph</span> besteht aus Knoten und Kanten. Die <span class="c-mem">Adjazenzliste</span> eines Knotens nennt seine Nachbarn: 0: 1 2 · 1: 0 3 · 2: 0 3 · 3: 1 2 4 · 4: 3.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">DFS.</span> Tiefe zuerst mit Rekursion (also einem <span class="c-rule">Stack</span>): 0, dann erster unbesuchter Nachbar 1, von dort 3, von dort 2, zurück zu 3, dann 4. Reihenfolge <span class="c-res">0 1 3 2 4</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">BFS.</span> Breite zuerst mit einer <span class="c-rule">Queue</span>: 0 besuchen, 1 und 2 anstellen. 1 besuchen, 3 anstellen. 2 besuchen (3 noch einmal anstellen). 3 besuchen, 4 anstellen. Das doppelte 3 wird übersprungen, dann 4. Reihenfolge <span class="c-res">0 1 2 3 4</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Markieren.</span> visited[] verhindert, dass ein Knoten zweimal besucht wird, auch bei Kreisen wie 0-1-3-2-0.</div></div>
+<div class="step">\[ \begin{aligned} \text{Zeit} &\propto V + E && \text{Eigenschaft 5.10: jeder Kopf und jeder Listenknoten einmal.} \end{aligned} \]</div>
+<div class="vn-res">✔ DFS 0 1 3 2 4 · BFS 0 1 2 3 4</div>
+</details>
+</div>
 <div class="figure">
 <div class="ttl"><span class="n">Prog 5.21 · 5.22</span> Tiefensuche (rekursiv) und Breitensuche (Queue) auf dem Graphen aus §3.7</div>
 <div class="sub">Adjazenzlisten wie in Fig. 5.32: 0 → 7 5 2 1 6 · 1 → 7 0 · 2 → 7 0 · 3 → 5 4 · 4 → 6 5 7 3 · 5 → 0 4 3 · 6 → 4 0 · 7 → 1 2 0 4.</div>
@@ -3144,6 +3455,58 @@ if($('schPlot')){
   const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ Object.values(links).forEach(a => a.classList.remove('active')); const a = links[e.target.id]; if(a){ a.classList.add('active'); const ni = a.parentElement; ni.scrollLeft = a.offsetLeft - ni.clientWidth/2; } } }); }, {rootMargin:'-15% 0px -75% 0px'});
   targets.forEach(t => io.observe(t));
 })();
+})();
+</script>
+<script>
+/* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
+(function(){
+'use strict';
+const LB = window.LB = window.LB || {};
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"]]]];
+const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Überlebende*", "Wurzel"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "push", "pop", "put", "get", "insert", "delete", "new"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Stack", "Queue", "FIFO", "LIFO", "Binärbaum*", "Baum", "Bäume", "Traversierung", "Preorder", "Inorder", "Postorder", "Level-Order", "Divide & Conquer", "Teile und Herrsche", "Memoisierung", "dynamische Programmierung", "Klasse*", "Template", "Axiom*", "Tiefensuche", "Breitensuche", "Graph*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Null-Link"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger", "Links", "Kopfknoten", "Dummy", "Heap-Speicher", "Stackframe*", "Ringpuffer", "Adjazenzliste*", "Adjazenzmatrix"]};
+/* ---------- Menü ---------- */
+const menu = document.getElementById('lbMenu');
+if(menu){
+  menu.innerHTML = '<div class="lbm-in"><div class="lbm-head"><b>Inhalt · Teil 2 · Datenstrukturen</b><span class="small muted">Klick springt hin · Esc schließt</span><button class="lbburger" data-close>✕ schließen</button></div><div class="lbm-grid">' +
+    MENU.map(g => '<div><h5>'+g[0]+'</h5>'+g[1].map(it => '<a href="#'+it[0]+'"><b>'+it[1]+'</b><span>'+it[2]+'</span></a>').join('')+'</div>').join('') +
+    '</div><div class="lbm-tools"><button class="lbburger" id="lbVnAll">alle „Von null“-Lösungen öffnen</button><button class="lbburger" id="lbVnNone">alle schließen</button></div></div>';
+  const open = () => document.body.classList.add('menu-open'), close = () => document.body.classList.remove('menu-open');
+  document.querySelectorAll('#lbBurger,#lbFab').forEach(b => b.addEventListener('click', open));
+  menu.addEventListener('click', e => { if(e.target === menu || e.target.closest('[data-close]') || e.target.closest('a')) close(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+  const vn = o => document.querySelectorAll('.vonnull details').forEach(d => d.open = o);
+  document.getElementById('lbVnAll').addEventListener('click', () => vn(true));
+  document.getElementById('lbVnNone').addEventListener('click', () => vn(false));
+}
+/* ---------- Schlüsselwörter färben ---------- */
+const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const ROLE = {}; const pats = [];
+Object.keys(KW).forEach(r => KW[r].forEach(t => { const base = t.replace(/\*$/, ''); ROLE[base] = r; pats.push({base, suf: t.endsWith('*')}); }));
+pats.sort((a, b) => b.base.length - a.base.length);
+const RE = new RegExp('(?<![\\p{L}\\d_])(' + pats.map(p => esc(p.base) + (p.suf ? '(?:e|en|n|s|es|er|ern)?' : '')).join('|') + ')(?![\\p{L}\\d_])', 'gu');
+const SKIP = 'script,style,pre,code,.katex,svg,textarea,input,select,button,option,table.codet,.hist,.cols,.werk-out,.readout,.cells,.bits,.var,.frames,.stackv,h1,h2,h3,h4,.lbtop,#lbMenu,.kw,.tr-title,.tnote,.lb,.num,.verdict,.ttl,.kop,.legend,[class*="c-"],[style*="color"],.plot,.anat-sym,.s,.vnn,.vn-res,summary,th';
+function roleOf(m){ if(ROLE[m]) return ROLE[m]; for(const suf of ['ern','en','er','es','e','n','s']) if(m.endsWith(suf) && ROLE[m.slice(0, -suf.length)]) return ROLE[m.slice(0, -suf.length)]; return null; }
+LB.kwColor = function(root){
+  if(!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => (!n.nodeValue.trim() || (n.parentElement && n.parentElement.closest(SKIP))) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; let n; while((n = w.nextNode())) nodes.push(n);
+  nodes.forEach(t => {
+    const s = t.nodeValue; RE.lastIndex = 0; if(!RE.test(s)) return; RE.lastIndex = 0;
+    const f = document.createDocumentFragment(); let last = 0, m;
+    while((m = RE.exec(s))){ const r = roleOf(m[0]); if(!r) continue;
+      if(m.index > last) f.appendChild(document.createTextNode(s.slice(last, m.index)));
+      const sp = document.createElement('span'); sp.className = 'kw kw-' + r; sp.textContent = m[0]; f.appendChild(sp); last = m.index + m[0].length; }
+    if(last === 0) return;
+    if(last < s.length) f.appendChild(document.createTextNode(s.slice(last)));
+    t.parentNode.replaceChild(f, t);
+  });
+};
+function patch(){
+  const T = LB.Tracer; if(!T || T.prototype.__kw) return;
+  const s0 = T.prototype.show; T.prototype.__kw = true;
+  T.prototype.show = function(k){ s0.call(this, k); const m = this.q && this.q('.tr-msg'); if(m) LB.kwColor(m); };
+}
+window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
 </script>
 </body>

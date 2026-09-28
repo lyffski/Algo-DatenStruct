@@ -169,46 +169,87 @@
     table.rt{display:block;overflow-x:auto}
   }
 .codet .tnote{margin-left:1.4em;color:#8a7f72;font-style:italic;font-size:.88em;white-space:nowrap}
+
+/* ===== UX-ADDON ===== */
+/* Kopf: nicht sticky, Burger-Menü */
+.lbtop{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.1rem;padding:.8rem 1.4rem;border-bottom:1px solid var(--lbline);background:var(--lbpanel)}
+.lbtop .lbt b{font-size:1.05rem;margin-right:.6rem}
+.lbtop .lbt span{color:var(--lbmuted);font-size:.85rem}
+.lbq{display:flex;flex-wrap:wrap;gap:.3rem .45rem;flex:1 1 520px}
+.lbq a{font-size:.8rem;text-decoration:none;color:var(--lbink);border:1px solid var(--lbline);border-radius:7px;padding:.12rem .5rem;white-space:nowrap}
+.lbq a:hover{border-color:var(--rule);color:var(--rule)}
+.lbq a small{color:var(--lbmuted);margin-left:.3rem}
+.lbburger,.lbfab{font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer;border-radius:9px;border:1px solid var(--lbline);background:var(--lbpanel2);color:var(--lbink);padding:.3rem .75rem}
+.lbfab{position:fixed;right:18px;bottom:18px;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.35);border-radius:50%;width:48px;height:48px;padding:0}
+.lbmenu{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.55);display:none;overflow:auto;padding:2.2rem 2rem}
+body.menu-open .lbmenu{display:block}
+.lbmenu .lbm-in{max-width:1640px;margin:0 auto;background:var(--lbpanel);border:1px solid var(--lbline);border-radius:14px;padding:1.1rem 1.4rem 1.4rem}
+.lbm-head{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem}
+.lbm-head b{font-size:1.15rem}
+.lbm-head button{margin-left:auto}
+.lbm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.9rem 1.4rem}
+.lbm-grid h5{margin:.2rem 0 .3rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rule)}
+.lbm-grid a{display:flex;gap:.5rem;align-items:baseline;text-decoration:none;color:var(--lbink);padding:.16rem .35rem;border-radius:6px;font-size:.9rem;line-height:1.35}
+.lbm-grid a:hover{background:var(--lbpanel2)}
+.lbm-grid a b{white-space:nowrap;font-weight:650}
+.lbm-grid a span{color:var(--lbmuted);font-size:.8rem}
+.lbm-tools{margin-top:.9rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-size:.85rem;color:var(--lbmuted)}
+/* Farbige Schlüsselwörter im Fließtext */
+.kw{font-weight:600}
+.kw-res{color:var(--res)} .kw-chg{color:var(--chg)} .kw-rule{color:var(--rule)} .kw-par{color:var(--par)}
+.kw-idx{color:var(--idx)} .kw-cond{color:var(--cond)} .kw-mem{color:var(--mem)}
+/* Breite für 16:9 und kein Seitwärts-Scrollen */
+pre.cpp .row{white-space:pre-wrap;word-break:break-word;padding-left:calc(2.6em + 1rem);text-indent:calc(-2.6em - 1rem)}
+pre.cpp .lnum{text-indent:0}
+table.codet td.src{white-space:pre-wrap;word-break:break-word}
+.codet .tnote{white-space:normal}
+.cells{flex-wrap:wrap}
+.arr{overflow-x:visible}
+/* Von-null-Karten */
+.vonnull{border:1.5px solid var(--rule)!important}
+.vonnull .vn-task{border-left:4px solid var(--res);background:var(--lbpanel2);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0 .6rem}
+.vonnull details{margin-top:.3rem}
+.vonnull summary{cursor:pointer;font-weight:700;color:var(--rule);padding:.3rem 0}
+.vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.6rem;align-items:start;margin:.45rem 0}
+.vn-step .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--rule);color:#fff;font-weight:700;font-size:.85rem}
+.vn-step b.h{color:var(--lbink)}
+:root{--lbline:var(--line);--lbpanel:#fffdf8;--lbpanel2:#f4efe4;--lbink:var(--ink);--lbmuted:var(--muted)}
+.wrap{display:block!important;max-width:1680px!important}
+main{padding:20px 34px 120px!important}
+main>*{max-width:none!important}
+.lbleg1{background:#fffdf8;border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:6px 0 10px;font-size:.85rem}
+.lbleg1 .legend{display:inline-flex;flex-wrap:wrap;gap:4px 16px}.lbleg1 .legend span{display:inline-flex;align-items:center;gap:6px}
+.lbleg1 .dot{width:.8rem;height:.8rem;border-radius:3px;display:inline-block}
+.tr-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important}
+main svg{max-height:560px}
+.tr-extra svg{max-width:100%!important;height:auto}
+@media(max-width:980px){.tr-grid{grid-template-columns:minmax(0,1fr)!important}}
+/* ===== VN-ADDON ===== */
+.vonnull{border:1.6px solid var(--rule);border-radius:14px;background:var(--lbpanel);padding:1rem 1.2rem .8rem;margin:1.1rem 0 1.4rem;box-shadow:0 0 0 4px color-mix(in srgb, var(--rule) 12%, transparent)}
+.vonnull .vn-ttl{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;font-size:1.22rem;font-weight:700;margin-bottom:.3rem}
+.vonnull .vn-badge{font-family:'JetBrains Mono',Consolas,monospace;font-size:.74rem;font-weight:700;color:#fff;background:var(--rule);border-radius:6px;padding:.16rem .55rem}
+.vonnull .vn-sub{color:var(--lbmuted);font-size:.9rem;margin:0 0 .4rem}
+.vonnull .vn-task{border-left:4px solid var(--res);background:var(--lbpanel2);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0 .6rem;line-height:1.6}
+.vonnull .vn-task b.t{color:var(--res)}
+.vonnull details{margin-top:.2rem}
+.vonnull summary{cursor:pointer;font-weight:700;color:var(--rule);padding:.35rem 0;font-size:.98rem}
+.vonnull .vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.65rem;align-items:start;margin:.55rem 0;line-height:1.6}
+.vonnull .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--rule);color:#fff;font-weight:700;font-size:.85rem}
+.vonnull .vn-step .h{font-weight:700}
+.vonnull .vn-res{display:inline-block;margin:.5rem 0 .2rem;padding:.35rem .8rem;border-radius:8px;font-weight:700;border:1.5px solid var(--idx);color:var(--idx);background:color-mix(in srgb, var(--idx) 10%, transparent)}
+.vonnull code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:5px;padding:0 .3rem}
 </style>
 </head>
 <body>
+<header class="lbtop"><button id="lbBurger" class="lbburger" title="Inhalt öffnen">☰ Inhalt</button><div class="lbt"><b>Teil 1 · Fundamentals</b><span>Sedgewick Kap. 1–2</span></div><div class="lbq"><a href="#start">Start</a><a href="#k1-algo">Kapitel 1 · Einführung</a><a href="#k2-emp">Kapitel 2 · Analyse</a><a href="#schema">Training</a></div></header>
+<div id="lbMenu" class="lbmenu"></div><button id="lbFab" class="lbfab" title="Inhalt">☰</button>
 <div class="wrap">
 
 <!-- ======================= NAV ======================= -->
-<nav id="nav">
-  <h4>Start</h4>
-  <a href="#start">0 · So liest du diese Seite</a>
-  <a href="#bruecke">🌉 Große Brücke</a>
-  <a href="#master">🔬 Master-Anatomie: Code → Kosten</a>
-  <a href="#cpp">🧱 C++-Werkzeug &amp; Speicher</a>
-  <h4>Kapitel 1 · Einführung</h4>
-  <a href="#k1-algo">1.1 Algorithmus</a>
-  <a href="#k1-problem">1.2 Konnektivität</a>
-  <a href="#k1-qf">1.3a Quick-Find (Prog 1.1)</a>
-  <a href="#k1-qu">1.3b Quick-Union (Prog 1.2)</a>
-  <a href="#k1-wqu">1.3c Weighted QU (Prog 1.3)</a>
-  <a href="#k1-pc">1.3d Pfadkompression (Prog 1.4)</a>
-  <a href="#k1-lab">1.3e Labor: Tabelle 1.1</a>
-  <a href="#k1-persp">1.4 Perspektive</a>
-  <h4>Kapitel 2 · Analyse</h4>
-  <a href="#k2-emp">2.1 Empirische Analyse</a>
-  <a href="#k2-ana">2.2 Analyse von Algorithmen</a>
-  <a href="#k2-grow">2.3 Wachstum von Funktionen</a>
-  <a href="#k2-log">2.3b lg · ⌊⌋ · H<sub>N</sub> · F<sub>N</sub> · N!</a>
-  <a href="#k2-O">2.4 O-Notation</a>
-  <a href="#k2-rec">2.5 Rekurrenzen</a>
-  <a href="#k2-search">2.6 Seq. vs. binäre Suche</a>
-  <a href="#k2-guar">2.7 Garantien &amp; Grenzen</a>
-  <h4>Training</h4>
-  <a href="#schema">📐 Schema + 3 Beispiele</a>
-  <a href="#abstrakt">🔧 Abstrakte Anatomie</a>
-  <a href="#uebung">✍️ Übungsgenerator 1.4–1.8</a>
-  <a href="#quiz">🎯 Prüfungs-Quiz</a>
-  <a href="#glossar">📚 Glossar</a>
-  <a href="#weiter">➡️ Brücke zu Teil 2</a>
-  <a href="#fazit">🧾 Spickzettel</a>
-  <h4>Farb-Rollen</h4>
-  <div class="legend">
+
+
+<main class="lb-main">
+<div class="lbleg1"><b>Farb-Rollen</b> (Code, Formeln und Fließtext): <div class="legend">
     <span><i class="dot" style="background:var(--res)"></i>Ergebnis / gesuchte Größe</span>
     <span><i class="dot" style="background:var(--chg)"></i>Änderung · Pointer · Schreiben</span>
     <span><i class="dot" style="background:var(--rule)"></i>Regel · Invariante · Fachwort</span>
@@ -216,10 +257,7 @@
     <span><i class="dot" style="background:var(--idx)"></i>Schleifenindex i, j, k, m</span>
     <span><i class="dot" style="background:var(--cond)"></i>Bedingung ==, !=, &lt;</span>
     <span><i class="dot" style="background:var(--mem)"></i>Speicher · Array · Adresse</span>
-  </div>
-</nav>
-
-<main>
+  </div></div>
 <header class="hero">
   <div class="kick">Sedgewick · Algorithmen in C++ (Teile 1–4) · Teil 1 von 4(+1)</div>
   <h1>Teil 1 — Fundamentals<br><span style="font-size:1.25rem;color:#5b6472">Kap. 1 Union-Find · Kap. 2 Prinzipien der Algorithmenanalyse</span></h1>
@@ -395,6 +433,18 @@
 
 <section id="k1-algo">
 <h2>1.1 · Algorithmus und Datenstruktur</h2>
+<div class="vonnull" id="vn-1-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.1</span>Warum der Algorithmus zählt, nicht der Rechner</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Die Summe 1 + 2 + … + N soll berechnet werden. Lösung A addiert in einer Schleife, Lösung B benutzt N(N+1)/2. Wie viele Operationen braucht jede Lösung für <span class="c-par">N = 10⁹</span>, und wie lange dauert das bei 10⁹ Operationen pro Sekunde?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Algorithmus von null.</span> Ein <span class="c-rule">Algorithmus</span> ist eine endliche, genaue Rechenvorschrift. Wie gut er ist, misst man daran, wie viele Grundoperationen er in Abhängigkeit von der <span class="c-par">Eingabegröße N</span> braucht.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Lösung A.</span> Die Schleife läuft N-mal und macht je eine Addition: 10⁹ Operationen, also etwa <span class="c-res">1 Sekunde</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Lösung B.</span> Eine Multiplikation, eine Addition, eine Division: <span class="c-res">3 Operationen</span>, unabhängig von N.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Vorgehen des Buches.</span> Problem genau formulieren, eine einfache Lösung finden, ihre Kosten zählen, gezielt verbessern. Das zieht sich durch alle Kapitel.</div></div>
+<div class="step">\[ \begin{aligned} \text{A} &= N = 10^9 \text{ Operationen} && \text{wächst mit N.} \\ \text{B} &= 3 && \text{konstant.} \end{aligned} \]</div>
+<div class="vn-res">✔ A: 10⁹ Operationen ≈ 1 s · B: 3 Operationen</div>
+</details>
+</div>
 <div class="grid2">
   <div class="card">
     <p><span class="fw">Algorithmus</span> = eine Problemlösungs-<b>Methode</b>, die man als Programm umsetzen kann. Sie hängt nicht von Rechner oder Sprache ab.</p>
@@ -411,6 +461,18 @@
 <!-- ======================= 1.2 PROBLEM ======================= -->
 <section id="k1-problem">
 <h2>1.2 · Das Beispielproblem: Konnektivität</h2>
+<div class="vonnull" id="vn-1-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.2</span>Das Konnektivitätsproblem von Hand</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Paare kommen einzeln an: <span class="c-par">3-4, 4-9, 8-0, 2-3, 5-6, 2-9, 5-9</span>. Ein Algorithmus soll ein Paar nur ausgeben, wenn es zwei bisher nicht verbundene Objekte verbindet. Welche Paare werden ausgegeben?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Problem von null.</span> Ein Paar p-q bedeutet: p und q sind verbunden. Verbundenheit ist <span class="c-rule">transitiv</span>: Aus p-q und q-r folgt p-r. Gesucht ist für jedes neue Paar die Antwort auf die Frage, ob p und q schon verbunden sind.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">3-4, 4-9, 8-0, 2-3, 5-6.</span> Alle neu: ausgeben. Mengen: {2,3,4,9}, {0,8}, {5,6}.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">2-9.</span> 2 und 9 liegen schon in derselben Menge (über 2-3-4-9): <span class="c-res">nicht ausgeben</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">5-9.</span> {5,6} und {2,3,4,9} sind getrennt: ausgeben. Jetzt {2,3,4,5,6,9}.</div></div>
+<div class="step">\[ \begin{aligned} \text{Ausgabe} &= 6 \text{ Paare} && \text{jedes ausgegebene Paar verringert die Zahl der Mengen um 1.} \end{aligned} \]</div>
+<div class="vn-res">✔ Ausgabe 3-4, 4-9, 8-0, 2-3, 5-6, 5-9 · nicht 2-9</div>
+</details>
+</div>
 <p>Die Eingabe ist eine Folge von Paaren <span class="c-par">p</span>-<span class="c-par">q</span>, gelesen als „p ist mit q verbunden“. Die Relation ist <span class="fw">transitiv</span> (p–q und q–r ergeben p–r). Das Programm soll ein Paar <b>nur ausgeben, wenn es neu ist</b>, also nicht schon aus den bisherigen Paaren folgt.</p>
 <div class="callout anat">
   <h3>🔬 Anatomie: die zwei abstrakten Operationen</h3>
@@ -443,6 +505,19 @@
 <!-- ======================= 1.3a QUICK-FIND ======================= -->
 <section id="k1-qf">
 <h2>1.3a · Quick-Find (Programm 1.1)</h2>
+<div class="vonnull" id="vn-1-3a">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.3a</span>Quick-Find von Hand</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> N = <span class="c-par">5</span> Objekte, Paare <span class="c-par">0-1, 1-2, 3-4</span>. Gib id[] nach jedem Paar an (Prog 1.1). Wie viele Array-Durchläufe macht union insgesamt?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Quick-Find von null.</span> Jedes Objekt x hat im <span class="c-mem">Array</span> id einen „Namen“ id[x]. <span class="c-rule">Regel</span>: p und q sind verbunden genau dann, wenn id[p] == id[q]. find ist also ein einziger <span class="c-cond">Vergleich</span>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">0-1.</span> id[0] = 0 ≠ id[1] = 1. union: Alle Einträge mit Namen 0 bekommen den Namen 1. id = 1 1 2 3 4.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">1-2.</span> id[1] = 1 ≠ 2: Alle mit Namen 1 bekommen Namen 2. id = 2 2 2 3 4.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">3-4.</span> id[3] = 3 ≠ 4: id = 2 2 2 4 4.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kosten.</span> Jede union läuft einmal durch alle N Einträge: 3 · 5 = 15 Durchläufe.</div></div>
+<div class="step">\[ \begin{aligned} \Res{T} &\ge M\cdot N && \text{Eigenschaft 1.1.} \\  &= 3\cdot 5 = 15 && \text{für dieses Beispiel.} \end{aligned} \]</div>
+<div class="vn-res">✔ id = 2 2 2 4 4 · 15 Durchläufe</div>
+</details>
+</div>
 <div class="callout key">
   <h3>Idee und <span style="color:var(--rule)">Invariante</span></h3>
   <p>Ein Array <span class="c-mem">id[N]</span> mit einem Eintrag pro Objekt. <span class="c-rule">Regel: p und q sind verbunden ⇔ id[p] == id[q].</span> Der Wert <code class="inl">id[x]</code> ist also der „Name“ der Menge von x.</p>
@@ -472,6 +547,19 @@
 <!-- ======================= 1.3b QUICK-UNION ======================= -->
 <section id="k1-qu">
 <h2>1.3b · Quick-Union (Programm 1.2)</h2>
+<div class="vonnull" id="vn-1-3b">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.3b</span>Quick-Union: Bäume statt Namen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Gleiche Eingabe: N = 5, Paare <span class="c-par">0-1, 1-2, 3-4</span>. Gib id[] nach Prog 1.2 an. Wie viele Schritte braucht danach find(0)?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Quick-Union von null.</span> Jetzt ist id[x] ein <span class="c-mem">Zeiger</span> auf ein anderes Objekt. Folgt man den Zeigern, landet man bei einer <span class="c-res">Wurzel</span> (id[r] == r). Zwei Objekte sind verbunden, wenn sie dieselbe Wurzel haben.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">0-1.</span> Wurzel von 0 ist 0, von 1 ist 1: id[0] = 1. id = 1 1 2 3 4.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">1-2.</span> Wurzel von 1 ist 1, von 2 ist 2: id[1] = 2. id = 1 2 2 3 4.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">3-4.</span> id[3] = 4. id = 1 2 2 4 4.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">find(0).</span> 0 → 1 → 2: zwei Schritte. Im schlechtesten Fall entsteht eine Kette der Länge N.</div></div>
+<div class="step">\[ \begin{aligned} \text{union} &= O(1) && \text{ein Zeiger wird umgehängt.} \\ \text{find} &= O(\text{Tiefe}) && \text{bis zu N im schlechtesten Fall.} \end{aligned} \]</div>
+<div class="vn-res">✔ id = 1 2 2 4 4 · find(0) braucht 2 Schritte</div>
+</details>
+</div>
 <div class="callout key">
   <h3>Idee und <span style="color:var(--rule)">Invariante</span>: dasselbe Array, andere Bedeutung</h3>
   <p><code class="inl">id[i]</code> ist jetzt ein <b>Zeiger auf den Elternknoten</b>. Folgt man den Zeigern, landet man immer bei einer <span class="fw">Wurzel</span> mit <code class="inl">id[r] == r</code>. <span class="c-rule">Regel: p und q verbunden ⇔ gleiche Wurzel.</span> Die Struktur ist ein <span class="fw">Wald</span> aus Bäumen, und die Bäume enthalten <b>keine Zyklen</b> (Beweis per Induktion: nach der Initialisierung wahr, und jede Union hängt eine Wurzel unter eine andere).</p>
@@ -500,6 +588,19 @@
 <!-- ======================= 1.3c WEIGHTED ======================= -->
 <section id="k1-wqu">
 <h2>1.3c · Weighted Quick-Union (Programm 1.3)</h2>
+<div class="vonnull" id="vn-1-3c">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.3c</span>Weighted Quick-Union hält Bäume flach</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> N = <span class="c-par">4</span>, Paare <span class="c-par">0-1, 2-3, 0-2</span>. Gib id[] und sz[] nach Prog 1.3 an. Welche Höhe hat der Baum am Ende?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Gewichtung von null.</span> Man merkt sich in sz[r] die Größe jedes Baums. Bei union wird immer der <span class="c-res">kleinere</span> Baum unter den größeren gehängt. So wächst die Höhe nur, wenn sich die Größe mindestens verdoppelt.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">0-1.</span> Beide Größe 1, also 1 unter 0: id[1] = 0, sz[0] = 2.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">2-3.</span> id[3] = 2, sz[2] = 2.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">0-2.</span> Beide Größe 2, also 2 unter 0: id[2] = 0, sz[0] = 4.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Höhe.</span> 3 → 2 → 0: Höhe 2 = lg 4.</div></div>
+<div class="step">\[ \begin{aligned} \text{Tiefe} &\le \lg N && \text{Eigenschaft 1.3.} \\  &= \lg 4 = 2 && \text{für dieses Beispiel.} \end{aligned} \]</div>
+<div class="vn-res">✔ id = 0 0 0 2 · sz[0] = 4 · Höhe 2</div>
+</details>
+</div>
 <div class="callout key">
   <h3>Idee: den <b>kleineren</b> Baum unter den <b>größeren</b> hängen</h3>
   <p>Ein zweites Array <span class="c-mem">sz[i]</span> speichert für jede Wurzel die Anzahl der Knoten ihres Baums. Bei union wird die Wurzel des kleineren Baums an die des größeren gehängt. So entstehen <b>keine langen Ketten</b>, und das kostet nur wenige Zeilen mehr.</p>
@@ -531,6 +632,18 @@ else { id[j] = i; sz[i] += sz[j]; }     // ⑮ sonst j unter i</pre>
 <!-- ======================= 1.3d PATH COMPRESSION ======================= -->
 <section id="k1-pc">
 <h2>1.3d · Pfadkompression (Programm 1.4 und Übung 1.16)</h2>
+<div class="vonnull" id="vn-1-3d">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.3d</span>Pfadkompression durch Halbierung</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Eine Kette: id = 0 0 1 2 3 (4 → 3 → 2 → 1 → 0). Führe find(4) mit Halbierung (<code>id[i] = id[id[i]]</code>) aus. Wie sieht id danach aus?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Während man zur Wurzel läuft, lässt man jeden zweiten Knoten auf seinen <span class="c-rule">Großvater</span> zeigen. Der Weg wird dabei etwa halb so lang, ohne zusätzliche Schleife.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">i = 4.</span> id[4] = id[id[4]] = id[3] = 2. Weiter bei i = 2.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">i = 2.</span> id[2] = id[id[2]] = id[1] = 0. Weiter bei i = 0: Wurzel.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ergebnis.</span> id = 0 0 0 2 2. Der Weg von 4 ist jetzt 4 → 2 → 0: zwei statt vier Schritte.</div></div>
+<div class="step">\[ \begin{aligned} \text{vorher} &= 4 \text{ Schritte} && \text{Kette.} \\ \text{nachher} &= 2 \text{ Schritte} && \text{halbiert.} \end{aligned} \]</div>
+<div class="vn-res">✔ id = 0 0 0 2 2 · Weg von 4 halbiert</div>
+</details>
+</div>
 <p>Ideal wäre es, wenn jeder Knoten <b>direkt</b> auf die Wurzel zeigt (wie bei Quick-Find), ohne dafür teuer umzuschreiben. Der Trick: Jeden Knoten, den find <b>sowieso besucht</b>, lässt man näher an die Wurzel zeigen.</p>
 <div class="grid2">
   <div class="card">
@@ -561,6 +674,18 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <!-- ======================= 1.3e LABOR ======================= -->
 <section id="k1-lab">
 <h2>1.3e · Labor: Tabelle 1.1 selbst messen (Verdopplungs-Experiment)</h2>
+<div class="vonnull" id="vn-1-3e">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.3e</span>Verdopplungsexperiment</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Gemessen: T(1000) = 0,2 s, T(2000) = 0,8 s, T(4000) = 3,2 s. Welche Wachstumsklasse liegt vor? Sage T(8000) voraus.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Verdopplung von null.</span> Man verdoppelt N und schaut, mit welchem Faktor die Zeit wächst. Faktor 2 heißt linear, 4 heißt quadratisch, 8 heißt kubisch, denn (2N)<sup>k</sup> = 2<sup>k</sup> N<sup>k</sup>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Faktoren.</span> 0,8 / 0,2 = 4 und 3,2 / 0,8 = 4.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Klasse.</span> 2<sup>k</sup> = 4, also k = 2: <span class="c-res">quadratisch</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Vorhersage.</span> T(8000) = 4 · 3,2 = <span class="c-res">12,8 s</span>.</div></div>
+<div class="step">\[ \begin{aligned} \frac{T(2N)}{T(N)} &= \frac{a(2N)^2}{aN^2} = 4 && \text{die Konstante a kürzt sich weg.} \\ T(8000) &= 4\cdot 3{,}2 = 12{,}8\ \text{s} && \text{Vorhersage.} \end{aligned} \]</div>
+<div class="vn-res">✔ quadratisch · T(8000) ≈ 12,8 s</div>
+</details>
+</div>
 <p>Wie im Buch werden <b>zufällige Paare</b> erzeugt, bis alle N Objekte verbunden sind (N−1 Unions). Gezählt werden <b>Array-Zugriffe</b>, die <span class="fw">abstrakte Operation</span>, die vom Rechner unabhängig ist. Der Test läuft in deinem Browser.</p>
 <div class="controls"><button id="labRun">▶ Experiment starten</button><span id="labInfo" class="small muted">F und U werden ab N &gt; 8000 übersprungen (zu langsam, genau das ist die Pointe).</span></div>
 <div id="labPlot" class="plot"></div>
@@ -574,6 +699,17 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <!-- ======================= 1.4 PERSPEKTIVE ======================= -->
 <section id="k1-persp">
 <h2>1.4 · Perspektive: die Methode und warum schnelle Rechner nicht reichen</h2>
+<div class="vonnull" id="vn-1-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §1.4</span>Algorithmus schlägt Hardware</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> N = <span class="c-par">10⁹</span> Objekte, M = <span class="c-par">10⁶</span> Paare, 10⁹ Operationen pro Sekunde. Schätze die Laufzeit von Quick-Find und von Weighted Quick-Union.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Quick-Find.</span> Jede union läuft durch alle N Einträge: M · N = 10¹⁵ Operationen, also 10⁶ Sekunden ≈ <span class="c-res">11,6 Tage</span>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Weighted Quick-Union.</span> find und union kosten höchstens lg N ≈ 30 Schritte: M · lg N ≈ 3 · 10⁷ Operationen, also <span class="c-res">0,03 Sekunden</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Schnellerer Rechner?</span> Ein 10-mal schnellerer Rechner macht aus 11,6 Tagen immer noch 1,2 Tage. Der bessere Algorithmus spart den Faktor 3 · 10⁷.</div></div>
+<div class="step">\[ \begin{aligned} \text{QF} &= M N = 10^{15} \to 10^6\ \text{s} && \text{etwa 11,6 Tage.} \\ \text{WQU} &= M\lg N \approx 3\cdot 10^7 \to 0{,}03\ \text{s} && \text{Faktor $3\cdot 10^7$ schneller.} \end{aligned} \]</div>
+<div class="vn-res">✔ Quick-Find ≈ 11,6 Tage · Weighted QU ≈ 0,03 s</div>
+</details>
+</div>
 <div class="card">
 <p><b>Sedgewicks Vorgehen</b>, das in jedem späteren Kapitel wiederkommt:</p>
 <p><span class="num">1</span>Vollständige <span class="fw">Problemstellung</span> mit den <span class="fw">abstrakten Operationen</span> (hier find/union).<br>
@@ -600,6 +736,18 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <!-- ======================= 2.1 ======================= -->
 <section id="k2-emp">
 <h2>2.1 · Implementierung und empirische Analyse</h2>
+<div class="vonnull" id="vn-2-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.1</span>Konstante aus einer Messung bestimmen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ein quadratisches Programm braucht für N = 1000 genau 0,5 s. Wie lange braucht es für N = 100 000?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Modell von null.</span> Quadratisch heißt T(N) ≈ a · N². Die Konstante a hängt vom Rechner ab und wird aus einer Messung bestimmt.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">a bestimmen.</span> a = 0,5 / 1000² = 5 · 10⁻⁷ s.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Vorhersage.</span> T(10⁵) = 5 · 10⁻⁷ · 10¹⁰ = <span class="c-res">5000 s</span> ≈ 83 Minuten.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Kürzer.</span> N wird 100-mal größer, also die Zeit 100² = 10 000-mal größer: 0,5 s · 10 000 = 5000 s.</div></div>
+<div class="step">\[ \begin{aligned} a &= \frac{0{,}5}{10^6} = 5\cdot 10^{-7} && \text{aus der Messung.} \\ T(10^5) &= 5\cdot 10^{-7}\cdot 10^{10} = 5000\ \text{s} && \text{Vorhersage.} \end{aligned} \]</div>
+<div class="vn-res">✔ T(100 000) ≈ 5000 s ≈ 83 min</div>
+</details>
+</div>
 <div class="grid2">
   <div class="card">
     <h4 style="margin-top:0">Empirisch = einfach laufen lassen und messen</h4>
@@ -625,6 +773,18 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <!-- ======================= 2.2 ======================= -->
 <section id="k2-ana">
 <h2>2.2 · Analyse von Algorithmen</h2>
+<div class="vonnull" id="vn-2-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.2</span>Häufigkeiten aus dem Code ablesen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Wie oft läuft <code>cnt++</code> in <code>for (i = 0; i &lt; N; i++) for (j = 0; j &lt; i; j++) cnt++;</code>? Wie oft wird die innere Bedingung geprüft? Rechne für N = 5.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Methode von null.</span> Man zählt für jede Zeile, wie oft sie läuft (Häufigkeit), und multipliziert mit ihren Kosten. Die <span class="c-cond">Bedingung</span> einer Schleife läuft einmal öfter als ihr Rumpf.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Rumpf.</span> Für i läuft cnt++ genau i-mal: 0 + 1 + 2 + 3 + 4 = 10.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Innere Bedingung.</span> Für jedes i wird j &lt; i genau i + 1-mal geprüft: 1 + 2 + 3 + 4 + 5 = 15.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Allgemein.</span> Rumpf N(N−1)/2, Bedingung N(N+1)/2.</div></div>
+<div class="step">\[ \begin{aligned} \Res{\text{cnt}} &= \sum_{i=0}^{N-1} i = \frac{N(N-1)}{2} = 10 && \text{für N = 5.} \\ \text{Tests} &= \frac{N(N+1)}{2} = 15 && \text{einer mehr pro Runde.} \end{aligned} \]</div>
+<div class="vn-res">✔ cnt = 10 · 15 Tests der inneren Bedingung</div>
+</details>
+</div>
 <div class="callout anat">
   <h3>🔬 Anatomie: Was die Analyse trennt</h3>
   <div class="anat-row"><span class="anat-sym" style="color:var(--rule)">Algorithmus</span><span>bestimmt, <b>wie oft</b> eine <span class="fw">abstrakte Operation</span> läuft (z.B. wie oft <code class="inl">i = a[i]</code> ausgeführt wird)</span></div>
@@ -639,6 +799,18 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <!-- ======================= 2.3 ======================= -->
 <section id="k2-grow">
 <h2>2.3 · Wachstum von Funktionen — die 7 Klassen</h2>
+<div class="vonnull" id="vn-2-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.3</span>Wachstumsklassen in Sekunden</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Bei 10⁹ Operationen pro Sekunde und N = <span class="c-par">10⁶</span>: Wie lange brauchen N lg N, N² und 2<sup>N</sup> Operationen?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Wachstum von null.</span> Für große N zählt nur, wie schnell die Funktion wächst. Die Reihenfolge ist 1 &lt; lg N &lt; N &lt; N lg N &lt; N² &lt; N³ &lt; 2<sup>N</sup>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">N lg N.</span> 10⁶ · 20 = 2 · 10⁷ Operationen: <span class="c-res">0,02 s</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">N².</span> 10¹² Operationen: <span class="c-res">1000 s</span> ≈ 17 Minuten.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">2<sup>N</sup>.</span> 2<sup>1 000 000</sup> hat etwa 300 000 Dezimalstellen: <span class="c-res">unmöglich</span>.</div></div>
+<div class="step">\[ \begin{aligned} N\lg N &= 2\cdot 10^7 \to 0{,}02\ \text{s} && \text{$\lg 10^6 \approx 20$.} \\ N^2 &= 10^{12} \to 1000\ \text{s} && \text{etwa 17 Minuten.} \end{aligned} \]</div>
+<div class="vn-res">✔ 0,02 s · 17 min · unmöglich</div>
+</details>
+</div>
 <div class="scroll"><table class="rt">
 <tr><th>Klasse</th><th>typische Code-Form</th><th>N verdoppeln bewirkt …</th><th>Beispiel im Buch</th></tr>
 <tr><td>\(1\)</td><td class="mono small">x = a[0];</td><td>nichts</td><td>ein Array-Zugriff, union bei QU</td></tr>
@@ -679,6 +851,18 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <!-- ======================= 2.3b ======================= -->
 <section id="k2-log">
 <h2>2.3b · Die Spezialfunktionen: lg, ⌊⌋ ⌈⌉, H<sub>N</sub>, F<sub>N</sub>, N!</h2>
+<div class="vonnull" id="vn-2-3b">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.3b</span>Spezialfunktionen ausrechnen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Berechne ⌊lg 1000⌋, ⌈lg 1000⌉, die Anzahl der Binärstellen von 1000, H<sub>10</sub> und ln 10 + γ.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">lg von null.</span> lg N ist der Logarithmus zur Basis 2: wie oft man N halbieren kann, bis 1 übrig bleibt. 2⁹ = 512 ≤ 1000 &lt; 1024 = 2¹⁰, also lg 1000 ≈ 9,97.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Runden.</span> ⌊lg 1000⌋ = 9, ⌈lg 1000⌉ = 10. 1000 hat ⌊lg 1000⌋ + 1 = <span class="c-res">10</span> Binärstellen (1111101000).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Harmonische Zahl.</span> H<sub>10</sub> = 1 + 1/2 + … + 1/10 = <span class="c-res">2,929</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Näherung.</span> ln 10 + γ = 2,303 + 0,577 = 2,880, mit + 1/(12·10) = 2,888. Die Näherung ist schon für N = 10 gut.</div></div>
+<div class="step">\[ \begin{aligned} \lfloor \lg 1000 \rfloor &= 9 && \text{$2^9 = 512$.} \\ H_{10} &= 2{,}929 && \text{Summe der Kehrwerte.} \\ \ln 10 + \gamma + \frac{1}{120} &\approx 2{,}888 && \text{Näherung aus 2.3.} \end{aligned} \]</div>
+<div class="vn-res">✔ ⌊lg 1000⌋ = 9 · ⌈lg 1000⌉ = 10 · 10 Bits · H₁₀ = 2,929</div>
+</details>
+</div>
 <h3>Der Logarithmus im Code: <code>lg N</code> = „wie oft kann ich halbieren?“</h3>
 <p>\(\ln N=\log_e N\) (Mathe), \(\lg N=\log_2 N\) (Informatik). Der Basiswechsel ändert nur eine Konstante: \(\lg N = 1{,}44\ln N\), deshalb schreibt man in O-Aussagen einfach \(\log N\). Das Buch berechnet ihn mit einer Schleife:</p>
 <div id="trLg"></div>
@@ -728,6 +912,18 @@ int b = N - N / 2;   // ⌈N/2⌉
 <!-- ======================= 2.4 ======================= -->
 <section id="k2-O">
 <h2>2.4 · Die O-Notation</h2>
+<div class="vonnull" id="vn-2-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.4</span>O-Notation beweisen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Zeige, dass 3N² + 10N ∈ O(N²) gilt, indem du Konstanten c<sub>0</sub> und N<sub>0</sub> angibst.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Definition von null.</span> g(N) ∈ O(f(N)) heißt: Es gibt Konstanten <span class="c-par">c₀</span> und <span class="c-par">N₀</span>, sodass g(N) &lt; c₀ · f(N) für alle N &gt; N₀. Kurz: Ab irgendwo bleibt g unter einem festen Vielfachen von f.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Ansatz.</span> Wähle c<sub>0</sub> = 4. Gesucht ist, ab wann 3N² + 10N &lt; 4N² gilt.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Umformen.</span> 3N² + 10N &lt; 4N² ⟺ 10N &lt; N² ⟺ N &gt; 10.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ergebnis.</span> Mit c<sub>0</sub> = 4 und N<sub>0</sub> = 10 ist die Definition erfüllt.</div></div>
+<div class="step">\[ \begin{aligned} 3N^2 + 10N &< 4N^2 && \text{für alle N > 10.} \\ \Rightarrow\ 3N^2 + 10N &\in O(N^2) && \text{mit $c_0 = 4,\ N_0 = 10$.} \end{aligned} \]</div>
+<div class="vn-res">✔ c₀ = 4, N₀ = 10 · also 3N² + 10N ∈ O(N²)</div>
+</details>
+</div>
 <div class="callout anat">
   <h3>🔬 Anatomie: Definition 2.1</h3>
   <div class="step" style="text-align:center;font-size:1.1rem">\[ \begin{aligned} \Res{g(N)} \in O\big(\Rule{f(N)}\big) \;&\iff\; \text{es gibt Konstanten } \Par{c_0}>0 \text{ und } \Par{N_0}, && \text{Es gibt eine Konstante und einen Startpunkt,} \\ &\phantom{\iff}\;\; \text{sodass } \Res{g(N)} \Cond{<} \Par{c_0}\cdot\Rule{f(N)} && \text{sodass } g \text{ unter dem } c_0\text{-Fachen von } f \text{ bleibt,} \\ &\phantom{\iff}\;\; \text{für alle } N \Cond{>} \Par{N_0}. && \text{und zwar ab der Stelle } N_0. \end{aligned} \]</div>
@@ -777,6 +973,18 @@ int b = N - N / 2;   // ⌈N/2⌉
 <!-- ======================= 2.5 ======================= -->
 <section id="k2-rec">
 <h2>2.5 · Grundlegende Rekurrenzen — Rekursion im Code ⇒ Gleichung</h2>
+<div class="vonnull" id="vn-2-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.5</span>Formel 2.4 durch Teleskopieren</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Löse C<sub>N</sub> = 2C<sub>N/2</sub> + N mit C<sub>1</sub> = 0 für N = 8, zuerst durch Einsetzen, dann allgemein.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Rekurrenz von null.</span> Eine <span class="c-rule">Rekurrenz</span> beschreibt die Kosten für N durch die Kosten kleinerer Eingaben. Sie entsteht aus rekursivem Code: zwei Aufrufe mit halber Größe plus N Arbeit.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Einsetzen.</span> C<sub>2</sub> = 2·0 + 2 = 2, C<sub>4</sub> = 2·2 + 4 = 8, C<sub>8</sub> = 2·8 + 8 = <span class="c-res">24</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Teleskopieren.</span> Teilt man durch N = 2<sup>n</sup>, wird jede Stufe um genau 1 größer: C<sub>N</sub>/N = C<sub>N/2</sub>/(N/2) + 1.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Lösung.</span> Nach n Stufen ist C<sub>N</sub>/N = n, also C<sub>N</sub> = N lg N. Probe: 8 · 3 = 24.</div></div>
+<div class="step">\[ \begin{aligned} \frac{C_{2^n}}{2^n} &= \frac{C_{2^{n-1}}}{2^{n-1}} + 1 && \text{durch $2^n$ geteilt.} \\  &= n && \text{bis zum Anker.} \\ C_N &= N\lg N && \text{für N = 8: 24.} \end{aligned} \]</div>
+<div class="vn-res">✔ C₈ = 24 = 8 · lg 8</div>
+</details>
+</div>
 <p>Ruft sich ein Programm selbst mit kleinerer Eingabe auf, spiegelt sich das <b>1:1</b> in einer <span class="fw">Rekurrenz</span> (Rekursionsgleichung) wider. Man liest sie direkt aus dem Code ab: <b>Anzahl der Aufrufe × Größe</b> + <b>Arbeit außerhalb der Aufrufe</b>, und der <span class="fw">Rekursionsanker</span> liefert den Startwert.</p>
 <div class="callout anat">
   <h3>🔬 Anatomie: Code → Rekurrenz (am Beispiel Formel 2.4)</h3>
@@ -828,6 +1036,19 @@ int b = N - N / 2;   // ⌈N/2⌉
 <!-- ======================= 2.6 ======================= -->
 <section id="k2-search">
 <h2>2.6 · Beispiele: sequentielle gegen binäre Suche</h2>
+<div class="vonnull" id="vn-2-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.6</span>Binäre Suche von Hand</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Suche v = <span class="c-par">33</span> in 2 5 8 12 16 23 38 56 72 91 (N = 10) mit binärer Suche. Wie viele Vergleiche mit der Mitte? Wie viele bräuchte die sequentielle Suche?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Binäre Suche von null.</span> Die Tabelle ist sortiert. Man vergleicht v mit dem <span class="c-idx">mittleren</span> Element. Ist v kleiner, sucht man links weiter, sonst rechts. Jeder Vergleich halbiert den Bereich.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Schritt 1.</span> l = 0, r = 9, m = 4: 16 &lt; 33, weiter rechts (l = 5).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Schritt 2.</span> m = 7: 56 &gt; 33, weiter links (r = 6).</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Schritt 3.</span> m = 5: 23 &lt; 33, l = 6.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Schritt 4.</span> m = 6: 38 &gt; 33, r = 5. Jetzt r &lt; l: <span class="c-res">nicht gefunden</span> nach 4 Vergleichen.</div></div>
+<div class="step">\[ \begin{aligned} \text{binär} &\le \lfloor \lg N \rfloor + 1 = 4 && \text{Eigenschaft 2.3.} \\ \text{sequentiell} &= N = 10 && \text{erfolglos läuft sie ganz durch.} \end{aligned} \]</div>
+<div class="vn-res">✔ 33 nicht vorhanden · 4 Vergleiche statt 10</div>
+</details>
+</div>
 <p><b>Szenario (Buch):</b> Eine Kreditkartenfirma hat \(N\) gesperrte Nummern (\(10^4\)–\(10^6\)) und prüft \(M\) Transaktionen (\(10^6\)–\(10^9\)). Bei jeder Transaktion lautet die Frage, ob v in der Tabelle steht.</p>
 <h3>Programm 2.1 — sequentielle Suche</h3>
 <div id="trSeq"></div>
@@ -863,6 +1084,18 @@ int b = N - N / 2;   // ⌈N/2⌉
 <!-- ======================= 2.7 ======================= -->
 <section id="k2-guar">
 <h2>2.7 · Garantien, Vorhersagen und Grenzen</h2>
+<div class="vonnull" id="vn-2-7">
+<div class="vn-ttl"><span class="vn-badge">Von null · §2.7</span>Garantie oder Mittelwert?</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Für N = <span class="c-par">10⁶</span>: Wie viele Vergleiche braucht die sequentielle Suche im schlechtesten Fall und im Mittel (erfolgreich), wie viele die binäre Suche im schlechtesten Fall? Welche Aussage ist eine Garantie?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Begriffe von null.</span> Eine <span class="c-rule">Garantie</span> (worst case) gilt für jede Eingabe. Ein <span class="c-rule">Mittelwert</span> (average case) gilt nur, wenn die Eingaben zufällig verteilt sind, wie angenommen.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Sequentiell, worst case.</span> Das Element steht ganz hinten oder fehlt: <span class="c-res">10⁶</span> Vergleiche.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Sequentiell, Mittel.</span> Bei zufälliger Position im Mittel (N+1)/2 ≈ <span class="c-res">500 000</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Binär, worst case.</span> ⌊lg 10⁶⌋ + 1 = <span class="c-res">20</span> Vergleiche, für jede Eingabe: eine Garantie.</div></div>
+<div class="step">\[ \begin{aligned} \text{sequentiell} &\le N = 10^6 && \text{worst case.} \\ \text{binär} &\le 20 && \text{worst case: Garantie.} \end{aligned} \]</div>
+<div class="vn-res">✔ sequentiell: 10⁶ worst, 500 000 im Mittel · binär: höchstens 20 (Garantie)</div>
+</details>
+</div>
 <div class="grid3">
   <div class="card"><h4 style="margin-top:0;color:var(--res)">Worst Case → Garantie</h4><p class="small">„Nie mehr als …, egal welche Eingabe“ (Eigenschaft 2.3, 1.3). <b>Problem:</b> Der Worst Case kann in der Praxis nie auftreten, und gute Garantien machen Algorithmen oft komplizierter.</p></div>
   <div class="card"><h4 style="margin-top:0;color:var(--par)">Average Case → Vorhersage</h4><p class="small">Mittelwert unter einem <span class="fw">Eingabemodell</span> (z.B. zufällig geordnet). <b>Probleme:</b> Das Modell passt vielleicht nicht, die Mathematik ist schwer, und der Mittelwert allein sagt nichts über Ausreißer.</p></div>
@@ -2335,6 +2568,58 @@ new LB.Tracer({
   const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ Object.values(links).forEach(a => a.classList.remove('on')); const a = links[e.target.id]; if(a) a.classList.add('on'); } }); }, {rootMargin:'-20% 0px -70% 0px'});
   document.querySelectorAll('main section[id]').forEach(s => io.observe(s));
 })();
+})();
+</script>
+<script>
+/* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
+(function(){
+'use strict';
+const LB = window.LB = window.LB || {};
+const MENU = [["Start", [["start", "So liest du die Seite", "Farben, Tracer, Aufbau"], ["bruecke", "Große Brücke", "wo Teil 1 im Buch steht"], ["master", "Master-Anatomie", "Code → Häufigkeit → Formel"], ["cpp", "C++-Werkzeug", "Array, Adresse, Schleife"]]], ["Kapitel 1 · Einführung", [["k1-algo", "1.1 Algorithmus", "Methode + Datenstruktur"], ["k1-problem", "1.2 Konnektivität", "Paare p-q, verbunden?"], ["k1-qf", "1.3a Quick-Find", "find O(1), union O(N)"], ["k1-qu", "1.3b Quick-Union", "Bäume, find = Weg zur Wurzel"], ["k1-wqu", "1.3c Weighted QU", "kleiner Baum unter großen, lg N"], ["k1-pc", "1.3d Pfadkompression", "Wege halbieren, fast linear"], ["k1-lab", "1.3e Labor Tab. 1.1", "Verdopplungs-Experiment"], ["k1-persp", "1.4 Perspektive", "Algorithmus schlägt Hardware"]]], ["Kapitel 2 · Analyse", [["k2-emp", "2.1 Empirisch", "messen, Verdopplung"], ["k2-ana", "2.2 Analyse", "Kosten × Häufigkeit"], ["k2-grow", "2.3 Wachstum", "1, lg N, N, N lg N, N², 2ᴺ"], ["k2-log", "2.3b Spezialfunktionen", "lg, ⌊⌋, H_N, F_N, N!"], ["k2-O", "2.4 O-Notation", "obere Schranke bis auf c₀"], ["k2-rec", "2.5 Rekurrenzen", "Formeln 2.1–2.5, Teleskop"], ["k2-search", "2.6 Suche", "sequentiell N vs. binär lg N"], ["k2-guar", "2.7 Garantien", "worst vs. average, Schranken"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele mit Urteil"], ["abstrakt", "🔧 Abstrakte Anatomie", "Regeln für jedes Kapitel"], ["uebung", "✍️ Übungsgenerator", "Übungen 1.4–1.8, 1.17"], ["quiz", "🎯 Quiz", "Klausurstil"], ["glossar", "📚 Glossar", "Fachwörter"], ["weiter", "➡️ Brücke zu Teil 2", "was weiterlebt"], ["fazit", "🧾 Spickzettel", "alles auf einen Blick"]]]];
+const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "find", "Zusammenhangskomponente*", "Wurzel*", "Laufzeitklasse*"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "union", "Pfadkompression", "Halbierung", "umbenennen"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Quick-Find", "Quick-Union", "Weighted Quick-Union", "gewichtet*", "Baum", "Bäume", "Höhe", "Verdopplung*", "Konnektivität", "Wachstum*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M", "Paar*", "Objekt*"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger"]};
+/* ---------- Menü ---------- */
+const menu = document.getElementById('lbMenu');
+if(menu){
+  menu.innerHTML = '<div class="lbm-in"><div class="lbm-head"><b>Inhalt · Teil 1 · Fundamentals</b><span class="small muted">Klick springt hin · Esc schließt</span><button class="lbburger" data-close>✕ schließen</button></div><div class="lbm-grid">' +
+    MENU.map(g => '<div><h5>'+g[0]+'</h5>'+g[1].map(it => '<a href="#'+it[0]+'"><b>'+it[1]+'</b><span>'+it[2]+'</span></a>').join('')+'</div>').join('') +
+    '</div><div class="lbm-tools"><button class="lbburger" id="lbVnAll">alle „Von null“-Lösungen öffnen</button><button class="lbburger" id="lbVnNone">alle schließen</button></div></div>';
+  const open = () => document.body.classList.add('menu-open'), close = () => document.body.classList.remove('menu-open');
+  document.querySelectorAll('#lbBurger,#lbFab').forEach(b => b.addEventListener('click', open));
+  menu.addEventListener('click', e => { if(e.target === menu || e.target.closest('[data-close]') || e.target.closest('a')) close(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+  const vn = o => document.querySelectorAll('.vonnull details').forEach(d => d.open = o);
+  document.getElementById('lbVnAll').addEventListener('click', () => vn(true));
+  document.getElementById('lbVnNone').addEventListener('click', () => vn(false));
+}
+/* ---------- Schlüsselwörter färben ---------- */
+const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const ROLE = {}; const pats = [];
+Object.keys(KW).forEach(r => KW[r].forEach(t => { const base = t.replace(/\*$/, ''); ROLE[base] = r; pats.push({base, suf: t.endsWith('*')}); }));
+pats.sort((a, b) => b.base.length - a.base.length);
+const RE = new RegExp('(?<![\\p{L}\\d_])(' + pats.map(p => esc(p.base) + (p.suf ? '(?:e|en|n|s|es|er|ern)?' : '')).join('|') + ')(?![\\p{L}\\d_])', 'gu');
+const SKIP = 'script,style,pre,code,.katex,svg,textarea,input,select,button,option,table.codet,.hist,.cols,.werk-out,.readout,.cells,.bits,.var,.frames,.stackv,h1,h2,h3,h4,.lbtop,#lbMenu,.kw,.tr-title,.tnote,.lb,.num,.verdict,.ttl,.kop,.legend,[class*="c-"],[style*="color"],.plot,.anat-sym,.s,.vnn,.vn-res,summary,th';
+function roleOf(m){ if(ROLE[m]) return ROLE[m]; for(const suf of ['ern','en','er','es','e','n','s']) if(m.endsWith(suf) && ROLE[m.slice(0, -suf.length)]) return ROLE[m.slice(0, -suf.length)]; return null; }
+LB.kwColor = function(root){
+  if(!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => (!n.nodeValue.trim() || (n.parentElement && n.parentElement.closest(SKIP))) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; let n; while((n = w.nextNode())) nodes.push(n);
+  nodes.forEach(t => {
+    const s = t.nodeValue; RE.lastIndex = 0; if(!RE.test(s)) return; RE.lastIndex = 0;
+    const f = document.createDocumentFragment(); let last = 0, m;
+    while((m = RE.exec(s))){ const r = roleOf(m[0]); if(!r) continue;
+      if(m.index > last) f.appendChild(document.createTextNode(s.slice(last, m.index)));
+      const sp = document.createElement('span'); sp.className = 'kw kw-' + r; sp.textContent = m[0]; f.appendChild(sp); last = m.index + m[0].length; }
+    if(last === 0) return;
+    if(last < s.length) f.appendChild(document.createTextNode(s.slice(last)));
+    t.parentNode.replaceChild(f, t);
+  });
+};
+function patch(){
+  const T = LB.Tracer; if(!T || T.prototype.__kw) return;
+  const s0 = T.prototype.show; T.prototype.__kw = true;
+  T.prototype.show = function(k){ s0.call(this, k); const m = this.q && this.q('.tr-msg'); if(m) LB.kwColor(m); };
+}
+window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
 </script>
 </body>

@@ -237,6 +237,72 @@ svg text{font-family:'JetBrains Mono',monospace}
 .cols .col span b{color:var(--chg)}
 .bits{font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
 .bits .on{color:var(--chg);font-weight:800}
+
+/* ===== UX-ADDON ===== */
+/* Kopf: nicht sticky, Burger-Menü */
+.lbtop{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.1rem;padding:.8rem 1.4rem;border-bottom:1px solid var(--lbline);background:var(--lbpanel)}
+.lbtop .lbt b{font-size:1.05rem;margin-right:.6rem}
+.lbtop .lbt span{color:var(--lbmuted);font-size:.85rem}
+.lbq{display:flex;flex-wrap:wrap;gap:.3rem .45rem;flex:1 1 520px}
+.lbq a{font-size:.8rem;text-decoration:none;color:var(--lbink);border:1px solid var(--lbline);border-radius:7px;padding:.12rem .5rem;white-space:nowrap}
+.lbq a:hover{border-color:var(--rule);color:var(--rule)}
+.lbq a small{color:var(--lbmuted);margin-left:.3rem}
+.lbburger,.lbfab{font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer;border-radius:9px;border:1px solid var(--lbline);background:var(--lbpanel2);color:var(--lbink);padding:.3rem .75rem}
+.lbfab{position:fixed;right:18px;bottom:18px;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.35);border-radius:50%;width:48px;height:48px;padding:0}
+.lbmenu{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.55);display:none;overflow:auto;padding:2.2rem 2rem}
+body.menu-open .lbmenu{display:block}
+.lbmenu .lbm-in{max-width:1640px;margin:0 auto;background:var(--lbpanel);border:1px solid var(--lbline);border-radius:14px;padding:1.1rem 1.4rem 1.4rem}
+.lbm-head{display:flex;align-items:center;gap:1rem;margin-bottom:.6rem}
+.lbm-head b{font-size:1.15rem}
+.lbm-head button{margin-left:auto}
+.lbm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.9rem 1.4rem}
+.lbm-grid h5{margin:.2rem 0 .3rem;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rule)}
+.lbm-grid a{display:flex;gap:.5rem;align-items:baseline;text-decoration:none;color:var(--lbink);padding:.16rem .35rem;border-radius:6px;font-size:.9rem;line-height:1.35}
+.lbm-grid a:hover{background:var(--lbpanel2)}
+.lbm-grid a b{white-space:nowrap;font-weight:650}
+.lbm-grid a span{color:var(--lbmuted);font-size:.8rem}
+.lbm-tools{margin-top:.9rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;font-size:.85rem;color:var(--lbmuted)}
+/* Farbige Schlüsselwörter im Fließtext */
+.kw{font-weight:600}
+.kw-res{color:var(--res)} .kw-chg{color:var(--chg)} .kw-rule{color:var(--rule)} .kw-par{color:var(--par)}
+.kw-idx{color:var(--idx)} .kw-cond{color:var(--cond)} .kw-mem{color:var(--mem)}
+/* Breite für 16:9 und kein Seitwärts-Scrollen */
+pre.cpp .row{white-space:pre-wrap;word-break:break-word;padding-left:calc(2.6em + 1rem);text-indent:calc(-2.6em - 1rem)}
+pre.cpp .lnum{text-indent:0}
+table.codet td.src{white-space:pre-wrap;word-break:break-word}
+.codet .tnote{white-space:normal}
+.cells{flex-wrap:wrap}
+.arr{overflow-x:visible}
+/* Von-null-Karten */
+.vonnull{border:1.5px solid var(--rule)!important}
+.vonnull .vn-task{border-left:4px solid var(--res);background:var(--lbpanel2);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0 .6rem}
+.vonnull details{margin-top:.3rem}
+.vonnull summary{cursor:pointer;font-weight:700;color:var(--rule);padding:.3rem 0}
+.vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.6rem;align-items:start;margin:.45rem 0}
+.vn-step .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--rule);color:#fff;font-weight:700;font-size:.85rem}
+.vn-step b.h{color:var(--lbink)}
+:root{--lbline:var(--border);--lbpanel:#11161d;--lbpanel2:#1c2129;--lbink:var(--text);--lbmuted:var(--muted)}
+.wrap{max-width:1680px!important;padding:1.4rem 1.6rem 5rem!important}
+.hero{margin-top:1rem!important}
+.tr-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+@media(max-width:980px){.tr-grid{grid-template-columns:minmax(0,1fr)}}
+.figure>svg,.figure .scroll>svg{max-width:1150px;margin-left:auto;margin-right:auto}
+.blatt,.figure{scroll-margin-top:12px}
+.tr-extra svg{max-width:100%!important;height:auto}
+/* ===== VN-ADDON ===== */
+.vonnull{border:1.6px solid var(--rule);border-radius:14px;background:var(--lbpanel);padding:1rem 1.2rem .8rem;margin:1.1rem 0 1.4rem;box-shadow:0 0 0 4px color-mix(in srgb, var(--rule) 12%, transparent)}
+.vonnull .vn-ttl{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;font-size:1.22rem;font-weight:700;margin-bottom:.3rem}
+.vonnull .vn-badge{font-family:'JetBrains Mono',Consolas,monospace;font-size:.74rem;font-weight:700;color:#fff;background:var(--rule);border-radius:6px;padding:.16rem .55rem}
+.vonnull .vn-sub{color:var(--lbmuted);font-size:.9rem;margin:0 0 .4rem}
+.vonnull .vn-task{border-left:4px solid var(--res);background:var(--lbpanel2);border-radius:8px;padding:.6rem .9rem;margin:.4rem 0 .6rem;line-height:1.6}
+.vonnull .vn-task b.t{color:var(--res)}
+.vonnull details{margin-top:.2rem}
+.vonnull summary{cursor:pointer;font-weight:700;color:var(--rule);padding:.35rem 0;font-size:.98rem}
+.vonnull .vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.65rem;align-items:start;margin:.55rem 0;line-height:1.6}
+.vonnull .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--rule);color:#fff;font-weight:700;font-size:.85rem}
+.vonnull .vn-step .h{font-weight:700}
+.vonnull .vn-res{display:inline-block;margin:.5rem 0 .2rem;padding:.35rem .8rem;border-radius:8px;font-weight:700;border:1.5px solid var(--idx);color:var(--idx);background:color-mix(in srgb, var(--idx) 10%, transparent)}
+.vonnull code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:5px;padding:0 .3rem}
 </style>
 </head>
 <body>
@@ -254,68 +320,11 @@ svg text{font-family:'JetBrains Mono',monospace}
   <marker id="aW" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#e6edf3"/></marker>
 </defs></svg>
 
-<nav><div class="ni">
-<span class="brand">Teil 3 · Sortieren</span>
-<a href="#start">Start</a>
-<a href="#bruecke">Brücke</a>
-<a href="#master">Master-Anatomie</a>
-<a href="#erkennen">Woran erkennbar?</a>
-<span class="sep">│</span>
-<a href="#k6">Kap 6</a>
-<a href="#s61">6.1 Spielregeln</a>
-<a href="#s62">6.2 Selection</a>
-<a href="#s63">6.3 Insertion</a>
-<a href="#s64">6.4 Bubble</a>
-<a href="#s65">6.5 Vergleich</a>
-<a href="#s66">6.6 Shellsort</a>
-<a href="#s68">6.7–6.8 Index-Sort</a>
-<a href="#s69">6.9 Listen</a>
-<a href="#s610">6.10 Zählen</a>
-<span class="sep">│</span>
-<a href="#k7">Kap 7</a>
-<a href="#s71">7.1 Quicksort</a>
-<a href="#s72">7.2 Analyse</a>
-<a href="#s73">7.3 Stack</a>
-<a href="#s74">7.4–7.5 Verbesserungen</a>
-<a href="#s76">7.6 Duplikate</a>
-<a href="#s78">7.8 Selektion</a>
-<span class="sep">│</span>
-<a href="#k8">Kap 8</a>
-<a href="#s81">8.1–8.2 Mischen</a>
-<a href="#s83">8.3 Top-down</a>
-<a href="#s85">8.5 Bottom-up</a>
-<a href="#s86">8.6 Analyse</a>
-<a href="#s87">8.7 Listen</a>
-<span class="sep">│</span>
-<a href="#k9">Kap 9</a>
-<a href="#s91">9.1 PQ-ADT</a>
-<a href="#s92">9.2 Heap</a>
-<a href="#s93">9.3 fixUp/fixDown</a>
-<a href="#s94">9.4 Heapsort</a>
-<a href="#s96">9.5–9.7 Erweiterungen</a>
-<span class="sep">│</span>
-<a href="#k10">Kap 10</a>
-<a href="#s101">10.1 Bits</a>
-<a href="#s102">10.2 Binär-Quick</a>
-<a href="#s103">10.3 MSD</a>
-<a href="#s104">10.4 3-Wege-Radix</a>
-<a href="#s105">10.5 LSD</a>
-<a href="#s106">10.6 Analyse</a>
-<span class="sep">│</span>
-<a href="#k11">Kap 11</a>
-<a href="#s111">11.1 Batcher</a>
-<a href="#s112">11.2 Netzwerke</a>
-<a href="#s113">11.3–11.5 Extern</a>
-<span class="sep">│</span>
-<a href="#schema">📐 Schema</a>
-<a href="#werkbank">🛠 Übungs-Werkbank</a>
-<a href="#pruefung">🎯 Prüfungstabelle</a>
-<a href="#quiz">Quiz</a>
-<a href="#glossar">Glossar</a>
-<a href="#faden" style="color:var(--pink)">★ Roter Faden</a>
-</div></nav>
+<header class="lbtop"><button id="lbBurger" class="lbburger" title="Inhalt öffnen">☰ Inhalt</button><div class="lbt"><b>Teil 3 · Sortieren</b><span>Sedgewick Kap. 6–11</span></div><div class="lbq"><a href="#start">Start</a><a href="#s61">Kapitel 6 · Elementar</a><a href="#s71">Kapitel 7 · Quicksort</a><a href="#s81">Kapitel 8 · Mergesort</a><a href="#s91">Kapitel 9 · Heaps</a><a href="#s101">Kapitel 10 · Radix</a><a href="#s111">Kapitel 11 · Spezial</a><a href="#schema">Training</a></div></header>
+<div id="lbMenu" class="lbmenu"></div><button id="lbFab" class="lbfab" title="Inhalt">☰</button>
 
-<div class="wrap">
+
+<div class="wrap lb-main">
 <div class="hero" id="start">
   <div class="logo">Sedgewick · Algorithmen in C++ · Teil 3 von 4</div>
   <h1>Sortieren — jeder Vergleich sichtbar, jede Formel hergeleitet</h1>
@@ -456,6 +465,18 @@ template &lt;class Item&gt;
 <div class="blatt part" id="k6"><div class="kop"><span class="bn">Kapitel 6</span><h2>Elementare Sortierverfahren</h2><span class="tp">Selection · Insertion · Bubble · Shellsort · Index-Sortieren · Listen · Key-Indexed Counting · Buch S. 265–314</span></div></div>
 
 <div class="blatt" id="s61"><div class="kop"><span class="bn">§6.1</span><h2>Spielregeln</h2><span class="tp">Prog. 6.1 · intern/extern · stabil · in-place · adaptiv</span></div></div>
+<div class="vonnull" id="vn-6-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.1</span>Was heißt sortieren, stabil und nicht-adaptiv?</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Gegeben sind die Datensätze (3,A) (1,B) (3,C) (2,D), sortiert werden soll nach der Zahl. a) Gib die <span class="c-rule">stabile</span> Ausgabe an und eine Ausgabe, die korrekt sortiert, aber nicht stabil ist. b) Wie viele <span class="c-chg">compexch</span>-Aufrufe macht der sort aus Prog 6.1 für N = 4, und warum hängt die Zahl nicht von den Daten ab?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Begriffe von null.</span> Ein <span class="c-par">Datensatz (Item)</span> ist hier ein Paar. Nur die Zahl ist der <span class="c-par">Schlüssel</span>; nach ihm wird geordnet, der Buchstabe reist nur mit. <span class="c-res">Sortiert</span> heißt: Die Schlüssel sind von links nach rechts nicht fallend.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Sortierte Schlüsselfolge.</span> Die Schlüssel sind 3, 1, 3, 2. Aufsteigend: 1, 2, 3, 3. Die ersten beiden Plätze sind eindeutig: (1,B), (2,D).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Stabil.</span> Bei gleichen Schlüsseln (hier zweimal 3) bleibt die ursprüngliche Reihenfolge: A stand vor C. <span class="c-rule">Stabil</span> ist also (1,B) (2,D) (3,A) (3,C). Die Ausgabe (1,B) (2,D) (3,C) (3,A) ist auch sortiert, aber <span class="c-res">nicht stabil</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">compexch zählen.</span> Prog 6.1 läuft für <span class="c-idx">i</span> = 1 bis 3 und für <span class="c-idx">j</span> = i bis 1 abwärts. Jeder Durchlauf ruft genau einmal <span class="c-chg">compexch</span> auf, egal ob getauscht wird: <span class="c-cond">keine Bedingung</span> bricht die innere Schleife ab. Deshalb heißt das Verfahren <span class="c-rule">nicht-adaptiv</span>.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_4} &= 1 + 2 + 3 && \text{Runde i macht i Vergleiche.} \\  &= \frac{4\cdot 3}{2} = \Res{6} && \text{Gauß-Summe N(N-1)/2.} \end{aligned} \]</div>
+<div class="vn-res">✔ stabil: (1,B) (2,D) (3,A) (3,C) · Prog 6.1: genau 6 compexch für jede Eingabe der Länge 4</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§6.1 · Theorie</span> Was „Sortieren“ genau heißt</div>
@@ -516,6 +537,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 6.2 ───────────── -->
 <div class="blatt" id="s62"><div class="kop"><span class="bn">§6.2</span><h2>Selection Sort</h2><span class="tp">Prog. 6.2 · Fig. 6.2 · Eigenschaft 6.1 · 6.6</span></div></div>
+<div class="vonnull" id="vn-6-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.2</span>Selection Sort von Hand</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere <span class="c-par">5 3 8 1</span> mit Selection Sort (Prog 6.2). Gib das Array nach jeder Runde an und zähle <span class="c-cond">Vergleiche</span> und <span class="c-chg">Tausche</span>. Leite die Formel für N Elemente her.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> In Runde <span class="c-idx">i</span> sucht man im noch unsortierten Rest a[i..N−1] das <span class="c-res">Minimum</span> und <span class="c-chg">tauscht</span> es an Stelle i. Danach ist Stelle i endgültig richtig. Das ist die <span class="c-rule">Invariante</span>: links von i steht der fertige Teil.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Runde 0.</span> Rest 5 3 8 1. Vergleiche: 3&lt;5 ja (min = 3), 8&lt;3 nein, 1&lt;3 ja (min = 1). Das sind 3 Vergleiche. Tausch a[0] mit a[3] ergibt <span class="c-res">1</span> 3 8 5.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Runde 1.</span> Rest 3 8 5. Vergleiche 8&lt;3 nein, 5&lt;3 nein: 2 Vergleiche, das Minimum 3 steht schon richtig (Tausch mit sich selbst). Array 1 <span class="c-res">3</span> 8 5.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Runde 2.</span> Rest 8 5. Ein Vergleich: 5&lt;8 ja. Tausch ergibt 1 3 <span class="c-res">5</span> 8. Die letzte Stelle ist automatisch richtig, Runde 3 entfällt.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Allgemein zählen.</span> Runde i vergleicht die N−1−i Elemente rechts von i, unabhängig von den Werten. Getauscht wird genau einmal pro Runde.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &= (N-1) + (N-2) + \dots + 1 && \text{Vergleiche aller Runden.} \\  &= \frac{N(N-1)}{2} && \text{für N = 4: 6 Vergleiche.} \\ \Chg{M_N} &= N - 1 && \text{für N = 4: 3 Tausche.} \end{aligned} \]</div>
+<div class="vn-res">✔ Runden: 1 3 8 5 → 1 3 8 5 → 1 3 5 8 · 6 Vergleiche = 4·3/2 · 3 Tausche = N−1</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 6.2</span> Selection Sort: immer das kleinste Restelement nach vorne</div>
@@ -542,6 +576,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 6.3 ───────────── -->
 <div class="blatt" id="s63"><div class="kop"><span class="bn">§6.3</span><h2>Insertion Sort</h2><span class="tp">Prog. 6.3 · Wächter · half-exchange · Inversionen · Eigenschaft 6.2</span></div></div>
+<div class="vonnull" id="vn-6-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.3</span>Insertion Sort und Inversionen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere <span class="c-par">4 1 3 2</span> mit Insertion Sort (ohne Wächter). a) Zähle die <span class="c-rule">Inversionen</span> der Eingabe. b) Zähle <span class="c-chg">Verschiebungen</span> und <span class="c-cond">Vergleiche</span>. c) Warum stimmen Verschiebungen und Inversionen überein?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Inversion von null.</span> Eine <span class="c-rule">Inversion</span> ist ein Paar von Positionen i &lt; j, bei dem das linke Element größer ist: Es steht „falsch herum“. In 4 1 3 2: (4,1), (4,3), (4,2), (3,2), also <span class="c-res">4</span> Inversionen.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">i = 1: v = 1.</span> Vergleich 1&lt;4 ja: 4 <span class="c-chg">rückt</span> nach rechts. Links ist kein Element mehr. Ergebnis 1 4 3 2 (1 Vergleich, 1 Verschiebung).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">i = 2: v = 3.</span> 3&lt;4 ja, 4 rückt; 3&lt;1 nein, Platz gefunden. Ergebnis 1 3 4 2 (2 Vergleiche, 1 Verschiebung).</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">i = 3: v = 2.</span> 2&lt;4 ja, 2&lt;3 ja (zwei Verschiebungen), 2&lt;1 nein. Ergebnis 1 2 3 4 (3 Vergleiche, 2 Verschiebungen).</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Warum gleich?</span> Eine Verschiebung setzt v an genau einem größeren Nachbarn vorbei, das beseitigt genau eine Inversion und keine andere. Am Ende gibt es keine Inversion mehr. Also: Verschiebungen = Inversionen.</div></div>
+<div class="step">\[ \begin{aligned} \Chg{\text{Verschiebungen}} &= 1 + 1 + 2 = 4 && \text{gleich der Zahl der Inversionen.} \\ \Res{\text{Vergleiche}} &= 1 + 2 + 3 = 6 && \text{Verschiebungen plus die Tests, die Platz gefunden melden.} \\ \text{Mittel} &= \frac{N(N-1)}{4} && \text{jedes Paar steht mit Wahrscheinlichkeit 1/2 falsch.} \end{aligned} \]</div>
+<div class="vn-res">✔ 4 Inversionen = 4 Verschiebungen · 6 Vergleiche · im Mittel N²/4</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 6.3</span> Insertion Sort: wie Spielkarten einordnen</div>
@@ -572,6 +619,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 6.4 ───────────── -->
 <div class="blatt" id="s64"><div class="kop"><span class="bn">§6.4</span><h2>Bubble Sort</h2><span class="tp">Prog. 6.4 · Fig. 6.4 · Eigenschaft 6.3</span></div></div>
+<div class="vonnull" id="vn-6-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.4</span>Bubble Sort Durchlauf für Durchlauf</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Führe Prog 6.4 (innere Schleife von rechts nach links) auf <span class="c-par">3 1 4 2</span> aus. Gib das Array nach jedem Durchlauf an und zähle <span class="c-cond">Vergleiche</span> und <span class="c-chg">Tausche</span>.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Ein <span class="c-chg">compexch</span> vergleicht zwei Nachbarn und <span class="c-chg">tauscht</span> sie, wenn der linke größer ist. Läuft man von rechts nach links, wird das kleinste Element wie eine Blase bis an Stelle i mitgenommen.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Durchlauf i = 0.</span> j = 3: (4,2) tauschen → 3 1 2 4. j = 2: (1,2) passt. j = 1: (3,1) tauschen → <span class="c-res">1</span> 3 2 4. Das sind 3 Vergleiche und 2 Tausche.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Durchlauf i = 1.</span> j = 3: (2,4) passt. j = 2: (3,2) tauschen → 1 <span class="c-res">2</span> 3 4. Das sind 2 Vergleiche und 1 Tausch.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Durchlauf i = 2.</span> j = 3: (3,4) passt. 1 Vergleich. Die Datei war schon sortiert, Prog 6.4 läuft trotzdem zu Ende: <span class="c-rule">nicht adaptiv</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kontrolle.</span> Die Eingabe hat die Inversionen (3,1), (3,2), (4,2), also 3. Jeder Nachbartausch beseitigt genau eine davon.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &= \frac{N(N-1)}{2} = 6 && \text{immer, Eigenschaft 6.3.} \\ \Chg{\text{Tausche}} &= \text{Inversionen} = 3 && \text{im Mittel $N^2/4$.} \end{aligned} \]</div>
+<div class="vn-res">✔ 1 3 2 4 → 1 2 3 4 → 1 2 3 4 · 6 Vergleiche · 3 Tausche</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 6.4</span> Bubble Sort: das Kleinste blubbert nach links</div>
@@ -590,6 +650,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 6.5 ───────────── -->
 <div class="blatt" id="s65"><div class="kop"><span class="bn">§6.5</span><h2>Leistung der elementaren Verfahren</h2><span class="tp">Eigenschaften 6.1–6.6 · Tab. 6.1 · Stabilität</span></div></div>
+<div class="vonnull" id="vn-6-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.5</span>Welches elementare Verfahren passt?</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Eine Datei mit <span class="c-par">N = 1000</span> Schlüsseln ist sortiert, nur am Ende wurden <span class="c-par">10</span> zufällige Schlüssel angehängt. Welches der drei elementaren Verfahren wählst du? Schätze die <span class="c-cond">Vergleiche</span> für alle drei.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Selection.</span> Macht immer N(N−1)/2 Vergleiche, weil jede Runde den ganzen Rest durchsucht (Eigenschaft 6.1). Das sind etwa 500 000.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Bubble.</span> Prog 6.4 macht ebenfalls immer N(N−1)/2, also etwa 500 000 Vergleiche.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Insertion, sortierter Teil.</span> Für die ersten 990 Elemente scheitert der erste Test v &lt; a[j−1] sofort: je 1 Vergleich, zusammen etwa 1000.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Insertion, angehängte Elemente.</span> Ein zufälliges Element muss im Mittel über die Hälfte der ~1000 sortierten wandern: etwa 500 Vergleiche. Für 10 Elemente sind das etwa 5000.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Begriff.</span> Das ist Eigenschaft 6.5: Nur <span class="c-par">konstant viele</span> Elemente haben viele <span class="c-rule">Inversionen</span>, dann ist Insertion Sort linear. Das Verfahren ist <span class="c-rule">adaptiv</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{Selection, Bubble} &\approx \frac{N^2}{2} \approx 500\,000 && \text{unabhängig von der Vorordnung.} \\ \text{Insertion} &\approx N + 10\cdot\frac{N}{2} \approx 6000 && \text{nutzt die Vorordnung aus.} \end{aligned} \]</div>
+<div class="vn-res">✔ Insertion Sort: etwa 6000 statt 500 000 Vergleiche</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§6.5 · Theorie</span> Eigenschaften 6.4–6.6 in einer Tabelle</div>
@@ -628,6 +701,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 6.6 ───────────── -->
 <div class="blatt" id="s66"><div class="kop"><span class="bn">§6.6</span><h2>Shellsort</h2><span class="tp">Prog. 6.5 · h-Sortieren · Inkrementfolgen · Eigenschaften 6.7–6.11</span></div></div>
+<div class="vonnull" id="vn-6-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.6</span>Shellsort: eine Datei 4-sortieren</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Wende Shellsort mit den Inkrementen <span class="c-par">h = 4, 1</span> auf <span class="c-par">7 3 6 2 5 1 4 0</span> an. a) Wie sieht die Datei nach dem 4-Sortieren aus? b) Wie viele <span class="c-rule">Inversionen</span> hat sie vorher und nachher?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">h-sortiert von null.</span> Eine Datei ist <span class="c-rule">h-sortiert</span>, wenn jede h-te Stelle, egal wo man anfängt, eine sortierte Folge bildet. Bei h = 4 gibt es 4 verschränkte Teilfolgen: Stellen {0,4}, {1,5}, {2,6}, {3,7}.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Teilfolgen sortieren.</span> {0,4}: 7 5 → 5 7. {1,5}: 3 1 → 1 3. {2,6}: 6 4 → 4 6. {3,7}: 2 0 → 0 2. Jeder Tausch springt 4 Stellen weit.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Ergebnis 4-sortiert.</span> Zurück an die Positionen: <span class="c-res">5 1 4 0 7 3 6 2</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Inversionen zählen.</span> Vorher 7+3+5+2+3+1+1 = 22 (für jedes Element: wie viele kleinere stehen rechts). Nachher 5+1+3+0+3+1+1 = 14. Vier weite Bewegungen haben 8 Inversionen beseitigt.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">1-sortieren.</span> Der letzte Durchlauf ist normales Insertion Sort. Er braucht so viele Verschiebungen wie Inversionen übrig sind: 14 statt 22.</div></div>
+<div class="step">\[ \begin{aligned} \text{Inversionen vorher} &= 22 && \text{Insertion Sort bräuchte 22 Verschiebungen.} \\ \text{nach 4-Sortieren} &= 14 && \text{weite Sprünge beheben mehrere Inversionen auf einmal.} \\ \text{Knuth-Folge} &\ h \leftarrow 3h + 1:\ 1, 4, 13, 40, \dots && \text{Eigenschaft 6.9: $O(N^{3/2})$.} \end{aligned} \]</div>
+<div class="vn-res">✔ nach 4-Sortieren: 5 1 4 0 7 3 6 2 · Inversionen 22 → 14</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 6.5</span> Shellsort: Insertion Sort mit großen Sprüngen</div>
@@ -666,6 +752,19 @@ int main(int argc, char *argv[])
 
 <!-- ───────────── 6.7 / 6.8 ───────────── -->
 <div class="blatt" id="s68"><div class="kop"><span class="bn">§6.7–6.8</span><h2>Andere Datentypen · Index- und Zeigersortieren</h2><span class="tp">Prog. 6.6–6.14 · Fig. 6.14 · 6.15</span></div></div>
+<div class="vonnull" id="vn-6-8">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.8</span>Index-Sortieren und In-situ-Umordnen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Gegeben <span class="c-mem">data</span> = D A C B. a) Gib das Index-Array a an, mit dem data[a[0]], data[a[1]], … sortiert ist. b) Ordne data mit Prog 6.14 in-place um: welche Zyklen entstehen?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Index-Sortieren von null.</span> Statt die Datensätze zu bewegen, sortiert man ein Array von <span class="c-idx">Indizes</span>. Die Daten bleiben liegen, nur a verrät die Reihenfolge. Das lohnt sich, wenn Datensätze groß sind.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Index-Array.</span> Sortiert: A (steht bei 1), B (3), C (2), D (0). Also <span class="c-idx">a = 1 3 2 0</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Zyklus ab i = 0.</span> a[0] = 1 ≠ 0: v = data[0] = D wird gerettet, Stelle 0 ist ein Loch. Ins Loch 0 gehört data[a[0]] = data[1] = A. Neues Loch 1, dorthin gehört data[a[1]] = data[3] = B. Neues Loch 3: a[3] = 0 ist der Start, also kommt v = D hinein.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Rest.</span> a[1] und a[3] sind jetzt fertig. a[2] = 2 ist ein Zyklus der Länge 1: C steht schon richtig.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kosten.</span> Jedes Element wird höchstens einmal bewegt, dazu einmal v pro Zyklus: linear.</div></div>
+<div class="step">\[ \begin{aligned} \text{Zyklen} &= (0\ 1\ 3)(2) && \text{0 bekommt von 1, 1 von 3, 3 bekommt das gerettete D.} \\ \Chg{\text{Bewegungen}} &= 2 + 1 + 1 = 4 && \text{zwei Lochfüllungen, v retten, v einsetzen.} \end{aligned} \]</div>
+<div class="vn-res">✔ a = 1 3 2 0 · Zyklen (0 1 3)(2) · Ergebnis A B C D</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§6.7 · Theorie</span> Sortieren über ein Interface</div>
@@ -693,6 +792,19 @@ int operator&lt;(const Item &amp;A, const Item &amp;B)     // Vergleich über de
 
 <!-- ───────────── 6.9 ───────────── -->
 <div class="blatt" id="s69"><div class="kop"><span class="bn">§6.9</span><h2>Sortieren verketteter Listen</h2><span class="tp">Prog. 6.15 · 6.16 · Fig. 6.16</span></div></div>
+<div class="vonnull" id="vn-6-9">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.9</span>Selection Sort auf einer verketteten Liste</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Die <span class="c-mem">Liste</span> ist 3 → 1 → 2 → 0 (Ende). Führe listselection (Prog 6.16) aus. Wie sieht die Ausgabeliste nach jeder Runde aus? Wie viele <span class="c-cond">Vergleiche</span> und <span class="c-chg">Zeigerzuweisungen</span>?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Von null: warum Maximum?</span> In einer einfach verketteten Liste ist <span class="c-chg">vorne einfügen</span> billig (O(1)). Nimmt man jeweils das <span class="c-res">Maximum</span> und setzt es vorne an die Ausgabe, wächst die Ausgabe von hinten nach vorne und ist am Ende aufsteigend.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Runde 1.</span> Eingabe 3 1 2: findmax vergleicht 2-mal, Maximum 3. Ausgabe: <span class="c-res">3</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Runde 2.</span> Eingabe 1 2: 1 Vergleich, Maximum 2. Ausgabe: <span class="c-res">2</span> → 3.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Runde 3.</span> Eingabe 1: 0 Vergleiche. Ausgabe: <span class="c-res">1</span> → 2 → 3.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Warum Vorgänger?</span> Um einen Knoten auszuhängen, braucht man den <span class="c-mem">Knoten davor</span>. Deshalb liefert findmax den Vorgänger, und ein Dummy-Kopf erlaubt das auch für den ersten Knoten.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &= (N-1) + \dots + 1 = 3 && \text{für N = 3, allgemein N(N-1)/2.} \\ \Chg{\text{Zeiger}} &= 3N = 9 && \text{aushängen, einhängen, out setzen.} \end{aligned} \]</div>
+<div class="vn-res">✔ Ausgabe 3 → 2 3 → 1 2 3 · 3 Vergleiche · 9 Zeigerzuweisungen</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 6.16</span> Selection Sort auf einer Liste</div>
@@ -728,6 +840,19 @@ link listselection(link h)
 
 <!-- ───────────── 6.10 ───────────── -->
 <div class="blatt" id="s610"><div class="kop"><span class="bn">§6.10</span><h2>Key-Indexed Counting</h2><span class="tp">Prog. 6.17 · Fig. 6.17 · Eigenschaft 6.12</span></div></div>
+<div class="vonnull" id="vn-6-10">
+<div class="vn-ttl"><span class="vn-badge">Von null · §6.10</span>Key-Indexed Counting</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere <span class="c-par">2 0 2 1 0</span> (Schlüssel kleiner als M = 3) mit Prog 6.17. Gib cnt nach dem Zählen, nach den Teilsummen und das Ergebnis an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Sind die Schlüssel kleine ganze Zahlen, kann man sie direkt als <span class="c-idx">Index</span> benutzen. Man zählt, wie oft jeder Schlüssel vorkommt, und weiß dann, wo jeder Block beginnt. Es gibt keinen einzigen <span class="c-cond">Vergleich</span>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Zählen.</span> cnt[k+1] zählt die k: zwei Nullen → cnt[1] = 2, eine Eins → cnt[2] = 1, zwei Zweien → cnt[3] = 2. Also cnt = 0 2 1 2.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Teilsummen.</span> cnt[1] += cnt[0] → 2, cnt[2] += cnt[1] → 3. Jetzt cnt = 0 2 3 …: Block 0 beginnt bei 0, Block 1 bei 2, Block 2 bei 3.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Verteilen (stabil, von links).</span> 2 → b[3], 0 → b[0], 2 → b[4], 1 → b[2], 0 → b[1]. Jedes Mal rückt der Zähler seines Blocks weiter. b = <span class="c-res">0 0 1 2 2</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kosten.</span> Zwei Durchläufe über die N Daten, zwei über die M Zähler.</div></div>
+<div class="step">\[ \begin{aligned} \Res{T(N)} &= 2N + 2M && \text{Eigenschaft 6.12.} \\  &= 10 + 6 = 16 && \text{Schritte für N = 5, M = 3.} \end{aligned} \]</div>
+<div class="vn-res">✔ cnt = 0 2 1 2 → 0 2 3 · Ergebnis 0 0 1 2 2 · linear, stabil</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 6.17</span> Sortieren durch Zählen: ganz ohne Vergleiche</div>
@@ -750,6 +875,19 @@ link listselection(link h)
 <div class="blatt part" id="k7"><div class="kop"><span class="bn">Kapitel 7</span><h2>Quicksort</h2><span class="tp">partition · Analyse · Stack · Median-of-Three · 3-Wege-Partitionierung · Selektion · Buch S. 315–346</span></div></div>
 
 <div class="blatt" id="s71"><div class="kop"><span class="bn">§7.1</span><h2>Der Grundalgorithmus</h2><span class="tp">Prog. 7.1 · 7.2 · Fig. 7.1–7.3</span></div></div>
+<div class="vonnull" id="vn-7-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §7.1</span>Eine Partition mit Prog 7.2</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Partitioniere <span class="c-par">5 8 1 9 3 6 4</span> mit Prog 7.2 (Pivot v = a[r] = 4). Gib jeden Tausch, das Ergebnis und die Zahl der <span class="c-cond">Vergleiche</span> an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Partition von null.</span> Ziel: Das <span class="c-res">Pivot</span> v kommt an seinen endgültigen Platz, links davon nur Kleinere oder Gleiche, rechts nur Größere oder Gleiche. Zeiger <span class="c-idx">i</span> sucht von links ein Element ≥ v, Zeiger <span class="c-idx">j</span> von rechts ein Element ≤ v.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Runde 1.</span> i stoppt bei 5 (Stelle 0). j: 6 &gt; 4 weiter, 3 ≤ 4 stopp (Stelle 4). i &lt; j: <span class="c-chg">tausche</span> → 3 8 1 9 5 6 4.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Runde 2.</span> i stoppt bei 8 (Stelle 1). j: 9 weiter, 1 stopp (Stelle 2). <span class="c-chg">Tausch</span> → 3 1 8 9 5 6 4.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Runde 3.</span> i stoppt bei 8 (Stelle 2), j stoppt bei 1 (Stelle 1). Jetzt <span class="c-cond">i ≥ j</span>: gekreuzt, Schleife endet.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Pivot setzen.</span> <span class="c-chg">exch(a[2], a[6])</span> → 3 1 <span class="c-res">4</span> 9 5 6 8. Rückgabe i = 2.</div></div>
+<div class="step">\[ \begin{aligned} \Res{\text{Vergleiche}} &= (1+2) + (1+2) + (1+1) = 8 && \text{i und j in den drei Runden.} \\  &= N + 1 && \text{für N = 7 Elemente.} \end{aligned} \]</div>
+<div class="vn-res">✔ Ergebnis 3 1 4 9 5 6 8 · Pivot 4 an Stelle 2 · 8 = N+1 Vergleiche</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§7.1 · Theorie</span> Teile durch Partitionieren, herrsche durch Rekursion</div>
@@ -793,6 +931,19 @@ link listselection(link h)
 
 <!-- ───────────── 7.2 ───────────── -->
 <div class="blatt" id="s72"><div class="kop"><span class="bn">§7.2</span><h2>Leistungsanalyse</h2><span class="tp">Eigenschaften 7.1 · 7.2 · Rekurrenz · Fig. 7.4–7.5</span></div></div>
+<div class="vonnull" id="vn-7-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §7.2</span>Die Quicksort-Rekurrenz für kleine N</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Berechne die mittlere Zahl der Vergleiche <span class="c-res">C<sub>3</sub></span> von Prog 7.1 aus der Rekurrenz und prüfe sie mit der geschlossenen Formel. Wie viele Vergleiche braucht eine schon sortierte Datei mit N = 3?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Rekurrenz von null.</span> Eine Partition von N Elementen kostet N+1 Vergleiche. Das Pivot ist mit Wahrscheinlichkeit 1/N das k-kleinste; dann bleiben Teile der Größe k−1 und N−k. Man mittelt über alle k.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Anker.</span> C<sub>0</sub> = C<sub>1</sub> = 0: nichts zu sortieren.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">N = 2.</span> C<sub>2</sub> = 3 + (2/2)(C<sub>0</sub> + C<sub>1</sub>) = 3.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">N = 3.</span> C<sub>3</sub> = 4 + (2/3)(C<sub>0</sub> + C<sub>1</sub> + C<sub>2</sub>) = 4 + 2 = <span class="c-res">6</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Worst case.</span> Sortiert: Pivot ist immer das Maximum. Partition von 3 kostet 4, von 2 kostet 3: zusammen 7.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &= N + 1 + \frac{2}{N}\sum_{k=1}^{N} C_{k-1} && \text{mittlere Kosten.} \\ \Res{C_N} &= 2(N+1)\Big(H_{N+1} - \frac43\Big) && \text{geschlossene Form aus Abschnitt 7.2.} \\ C_3 &= 8\Big(\frac{25}{12} - \frac{16}{12}\Big) = 6 && \text{Probe stimmt.} \end{aligned} \]</div>
+<div class="vn-res">✔ C₃ = 6 (Mittel) · sortiert: 7 · allgemein ≈ 2N ln N</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">Eigenschaft 7.1</span> Schlechtester Fall: schon sortierte Datei</div>
@@ -837,6 +988,18 @@ N\,C_N &= (N+1)\,C_{N-1} + 2N && \text{umgestellt.} \\
 
 <!-- ───────────── 7.3 ───────────── -->
 <div class="blatt" id="s73"><div class="kop"><span class="bn">§7.3</span><h2>Stackgröße</h2><span class="tp">Prog. 7.3 · Eigenschaft 7.3 · Fig. 7.6</span></div></div>
+<div class="vonnull" id="vn-7-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §7.3</span>Stackgröße: kleiner Teil zuerst</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Warum hat der Stack von Prog 7.3 höchstens lg N Einträge? Wie tief wird dagegen die Rekursion von Prog 7.1 bei einer sortierten Datei mit N = 1000?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Stack von null.</span> Jede Rekursion lässt sich durch einen <span class="c-rule">Stack</span> ersetzen: Man legt die Grenzen (l, r) der noch offenen Teildateien auf den Stack und holt sich immer den obersten Auftrag.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Der Trick.</span> Nach einer Partition wird der <span class="c-res">größere</span> Teil zuerst gepusht, der kleinere danach. Also liegt oben immer der kleinere Teil, und er ist höchstens halb so groß wie der Bereich, aus dem er kam.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Rekurrenz.</span> Ist T<sub>N</sub> die maximale Stackgröße, dann T<sub>N</sub> ≤ T<sub>N/2</sub> + 1 mit T<sub>1</sub> = 0. Das ist Formel 2.2 aus Teil 1: <span class="c-res">lg N</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ohne Trick.</span> Prog 7.1 ruft sich bei sortierter Eingabe mit N−1, N−2, … Elementen auf. Jeder Aufruf wartet auf den nächsten: Rekursionstiefe etwa N.</div></div>
+<div class="step">\[ \begin{aligned} T_N &\le T_{\lfloor N/2\rfloor} + 1 && \text{kleiner Teil liegt oben.} \\ \Res{T_{1000}} &\le \lg 1000 \approx 10 && \text{Einträge mit Trick.} \\ \text{Tiefe Prog 7.1} &\approx N = 1000 && \text{sortierte Eingabe ohne Trick.} \end{aligned} \]</div>
+<div class="vn-res">✔ mit Trick höchstens ~10 Stack-Einträge · ohne Trick ~1000 geschachtelte Aufrufe</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 7.3</span> Quicksort ohne Rekursion, mit eigenem Stack</div>
@@ -854,6 +1017,19 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 
 <!-- ───────────── 7.4 / 7.5 ───────────── -->
 <div class="blatt" id="s74"><div class="kop"><span class="bn">§7.4–7.5</span><h2>Kleine Teildateien und Median-of-Three</h2><span class="tp">Prog. 7.4 · Fig. 7.7–7.10</span></div></div>
+<div class="vonnull" id="vn-7-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §7.4</span>Median-of-Three auf einer sortierten Datei</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Die Teildatei ist <span class="c-par">1 2 3 4 5 6 7</span>. Welches Pivot wählt Prog 7.2, welches Prog 7.4 (Median aus drei)? Wie groß sind jeweils die beiden Teile?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Pivot von null.</span> Das <span class="c-res">Pivot</span> teilt die Datei. Gut ist ein Pivot in der Mitte: Dann halbiert sich das Problem. Schlecht ist ein Extremwert: Dann bleibt fast alles in einem Teil.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Prog 7.2.</span> Pivot a[r] = 7 ist das Maximum. Teile: 6 Elemente links, 0 rechts. Das ist der Grund für Eigenschaft 7.1 (N²/2).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Prog 7.4, drei Proben.</span> a[l] = 1, a[(l+r)/2] = 4, a[r] = 7. Der mittlere Wert ist <span class="c-res">4</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ablauf.</span> Das mittlere Element wird nach r−1 getauscht, drei <span class="c-chg">compexch</span> ordnen a[l], a[r−1], a[r]. Danach steht 4 in a[r−1], und a[l] = 1, a[r] = 7 dienen als <span class="c-rule">Wächter</span>. Partitioniert wird nur a[l+1..r−1].</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Ergebnis.</span> Pivot 4 landet in der Mitte: je 3 Elemente links und rechts.</div></div>
+<div class="step">\[ \begin{aligned} \text{Prog 7.2} &\ (6,\ 0) && \text{schlechteste Teilung.} \\ \text{Prog 7.4} &\ (3,\ 3) && \text{perfekte Teilung.} \\ \Res{C_N} &\approx 1{,}19\,N\lg N && \text{Mittel mit Median-of-Three statt $1{,}39\,N\lg N$.} \end{aligned} \]</div>
+<div class="vn-res">✔ Prog 7.2: Pivot 7, Teile 6 und 0 · Prog 7.4: Pivot 4, Teile 3 und 3</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 7.4</span> Verbessertes Quicksort: Cutoff M und Median aus drei</div>
@@ -867,6 +1043,18 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 
 <!-- ───────────── 7.6 ───────────── -->
 <div class="blatt" id="s76"><div class="kop"><span class="bn">§7.6</span><h2>Doppelte Schlüssel: 3-Wege-Partitionierung</h2><span class="tp">Prog. 7.5 · Fig. 7.11–7.12</span></div></div>
+<div class="vonnull" id="vn-7-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §7.6</span>Viele gleiche Schlüssel</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Die Datei besteht aus <span class="c-par">acht gleichen Schlüsseln 2 2 2 2 2 2 2 2</span>. Wie viele Partitionen macht Prog 7.1, wie viele Prog 7.5?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">3-Wege-Partition von null.</span> Statt in „kleiner“ und „größer“ teilt man in drei Teile: <span class="c-par">kleiner</span>, <span class="c-res">gleich</span> und <span class="c-rule">größer</span> als v. Der mittlere Teil ist sofort fertig und wird nie wieder angefasst.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Prog 7.1.</span> Beide Zeiger stoppen bei Gleichheit, also tauschen sie ständig und treffen sich in der Mitte. Das Pivot landet bei 3, danach Teile [0..2] und [4..7], dann [0..0]/[2..2], [4..4]/[6..7] und schließlich [6..7]: zusammen <span class="c-res">4</span> Partitionen.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Prog 7.5.</span> Alle Elemente sind gleich v. Während des Scannens wandern sie an die Ränder (p, q), am Ende werden sie in die Mitte getauscht. Der Gleich-Block ist die ganze Datei: <span class="c-res">1</span> Partition, beide Rekursionen sind leer.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Allgemein.</span> Bei wenigen verschiedenen Schlüsseln wird Prog 7.5 linear, Prog 7.1 bleibt bei N lg N.</div></div>
+<div class="step">\[ \begin{aligned} \text{Prog 7.1} &= 4 \text{ Partitionen} && \text{Aufteilung wie bei verschiedenen Schlüsseln.} \\ \text{Prog 7.5} &= 1 \text{ Partition} && \text{der Block gleich v ist alles.} \end{aligned} \]</div>
+<div class="vn-res">✔ Prog 7.1: 4 Partitionen · Prog 7.5: 1 Partition</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 7.5</span> Quicksort mit Drei-Wege-Partitionierung</div>
@@ -882,6 +1070,19 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 
 <!-- ───────────── 7.7 / 7.8 ───────────── -->
 <div class="blatt" id="s78"><div class="kop"><span class="bn">§7.7–7.8</span><h2>Strings, Vektoren und Selektion</h2><span class="tp">Prog. 7.6 · Fig. 7.13 · Eigenschaft 7.4</span></div></div>
+<div class="vonnull" id="vn-7-8">
+<div class="vn-ttl"><span class="vn-badge">Von null · §7.8</span>Selektion: das 3.-kleinste Element</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Finde mit Prog 7.6 das Element, das nach dem Sortieren an Stelle <span class="c-par">k = 2</span> stünde, in <span class="c-par">7 2 9 4 1 8 5</span>. Wie viele Aufrufe braucht es?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Selektion von null.</span> Nach einer Partition steht das <span class="c-res">Pivot</span> an seinem endgültigen Platz i. Ist i = k, ist man fertig. Ist i &gt; k, liegt das Gesuchte links, sonst rechts. Die andere Seite wird nie angesehen.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Aufruf 1.</span> Pivot 5. Partition ergibt 1 2 4 <span class="c-res">5</span> 7 8 9, Pivot bei i = 3.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Vergleich mit k.</span> i = 3 &gt; k = 2: weiter nur links in a[0..2] = 1 2 4.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Aufruf 2.</span> Pivot 4, bleibt bei i = 2. Jetzt i = k: gefunden, a[2] = <span class="c-res">4</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kontrolle.</span> Sortiert wäre 1 2 4 5 7 8 9, an Stelle 2 steht 4.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &\approx N + \frac N2 + \frac N4 + \dots && \text{jede Partition halbiert grob den Bereich.} \\  &\approx 2N && \text{geometrische Reihe: linear, Eigenschaft 7.4.} \end{aligned} \]</div>
+<div class="vn-res">✔ a[2] = 4 nach 2 Aufrufen · im Mittel linear</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§7.7 · Theorie</span> Quicksort für Strings</div>
@@ -910,6 +1111,18 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 <div class="blatt part" id="k8"><div class="kop"><span class="bn">Kapitel 8</span><h2>Mischen und Mergesort</h2><span class="tp">merge · top-down · bottom-up · Analyse · Listen · Buch S. 347–372</span></div></div>
 
 <div class="blatt" id="s81"><div class="kop"><span class="bn">§8.1–8.2</span><h2>Zwei-Wege-Mischen</h2><span class="tp">Prog. 8.1 · 8.2 · bitonische Folge</span></div></div>
+<div class="vonnull" id="vn-8-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §8.1</span>Zwei sortierte Arrays mischen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Mische <span class="c-par">a = 1 4 7</span> und <span class="c-par">b = 2 3 8 9</span> mit Prog 8.1. Gib c an und zähle die <span class="c-cond">Vergleiche</span>. Wie sähe aux bei Prog 8.2 aus?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Mischen von null.</span> Beide Arrays sind sortiert, also steht das kleinste noch nicht benutzte Element immer <span class="c-idx">vorne</span> in a oder in b. Man vergleicht nur diese beiden und nimmt das kleinere.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Ablauf.</span> 1 vs 2 → 1. 4 vs 2 → 2. 4 vs 3 → 3. 4 vs 8 → 4. 7 vs 8 → 7. Jetzt ist a erschöpft: 8 und 9 kommen ohne Vergleich.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Ergebnis.</span> c = <span class="c-res">1 2 3 4 7 8 9</span> mit 5 Vergleichen.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Prog 8.2.</span> Dort liegen beide Teile nebeneinander. Die rechte Hälfte wird rückwärts kopiert: aux = 1 4 7 | 9 8 3 2 ist <span class="c-rule">bitonisch</span>. Das Maximum 9 ist <span class="c-rule">Wächter</span> für die linke Hälfte, deshalb braucht die Schleife keinen Endtest.</div></div>
+<div class="step">\[ \begin{aligned} \Res{\text{Vergleiche}} &\le N + M - 1 = 6 && \text{hier 5, weil a früher leer war.} \\ \text{Prog 8.2} &= N + M = 7 && \text{immer genau so viele.} \end{aligned} \]</div>
+<div class="vn-res">✔ c = 1 2 3 4 7 8 9 · 5 Vergleiche</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§8.1 · Theorie</span> Mischen ist das Gegenstück zum Partitionieren</div>
@@ -941,6 +1154,19 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 
 <!-- ───────────── 8.3 ───────────── -->
 <div class="blatt" id="s83"><div class="kop"><span class="bn">§8.3</span><h2>Top-down Mergesort</h2><span class="tp">Prog. 8.3 · Fig. 8.2 · 8.3 · Teile-und-Herrsche-Baum</span></div></div>
+<div class="vonnull" id="vn-8-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §8.3</span>Top-down Mergesort komplett</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere <span class="c-par">38 27 43 3</span> mit Prog 8.3 (merge aus Prog 8.2). Zeichne den Aufrufbaum, zähle die <span class="c-chg">Merges</span> und die <span class="c-cond">Vergleiche</span>.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Teile und Herrsche von null.</span> Ein Problem der Größe N wird in zwei halbe Probleme geteilt, beide werden <span class="c-rule">rekursiv</span> gelöst, dann werden die Teillösungen zusammengesetzt. Bei Mergesort ist das Zusammensetzen das <span class="c-chg">Mischen</span>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Teilen.</span> [0..3] bei m = 1 in [0..1] und [2..3]. [0..1] bei m = 0 in [0] und [1]. [2..3] in [2] und [3]. Ein Element ist schon sortiert (<span class="c-cond">Anker</span>).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Mischen unten.</span> merge(38 | 27) → 27 38 (2 Vergleiche). merge(43 | 3) → 3 43 (2 Vergleiche).</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Mischen oben.</span> merge(27 38 | 3 43) → <span class="c-res">3 27 38 43</span> (4 Vergleiche).</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Zählen.</span> Jeder innere Knoten des Aufrufbaums ist ein merge: N−1 = 3.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &= 2\,C_{N/2} + N && \text{zwei Hälften, dann N mischen.} \\ C_4 &= 2\cdot 2 + 4 = 8 && \text{= N lg N für N = 4.} \\ \text{Merges} &= N - 1 = 3 && \text{innere Knoten des Baums.} \end{aligned} \]</div>
+<div class="vn-res">✔ Ergebnis 3 27 38 43 · 3 Merges · 8 Vergleiche = N lg N</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 8.3</span> Mergesort rekursiv</div>
@@ -966,6 +1192,19 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 
 <!-- ───────────── 8.4 / 8.5 ───────────── -->
 <div class="blatt" id="s85"><div class="kop"><span class="bn">§8.4–8.5</span><h2>Verbesserungen und Bottom-up Mergesort</h2><span class="tp">Prog. 8.4 · 8.5 · Eigenschaften 8.5 · 8.6</span></div></div>
+<div class="vonnull" id="vn-8-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §8.5</span>Bottom-up Mergesort für N = 6</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Welche Merges führt Prog 8.5 für <span class="c-par">N = 6</span> aus, in welcher Reihenfolge und mit welchen Blockgrößen? Wie viele Durchläufe sind es?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Bottom-up von null.</span> Statt von oben zu teilen, baut man von unten auf: Blöcke der Länge m = 1 sind sortiert. Ein <span class="c-chg">Durchlauf</span> mischt benachbarte Blöcke der Länge m zu Blöcken der Länge 2m.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">m = 1.</span> merge(0,0,1), merge(2,2,3), merge(4,4,5): drei 1-zu-1-Merges.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">m = 2.</span> i = 0: merge(0,1,3), ein 2-zu-2-Merge. i = 4 &gt; r − m = 3: Die Elemente 4 und 5 haben keinen Partner.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">m = 4.</span> i = 0: merge(0,3,5), ein 4-zu-2-Merge (min(7, 5) = 5).</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Ende.</span> m = 8 &gt; r − l = 5: fertig.</div></div>
+<div class="step">\[ \begin{aligned} \text{Durchläufe} &= \lceil \lg 6 \rceil = 3 && \text{m = 1, 2, 4.} \\ \text{Merges} &= 3 + 1 + 1 = 5 = N - 1 && \text{wie top-down.} \end{aligned} \]</div>
+<div class="vn-res">✔ 3 Durchläufe · Merges 1-1, 1-1, 1-1, 2-2, 4-2</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§8.4 · Theorie</span> Drei Verbesserungen</div>
@@ -993,6 +1232,18 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 
 <!-- ───────────── 8.6 ───────────── -->
 <div class="blatt" id="s86"><div class="kop"><span class="bn">§8.6</span><h2>Leistung von Mergesort</h2><span class="tp">Eigenschaften 8.1–8.4 · Tab. 8.1 · untere Schranke</span></div></div>
+<div class="vonnull" id="vn-8-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §8.6</span>Exakte Vergleichszahl und untere Schranke</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> a) Berechne C<sub>5</sub> aus C<sub>N</sub> = C<sub>⌊N/2⌋</sub> + C<sub>⌈N/2⌉</sub> + N und prüfe mit N⌈lg N⌉ + N − 2<sup>⌈lg N⌉</sup>. b) Wie viele Vergleiche braucht <span class="c-res">jedes</span> vergleichsbasierte Verfahren für N = 5 mindestens im schlechtesten Fall?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Rekurrenz.</span> C<sub>1</sub> = 0, C<sub>2</sub> = 0 + 0 + 2 = 2, C<sub>3</sub> = C<sub>1</sub> + C<sub>2</sub> + 3 = 5, C<sub>5</sub> = C<sub>2</sub> + C<sub>3</sub> + 5 = <span class="c-res">12</span>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Formel.</span> ⌈lg 5⌉ = 3: 5·3 + 5 − 8 = 12. Stimmt.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Entscheidungsbaum von null.</span> Jeder <span class="c-cond">Vergleich</span> ist eine Ja/Nein-Frage. Alle möglichen Abläufe bilden einen Binärbaum; jedes Blatt ist eine fertige Anordnung. Es muss mindestens N! Blätter geben, weil jede Permutation anders umgeordnet werden muss.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Höhe.</span> Ein Binärbaum der Höhe h hat höchstens 2<sup>h</sup> Blätter. Also 2<sup>h</sup> ≥ 5! = 120, h ≥ lg 120 ≈ 6,9.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_5} &= 12 && \text{Mergesort mit Prog 8.2.} \\ h &\ge \lceil \lg 5! \rceil = \lceil \lg 120 \rceil = 7 && \text{untere Schranke für jedes Verfahren.} \end{aligned} \]</div>
+<div class="vn-res">✔ C₅ = 12 · mindestens 7 Vergleiche für jedes Verfahren</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">Eigenschaft 8.1</span> N lg N Vergleiche, von null hergeleitet</div>
@@ -1040,6 +1291,18 @@ h &\ge \lg N! && \text{Logarithmus: } h \text{ ist die Zahl der Vergleiche im sc
 
 <!-- ───────────── 8.7 ───────────── -->
 <div class="blatt" id="s87"><div class="kop"><span class="bn">§8.7–8.8</span><h2>Mergesort für Listen · Rekursion revisited</h2><span class="tp">Prog. 8.6 · 8.7</span></div></div>
+<div class="vonnull" id="vn-8-7">
+<div class="vn-ttl"><span class="vn-badge">Von null · §8.7</span>Listen mischen und Stabilität</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Mische die Listen <span class="c-par">a: 1 → 5 → 9</span> und <span class="c-par">b: 2 → 5 → 6</span> mit Prog 8.6. In welcher Reihenfolge werden die Knoten angehängt? Ist das stabil, wenn a die frühere Liste ist?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Von null.</span> Beim Listen-Mischen wird nichts kopiert: Der Zeiger <span class="c-idx">c</span> zeigt auf das Ende der Ausgabe, und der jeweils kleinere Kopfknoten wird dort <span class="c-chg">angehängt</span>.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Ablauf.</span> 1 (a), 2 (b). Jetzt 5 gegen 5: Der Test a-&gt;item &lt; b-&gt;item ist falsch, also kommt die <span class="c-res">5 aus b</span> zuerst. Dann 5 (a) gegen 6: 5 aus a. Dann 9 gegen 6: 6 (b). b ist leer, Rest 9 (a).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Reihenfolge.</span> 1a 2b 5b 5a 6b 9a.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Stabil?</span> Nein: Die 5 aus der früheren Liste a steht hinter der 5 aus b. Mit a-&gt;item &lt;= b-&gt;item wäre es <span class="c-rule">stabil</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{Kosten} &= N + M && \text{jeder Knoten einmal angehängt, kein Zusatzspeicher.} \end{aligned} \]</div>
+<div class="vn-res">✔ Reihenfolge 1a 2b 5b 5a 6b 9a · mit < nicht stabil, mit <= stabil</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 8.6 + 8.7</span> Mischen und Sortieren von verketteten Listen</div>
@@ -1077,6 +1340,19 @@ link mergesort(link c)                               // Prog 8.7: Liste c sortie
 <div class="blatt part" id="k9"><div class="kop"><span class="bn">Kapitel 9</span><h2>Prioritätswarteschlangen und Heapsort</h2><span class="tp">PQ-ADT · Heap · fixUp · fixDown · Heapsort · Binomial-Queues · Buch S. 373–418</span></div></div>
 
 <div class="blatt" id="s91"><div class="kop"><span class="bn">§9.1</span><h2>Der ADT Prioritätswarteschlange</h2><span class="tp">Prog. 9.1 · 9.2 · Tab. 9.1</span></div></div>
+<div class="vonnull" id="vn-9-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §9.1</span>Prioritätswarteschlange mit ungeordnetem Array</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Eine PQ ist als ungeordnetes Array implementiert (Prog 9.2). Führe aus: insert 5, insert 9, insert 3, getmax, insert 7, getmax. Gib den Inhalt nach jedem Schritt und die Kosten an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">PQ von null.</span> Eine <span class="c-rule">Prioritätswarteschlange</span> kennt zwei Operationen: <span class="c-chg">insert</span> legt ein Element ab, <span class="c-res">getmax</span> entfernt das größte. Wie das intern aussieht, entscheidet über die Kosten.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">insert.</span> Hinten anhängen: [5], [5 9], [5 9 3]. Kosten O(1).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">getmax.</span> Das ganze Array nach dem Maximum durchsuchen: 2 Vergleiche, Maximum 9. Mit dem letzten Element tauschen und N verkleinern: [5 3], Rückgabe <span class="c-res">9</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">insert 7, getmax.</span> [5 3 7], 2 Vergleiche, Maximum 7 steht schon hinten. Rückgabe <span class="c-res">7</span>, Rest [5 3].</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kosten allgemein.</span> insert O(1), getmax O(N). Sortieren damit ergibt Selection Sort.</div></div>
+<div class="step">\[ \begin{aligned} \Chg{\text{insert}} &= O(1) && \text{anhängen.} \\ \Res{\text{getmax}} &= N - 1 \text{ Vergleiche} && \text{durchsuchen.} \end{aligned} \]</div>
+<div class="vn-res">✔ Rückgaben 9 und 7 · Rest [5 3] · getmax linear</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">Def 9.1</span> Priority Queue: immer das größte zuerst</div>
@@ -1136,6 +1412,19 @@ class PQ                                  // ungeordnetes Array
 
 <!-- ───────────── 9.2 ───────────── -->
 <div class="blatt" id="s92"><div class="kop"><span class="bn">§9.2</span><h2>Die Datenstruktur Heap</h2><span class="tp">Def. 9.2 · Eigenschaft 9.1 · Fig. 9.1–9.2</span></div></div>
+<div class="vonnull" id="vn-9-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §9.2</span>Heap erkennen und navigieren</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Ist pq[1..6] = <span class="c-par">9 7 8 3 7 2</span> ein Heap? Nenne den Elternknoten von Index 5, die Kinder von Index 3 und die Höhe.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Heap von null.</span> Ein <span class="c-rule">Heap</span> ist ein vollständiger Binärbaum, ebenenweise in einem Array ab Index 1 gespeichert, bei dem jeder Knoten mindestens so groß ist wie seine Kinder (<span class="c-rule">Heap-Bedingung</span>).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Index-Rechnung.</span> Kinder von k: 2k und 2k+1. Eltern von k: ⌊k/2⌋. Es gibt keine <span class="c-mem">Zeiger</span>, nur Arithmetik.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Prüfen.</span> k = 2: 7 ≤ 9. k = 3: 8 ≤ 9. k = 4: 3 ≤ 7. k = 5: 7 ≤ 7. k = 6: 2 ≤ 8. Alle erfüllt: <span class="c-res">Heap</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Navigation.</span> Eltern von 5: ⌊5/2⌋ = 2 (Wert 7). Kinder von 3: 6 (Wert 2) und 7, aber 7 &gt; N = 6, also nur ein Kind.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Höhe.</span> ⌊lg 6⌋ = 2 Ebenen unter der Wurzel.</div></div>
+<div class="step">\[ \begin{aligned} \text{Eltern}(5) &= \lfloor 5/2\rfloor = 2 && \text{Index halbieren.} \\ \text{Kinder}(3) &= 6,\ 7 && \text{Index verdoppeln.} \\ \text{Höhe} &= \lfloor \lg 6 \rfloor = 2 && \text{vollständiger Baum.} \end{aligned} \]</div>
+<div class="vn-res">✔ gültiger Heap · Eltern(5) = 2 · Kinder(3) = 6 (7 existiert nicht) · Höhe 2</div>
+</details>
+</div>
 
 <div class="figure anat">
 <div class="ttl"><span class="n">Def 9.2 · Bauplan</span> Heap = vollständiger Binärbaum in einem Array</div>
@@ -1157,6 +1446,19 @@ class PQ                                  // ungeordnetes Array
 
 <!-- ───────────── 9.3 ───────────── -->
 <div class="blatt" id="s93"><div class="kop"><span class="bn">§9.3</span><h2>Algorithmen auf Heaps</h2><span class="tp">Prog. 9.3 fixUp · 9.4 fixDown · 9.5 PQ · Eigenschaften 9.2 · 9.3</span></div></div>
+<div class="vonnull" id="vn-9-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §9.3</span>insert und getmax im Heap</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Füge <span class="c-par">10</span> in den Heap pq[1..6] = 9 7 8 3 7 2 ein (fixUp) und entferne danach das Maximum (getmax mit fixDown). Gib alle Tausche an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">fixUp von null.</span> Ein neues Element kommt ganz hinten hin, damit der Baum vollständig bleibt. Ist es größer als sein Elternknoten, wird es <span class="c-chg">befördert</span> (getauscht), bis es passt.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">insert 10.</span> pq[7] = 10. Eltern 3 (8) &lt; 10: tauschen. Eltern 1 (9) &lt; 10: tauschen. Heap: 10 7 9 3 7 2 8 (2 Vergleiche).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">fixDown von null.</span> Ist ein Knoten zu klein, wird er mit dem <span class="c-res">größeren Kind</span> getauscht, bis beide Kinder kleiner sind oder er unten ist.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">getmax.</span> pq[1] und pq[7] tauschen, N = 6: 8 7 9 3 7 2 | 10. fixDown(1): Kinder 7 und 9, größer 9 &gt; 8: tauschen → 9 7 8 3 7 2. Bei k = 3 nur Kind 6 (Wert 2) &lt; 8: fertig.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Rückgabe.</span> <span class="c-res">10</span>. Der Heap ist wieder 9 7 8 3 7 2.</div></div>
+<div class="step">\[ \begin{aligned} \Chg{\text{insert}} &\le \lg N && \text{ein Weg nach oben.} \\ \Res{\text{getmax}} &\le 2\lg N && \text{zwei Vergleiche pro Ebene, Eigenschaft 9.2.} \end{aligned} \]</div>
+<div class="vn-res">✔ nach insert: 10 7 9 3 7 2 8 · getmax liefert 10 · Heap wieder 9 7 8 3 7 2</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§9.3 · Theorie</span> Zwei Reparaturen: nach oben und nach unten</div>
@@ -1212,6 +1514,19 @@ void fixDown(Item a[], int k, int N)
 
 <!-- ───────────── 9.4 ───────────── -->
 <div class="blatt" id="s94"><div class="kop"><span class="bn">§9.4</span><h2>Heapsort</h2><span class="tp">Prog. 9.6 · 9.7 · Fig. 9.9–9.11 · Eigenschaften 9.4–9.6</span></div></div>
+<div class="vonnull" id="vn-9-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §9.4</span>Heapsort: Aufbau und Abbau</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere <span class="c-par">3 1 6 5 2 4</span> mit Prog 9.7. Gib den Heap nach Phase 1 und das Array nach den ersten zwei Schritten von Phase 2 an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Heapsort von null.</span> Phase 1 baut aus dem Array einen <span class="c-rule">Heap</span>, Phase 2 tauscht immer das <span class="c-res">Maximum</span> (die Wurzel) ans Ende und repariert den kleineren Heap. Das ist Selection Sort mit einem schnellen Weg zum Maximum.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Phase 1.</span> k = 3: Kind 4 &lt; 6, passt. k = 2: Kinder 5 und 2, 5 &gt; 1: tauschen → 3 5 6 1 2 4. k = 1: Kinder 5 und 6, 6 &gt; 3: tauschen → 6 5 3 1 2 4; bei k = 3 Kind 4 &gt; 3: tauschen → <span class="c-res">6 5 4 1 2 3</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Phase 2, Schritt 1.</span> 6 ↔ 3: 3 5 4 1 2 | 6. fixDown: 5 &gt; 3 tauschen → 5 3 4 1 2, dann Kinder 1 und 2 &lt; 3. Array: 5 3 4 1 2 | 6.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Phase 2, Schritt 2.</span> 5 ↔ 2: 2 3 4 1 | 5 6. fixDown: 4 &gt; 2 tauschen → 4 3 2 1 | 5 6.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Kosten.</span> Phase 1 höchstens N Tausche (Eigenschaft 9.4), Phase 2 höchstens 2 lg N Vergleiche pro Schritt.</div></div>
+<div class="step">\[ \begin{aligned} \text{Aufbau} &< 2N \text{ Vergleiche} && \text{die meisten Teilheaps sind klein.} \\ \Res{C_N} &< 2N\lg N && \text{Eigenschaft 9.5, in-place.} \end{aligned} \]</div>
+<div class="vn-res">✔ Heap 6 5 4 1 2 3 · danach 5 3 4 1 2 | 6 · dann 4 3 2 1 | 5 6</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 9.7</span> Heapsort: Heap von unten bauen, dann immer das Maximum nach hinten</div>
@@ -1253,6 +1568,18 @@ N &= 2^n - 1 && \text{vollständiger Baum mit } n \text{ Ebenen, zum Beispiel } 
 
 <!-- ───────────── 9.5–9.7 ───────────── -->
 <div class="blatt" id="s96"><div class="kop"><span class="bn">§9.5–9.7</span><h2>Erweiterungen</h2><span class="tp">vollständiger PQ-ADT · Index-Items · Binomial-Queues · Eigenschaften 9.7 · 9.8</span></div></div>
+<div class="vonnull" id="vn-9-7">
+<div class="vn-ttl"><span class="vn-badge">Von null · §9.7</span>Binomial-Queue als Binärzahl</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Eine Binomial-Queue enthält <span class="c-par">N = 13</span> Elemente. Aus welchen Baumgrößen besteht sie? Was passiert beim Einfügen des 14. Elements?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Binomial-Queue von null.</span> Eine Binomial-Queue ist ein Wald aus heap-geordneten Bäumen mit 1, 2, 4, 8, … Knoten, und jede Größe kommt höchstens einmal vor. Welche Größen vorhanden sind, verrät die Binärdarstellung von N.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">13 binär.</span> 13 = 1101<sub>2</sub> = 8 + 4 + 1: Bäume mit <span class="c-res">8, 4 und 1</span> Knoten.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Einfügen.</span> Der neue Knoten ist ein Baum der Größe 1. Es gibt schon einen: Zwei 1er-Bäume werden zu einem 2er-Baum verbunden (größere Wurzel oben), ein <span class="c-chg">Übertrag</span> wie beim binären Addieren.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ergebnis.</span> 14 = 1110<sub>2</sub>: Bäume mit 8, 4 und 2 Knoten.</div></div>
+<div class="step">\[ \begin{aligned} 13 &= 1101_2 && \text{Bäume 8 + 4 + 1.} \\ 14 &= 1110_2 && \text{Bäume 8 + 4 + 2.} \\ \text{Kosten} &= O(\lg N) && \text{höchstens lg N Überträge, Eigenschaft 9.7.} \end{aligned} \]</div>
+<div class="vn-res">✔ 13 → Bäume 8, 4, 1 · nach insert: 8, 4, 2</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§9.5–9.7 · Theorie</span> Was über insert und getmax hinausgeht</div>
@@ -1272,6 +1599,19 @@ N &= 2^n - 1 && \text{vollständiger Baum mit } n \text{ Ebenen, zum Beispiel } 
 <div class="blatt part" id="k10"><div class="kop"><span class="bn">Kapitel 10</span><h2>Radixsort</h2><span class="tp">digit · Binär-Quicksort · MSD · 3-Wege-Radix-Quicksort · LSD · Buch S. 419–452</span></div></div>
 
 <div class="blatt" id="s101"><div class="kop"><span class="bn">§10.1</span><h2>Bits, Bytes und Wörter</h2><span class="tp">digit(A, B) · Radix R</span></div></div>
+<div class="vonnull" id="vn-10-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §10.1</span>Ziffern eines Schlüssels</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> A = <span class="c-par">0x12345678</span> (32 Bit), bitsbyte = 8. Berechne digit(A, 1) und digit(A, 3). Wie viele Ziffern hat A bei R = 16?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Ziffer von null.</span> Ein Schlüssel aus w Bits wird in Stücke zu je bitsbyte Bits zerlegt. Jedes Stück ist eine <span class="c-rule">Ziffer</span> zur Basis R = 2<sup>bitsbyte</sup>. digit(A, B) holt die B-te Ziffer von links.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Hexadezimal lesen.</span> Bei 8 Bit pro Ziffer sind das je zwei Hex-Stellen: 12 | 34 | 56 | 78.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">digit(A, 1).</span> Schieben um 8·(4 − 1 − 1) = 16 Bit: 0x1234, maskieren mit 0xFF: 0x34 = <span class="c-res">52</span>.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">digit(A, 3).</span> Schieben um 0: 0x78 = <span class="c-res">120</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">R = 16.</span> bitsbyte = 4: 32/4 = 8 Ziffern.</div></div>
+<div class="step">\[ \begin{aligned} \text{digit}(A,B) &= (A \gg 8(4-B-1))\ \&\ 255 && \text{Formel aus 10.1.} \\ \text{Ziffern} &= \frac{w}{\lg R} = \frac{32}{4} = 8 && \text{für R = 16.} \end{aligned} \]</div>
+<div class="vn-res">✔ digit(A,1) = 52 · digit(A,3) = 120 · 8 Ziffern bei R = 16</div>
+</details>
+</div>
 
 <div class="figure anat">
 <div class="ttl"><span class="n">§10.1 · Bauplan</span> Ein Schlüssel ist eine Folge von Ziffern zur Basis R</div>
@@ -1296,6 +1636,19 @@ inline int digit(char* A, int B)               // für C-Strings: die Ziffer ist
 
 <!-- ───────────── 10.2 ───────────── -->
 <div class="blatt" id="s102"><div class="kop"><span class="bn">§10.2</span><h2>Binärer Quicksort</h2><span class="tp">Prog. 10.1 · Fig. 10.2 · 10.3 · Eigenschaft 10.2</span></div></div>
+<div class="vonnull" id="vn-10-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §10.2</span>Binärer Quicksort: eine Partition</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Partitioniere die 3-Bit-Schlüssel <span class="c-par">5 2 7 1 6 3</span> (101 010 111 001 110 011) nach dem höchsten Bit (d = 0) mit Prog 10.1.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Statt mit einem Pivot zu vergleichen, fragt man nur: Ist Bit d gleich 0? Alle mit 0 kommen nach links, alle mit 1 nach rechts. Dann geht es rekursiv mit dem nächsten Bit weiter.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Runde 1.</span> i: 5 hat Bit 1, stopp bei 0. j: 3 hat Bit 0, stopp bei 5. <span class="c-chg">Tausch</span> → 3 2 7 1 6 5.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Runde 2.</span> i läuft über 3 und 2 (Bit 0), stoppt bei 7 (Stelle 2). j läuft über 5 und 6 (Bit 1), stoppt bei 1 (Stelle 3). Tausch → 3 2 1 7 6 5.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ende.</span> i und j treffen sich bei 3. Das letzte Element 5 hat Bit 1, also bleibt die Grenze j = 3.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Teile.</span> Links <span class="c-res">3 2 1</span> (Bit 0), rechts <span class="c-res">7 6 5</span> (Bit 1). Jetzt beide Teile mit d = 1.</div></div>
+<div class="step">\[ \begin{aligned} \text{Tiefe} &\le w = 3 && \text{ein Bit pro Ebene.} \\ \text{Mittel} &\approx N\lg N \text{ Bits} && \text{Eigenschaft 10.2.} \end{aligned} \]</div>
+<div class="vn-res">✔ nach Bit 0: 3 2 1 | 7 6 5</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 10.1</span> Partitionieren nach einem Bit statt nach einem Pivot</div>
@@ -1308,6 +1661,19 @@ inline int digit(char* A, int B)               // für C-Strings: die Ziffer ist
 
 <!-- ───────────── 10.3 ───────────── -->
 <div class="blatt" id="s103"><div class="kop"><span class="bn">§10.3</span><h2>MSD-Radixsort</h2><span class="tp">Prog. 10.2 · Fig. 10.7 · Eigenschaften 10.3 · 10.4</span></div></div>
+<div class="vonnull" id="vn-10-3">
+<div class="vn-ttl"><span class="vn-badge">Von null · §10.3</span>MSD-Radixsort auf Wörtern</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere die Wörter <span class="c-par">dab add cab bad ace bee</span> mit MSD-Radixsort. Welche Fächer entstehen nach dem ersten Buchstaben, welche werden rekursiv weiter sortiert?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">MSD von null.</span> Man verteilt die Wörter nach ihrem <span class="c-res">ersten</span> Buchstaben stabil in R Fächer (Key-Indexed Counting). Jedes Fach mit mehr als einem Wort wird mit dem nächsten Buchstaben genauso behandelt.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Fächer nach Buchstabe 1.</span> a: add, ace. b: bad, bee. c: cab. d: dab. Innerhalb eines Faches bleibt die Eingabereihenfolge (<span class="c-rule">stabil</span>).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Fach a, Buchstabe 2.</span> add hat d, ace hat c: ace, add.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Fach b, Buchstabe 2.</span> bad hat a, bee hat e: bad, bee.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Rest.</span> c und d haben nur ein Wort: fertig.</div></div>
+<div class="step">\[ \begin{aligned} \text{ein Aufruf} &\ge 2N + 2R && \text{Zählen, Verteilen, Zähler löschen und aufsummieren.} \\ \text{Mittel} &\approx N\log_R N && \text{Eigenschaft 10.4.} \end{aligned} \]</div>
+<div class="vn-res">✔ ace add bad bee cab dab</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 10.2</span> Most-Significant-Digit: in R Fächer verteilen, dann jedes Fach rekursiv</div>
@@ -1326,6 +1692,19 @@ inline int digit(char* A, int B)               // für C-Strings: die Ziffer ist
 
 <!-- ───────────── 10.4 ───────────── -->
 <div class="blatt" id="s104"><div class="kop"><span class="bn">§10.4</span><h2>Drei-Wege-Radix-Quicksort</h2><span class="tp">Prog. 10.3 · Fig. 10.10 · Eigenschaft 10.5</span></div></div>
+<div class="vonnull" id="vn-10-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §10.4</span>Drei-Wege-Radix-Quicksort: ein Schritt</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Teile <span class="c-par">she sea by the shore are</span> nach dem ersten Zeichen (d = 0) mit dem Pivot-Zeichen <span class="c-res">v = s</span> in drei Teile. An welcher Zeichenstelle geht es für jeden Teil weiter?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Wie Quicksort mit drei Teilen (Prog 7.5), aber verglichen wird nur ein <span class="c-rule">Zeichen</span>: kleiner, gleich oder größer als v an Stelle d.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Kleiner als s.</span> by (b), are (a).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Gleich s.</span> she, sea, shore. Diese stimmen im ersten Zeichen überein, also geht es bei ihnen mit d = 1 weiter.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Größer als s.</span> the (t).</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Weiter.</span> Kleiner- und Größer-Teil bleiben bei d = 0, weil ihre ersten Zeichen noch verschieden sein können.</div></div>
+<div class="step">\[ \begin{aligned} \Res{C_N} &\approx 2N\ln N \text{ Zeichenvergleiche} && \text{Eigenschaft 10.5, unabhängig von der Länge gemeinsamer Präfixe.} \end{aligned} \]</div>
+<div class="vn-res">✔ kleiner: by are (d = 0) · gleich: she sea shore (d = 1) · größer: the (d = 0)</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 10.3</span> Quicksort auf einem Zeichen, mit drei Teilen</div>
@@ -1369,6 +1748,19 @@ void quicksortX(Item a[], int l, int r, int d)
 
 <!-- ───────────── 10.5 ───────────── -->
 <div class="blatt" id="s105"><div class="kop"><span class="bn">§10.5</span><h2>LSD-Radixsort</h2><span class="tp">Prog. 10.4 · Fig. 10.14 · Eigenschaft 10.6</span></div></div>
+<div class="vonnull" id="vn-10-5">
+<div class="vn-ttl"><span class="vn-badge">Von null · §10.5</span>LSD-Radixsort mit Dezimalziffern</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Sortiere <span class="c-par">329 457 657 839 436 720 355</span> mit LSD-Radixsort (R = 10). Gib das Array nach jedem Durchlauf an.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">LSD von null.</span> Man sortiert zuerst nach der <span class="c-res">letzten</span> Ziffer, dann nach der vorletzten, zuletzt nach der ersten. Jeder Durchlauf muss <span class="c-rule">stabil</span> sein, sonst geht die Ordnung der vorigen Durchläufe verloren.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Einerstelle.</span> 0: 720 · 5: 355 · 6: 436 · 7: 457, 657 · 9: 329, 839. Ergebnis 720 355 436 457 657 329 839.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Zehnerstelle.</span> 2: 720, 329 · 3: 436, 839 · 5: 355, 457, 657. Ergebnis 720 329 436 839 355 457 657.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Hunderterstelle.</span> 3: 329, 355 · 4: 436, 457 · 6: 657 · 7: 720 · 8: 839. Ergebnis <span class="c-res">329 355 436 457 657 720 839</span>.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Warum stabil?</span> 329 und 355 haben dieselbe Hunderterziffer. Ihre Ordnung stammt aus dem Zehner-Durchlauf und darf nicht zerstört werden.</div></div>
+<div class="step">\[ \begin{aligned} \text{Durchläufe} &= \frac{w}{\lg R} = 3 && \text{drei Dezimalziffern.} \\ \Res{T} &= 3\,(2N + 2R) && \text{linear in N.} \end{aligned} \]</div>
+<div class="vn-res">✔ 720 355 436 457 657 329 839 → 720 329 436 839 355 457 657 → 329 355 436 457 657 720 839</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 10.4</span> Least-Significant-Digit: von hinten nach vorne, jedes Mal stabil</div>
@@ -1387,6 +1779,18 @@ void quicksortX(Item a[], int l, int r, int d)
 
 <!-- ───────────── 10.6 ───────────── -->
 <div class="blatt" id="s106"><div class="kop"><span class="bn">§10.6–10.7</span><h2>Leistung der Radixverfahren</h2><span class="tp">Eigenschaften 10.1–10.6 · Tab. 10.1 · sublineare Sortierverfahren</span></div></div>
+<div class="vonnull" id="vn-10-6">
+<div class="vn-ttl"><span class="vn-badge">Von null · §10.6</span>Radix gegen Quicksort in Zahlen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Es sind <span class="c-par">N = 10⁶</span> Schlüssel mit 32 Bit zu sortieren. Schätze die Schritte von LSD-Radixsort mit R = 2<sup>16</sup> und die Vergleiche von Quicksort.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Warum geht das unter N lg N?</span> Die <span class="c-rule">untere Schranke</span> lg N! gilt nur für Verfahren, die ausschließlich <span class="c-cond">vergleichen</span>. Radixsort schaut auf die Ziffern und ist deshalb nicht daran gebunden.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">LSD.</span> 32/16 = 2 Durchläufe mit je 2N + 2R = 2 000 000 + 131 072 Schritten: zusammen etwa 4,3 Millionen.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Quicksort.</span> 2N ln N = 2 · 10⁶ · 13,8 ≈ 27,6 Millionen Vergleiche.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Vorsicht.</span> Ein Radix-Schritt (Zähler lesen und schreiben) kostet anders als ein Vergleich. Der Faktor 6 ist also nur eine grobe Richtung.</div></div>
+<div class="step">\[ \begin{aligned} \text{LSD} &= 2\,(2\cdot 10^6 + 2\cdot 65\,536) \approx 4{,}3\cdot 10^6 && \text{Eigenschaft 10.6.} \\ \text{Quicksort} &= 2\cdot 10^6 \ln 10^6 \approx 27{,}6\cdot 10^6 && \text{Eigenschaft 7.2.} \end{aligned} \]</div>
+<div class="vn-res">✔ LSD ≈ 4,3 Mio. Schritte gegen Quicksort ≈ 27,6 Mio. Vergleiche</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§10.6 · Theorie</span> Alle Radix-Eigenschaften auf einen Blick</div>
@@ -1412,6 +1816,19 @@ void quicksortX(Item a[], int l, int r, int d)
 <div class="blatt part" id="k11"><div class="kop"><span class="bn">Kapitel 11</span><h2>Sortierverfahren für Spezialfälle</h2><span class="tp">Batcher · 0-1-Prinzip · Sortiernetzwerke · externes Sortieren · Buch S. 453–488</span></div></div>
 
 <div class="blatt" id="s111"><div class="kop"><span class="bn">§11.1</span><h2>Batchers Odd-Even-Mergesort</h2><span class="tp">Prog. 11.1 · 11.2 · Eigenschaften 11.1 · 11.2</span></div></div>
+<div class="vonnull" id="vn-11-1">
+<div class="vn-ttl"><span class="vn-badge">Von null · §11.1</span>Batchers Odd-Even-Merge von Hand</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Mische die sortierten Hälften <span class="c-par">1 4 | 2 3</span> mit Prog 11.2. Gib jeden Schritt an und zähle die Komparatoren.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Nicht-adaptiv von null.</span> Das Verfahren fragt nie „wie sehen die Daten aus?“. Es macht immer dieselben <span class="c-chg">compexch</span>, egal was drinsteht. Deshalb kann man es als festes Netz bauen.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">unshuffle.</span> Gerade Stellen (0, 2) nach vorne, ungerade (1, 3) nach hinten: 1 2 | 4 3.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Rekursiv mischen.</span> Vorne compexch(1, 2): passt. Hinten compexch(4, 3): <span class="c-chg">tauschen</span> → 1 2 3 4.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">shuffle.</span> Verzahnen der Hälften 1 2 und 3 4: 1 3 2 4.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Letzte Reihe.</span> compexch(a[1], a[2]) = (3, 2): tauschen → <span class="c-res">1 2 3 4</span>.</div></div>
+<div class="step">\[ \begin{aligned} \text{Komparatoren} &= 1 + 1 + 1 = 3 && \text{zwei rekursive und einer in der letzten Reihe.} \\ M(N) &= 2M(N/2) + \frac N2 - 1 && \text{für N = 4: 2 + 1 = 3.} \end{aligned} \]</div>
+<div class="vn-res">✔ Ergebnis 1 2 3 4 mit 3 Komparatoren</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§11.1 · Theorie</span> Nicht-adaptiv: immer dieselben Vergleiche, egal welche Daten</div>
@@ -1452,6 +1869,18 @@ void unshuffle(Item a[], int l, int r)           // Umkehrung: gerade Stellen na
 
 <!-- ───────────── 11.2 ───────────── -->
 <div class="blatt" id="s112"><div class="kop"><span class="bn">§11.2</span><h2>Sortiernetzwerke</h2><span class="tp">Prog. 11.4 · Fig. 11.7 · Eigenschaft 11.3</span></div></div>
+<div class="vonnull" id="vn-11-2">
+<div class="vn-ttl"><span class="vn-badge">Von null · §11.2</span>Ein Netz mit dem 0-1-Prinzip prüfen</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Beweise, dass das Netz mit den <span class="c-rule">Komparatoren</span> (0,1), (1,2), (0,1) jede Eingabe der Länge 3 sortiert.</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Komparator von null.</span> Ein Komparator (x, y) schreibt das Kleinere auf Linie x und das Größere auf Linie y.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">0-1-Prinzip.</span> Sortiert ein nicht-adaptives Netz alle Eingaben aus 0 und 1, dann sortiert es alle Eingaben (Eigenschaft 11.1). Statt 3! = 6 Permutationen prüft man 2³ = 8 Bitfolgen, und es gilt für beliebige Werte.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Argument.</span> (0,1) und (1,2) schieben die größte Zahl wie bei Bubble Sort ganz nach unten auf Linie 2. Danach sortiert (0,1) die zwei übrigen.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Probe.</span> z. B. 110 → (0,1): 110 → (1,2): 101 → (0,1): 011. Alle 8 Eingaben ergeben 000, 001, 011 oder 111.</div></div>
+<div class="step">\[ \begin{aligned} \text{zu prüfen} &= 2^3 = 8 \text{ Eingaben} && \text{0-1-Prinzip.} \\ \text{Stufen} &= 3 && \text{kein Komparator kann parallel laufen.} \end{aligned} \]</div>
+<div class="vn-res">✔ alle 8 Bitfolgen werden sortiert, also sortiert das Netz jede Eingabe</div>
+</details>
+</div>
 
 <div class="figure">
 <div class="ttl"><span class="n">Prog 11.4 · Fig 11.7</span> Das Batcher-Sortiernetz zum Ausprobieren</div>
@@ -1485,6 +1914,18 @@ void batchersort(Item a[], int l, int r)
 
 <!-- ───────────── 11.3–11.5 ───────────── -->
 <div class="blatt" id="s113"><div class="kop"><span class="bn">§11.3–11.5</span><h2>Externes Sortieren</h2><span class="tp">Sort-Merge · Ersetzungsauswahl · Polyphasen-Mischen · Eigenschaften 11.4–11.8</span></div></div>
+<div class="vonnull" id="vn-11-4">
+<div class="vn-ttl"><span class="vn-badge">Von null · §11.4</span>Durchläufe beim externen Sortieren</div>
+<div class="vn-task"><b class="t">Prüfungsaufgabe (für sich allein lösbar).</b> Zu sortieren sind <span class="c-par">N = 10⁹</span> Datensätze, der Speicher fasst <span class="c-par">M = 10⁶</span>, es gibt 2P = 16 Bänder (P = 8). Wie viele Durchläufe braucht ein P-Wege-Sort-Merge? Wie viele mit Ersetzungsauswahl?</div>
+<details><summary>Lösung von null, Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Kostenmodell von null.</span> Beim externen Sortieren ist ein Band- oder Plattenzugriff viel teurer als jeder Vergleich. Man zählt deshalb <span class="c-chg">Durchläufe</span>: einmal alle Daten lesen und schreiben.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Runs bilden.</span> Durchlauf 1: je M Datensätze einlesen, intern sortieren, als <span class="c-rule">Run</span> schreiben. Das sind N/M = 1000 Runs.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Mischen.</span> Jeder weitere Durchlauf mischt je P Runs zu einem: 1000 → 125 → 16 → 2 → 1, also ⌈log<sub>8</sub> 1000⌉ = 4 Mischdurchläufe.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Ersetzungsauswahl.</span> Ein Heap der Größe M erzeugt Runs der Länge etwa 2M (Eigenschaft 11.5): 500 Runs, ⌈log<sub>8</sub> 500⌉ = 3 Mischdurchläufe.</div></div>
+<div class="step">\[ \begin{aligned} \Res{\text{Durchläufe}} &= 1 + \lceil \log_8 1000 \rceil = 5 && \text{Eigenschaft 11.4.} \\ \text{mit Ersetzungsauswahl} &= 1 + \lceil \log_8 500 \rceil = 4 && \text{ein Durchlauf gespart.} \end{aligned} \]</div>
+<div class="vn-res">✔ 5 Durchläufe · mit Ersetzungsauswahl 4</div>
+</details>
+</div>
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§11.3 · Theorie</span> Wenn die Datei nicht in den Speicher passt</div>
@@ -3980,6 +4421,58 @@ if($('schPlot')){
   const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ Object.values(links).forEach(a => a.classList.remove('active')); const a = links[e.target.id]; if(a){ a.classList.add('active'); const ni = a.parentElement; ni.scrollLeft = a.offsetLeft - ni.clientWidth/2; } } }); }, {rootMargin:'-15% 0px -75% 0px'});
   targets.forEach(t => io.observe(t));
 })();
+})();
+</script>
+<script>
+/* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
+(function(){
+'use strict';
+const LB = window.LB = window.LB || {};
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 3 steht"], ["master", "Master-Anatomie", "Invariante + Vergleich + Bewegung"], ["erkennen", "Woran erkennbar?", "Sortier-Kino"]]], ["Kapitel 6 · Elementar", [["s61", "6.1 Spielregeln", "stabil, in-place, Prog 6.1"], ["s62", "6.2 Selection", "Minimum nach vorne, N²/2"], ["s63", "6.3 Insertion", "einfügen, N²/4, Inversionen"], ["s64", "6.4 Bubble", "Nachbarn tauschen, N²/2"], ["s65", "6.5 Vergleich", "Tab. 6.1, Stabilität"], ["s66", "6.6 Shellsort", "h-sortieren, N^1,5"], ["s68", "6.7–6.8 Index-Sort", "Zeiger tauschen, in-situ"], ["s69", "6.9 Listen", "Selection auf Liste"], ["s610", "6.10 Zählen", "Key-Indexed Counting, linear"]]], ["Kapitel 7 · Quicksort", [["s71", "7.1 Quicksort", "partition um a[r]"], ["s72", "7.2 Analyse", "2N ln N, worst N²/2"], ["s73", "7.3 Stack", "kleiner Teil zuerst, lg N"], ["s74", "7.4–7.5 Verbesserungen", "Cutoff, Median-of-3"], ["s76", "7.6 Duplikate", "3-Wege-Partition"], ["s78", "7.8 Selektion", "k-kleinstes, linear"]]], ["Kapitel 8 · Mergesort", [["s81", "8.1–8.2 Mischen", "merge, bitonisch"], ["s83", "8.3 Top-down", "N lg N, N−1 Merges"], ["s85", "8.5 Bottom-up", "Blöcke 1, 2, 4 …"], ["s86", "8.6 Analyse", "exakt, untere Schranke"], ["s87", "8.7 Listen", "Links mischen"]]], ["Kapitel 9 · Heaps", [["s91", "9.1 PQ-ADT", "insert, getmax, Tab. 9.1"], ["s92", "9.2 Heap", "Baum im Array, 2k, 2k+1"], ["s93", "9.3 fixUp/fixDown", "lg N reparieren"], ["s94", "9.4 Heapsort", "bauen < 2N, < 2N lg N"], ["s96", "9.5–9.7 Erweiterungen", "Index-PQ, Binomial"]]], ["Kapitel 10 · Radix", [["s101", "10.1 Bits", "digit(A, B), Radix R"], ["s102", "10.2 Binär-Quick", "nach Bits teilen"], ["s103", "10.3 MSD", "Fächer, rekursiv"], ["s104", "10.4 3-Wege-Radix", "Zeichen-Quicksort"], ["s105", "10.5 LSD", "hinten zuerst, stabil"], ["s106", "10.6 Analyse", "linear vs. N lg N"]]], ["Kapitel 11 · Spezial", [["s111", "11.1 Batcher", "0-1-Prinzip, Odd-Even"], ["s112", "11.2 Netzwerke", "Komparatoren, parallel"], ["s113", "11.3–11.5 Extern", "Runs, P-Wege-Mischen"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele"], ["werkbank", "🛠 Werkbank", "Übungsblätter lösen"], ["pruefung", "🎯 Prüfungstabelle", "alle Verfahren"], ["quiz", "Quiz", "33 Fragen"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 4"]]]];
+const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Pivot*", "Partitionselement", "gewinnt"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "Partitionieren", "partitionieren", "partitioniert", "Partition", "Mischen", "mischen", "gemischt", "versickern", "Versickern", "befördern", "Beförderung*", "Durchlauf", "Durchläufe", "verteilen", "verteilt"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "stabil", "instabil", "nicht stabil", "in-place", "adaptiv", "nicht-adaptiv", "nicht adaptiv", "Inversion*", "Wächter*", "Heap-Bedingung", "heap-geordnet", "Heap*", "Prioritätswarteschlange*", "bitonisch*", "h-sortiert", "Sortiernetz*", "Komparator*", "0-1-Prinzip", "Entscheidungsbaum*", "Run", "Runs", "Radix", "Ziffer*", "Fach", "Fächer", "Teile und Herrsche", "Teile-und-Herrsche-Baum"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife", "Zeiger", "Zeiger i", "Zeiger j"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Cutoff", "gekreuzt", "kreuzen"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "aux", "Band", "Bänder", "Puffer"]};
+/* ---------- Menü ---------- */
+const menu = document.getElementById('lbMenu');
+if(menu){
+  menu.innerHTML = '<div class="lbm-in"><div class="lbm-head"><b>Inhalt · Teil 3 · Sortieren</b><span class="small muted">Klick springt hin · Esc schließt</span><button class="lbburger" data-close>✕ schließen</button></div><div class="lbm-grid">' +
+    MENU.map(g => '<div><h5>'+g[0]+'</h5>'+g[1].map(it => '<a href="#'+it[0]+'"><b>'+it[1]+'</b><span>'+it[2]+'</span></a>').join('')+'</div>').join('') +
+    '</div><div class="lbm-tools"><button class="lbburger" id="lbVnAll">alle „Von null“-Lösungen öffnen</button><button class="lbburger" id="lbVnNone">alle schließen</button></div></div>';
+  const open = () => document.body.classList.add('menu-open'), close = () => document.body.classList.remove('menu-open');
+  document.querySelectorAll('#lbBurger,#lbFab').forEach(b => b.addEventListener('click', open));
+  menu.addEventListener('click', e => { if(e.target === menu || e.target.closest('[data-close]') || e.target.closest('a')) close(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+  const vn = o => document.querySelectorAll('.vonnull details').forEach(d => d.open = o);
+  document.getElementById('lbVnAll').addEventListener('click', () => vn(true));
+  document.getElementById('lbVnNone').addEventListener('click', () => vn(false));
+}
+/* ---------- Schlüsselwörter färben ---------- */
+const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const ROLE = {}; const pats = [];
+Object.keys(KW).forEach(r => KW[r].forEach(t => { const base = t.replace(/\*$/, ''); ROLE[base] = r; pats.push({base, suf: t.endsWith('*')}); }));
+pats.sort((a, b) => b.base.length - a.base.length);
+const RE = new RegExp('(?<![\\p{L}\\d_])(' + pats.map(p => esc(p.base) + (p.suf ? '(?:e|en|n|s|es|er|ern)?' : '')).join('|') + ')(?![\\p{L}\\d_])', 'gu');
+const SKIP = 'script,style,pre,code,.katex,svg,textarea,input,select,button,option,table.codet,.hist,.cols,.werk-out,.readout,.cells,.bits,.var,.frames,.stackv,h1,h2,h3,h4,.lbtop,#lbMenu,.kw,.tr-title,.tnote,.lb,.num,.verdict,.ttl,.kop,.legend,[class*="c-"],[style*="color"],.plot,.anat-sym,.s,.vnn,.vn-res,summary,th';
+function roleOf(m){ if(ROLE[m]) return ROLE[m]; for(const suf of ['ern','en','er','es','e','n','s']) if(m.endsWith(suf) && ROLE[m.slice(0, -suf.length)]) return ROLE[m.slice(0, -suf.length)]; return null; }
+LB.kwColor = function(root){
+  if(!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => (!n.nodeValue.trim() || (n.parentElement && n.parentElement.closest(SKIP))) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; let n; while((n = w.nextNode())) nodes.push(n);
+  nodes.forEach(t => {
+    const s = t.nodeValue; RE.lastIndex = 0; if(!RE.test(s)) return; RE.lastIndex = 0;
+    const f = document.createDocumentFragment(); let last = 0, m;
+    while((m = RE.exec(s))){ const r = roleOf(m[0]); if(!r) continue;
+      if(m.index > last) f.appendChild(document.createTextNode(s.slice(last, m.index)));
+      const sp = document.createElement('span'); sp.className = 'kw kw-' + r; sp.textContent = m[0]; f.appendChild(sp); last = m.index + m[0].length; }
+    if(last === 0) return;
+    if(last < s.length) f.appendChild(document.createTextNode(s.slice(last)));
+    t.parentNode.replaceChild(f, t);
+  });
+};
+function patch(){
+  const T = LB.Tracer; if(!T || T.prototype.__kw) return;
+  const s0 = T.prototype.show; T.prototype.__kw = true;
+  T.prototype.show = function(k){ s0.call(this, k); const m = this.q && this.q('.tr-msg'); if(m) LB.kwColor(m); };
+}
+window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
 </script>
 </body>
