@@ -1297,6 +1297,43 @@ T_1 &= T_0 = 0 && \text{Eine Datei der Größe 0 oder 1 braucht keinen Eintrag.}
 </div>
 
 <!-- ───────────── 8.3 ───────────── -->
+<!--BL:gp-p3-isect-->
+<div class="figure blgroup" id="gp-p3-isect">
+<div class="ttl"><span class="n">Gedächtnisprotokoll</span> Klausuraufgabe: C++-Schnittmenge mit Iteratoren</div>
+<div class="sub">Aufgabe aus dem Gedächtnisprotokoll der Klausur vom 1. Februar 2019 mit ausführlicher Lösung. Es gibt keine offizielle Musterlösung: Die Begründungen stehen deshalb vollständig da, damit du jede Antwort selbst nachprüfen kannst.</div>
+<div class="blsol" id="gp-6">
+<div class="vn-ttl"><span class="bl-badge">Gedächtnisprotokoll WS 18/19 · Aufgabe 6</span>C++: Schnittmenge sortierter Bereiche mit Iteratoren <span class="bl-stars">[10+ Punkte]</span></div>
+<div class="vn-task">Schreibe template &lt;class In, class Out&gt; Out intersection(In first1, In last1, In first2, In last2, Out result), die die Schnittmenge zweier sortierter Container in einen neuen Container schreibt. Gib die Zeitkomplexität in Abhängigkeit von n1 = |[first1, last1)| und n2 = |[first2, last2)| für den günstigsten und den ungünstigsten Fall an.</div>
+<details><summary>Lösung Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Idee von null.</span> Dasselbe Muster wie beim Mischen in Mergesort (Prog 8.1): Zwei Zeiger laufen gleichzeitig durch zwei <b>sortierte</b> Folgen. Man vergleicht nur die beiden vorderen Elemente. Das kleinere kann nicht im anderen Bereich vorkommen, denn dort folgen nur noch größere. Also darf man es überspringen. Sind beide gleich, gehört das Element zum Schnitt.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Nur operator&lt;.</span> Wie die STL-Algorithmen benutzt der Code nur &lt;: „gleich“ heißt „weder a &lt; b noch b &lt; a“. So funktioniert er für jeden Typ mit strenger schwacher Ordnung. Halb offene Bereiche [first, last) wie in der STL: last zeigt hinter das letzte Element.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Code.</span> <pre class="cpp">template &lt;class In, class Out&gt;
+Out intersection(In first1, In last1, In first2, In last2, Out result)
+  {
+    while (first1 != last1 &amp;&amp; first2 != last2)   // solange beide Bereiche Elemente haben
+      {
+        if (*first1 &lt; *first2)                    // links kleiner: kann nicht im Schnitt sein,
+          ++first1;                               //   denn rechts kommen nur noch größere
+        else if (*first2 &lt; *first1)               // rechts kleiner: ebenso
+          ++first2;
+        else                                      // weder kleiner noch größer: gleich
+          {
+            *result = *first1;                    // Element gehört zum Schnitt: schreiben
+            ++result;                             // Ausgabeposition weiter
+            ++first1; ++first2;                   // in beiden Bereichen weiter
+          }
+      }
+    return result;                                // Ende des geschriebenen Bereichs
+  }</pre></div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Beispiel.</span> [1, 3, 5, 7, 9] ∩ [3, 4, 5, 9, 10]:<div class="bl-mv">1 &lt; 3 ⇒ ++first1 · 3 == 3 ⇒ <b>3 ausgeben</b>, beide weiter · 4 &lt; 5 ⇒ ++first2 · 5 == 5 ⇒ <b>5 ausgeben</b>, beide weiter · 7 &lt; 9 ⇒ ++first1 · 9 == 9 ⇒ <b>9 ausgeben</b>, beide weiter</div>Ergebnis [3, 5, 9] nach 6 Schleifendurchläufen.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Ungünstigster Fall.</span> Jeder Durchlauf rückt mindestens einen Iterator weiter. Die Schleife endet, wenn einer am Ende ist. Also höchstens n1 + n2 − 1 Durchläufe: <span class="c-res">Θ(n1 + n2)</span>. Beispiel: die Bereiche verzahnen sich (1, 3, 5, … und 2, 4, 6, …).</div></div>
+<div class="vn-step"><span class="vnn">6</span><div><span class="h">Günstigster Fall.</span> Die Schleife endet, sobald der <b>kürzere</b> Bereich erschöpft ist. Das geht frühestens nach min(n1, n2) Durchläufen, z. B. wenn alle Elemente gleich sind oder alle Elemente des kürzeren Bereichs kleiner sind als das erste des anderen: <span class="c-res">Θ(min(n1, n2))</span>.</div></div>
+<div class="step">\[ \begin{aligned} \Res{T_{\text{worst}}} &= n_1 + n_2 - 1 && \text{jeder Durchlauf verbraucht mindestens ein Element.} \\ \Res{T_{\text{best}}} &= \min(n_1, n_2) && \text{der kürzere Bereich ist sofort erschöpft.} \end{aligned} \]</div>
+<div class="vn-res">✔ O(n1 + n2) im ungünstigsten, Θ(min(n1, n2)) im günstigsten Fall</div>
+</details>
+</div>
+</div>
+<!--/BL:gp-p3-isect-->
 <div class="blatt" id="s83"><div class="kop"><span class="bn">§8.3</span><h2>Top-down Mergesort</h2><span class="tp">Prog. 8.3 · Fig. 8.2 · 8.3 · Teile-und-Herrsche-Baum</span></div></div>
 <div class="vonnull" id="vn-8-3">
 <div class="vn-ttl"><span class="vn-badge">Von null · §8.3</span>Top-down Mergesort komplett</div>
@@ -1571,6 +1608,25 @@ h &\ge \lg N! && \text{Logarithmus: } h \text{ ist die Zahl der Vergleiche im sc
 </div>
 
 <!-- ───────────── 8.7 ───────────── -->
+<!--BL:gp-p3-lb-->
+<div class="figure blgroup" id="gp-p3-lb">
+<div class="ttl"><span class="n">Gedächtnisprotokoll</span> Klausuraufgabe zur unteren Schranke und zu Quicksort</div>
+<div class="sub">Aufgabe aus dem Gedächtnisprotokoll der Klausur vom 1. Februar 2019 mit ausführlicher Lösung. Es gibt keine offizielle Musterlösung: Die Begründungen stehen deshalb vollständig da, damit du jede Antwort selbst nachprüfen kannst.</div>
+<div class="blsol" id="gp-5">
+<div class="vn-ttl"><span class="bl-badge">Gedächtnisprotokoll WS 18/19 · Aufgabe 5</span>Untere Schranke fürs Sortieren und Quicksort im Worst Case</div>
+<div class="vn-task">a) Was ist die untere Grenze für die Zeitkomplexität eines allgemeinen Sortierverfahrens für Arrays der Länge n (nur Ω, O, Θ)? b) Nenne ein Verfahren, das diese Grenze selbst im ungünstigsten Fall erreicht. c) Welche Zeit- und Speicherkomplexität hat ein (gut implementierter) Quicksort im ungünstigsten Fall?</div>
+<details><summary>Lösung Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">a) Entscheidungsbaum.</span> „Allgemein“ heißt vergleichsbasiert. Jede Folge von Vergleichen ist ein Weg in einem binären Entscheidungsbaum. Er muss alle n! Anordnungen unterscheiden, hat also mindestens n! Blätter und damit Höhe ≥ lg n! (§8.6).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">a) Abschätzen.</span> lg n! = Σ lg i ≥ (n/2) · lg(n/2), denn die obere Hälfte der Faktoren ist ≥ n/2. Also lg n! = Ω(n log n). Antwort: <span class="c-res">Ω(n log n)</span>.</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">b)</span> Mergesort (immer ≈ n lg n Vergleiche, Eigenschaft 8.1) oder Heapsort (&lt; 2n lg n, Eigenschaft 9.5). Beide sind im schlechtesten Fall O(n log n), also Θ(n log n). Quicksort nicht: sein Worst Case ist quadratisch.</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">c) Zeit.</span> Im schlechtesten Fall entfernt jede Partition nur das Pivot (z. B. sortierte Eingabe mit Pivot am Rand): n + (n − 1) + … ≈ n²/2 Vergleiche, also <span class="c-res">Θ(n²)</span> (Eigenschaft 7.1).</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">c) Speicher.</span> „Gut implementiert“ heißt: den <b>kleineren</b> Teil zuerst rekursiv bzw. mit dem Stack bearbeiten, den größeren iterativ (Prog 7.3). Dann ist die Stacktiefe höchstens lg n: <span class="c-res">O(log n)</span> Zusatzspeicher (Eigenschaft 7.3). Naiv wären es im schlechtesten Fall O(n) Aufrufrahmen.</div></div>
+<div class="step">\[ \begin{aligned} \lg n! &\ge \tfrac n2 \lg\tfrac n2 && \text{die größere Hälfte der Faktoren ist mindestens $n/2$.} \\  &= \Omega(n\log n) && \text{untere Schranke für jedes Vergleichsverfahren.} \end{aligned} \]</div>
+<div class="vn-res">✔ a) Ω(n log n) · b) Mergesort oder Heapsort · c) Zeit Θ(n²), Speicher O(log n)</div>
+</details>
+</div>
+</div>
+<!--/BL:gp-p3-lb-->
 <div class="blatt" id="s87"><div class="kop"><span class="bn">§8.7–8.8</span><h2>Mergesort für Listen · Rekursion revisited</h2><span class="tp">Prog. 8.6 · 8.7</span></div></div>
 <div class="vonnull" id="vn-8-7">
 <div class="vn-ttl"><span class="vn-badge">Von null · §8.7</span>Listen mischen und Stabilität</div>
@@ -1692,6 +1748,26 @@ class PQ                                  // ungeordnetes Array
 </div>
 
 <!-- ───────────── 9.2 ───────────── -->
+<!--BL:gp-p3-pq-->
+<div class="figure blgroup" id="gp-p3-pq">
+<div class="ttl"><span class="n">Gedächtnisprotokoll</span> Klausuraufgabe zu PQ-Axiomen</div>
+<div class="sub">Aufgabe aus dem Gedächtnisprotokoll der Klausur vom 1. Februar 2019 mit ausführlicher Lösung. Es gibt keine offizielle Musterlösung: Die Begründungen stehen deshalb vollständig da, damit du jede Antwort selbst nachprüfen kannst.</div>
+<div class="blsol" id="gp-4">
+<div class="vn-ttl"><span class="bl-badge">Gedächtnisprotokoll WS 18/19 · Aufgabe 4</span>Queue-Axiome zur Prioritätswarteschlange umbauen</div>
+<div class="vn-task">Gegeben sind die Axiome der Queue: empty(new()), !empty(push(q, t)), pop(push(q, t)) = empty(q) ? q : push(pop(q), t), top(push(q, t)) = empty(q) ? t : top(q). Vorbedingungen pre(pop(t)) := !empty(t), pre(front(t)) := !empty(t). Ändere die Axiome so, dass sie für eine Prioritätswarteschlange gelten (top liefert das größte Element, pop entfernt es).</div>
+<details><summary>Lösung Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Was bedeuten die Queue-Axiome?</span> push(q, t) hängt t hinten an. Ist q leer, ist t das einzige Element: Es ist vorne (top) und pop macht die Queue wieder leer. Sonst bleibt das Element vorne, das schon in q vorne war: top(push(q, t)) = top(q), und pop entfernt dieses, t bleibt hinten: push(pop(q), t). Das ist FIFO.</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Was ändert sich bei der PQ?</span> Vorne steht nicht das älteste, sondern das größte Element (§9.1: remove the maximum). Nach push(q, t) ist das Maximum entweder t oder das bisherige Maximum top(q).</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">top.</span> top(push(q, t)) = empty(q) ? t : (t &gt; top(q) ? t : top(q)). Kurz: max(t, top(q)).</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">pop.</span> pop(push(q, t)) = empty(q) ? q : (t &gt; top(q) ? q : push(pop(q), t)). Ist t das neue Maximum, entfernt pop genau t, und übrig bleibt q. Sonst entfernt pop das alte Maximum aus q, und t kommt wieder hinein.</div></div>
+<div class="vn-step"><span class="vnn">5</span><div><span class="h">Gleiche Prioritäten.</span> Mit dem strikten Vergleich t &gt; top(q) bleibt bei Gleichstand das ältere Element vorne: Unter gleich großen Elementen verhält sich die PQ wie eine Queue. Mit ≥ wäre es umgekehrt (LIFO unter Gleichen). Beides ist korrekt; man sollte die Wahl hinschreiben.</div></div>
+<div class="vn-step"><span class="vnn">6</span><div><span class="h">Unverändert.</span> empty(new()) und !empty(push(q, t)) bleiben gleich. Die Vorbedingungen ebenfalls; im Blatt steht pre(front(t)), gemeint ist pre(top(t)) := !empty(t).</div></div>
+<div class="vn-step"><span class="vnn">7</span><div><span class="h">Probe mit Beispiel.</span> q = push(push(new, 3), 7). top(q): empty(push(new, 3))? nein, 7 &gt; top(push(new, 3)) = 3 ⇒ 7. pop(q): 7 &gt; 3 ⇒ Ergebnis push(new, 3), also bleibt 3. Stimmt.</div></div>
+<div class="vn-res">✔ top(push(q,t)) = empty(q) ? t : max(t, top(q)) · pop(push(q,t)) = empty(q) ? q : (t > top(q) ? q : push(pop(q), t))</div>
+</details>
+</div>
+</div>
+<!--/BL:gp-p3-pq-->
 <div class="blatt" id="s92"><div class="kop"><span class="bn">§9.2</span><h2>Die Datenstruktur Heap</h2><span class="tp">Def. 9.2 · Eigenschaft 9.1 · Fig. 9.1–9.2</span></div></div>
 <div class="vonnull" id="vn-9-2">
 <div class="vn-ttl"><span class="vn-badge">Von null · §9.2</span>Heap erkennen und navigieren</div>
@@ -5211,7 +5287,7 @@ if($('schPlot')){
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 3 steht"], ["master", "Master-Anatomie", "Invariante + Vergleich + Bewegung"], ["erkennen", "Woran erkennbar?", "Sortier-Kino"]]], ["Kapitel 6 · Elementar", [["s61", "6.1 Spielregeln", "stabil, in-place, Prog 6.1"], ["s62", "6.2 Selection", "Minimum nach vorne, N²/2"], ["s63", "6.3 Insertion", "einfügen, N²/4, Inversionen"], ["s64", "6.4 Bubble", "Nachbarn tauschen, N²/2"], ["s65", "6.5 Vergleich", "Tab. 6.1, Stabilität"], ["s66", "6.6 Shellsort", "h-sortieren, N^1,5"], ["s68", "6.7–6.8 Index-Sort", "Zeiger tauschen, in-situ"], ["s69", "6.9 Listen", "Selection auf Liste"], ["s610", "6.10 Zählen", "Key-Indexed Counting, linear"]]], ["Kapitel 7 · Quicksort", [["s71", "7.1 Quicksort", "partition um a[r]"], ["s72", "7.2 Analyse", "2N ln N, worst N²/2"], ["s73", "7.3 Stack", "kleiner Teil zuerst, lg N"], ["s74", "7.4–7.5 Verbesserungen", "Cutoff, Median-of-3"], ["s76", "7.6 Duplikate", "3-Wege-Partition"], ["s78", "7.8 Selektion", "k-kleinstes, linear"]]], ["Kapitel 8 · Mergesort", [["s81", "8.1–8.2 Mischen", "merge, bitonisch"], ["s83", "8.3 Top-down", "N lg N, N−1 Merges"], ["s85", "8.5 Bottom-up", "Blöcke 1, 2, 4 …"], ["s86", "8.6 Analyse", "exakt, untere Schranke"], ["s87", "8.7 Listen", "Links mischen"]]], ["Kapitel 9 · Heaps", [["s91", "9.1 PQ-ADT", "insert, getmax, Tab. 9.1"], ["s92", "9.2 Heap", "Baum im Array, 2k, 2k+1"], ["s93", "9.3 fixUp/fixDown", "lg N reparieren"], ["s94", "9.4 Heapsort", "bauen < 2N, < 2N lg N"], ["s96", "9.5–9.7 Erweiterungen", "Index-PQ, Binomial"]]], ["Kapitel 10 · Radix", [["s101", "10.1 Bits", "digit(A, B), Radix R"], ["s102", "10.2 Binär-Quick", "nach Bits teilen"], ["s103", "10.3 MSD", "Fächer, rekursiv"], ["s104", "10.4 3-Wege-Radix", "Zeichen-Quicksort"], ["s105", "10.5 LSD", "hinten zuerst, stabil"], ["s106", "10.6 Analyse", "linear vs. N lg N"]]], ["Kapitel 11 · Spezial", [["s111", "11.1 Batcher", "0-1-Prinzip, Odd-Even"], ["s112", "11.2 Netzwerke", "Komparatoren, parallel"], ["s113", "11.3–11.5 Extern", "Runs, P-Wege-Mischen"]]], ["Übungsblätter gelöst", [["bl-quick", "Quicksort", "6 Aufgaben, Pivot erstes Element"], ["bl-merge", "Mergesort", "6 Aufgaben, N−1 Merges"], ["bl-heaperk", "Heap-Erkennung", "12 Aufgaben Multiple Choice"], ["bl-heapkon", "Heap-Konstruktion", "16 Aufgaben bottom-up / sift-up"], ["bl-heapsort", "Heapsort", "6 Aufgaben, Zwischenheaps"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele"], ["werkbank", "🛠 Werkbank", "Übungsblätter lösen"], ["pruefung", "🎯 Prüfungstabelle", "alle Verfahren"], ["quiz", "Quiz", "33 Fragen"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 4"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 3 steht"], ["master", "Master-Anatomie", "Invariante + Vergleich + Bewegung"], ["erkennen", "Woran erkennbar?", "Sortier-Kino"]]], ["Kapitel 6 · Elementar", [["s61", "6.1 Spielregeln", "stabil, in-place, Prog 6.1"], ["s62", "6.2 Selection", "Minimum nach vorne, N²/2"], ["s63", "6.3 Insertion", "einfügen, N²/4, Inversionen"], ["s64", "6.4 Bubble", "Nachbarn tauschen, N²/2"], ["s65", "6.5 Vergleich", "Tab. 6.1, Stabilität"], ["s66", "6.6 Shellsort", "h-sortieren, N^1,5"], ["s68", "6.7–6.8 Index-Sort", "Zeiger tauschen, in-situ"], ["s69", "6.9 Listen", "Selection auf Liste"], ["s610", "6.10 Zählen", "Key-Indexed Counting, linear"]]], ["Kapitel 7 · Quicksort", [["s71", "7.1 Quicksort", "partition um a[r]"], ["s72", "7.2 Analyse", "2N ln N, worst N²/2"], ["s73", "7.3 Stack", "kleiner Teil zuerst, lg N"], ["s74", "7.4–7.5 Verbesserungen", "Cutoff, Median-of-3"], ["s76", "7.6 Duplikate", "3-Wege-Partition"], ["s78", "7.8 Selektion", "k-kleinstes, linear"]]], ["Kapitel 8 · Mergesort", [["s81", "8.1–8.2 Mischen", "merge, bitonisch"], ["s83", "8.3 Top-down", "N lg N, N−1 Merges"], ["s85", "8.5 Bottom-up", "Blöcke 1, 2, 4 …"], ["s86", "8.6 Analyse", "exakt, untere Schranke"], ["s87", "8.7 Listen", "Links mischen"]]], ["Kapitel 9 · Heaps", [["s91", "9.1 PQ-ADT", "insert, getmax, Tab. 9.1"], ["s92", "9.2 Heap", "Baum im Array, 2k, 2k+1"], ["s93", "9.3 fixUp/fixDown", "lg N reparieren"], ["s94", "9.4 Heapsort", "bauen < 2N, < 2N lg N"], ["s96", "9.5–9.7 Erweiterungen", "Index-PQ, Binomial"]]], ["Kapitel 10 · Radix", [["s101", "10.1 Bits", "digit(A, B), Radix R"], ["s102", "10.2 Binär-Quick", "nach Bits teilen"], ["s103", "10.3 MSD", "Fächer, rekursiv"], ["s104", "10.4 3-Wege-Radix", "Zeichen-Quicksort"], ["s105", "10.5 LSD", "hinten zuerst, stabil"], ["s106", "10.6 Analyse", "linear vs. N lg N"]]], ["Kapitel 11 · Spezial", [["s111", "11.1 Batcher", "0-1-Prinzip, Odd-Even"], ["s112", "11.2 Netzwerke", "Komparatoren, parallel"], ["s113", "11.3–11.5 Extern", "Runs, P-Wege-Mischen"]]], ["Übungsblätter gelöst", [["bl-quick", "Quicksort", "6 Aufgaben, Pivot erstes Element"], ["bl-merge", "Mergesort", "6 Aufgaben, N−1 Merges"], ["bl-heaperk", "Heap-Erkennung", "12 Aufgaben Multiple Choice"], ["bl-heapkon", "Heap-Konstruktion", "16 Aufgaben bottom-up / sift-up"], ["bl-heapsort", "Heapsort", "6 Aufgaben, Zwischenheaps"], ["gp-p3-pq", "Klausur: PQ-Axiome", "Gedächtnisprotokoll A4"], ["gp-p3-isect", "Klausur: Schnittmenge C++", "Gedächtnisprotokoll A6"], ["gp-p3-lb", "Klausur: untere Schranke", "Gedächtnisprotokoll A5"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele"], ["werkbank", "🛠 Werkbank", "Übungsblätter lösen"], ["pruefung", "🎯 Prüfungstabelle", "alle Verfahren"], ["quiz", "Quiz", "33 Fragen"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 4"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Pivot*", "Partitionselement", "gewinnt"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "Partitionieren", "partitionieren", "partitioniert", "Partition", "Mischen", "mischen", "gemischt", "versickern", "Versickern", "befördern", "Beförderung*", "Durchlauf", "Durchläufe", "verteilen", "verteilt"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "stabil", "instabil", "nicht stabil", "in-place", "adaptiv", "nicht-adaptiv", "nicht adaptiv", "Inversion*", "Wächter*", "Heap-Bedingung", "heap-geordnet", "Heap*", "Prioritätswarteschlange*", "bitonisch*", "h-sortiert", "Sortiernetz*", "Komparator*", "0-1-Prinzip", "Entscheidungsbaum*", "Run", "Runs", "Radix", "Ziffer*", "Fach", "Fächer", "Teile und Herrsche", "Teile-und-Herrsche-Baum"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife", "Zeiger", "Zeiger i", "Zeiger j"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Cutoff", "gekreuzt", "kreuzen"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "aux", "Band", "Bänder", "Puffer"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');

@@ -271,6 +271,34 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .vonnull .vn-step .h{font-weight:700}
 .vonnull .vn-res{display:inline-block;margin:.5rem 0 .2rem;padding:.35rem .8rem;border-radius:8px;font-weight:700;border:1.5px solid var(--idx);color:var(--idx);background:color-mix(in srgb, var(--idx) 10%, transparent)}
 .vonnull code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:5px;padding:0 .3rem}
+/* ===== BLATT-ADDON ===== */
+.blgroup{margin:1.4rem 0}
+.blgroup>.ttl .n{background:rgba(88,166,255,.16)!important;color:var(--par,#58a6ff)!important}
+.blsol{border:1.6px solid var(--par);border-radius:14px;background:var(--lbpanel);padding:.9rem 1.1rem .7rem;margin:.9rem 0}
+.blsol .vn-ttl{display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem;font-size:1.12rem;font-weight:700;margin-bottom:.3rem}
+.blsol .bl-badge{font-family:'JetBrains Mono',Consolas,monospace;font-size:.72rem;font-weight:700;color:#fff;background:var(--par);border-radius:6px;padding:.16rem .55rem}
+.blsol .bl-stars{color:var(--chg);font-size:.85rem}
+.blsol .vn-task{border-left:4px solid var(--par);background:var(--lbpanel2);border-radius:8px;padding:.55rem .9rem;margin:.4rem 0 .5rem;line-height:1.6}
+.blsol details{margin-top:.2rem}
+.blsol summary{cursor:pointer;font-weight:700;color:var(--par);padding:.3rem 0}
+.blsol .vn-step{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.6rem;align-items:start;margin:.5rem 0;line-height:1.55}
+.blsol .vnn{display:inline-flex;align-items:center;justify-content:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--par);color:#fff;font-weight:700;font-size:.8rem}
+.blsol .vn-step .h{font-weight:700}
+.blsol .vn-res{display:inline-block;margin:.5rem 0 .2rem;padding:.35rem .8rem;border-radius:8px;font-weight:700;border:1.5px solid var(--idx);color:var(--idx);background:color-mix(in srgb, var(--idx) 10%, transparent)}
+.blsol .bl-ok{display:inline-block;margin:.3rem 0 .2rem .4rem;font-size:.82rem;color:var(--idx)}
+.blsol .bl-mv{font-family:'JetBrains Mono',Consolas,monospace;font-size:.8rem;line-height:1.6;color:var(--lbmuted)}
+.blsol .bl-mv b{color:var(--lbink)}
+.blarr{display:flex;flex-wrap:wrap;gap:3px;margin:.35rem 0}
+.blarr .c{min-width:2.1rem;text-align:center;border:1px solid var(--lbline);border-radius:5px;padding:.08rem .25rem;font-family:'JetBrains Mono',Consolas,monospace;font-size:.82rem;font-weight:700;background:var(--lbpanel2)}
+.blarr .c i{display:block;font-style:normal;font-size:.6rem;font-weight:400;color:var(--lbmuted)}
+.blarr .c.piv{border-color:var(--chg);background:color-mix(in srgb, var(--chg) 25%, transparent)}
+.blarr .c.fin{border-color:var(--idx);background:color-mix(in srgb, var(--idx) 22%, transparent)}
+.blarr .c.sw{border-color:var(--res);background:color-mix(in srgb, var(--res) 22%, transparent)}
+.blarr .c.cmp{border-color:var(--cond);background:color-mix(in srgb, var(--cond) 18%, transparent)}
+.blarr .c.out{opacity:.35}
+.blarr .lab{align-self:center;font-size:.78rem;color:var(--lbmuted);margin-right:.4rem}
+.bltree{font-family:'JetBrains Mono',Consolas,monospace;font-size:.8rem;line-height:1.35;white-space:pre;overflow-x:auto;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:8px;padding:.4rem .7rem;margin:.35rem 0}
+.blsol svg{width:auto!important;max-width:100%;height:auto;display:block;margin:.3rem 0}
 </style>
 </head>
 <body>
@@ -1735,6 +1763,23 @@ Jeder Wert wird genau einmal berechnet, also Laufzeit \(\Res{O(N)}\).</div>
 </div>
 
 <!-- ───────────── 5.7 ───────────── -->
+<!--BL:gp-p2-thread-->
+<div class="figure blgroup" id="gp-p2-thread">
+<div class="ttl"><span class="n">Gedächtnisprotokoll</span> Klausuraufgabe zur Fädelung</div>
+<div class="sub">Aufgabe aus dem Gedächtnisprotokoll der Klausur vom 1. Februar 2019 mit ausführlicher Lösung. Es gibt keine offizielle Musterlösung: Die Begründungen stehen deshalb vollständig da, damit du jede Antwort selbst nachprüfen kannst.</div>
+<div class="blsol" id="gp-1d">
+<div class="vn-ttl"><span class="bl-badge">Gedächtnisprotokoll WS 18/19 · Aufgabe 1 d</span>Multiple Choice: Wo ist Fädelung sinnvoll?</div>
+<div class="vn-task">Wo ist Fädelung sinnvoll? □ hohler Baum (Daten nur in Blättern) □ Binärbaum (Daten in Blättern und Knoten) □ doppelt verkettete Liste</div>
+<details><summary>Lösung Schritt für Schritt</summary>
+<div class="vn-step"><span class="vnn">1</span><div><span class="h">Was ist Fädelung?</span> Ein <span class="c-rule">gefädelter</span> (threaded) Baum nutzt Zeiger, die sonst leer wären, als „Fäden“ zum Nachfolger (bzw. Vorgänger) in der Durchlaufreihenfolge. Dann kann man ohne Stack und ohne Rekursion traversieren (§5.6 braucht sonst einen Stack oder Rekursion).</div></div>
+<div class="vn-step"><span class="vnn">2</span><div><span class="h">Binärbaum.</span> Ein Binärbaum mit n Knoten hat n + 1 leere Links (Eigenschaft 5.4 aus Teil 2). Sie kosten Platz, tragen aber keine Information. Als Fäden zum Inorder-Nachfolger machen sie den Durchlauf billig. ✓</div></div>
+<div class="vn-step"><span class="vnn">3</span><div><span class="h">Hohler Baum.</span> Im hohlen Baum stehen die Daten nur in den Blättern (wie im B⁺-Baum aus §16.3). Verkettet man die Blätter der Reihe nach, kann man alle Daten sortiert durchlaufen und Bereichsanfragen beantworten, ohne wieder nach oben zu steigen. Das ist Fädelung der Blattebene. ✓</div></div>
+<div class="vn-step"><span class="vnn">4</span><div><span class="h">Doppelt verkettete Liste.</span> Hier hat jedes Element schon Zeiger auf Vorgänger und Nachfolger. Es gibt nichts zu fädeln. ✗</div></div>
+<div class="vn-res">✔ hohler Baum ✓ · Binärbaum ✓ · doppelt verkettete Liste ✗ (keine offizielle Lösung; Begründung oben)</div>
+</details>
+</div>
+</div>
+<!--/BL:gp-p2-thread-->
 <div class="blatt" id="s57"><div class="kop"><span class="bn">§5.7</span><h2>Rekursive Algorithmen auf Binärbäumen</h2><span class="tp">Prog. 5.17 count/height · 5.18 print · 5.19 Turnier · 5.20 Parse-Baum</span></div></div>
 <div class="vonnull" id="vn-5-7">
 <div class="vn-ttl"><span class="vn-badge">Von null · §5.7</span>count und height rekursiv</div>
