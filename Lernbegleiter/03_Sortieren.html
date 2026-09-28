@@ -487,8 +487,8 @@ template &lt;class Item&gt;
     { if (B &lt; A) exch(A, B); }                // danach: A ≤ B
 template &lt;class Item&gt;
   void sort(Item a[], int l, int r)
-    { for (int i = l+1; i &lt;= r; i++)          // Element i einsortieren …
-        for (int j = i; j &gt; l; j--)           // … immer bis ganz nach links
+    { for (int i = l+1; i &lt;= r; i++)          // Element i einsortieren,
+        for (int j = i; j &gt; l; j--)           // und zwar immer bis ganz nach links
           compexch(a[j-1], a[j]);             // Nachbarn ordnen
     }
 int main(int argc, char *argv[])
@@ -1085,7 +1085,7 @@ link mergesort(link c)                               // Prog 8.7: Liste c sortie
 class PQ
   {
     private:
-      // Die Darstellung wählt die Implementierung (Array, Liste, Heap …)
+      // Die Darstellung wählt die Implementierung (Array, Liste oder Heap)
     public:
       PQ(int);                  // leere PQ für höchstens so viele Elemente
       int empty() const;        // ist die PQ leer?
@@ -1118,8 +1118,8 @@ class PQ                                  // ungeordnetes Array
         { int max = 0;
           for (int j = 1; j &lt; N; j++)     // ganzes Array nach dem Maximum durchsuchen: O(N)
             if (pq[max] &lt; pq[j]) max = j;
-          exch(pq[max], pq[N-1]);         // Maximum ans Ende tauschen …
-          return pq[--N];                 // … und von dort entfernen
+          exch(pq[max], pq[N-1]);         // Maximum ans Ende tauschen
+          return pq[--N];                 // und von dort entfernen
         }
   };</pre>
 <div class="scroll"><table class="rt">
@@ -1460,7 +1460,7 @@ void unshuffle(Item a[], int l, int r)           // Umkehrung: gerade Stellen na
 void batchersort(Item a[], int l, int r)
   { int N = r-l+1;
     for (int p = 1; p &lt; N; p += p)                          // Phase: Blöcke der Größe 2p entstehen
-      for (int k = p; k &gt; 0; k /= 2)                        // Abstand der Komparatoren: p, p/2, …, 1
+      for (int k = p; k &gt; 0; k /= 2)                        // Abstand der Komparatoren: p, p/2, p/4 bis 1
         for (int j = k%p; j+k &lt; N; j += (k+k))              // Startpunkte der Komparator-Gruppen
           for (int i = 0; i &lt; N-j-k; i++)                   // Buch; korrekt für Batcher: i &lt; k
             if ((j+i)/(p+p) == (j+i+k)/(p+p))               // beide Enden im selben 2p-Block?
