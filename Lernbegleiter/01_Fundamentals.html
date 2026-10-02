@@ -326,6 +326,26 @@ svg text{font-family:'JetBrains Mono',monospace}
 svg text:not([fill]){fill:#e6edf3}
 .fw{color:var(--rule)}
 </style>
+<style>
+/* ===== P1X-ADDON: Spickzettel-Raster + Druck ===== */
+.spick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,680px),1fr));gap:14px;align-items:start}
+.spick .sp{margin:0;padding:12px 16px}
+.spick .sp h4{margin:0 0 .5rem;font-size:1.02rem;display:flex;align-items:center;gap:.5rem}
+.spick .spn{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;background:var(--rule);color:#0d1117;font-weight:800;font-size:.85rem}
+.spick p{margin:.35rem 0;line-height:1.5}
+.spick table.rt{font-size:.82rem;margin:.4rem 0}
+.spick table.rt td.mono{font-size:.76rem;line-height:1.45}
+.spick .step{padding:4px 10px;margin:6px 0}
+.spick pre.cpp{font-size:.78rem}
+.spick .num{min-width:1.6em;width:auto;padding:0 .35em;border-radius:9px}
+@media print{
+  body.print-spick .lbtop, body.print-spick #lbFab, body.print-spick #lbMenu, body.print-spick nav{display:none!important}
+  body.print-spick main > *:not(#fazit){display:none!important}
+  body.print-spick #fazit > p, body.print-spick #spPrint{display:none!important}
+  body.print-spick .spick{grid-template-columns:1fr 1fr}
+  body.print-spick .sp{break-inside:avoid}
+}
+</style>
 </head>
 <body>
 <header class="lbtop"><button id="lbBurger" class="lbburger" title="Inhalt öffnen">☰ Inhalt</button><div class="lbt"><b>Teil 1 · Fundamentals</b><span>Sedgewick Kap. 1–2</span></div><div class="lbq"><a href="#start">Start</a><a href="#k1-algo">Kapitel 1 · Einführung</a><a href="#k2-emp">Kapitel 2 · Analyse</a><a href="#schema">Training</a></div></header>
@@ -572,6 +592,142 @@ svg text:not([fill]){fill:#e6edf3}
   }</pre>
   <p class="anat-read">📖 <b>Vorlesen:</b> „Für jedes Paar zweimal find. Sind die Ergebnisse gleich, ist das Paar überflüssig. Sonst einmal union und das Paar ausgeben.“</p>
 </div>
+<!--P1X:io-->
+<h3 id="k1-io">🧱 Der Rahmen um find/union von null: Ein- und Ausgabe in C++</h3>
+<p>Die Schleife oben ist das <b>ganze Hauptprogramm</b> von Kapitel 1. Alle vier Algorithmen (1.3a–d) tauschen nur aus, <i>wie</i> <span class="c-res">find</span> und <span class="c-chg">unite</span> arbeiten. Damit du jede Zeichenfolge darin lesen kannst, hier die beiden Ein-/Ausgabe-Zeilen Zeichen für Zeichen.</p>
+<div class="grid2">
+<div class="callout anat">
+  <h3>🔬 Anatomie: <code class="inl">while (cin &gt;&gt; p &gt;&gt; q)</code></h3>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--par)">cin</span><span>der <span class="fw">Standard-Eingabestrom</span> (<i>character input</i>): Tastatur oder eine umgeleitete Datei.</span></div>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--chg)">&gt;&gt;</span><span>der <span class="fw">Extraktionsoperator</span>: „zieht“ die nächste Zahl aus dem Strom. Leerzeichen, Tabulatoren und Zeilenumbrüche trennen nur, sie werden übersprungen.</span></div>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--par)">&gt;&gt; p &gt;&gt; q</span><span>Kette von links nach rechts: erst <span class="c-par">p</span>, dann <span class="c-par">q</span>. Ob die Zahlen in einer Zeile oder in zwei Zeilen stehen, ist egal.</span></div>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--cond)">while ( … )</span><span>der Strom wird als <span class="c-cond">Bedingung</span> gelesen: <b>wahr</b>, solange beide Zahlen gelesen wurden; <b>falsch</b> beim <span class="fw">Eingabeende</span> (EOF: Strg+D unter Linux/macOS, Strg+Z dann Enter unter Windows) oder wenn keine Zahl kommt.</span></div>
+  <p class="anat-read">📖 <b>Vorlesen:</b> „Solange sich noch zwei Zahlen p und q lesen lassen, führe den Rumpf aus.“</p>
+</div>
+<div class="callout anat">
+  <h3>🔬 Anatomie: <code class="inl">cout &lt;&lt; " " &lt;&lt; p &lt;&lt; " " &lt;&lt; q &lt;&lt; endl;</code></h3>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--res)">cout</span><span>der <span class="fw">Standard-Ausgabestrom</span> (<i>character output</i>): das Terminal oder eine umgeleitete Datei.</span></div>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--chg)">&lt;&lt;</span><span>der <span class="fw">Einfügeoperator</span>: schiebt den Wert rechts davon in den Strom, von links nach rechts.</span></div>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--mem)">" "</span><span>ein Text aus genau einem Leerzeichen. Er trennt die Zahlen, sonst stünde <code class="inl">34</code> statt <code class="inl">3 4</code>.</span></div>
+  <div class="anat-row"><span class="anat-sym" style="color:var(--idx)">endl</span><span><i>end line</i>: Zeilenumbruch und Puffer sofort leeren, damit die Zeile direkt erscheint.</span></div>
+  <p class="anat-read">📖 <b>Vorlesen:</b> „Gib ein Leerzeichen, p, ein Leerzeichen, q und einen Zeilenumbruch aus.“ Für p = 3, q = 4 erscheint <code class="inl">␣3␣4</code>.</p>
+</div>
+</div>
+<div class="callout warn">
+  <h3>⚠ Zwei Stolpersteine, die oft für Fehler gehalten werden</h3>
+  <p><b>1. <code class="inl">" "</code> ist kein Syntaxfehler.</b> So steht die Zeile im Buch: Jede Ausgabezeile beginnt mit einem Leerzeichen. Wird beim Kopieren das <code class="inl">" "</code> verschluckt, sieht man <code class="inl">cout &lt;&lt; &lt;&lt; p</code>. <i>Das</i> wäre wirklich ein Kompilierfehler, weil zwischen zwei <code class="inl">&lt;&lt;</code> ein Wert fehlt. Ohne führendes Leerzeichen geht auch <code class="inl">cout &lt;&lt; p &lt;&lt; " " &lt;&lt; q &lt;&lt; endl;</code>, Ausgabe <code class="inl">3␣4</code>.</p>
+  <p><b>2. Warum <code class="inl">unite</code> statt <code class="inl">union</code>?</b> <code class="inl">union</code> ist in C++ ein <span class="fw">reserviertes Schlüsselwort</span> (ein Verbund-Datentyp) und kann nicht als Funktionsname dienen. Die abstrakte Operation heißt im Buch <i>union</i>, die C++-Funktion heißt deshalb <code class="inl">unite</code>. In den Programmen 1.1–1.4 steht der union-Code direkt in der Schleife, ganz ohne Funktion.</p>
+</div>
+
+<h3>🏗️ Das vollständige Programm (kompiliert und getestet)</h3>
+<p>Hier sind <span class="c-res">find</span> und <span class="c-chg">unite</span> als <span class="fw">Weighted Quick-Union mit Halbierung</span> umgesetzt (Programm 1.4, siehe 1.3d). Für 1.2 genügt: <span class="c-res">find(p)</span> liefert den <span class="fw">Repräsentanten</span> (die Wurzel), also den Namen der Menge von p. Zusätzlich gibt <code class="inl">printComponents()</code> am Ende die Mengen aus.</p>
+<div class="grid2">
+<div class="card" style="padding:10px 12px">
+<pre class="cpp" data-roles='{"find":"res","unite":"chg","printComponents":"rule","comp":"mem","nr":"idx","e":"idx","x":"idx"}'>#include &lt;iostream&gt;   // cin, cout, endl
+#include &lt;map&gt;        // map: Wurzel → Elemente (für die Mengen-Ausgabe)
+#include &lt;vector&gt;     // vector: Liste der Elemente einer Menge
+using namespace std;  // erlaubt cin statt std::cin
+
+static const int N = 10;  // Objekte 0 … N−1
+int id[N];                // id[i]: Elternzeiger (Wurzel: id[i] == i)
+int sz[N];                // sz[i]: Knotenzahl im Baum mit Wurzel i
+
+int find(int p)           // liefert die Wurzel = den Namen der Menge von p
+{ while (p != id[p])      // solange p nicht die Wurzel ist …
+    { id[p] = id[id[p]];  // … p auf seinen Großvater zeigen lassen (Halbierung)
+      p = id[p];          // … und eine Stufe nach oben gehen
+    }
+  return p;               // p ist jetzt die Wurzel
+}
+
+void unite(int p, int q)  // vereinigt die Mengen von p und q ("union" ist reserviert)
+{ int i = find(p);        // Wurzel von p
+  int j = find(q);        // Wurzel von q
+  if (i == j) return;     // schon dieselbe Menge: nichts zu tun
+  if (sz[i] &lt; sz[j])      // kleineren Baum unter den größeren hängen
+    { id[i] = j; sz[j] += sz[i]; }
+  else
+    { id[j] = i; sz[i] += sz[j]; }
+}
+
+void printComponents()    // gibt jede Menge in einer Zeile aus
+{ map&lt;int, vector&lt;int&gt;&gt; comp;              // Schlüssel: Wurzel, Wert: alle Elemente dieser Menge
+  for (int i = 0; i &lt; N; i++)
+    comp[find(i)].push_back(i);            // Element i zur Menge seiner Wurzel legen
+  int nr = 1;                              // laufende Nummer der Menge
+  for (const auto&amp; e : comp)               // e.first = Wurzel, e.second = Elemente
+    { cout &lt;&lt; "Menge " &lt;&lt; nr++ &lt;&lt; ": { ";
+      for (int x : e.second) cout &lt;&lt; x &lt;&lt; " ";
+      cout &lt;&lt; "}" &lt;&lt; endl;
+    }
+}
+
+int main()
+{ int p, q;                                // das gerade gelesene Paar
+  for (int i = 0; i &lt; N; i++)
+    { id[i] = i; sz[i] = 1; }              // Start: jedes Objekt ist seine eigene Menge
+  while (cin &gt;&gt; p &gt;&gt; q)                    // liest Paare, bis die Eingabe endet
+    { if (find(p) == find(q)) continue;    // schon verbunden → nichts tun
+      unite(p, q);                         // Mengen vereinigen
+      cout &lt;&lt; " " &lt;&lt; p &lt;&lt; " " &lt;&lt; q &lt;&lt; endl;  // neues Paar ausgeben (wie im Buch)
+    }
+  printComponents();                       // nach dem Ende der Eingabe: alle Mengen
+  return 0;
+}</pre>
+</div>
+<div>
+<div class="card small">
+<p><b>So startest du es</b></p>
+<pre class="mono" style="margin:4px 0">g++ -std=c++17 -Wall -o uf uf.cpp
+./uf &lt; paare.txt</pre>
+<p>Zeile 1 übersetzt <code class="inl">uf.cpp</code> zum Programm <code class="inl">uf</code>. Zeile 2 startet es; <code class="inl">&lt; paare.txt</code> leitet die Datei in <span class="c-par">cin</span> um. Ohne Umleitung (<code class="inl">./uf</code>) tippst du die Paare selbst und beendest mit Strg+D.</p>
+<p><b>Eingabe</b> <code class="inl">paare.txt</code> → <b>Ausgabe</b> (· = Leerzeichen):</p>
+<div class="grid2">
+<pre class="mono" style="margin:0">1 2
+2 3
+1 3
+4 5
+3 4</pre>
+<pre class="mono" style="margin:0">·1·2
+·2·3
+·4·5
+·3·4
+Menge 1: { 0 }
+Menge 2: { 1 2 3 4 5 }
+Menge 3: { 6 }
+Menge 4: { 7 }
+Menge 5: { 8 }
+Menge 6: { 9 }</pre>
+</div>
+<p><span class="c-res">1 3</span> fehlt in der Ausgabe: 1 und 3 waren über 1–2–3 schon verbunden, also <code class="inl">continue</code>.</p>
+</div>
+<div class="callout key">
+  <h3>Gibt das Programm die Mengen aus?</h3>
+  <p><b>Nein, das Programm aus dem Buch gibt nur Paare aus.</b> Ausgegeben wird genau das eingelesene Paar p q, und zwar nur, wenn es zwei bisher getrennte Mengen verbindet. Die Mengen selbst stehen unsichtbar im Speicher, im <span class="c-mem">id[]</span>-Array als Wald von Bäumen.</p>
+  <p><b>Mengen sichtbar machen:</b> Alle Elemente mit derselben Wurzel <span class="c-res">find(i)</span> gehören zusammen. <code class="inl">printComponents()</code> sammelt sie in einer <code class="inl">map</code> (Schlüssel = Wurzel) und gibt jede Gruppe aus. Die Mengen sind nach ihrer Wurzel geordnet.</p>
+  <p class="small muted">Ruft man <code class="inl">printComponents()</code> nach jedem <code class="inl">unite</code> auf, sieht man live, wie die Mengen verschmelzen. Genau das zeigt der Simulator unten.</p>
+</div>
+</div>
+</div>
+
+<h3>👁️ Terminal-Simulator: was cin liest, was cout schreibt, was im Speicher steht</h3>
+<p>Tippe die Eingabe wie im Terminal: Zahlen von 0 bis 9, durch Leerzeichen oder Zeilen getrennt. <span class="c-par">cin</span> liest immer die nächsten zwei Zahlen als Paar, egal wie sie auf Zeilen verteilt sind. Der letzte Schritt ist das <span class="fw">Eingabeende</span>: Dann läuft <code class="inl">printComponents()</code>.</p>
+<div class="controls">
+  <label>stdin <textarea id="ioIn" rows="3" style="width:13rem;font-family:'JetBrains Mono',monospace;background:#0a0d12;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 8px">1 2
+2 3
+1 3
+4 5
+3 4</textarea></label>
+  <button id="ioPrev">◀</button><button id="ioNext">Paar ▶</button><button id="ioAll">⏭ bis EOF</button><button id="ioReset">↺</button>
+  <span class="readout">Schritt <b id="ioK">0</b>/<span id="ioM">0</span></span>
+</div>
+<div class="grid3">
+  <div class="card" style="padding:8px 12px"><div class="small muted">stdin, Paar für Paar (cin)</div><div id="ioRead" class="mono small"></div></div>
+  <div class="card" style="padding:8px 12px"><div class="small muted">stdout (cout), · = Leerzeichen</div><pre id="ioOut" class="mono small" style="margin:0;white-space:pre-wrap"></pre></div>
+  <div class="card" style="padding:8px 12px"><div class="small muted">Speicher: Mengen (für das Programm unsichtbar)</div><div id="ioSets" class="mono small"></div></div>
+</div>
+<div class="step" id="ioMsg"></div>
+<!--/P1X:io-->
 <h3>👁️ Woran erkennbar? Figur 1.1 live</h3>
 <p>Grün heißt neues Paar, es wird ausgegeben. Grau gestrichelt heißt überflüssig, und <span class="c-chg">amber</span> leuchtet der <b>Beweisweg</b>, über den p und q schon verbunden waren (wie die rechte Spalte in Fig. 1.1). Gleiche Füllfarbe = gleiche Komponente.</p>
 <div class="controls">
@@ -756,6 +912,70 @@ for (k = p; k != i; )                  // 2. Pass: alle
 <div id="hvSvg" class="card" style="padding:6px;overflow:auto"></div>
 <p>Und jetzt das Ganze im echten Programm (Weighted + Halbierung):</p>
 <div id="trPC"></div>
+<!--P1X:depth-->
+<h3 id="k1-pc-tiefe">🎓 Klausurfrage: Macht die Halbierung die Bäume immer flach (Tiefe 1)?</h3>
+<div class="callout exam">
+  <h3>Antwort: Nein. Tiefe 2, 3, … bleibt möglich, höchstens aber lg N.</h3>
+  <p><span class="num">1</span><b>Halbierung wirkt nur auf besuchte Knoten.</b> <code class="inl">id[i] = id[id[i]]</code> läuft nur auf den Wegen von <span class="c-par">p</span> und <span class="c-par">q</span> des <i>aktuellen</i> Paars.</p>
+  <p><span class="num">2</span><b>union schiebt ganze Teilbäume passiv nach unten.</b> Wird eine Wurzel unter eine andere gehängt, rutschen alle ihre Kinder und Enkel eine Stufe tiefer, ohne dass find sie besucht.</p>
+  <p><span class="num">3</span><b>Die Obergrenze von Weighted gilt weiter.</b> Ein Knoten wird nur tiefer, wenn sein Baum unter einen <i>mindestens gleich großen</i> gehängt wird. Dann verdoppelt sich die Baumgröße mindestens. Halbierung macht Wege nur kürzer, nie länger.</p>
+  <div class="step">\[ \begin{aligned}
+  \Res{\text{Tiefe}} &\le \lg \Par{N} && \text{Eigenschaft 1.3 gilt auch mit Halbierung} \\
+  \Res{\text{Tiefe } d} &\Rightarrow \text{Baum hat mindestens } 2^d \text{ Knoten} && \text{jede Stufe tiefer verdoppelt die Baumgröße mindestens} \\
+  d = 2 &\Rightarrow \text{mindestens } 4 \text{ Knoten} && \text{kürzestes Beispiel: 0-1, 2-3, 0-2} \\
+  d = 3 &\Rightarrow \text{mindestens } 8 \text{ Knoten} && \text{kürzestes Beispiel: 0-1, 2-3, 0-2, 4-5, 6-7, 4-6, 0-4}
+  \end{aligned} \]</div>
+  <p><b>Rezept für eine tiefe Eingabe:</b> immer zwei <i>gleich große</i> Bäume über ihre <i>Wurzeln</i> verbinden (p und q sind Wurzeln, also gibt es nichts zu halbieren). Danach nie wieder ein Paar mit einem tiefen Knoten eingeben.</p>
+</div>
+
+<p>Die Eingabe <code class="inl">0-1, 2-3, 0-2, 4-5, 6-7, 4-6, 0-4</code> Schritt für Schritt nach Programm 1.4. Bei Gleichstand (<code class="inl">sz[i] == sz[j]</code>) greift der else-Zweig: die Wurzel von q kommt unter die Wurzel von p.</p>
+<div class="scroll"><table class="rt">
+<tr><th>Paar</th><th>Wurzeln i, j (sz)</th><th>Änderung</th><th class="mono">id[0..7]</th><th class="mono">sz[0..7]</th><th>max. Tiefe</th></tr>
+<tr><td>0-1</td><td>0 (1), 1 (1): gleich</td><td><span class="c-chg">id[1] = 0</span>, sz[0] = 2</td><td class="mono">0 0 2 3 4 5 6 7</td><td class="mono">2 1 1 1 1 1 1 1</td><td>1</td></tr>
+<tr><td>2-3</td><td>2 (1), 3 (1): gleich</td><td><span class="c-chg">id[3] = 2</span>, sz[2] = 2</td><td class="mono">0 0 2 2 4 5 6 7</td><td class="mono">2 1 2 1 1 1 1 1</td><td>1</td></tr>
+<tr><td>0-2</td><td>0 (2), 2 (2): gleich</td><td><span class="c-chg">id[2] = 0</span>, sz[0] = 4</td><td class="mono">0 0 0 2 4 5 6 7</td><td class="mono">4 1 2 1 1 1 1 1</td><td><span class="c-res">2</span>: 3 → 2 → 0</td></tr>
+<tr><td>4-5</td><td>4 (1), 5 (1): gleich</td><td><span class="c-chg">id[5] = 4</span>, sz[4] = 2</td><td class="mono">0 0 0 2 4 4 6 7</td><td class="mono">4 1 2 1 2 1 1 1</td><td>2</td></tr>
+<tr><td>6-7</td><td>6 (1), 7 (1): gleich</td><td><span class="c-chg">id[7] = 6</span>, sz[6] = 2</td><td class="mono">0 0 0 2 4 4 6 6</td><td class="mono">4 1 2 1 2 1 2 1</td><td>2</td></tr>
+<tr><td>4-6</td><td>4 (2), 6 (2): gleich</td><td><span class="c-chg">id[6] = 4</span>, sz[4] = 4</td><td class="mono">0 0 0 2 4 4 4 6</td><td class="mono">4 1 2 1 4 1 2 1</td><td>2: 7 → 6 → 4</td></tr>
+<tr><td>0-4</td><td>0 (4), 4 (4): gleich</td><td><span class="c-chg">id[4] = 0</span>, sz[0] = 8</td><td class="mono">0 0 0 2 0 4 4 6</td><td class="mono">8 1 2 1 4 1 2 1</td><td><span class="c-res">3</span>: 7 → 6 → 4 → 0</td></tr>
+</table></div>
+<p class="small muted">sz[ ] ist nur an Wurzeln aktuell. Die alten Werte an inneren Knoten (z. B. sz[2] = 2) liest das Programm nie wieder.</p>
+
+<div class="grid2">
+<div class="callout warn">
+  <h3>Kontrast A: <code class="inl">0-1, 2-3, 0-2, 4-3</code> endet wieder bei Tiefe 1</h3>
+  <p>Nach 0-2 hängt 3 auf Tiefe 2. Das Paar <b>4-3 nennt die 3</b>. find(3) läuft 3 → 2 → 0 und halbiert dabei: <span class="c-chg">id[3] = id[id[3]] = id[2] = 0</span>. Danach ist sz[4] = 1 &lt; sz[0] = 4, also <span class="c-chg">id[4] = 0</span>.</p>
+  <p class="mono small">id = 0 0 0 0 0 5 6 7 → alle direkt unter 0, Tiefe 1</p>
+  <p><b>Merke:</b> Ein Paar, das einen tiefen Knoten nennt, zieht ihn nach oben.</p>
+</div>
+<div class="callout note">
+  <h3>Kontrast B: danach noch <code class="inl">7-8</code></h3>
+  <p>find(7) läuft 7 → 6 → 4 → 0. Halbierung bei i = 7: <span class="c-chg">id[7] = id[6] = 4</span>. Weiter bei 4: id[4] = id[0] = 0, keine Änderung. Wurzel 0, und sz[8] = 1 &lt; 8 ergibt <span class="c-chg">id[8] = 0</span>.</p>
+  <p class="mono small">id = 0 0 0 2 0 4 4 4 0 → 7 jetzt auf Tiefe 2, max. Tiefe 2</p>
+  <p><b>Merke:</b> Halbierung halbiert den <i>besuchten</i> Weg, sie macht ihn nicht sofort flach.</p>
+</div>
+</div>
+
+<h3>👁️ Tiefen-Labor: eigene Paare im Format 0-1, 2-3, …</h3>
+<p>Genau Programm 1.4 (Weighted + Halbierung). <span class="c-chg">Orange</span> umrandet sind die Knoten, deren id[] sich in diesem Schritt geändert hat. Die kleine Zahl unter jedem Knoten ist seine <span class="c-res">Tiefe</span>.</p>
+<div class="controls">
+  <label>Paare <input type="text" id="tdIn" style="width:min(30rem,100%)" value="0-1, 2-3, 0-2, 4-5, 6-7, 4-6, 0-4"></label>
+  <button id="tdPrev">◀</button><button id="tdNext">Paar ▶</button><button id="tdLast">⏭</button><button id="tdReset">↺</button>
+  <span class="readout">Paar <b id="tdK">0</b>/<span id="tdM">0</span> · max. Tiefe <b id="tdD">0</b></span>
+</div>
+<div class="controls" style="margin-top:-4px">
+  <span class="small muted">Beispiele:</span>
+  <button class="tdEx" data-v="0-1, 2-3, 0-2">Tiefe 2</button>
+  <button class="tdEx" data-v="0-1, 2-3, 0-2, 4-5, 6-7, 4-6, 0-4">Tiefe 3</button>
+  <button class="tdEx" data-v="0-1, 2-3, 0-2, 4-3">4-3 zieht 3 hoch</button>
+  <button class="tdEx" data-v="0-1, 2-3, 0-2, 4-5, 6-7, 4-6, 0-4, 7-8">danach 7-8</button>
+  <button class="tdEx" data-v="0-1, 2-3, 4-5, 6-7, 8-9, 10-11, 12-13, 14-15, 0-2, 4-6, 8-10, 12-14, 0-4, 8-12, 0-8">Tiefe 4 (16 Knoten)</button>
+</div>
+<div class="grid2">
+  <div id="tdSvg" class="card" style="padding:6px"></div>
+  <div class="card" style="padding:8px 12px"><div id="tdTab" class="mono small"></div><div id="tdLog" class="small" style="margin-top:6px"></div></div>
+</div>
+<!--/P1X:depth-->
 </section>
 
 <!-- ======================= 1.3e LABOR ======================= -->
@@ -1145,7 +1365,7 @@ int b = N - N / 2;   // ⌈N/2⌉
   <p><b>Erfolgreich</b>: wenn jede Position gleich wahrscheinlich ist:</p>
   <div class="step">\[ \begin{aligned} \Res{\bar C} &= \frac{1+2+\dots+N}{N} && \text{Steht } v \text{ an Position } k \text{, kostet es } k \text{ Vergleiche. Jede Position ist gleich wahrscheinlich.} \\ &= \frac{N(N+1)/2}{N} && \text{Gauß-Summe.} \\ &= \Res{\frac{N+1}{2}} \approx \frac N2 && \text{Im Mittel wird die halbe Tabelle angesehen.} \end{aligned} \]</div>
   <p><b>Sortierte Tabelle</b>: man bricht ab, sobald eine Zahl &gt; v kommt. Eine erfolglose Suche endet gleich wahrscheinlich in einem der \(N+1\) Intervalle:</p>
-  <div class="step">\[ \begin{aligned} \bar C_{\text{erfolglos}} &= \frac{1+2+\dots+N+N}{N+1} && N+1 \text{ mögliche Lücken; die hinter dem Ende kostet } N \text{ Vergleiche.} \\ &= \Res{\frac{N+3}{2}} \approx \frac N2 && \text{Auch erfolglos nur noch die halbe Tabelle.} \\ M \text{ Suchen} &\propto \Par{M}\cdot\Par{N} && \text{Jede Suche kostet } \propto N. \end{aligned} \]</div>
+  <div class="step">\[ \begin{aligned} \bar C_{\text{erfolglos}} &= \frac{1+2+\dots+N+N}{N+1} && N+1 \text{ mögliche Lücken; die hinter dem Ende kostet } N \text{ Vergleiche.} \\ &= \frac{N(N+1)/2 + N}{N+1} && \text{Gauß-Summe im Zähler.} \\ &= \Res{\frac N2 + \frac{N}{N+1}} \approx \frac N2 && \text{Auch erfolglos nur noch die halbe Tabelle.} \\ M \text{ Suchen} &\propto \Par{M}\cdot\Par{N} && \text{Jede Suche kostet } \propto N. \end{aligned} \]</div>
   <p class="small">Mit \(M=10^9\), \(N=10^6\) und c µs pro Vergleich: \(\ge (c/2)\cdot10^9\) s, also etwa <b>16c Jahre</b>. Unbrauchbar.</p>
 </div>
 <h3>Programm 2.2 — binäre Suche (Fig. 2.7: sucht 5025)</h3>
@@ -1305,6 +1525,7 @@ int b = N - N / 2;   // ⌈N/2⌉
 
 <section id="glossar">
 <h2>📚 Fachwörter-Glossar</h2>
+<div class="controls"><label>Suchen <input type="text" id="glossQ" placeholder="z. B. Tiefe, cin, O-Notation" style="width:min(22rem,100%)"></label><span class="readout"><b id="glossN"></b></span><span class="small muted">nach Themen geordnet · → springt zur Stelle im Text</span></div>
 <div class="scroll"><table class="rt" id="glossTab"></table></div>
 </section>
 
@@ -1337,24 +1558,218 @@ int b = N - N / 2;   // ⌈N/2⌉
     <text x="350" y="236" text-anchor="middle" font-size="10.5" fill="#bc8cff">binäre Suche → Teil 4 (Suchbäume)</text>
   </g>
 </svg>
-<p>In Teil 2 wird aus „Array + Index“ auch „<b>Knoten + Zeiger</b>“ (<code class="inl">struct node { Item item; node* next; };</code>). Das Denkwerkzeug bleibt dasselbe: <b>Was passiert im Speicher, wie oft, welche Formel?</b></p>
+<!--P1X:weiter-->
+<h3>Was aus Teil 1 in Teil 2 wiederkommt, und woran du es erkennst</h3>
+<div class="scroll"><table class="rt">
+<tr><th>Werkzeug aus Teil 1</th><th>kommt wieder in Teil 2</th><th>woran du es erkennst</th></tr>
+<tr><td><span class="c-res">find</span>/<span class="c-chg">unite</span> und der Rahmen <code class="inl">while (cin &gt;&gt; p &gt;&gt; q)</code></td><td><b>§4.5</b>: Union-Find wird eine Klasse (ADT) mit <code class="inl">find(p, q)</code> und <code class="inl">unite(p, q)</code></td><td>derselbe Client-Code; der Algorithmus steckt hinter dem Interface</td></tr>
+<tr><td><code class="inl">int id[N]</code>, Adresse = Anfang + 4·i</td><td><b>§3.2</b> Arrays, <code class="inl">new int[N]</code></td><td>Zugriff in O(1), Größe zur Laufzeit</td></tr>
+<tr><td><code class="inl">id[i]</code> als Zeiger auf den Elternknoten</td><td><b>§3.3–3.5</b> verkettete Listen: <code class="inl">node* next</code></td><td>Zeigern folgen wie in find, nur über Adressen statt Indizes</td></tr>
+<tr><td>Wald, Wurzel, Tiefe, N−1 Kanten</td><td><b>§5.4–5.5</b> Bäume und ihre Eigenschaften</td><td>„ein Baum mit N Knoten hat N−1 Kanten“ ist wieder Satz</td></tr>
+<tr><td>Rekurrenzen 2.1–2.5</td><td><b>§5.1–5.2</b> Rekursion, Divide &amp; Conquer</td><td>Code aufschreiben → Rekurrenz ablesen → Kasten 8 des Spickzettels</td></tr>
+<tr><td>Worst/Average, O-Kosten pro Operation</td><td><b>§4.4, 4.6</b> Stack und Queue: Array gegen Liste</td><td>jede Operation in O(1); Vergleich der Implementierungen</td></tr>
+<tr><td>binäre Suche, lg N</td><td>Teil 4 (Kap. 12: Symboltabellen und Suchbäume)</td><td>„halbieren“ heißt immer lg N</td></tr>
+</table></div>
+<p class="small muted">Kurz: In Teil 2 wird aus „Array + Index“ auch „Knoten + Zeiger“. Die drei Fragen bleiben: <b>Was passiert im Speicher? Wie oft? Welche Formel?</b></p>
+<!--/P1X:weiter-->
 </section>
 
 <section id="fazit">
-<h2>🧾 Spickzettel Teil 1 (alles auf einen Blick)</h2>
-<div class="grid2">
-<div class="card small">
-<p><b>Union-Find</b></p>
-<p>QF: find O(1), union O(N), also \(\ge MN\)<br>QU: union O(1), find O(Tiefe), worst \(>MN/2\)<br>WQU: Tiefe \(\le\lg N\), also \(O(M\lg N)\)<br>+ Kompression: \(O(M\lg^*N)\), praktisch linear<br>Beweis WQU: \(1+\lg i=\lg 2i\le\lg(i+j)\)</p>
-<p><b>Suchen</b></p>
-<p>seq. unsortiert: erfolglos N, erfolgreich \((N+1)/2\)<br>seq. sortiert: im Mittel \((N+3)/2\) bzw. \(\approx N/2\)<br>binär: \(\le\lfloor\lg N\rfloor+1\), optimal (vergleichsbasiert)</p>
+<h2>🧾 Spickzettel Teil 1: alles für die Klausur auf einen Blick</h2>
+<p>Zwölf Kästen, jeder <b>von null</b> lesbar: erst die Begriffe, dann das Rezept, dann die Formeln. Erkenne zuerst den <b>Aufgabentyp</b> (Kasten 0), dann gehst du direkt zum passenden Kasten. <button class="lbburger" id="spPrint" style="font-size:.85rem">🖨 nur den Spickzettel drucken</button></p>
+
+<div class="spick">
+
+<div class="card sp" id="sp0">
+<h4><span class="spn">0</span>Aufgabentyp erkennen → Kasten</h4>
+<table class="rt">
+<tr><th>Die Aufgabe sagt …</th><th>Kasten</th></tr>
+<tr><td>„Welche Paare werden ausgegeben?“</td><td>1</td></tr>
+<tr><td>„Gib id[] (und sz[]) nach jedem Paar an“</td><td>2, 3</td></tr>
+<tr><td>„Wie tief kann der Baum werden? Eingabe für Tiefe d?“</td><td>4</td></tr>
+<tr><td>„Was gibt dieser C++-Code aus?“</td><td>5</td></tr>
+<tr><td>„Wie oft läuft Zeile x? Laufzeit? O-Klasse?“</td><td>6, 7</td></tr>
+<tr><td>„Löse die Rekurrenz“</td><td>8</td></tr>
+<tr><td>„Stimmt g ∈ O(f)? Ω? Θ?“</td><td>9</td></tr>
+<tr><td>„Vergleiche/Kosten beim Suchen“</td><td>10</td></tr>
+<tr><td>„Wie lange auf k-mal schnellerem Rechner?“</td><td>11</td></tr>
+<tr><td>Quiz: „eine, mehrere oder keine richtig“</td><td>12</td></tr>
+</table>
 </div>
-<div class="card small">
-<p><b>Rekurrenzen</b></p>
-<p>2.1 \(C_N=C_{N-1}+N\Rightarrow N^2/2\)<br>2.2 \(C_N=C_{N/2}+1\Rightarrow\lg N\)<br>2.3 \(C_N=C_{N/2}+N\Rightarrow 2N\)<br>2.4 \(C_N=2C_{N/2}+N\Rightarrow N\lg N\)<br>2.5 \(C_N=2C_{N/2}+1\Rightarrow 2N\)</p>
-<p><b>O-Notation</b></p>
-<p>\(g\in O(f)\iff g&lt;c_0f\) für \(N>N_0\) · Ω untere, Θ beide Schranken · „∼“ heißt Quotient → 1<br>Verdopplung: N ×2, N² ×4, N³ ×8, lg N +1, N lg N etwas mehr als ×2</p>
+
+<div class="card sp" id="sp1">
+<h4><span class="spn">1</span>Das Konnektivitätsproblem</h4>
+<p><b>Eingabe:</b> Paare <span class="c-par">p-q</span> = „p ist mit q verbunden“. Verbunden ist <span class="fw">transitiv</span>: p–q und q–r ergeben p–r.</p>
+<p><b>Ausgabe:</b> nur Paare, die zwei bisher <b>getrennte</b> Mengen verbinden. Die Mengen selbst werden <b>nicht</b> ausgegeben.</p>
+<pre class="cpp" data-roles='{"find":"res","unite":"chg"}'>while (cin &gt;&gt; p &gt;&gt; q)                     // nächstes Paar lesen
+  { if (find(p) == find(q)) continue;     // gleiche Menge: überspringen
+    unite(p, q);                          // Mengen verschmelzen
+    cout &lt;&lt; " " &lt;&lt; p &lt;&lt; " " &lt;&lt; q &lt;&lt; endl; // Paar ausgeben
+  }</pre>
+<div class="step">\[ \begin{aligned}
+\text{Komponenten} &= \Par{N} - \Res{\#\text{Ausgaben}} && \text{je Ausgabe eine Menge weniger} \\
+\text{alle verbunden} &\iff \Res{\#\text{Ausgaben}} = \Par{N} - 1 && \text{Spannbaum: N−1 Kanten}
+\end{aligned} \]</div>
+<p><b>Von Hand:</b> Mengen als Liste führen, z. B. {2,3,4,9} {0,8}. Paar in derselben Menge: nicht ausgeben. Sonst ausgeben und die Mengen vereinigen.</p>
 </div>
+
+<div class="card sp" id="sp2">
+<h4><span class="spn">2</span>Die vier Algorithmen: Kerncode und Kosten</h4>
+<table class="rt">
+<tr><th>Alg.</th><th>id[i] heißt</th><th>Kerncode</th><th>find</th><th>union</th><th>M Paare (worst)</th></tr>
+<tr><td>QF 1.1</td><td>Name der Menge</td><td class="mono">t = id[p]; if (t == id[q]) continue;<br>for (i = 0; i &lt; N; i++)<br>&nbsp;&nbsp;if (id[i] == t) id[i] = id[q];</td><td>1</td><td>N</td><td>\(\ge M N\)</td></tr>
+<tr><td>QU 1.2</td><td>Elternknoten</td><td class="mono">for (i = p; i != id[i]; i = id[i]) ;<br>for (j = q; j != id[j]; j = id[j]) ;<br>if (i == j) continue; id[i] = j;</td><td>Tiefe ≤ N</td><td>1 + 2 find</td><td>\(&gt; MN/2\)</td></tr>
+<tr><td>WQU 1.3</td><td>Elternknoten + sz[ ]</td><td class="mono">if (sz[i] &lt; sz[j]) { id[i] = j; sz[j] += sz[i]; }<br>else { id[j] = i; sz[i] += sz[j]; }</td><td>≤ lg N</td><td>≤ lg N</td><td>\(O(M\lg N)\)</td></tr>
+<tr><td>+ Halb. 1.4</td><td>wie WQU</td><td class="mono">for (i = p; i != id[i]; i = id[i])<br>&nbsp;&nbsp;id[i] = id[id[i]];</td><td>fast 1</td><td>fast 1</td><td>\(O(M\lg^* N)\), praktisch linear</td></tr>
+</table>
+<p class="small"><b>Speicher:</b> QF, QU: N Werte. WQU (+ Halbierung): 2N Werte (id[ ] und sz[ ]).</p>
+</div>
+
+<div class="card sp" id="sp3">
+<h4><span class="spn">3</span>Von Hand rechnen: „id[] nach jedem Paar“</h4>
+<p><span class="num">QF</span><span class="c-mem">t = id[p]</span>. <b>Jede</b> Stelle mit Wert t bekommt den Wert <span class="c-chg">id[q]</span>. Die Menge von p erhält den Namen von q. Pro union werden alle N Stellen gelesen.</p>
+<p><span class="num">QU</span>Von p zur Wurzel <span class="c-idx">i</span>, von q zur Wurzel <span class="c-idx">j</span> laufen. Gleich: nichts. Sonst <span class="c-chg">id[i] = j</span>: die <b>Wurzel</b> von p unter die <b>Wurzel</b> von q. Es ändert sich genau <b>eine</b> Stelle.</p>
+<p><span class="num">W</span>Wurzeln i, j wie bei QU, dann <b>sz vergleichen</b>. Kleinere Wurzel unter die größere. <b>Gleichstand:</b> <span class="c-chg">id[j] = i</span>, also Wurzel von q unter Wurzel von p (else-Zweig). Dann sz der neuen Wurzel += sz der alten.</p>
+<p><span class="num">H</span>Beim Hochlaufen von p <b>und</b> q: jeder besuchte Knoten <span class="c-chg">id[x] = id[id[x]]</span> (zeigt auf den Großvater). Das passiert <b>auch</b>, wenn danach <code class="inl">continue</code> folgt.</p>
+<p class="small"><b>Probe:</b> Die Zahl der Wurzeln (id[x] == x) ist N minus Zahl der Ausgaben.</p>
+</div>
+
+<div class="card sp" id="sp4">
+<h4><span class="spn">4</span>Tiefe der Bäume</h4>
+<div class="step">\[ \begin{aligned}
+\text{QU} &: \Res{\text{Tiefe}} \le \Par{N} - 1 && \text{Kette: 0-1, 0-2, 0-3, …} \\
+\text{WQU (+H)} &: \Res{\text{Tiefe}} \le \lg \Par{N} && \text{tiefer nur durch Verdoppeln} \\
+\text{Tiefe } d &\Rightarrow \ge 2^d \text{ Knoten} && \text{d = 2: 4, d = 3: 8}
+\end{aligned} \]</div>
+<p><b>Tiefe d erzeugen (WQU + H):</b> gleich große Bäume über ihre Wurzeln verbinden. <code class="inl">0-1, 2-3, 0-2</code> → Tiefe 2. Dazu <code class="inl">4-5, 6-7, 4-6, 0-4</code> → Tiefe 3.</p>
+<p><b>Falle:</b> Halbierung ≠ Tiefe 1. Sie kürzt nur besuchte Wege. Ein späteres Paar mit dem tiefen Knoten zieht ihn hoch (0-1, 2-3, 0-2, <b>4-3</b> → Tiefe 1).</p>
+<p class="small"><b>Beweis lg N in einer Zeile</b> (Knoten in Baum der Größe i kommt unter Baum der Größe j ≥ i): \(1 + \lg i = \lg 2i \le \lg(i+j)\).</p>
+</div>
+
+<div class="card sp" id="sp5">
+<h4><span class="spn">5</span>C++, das du lesen können musst</h4>
+<table class="rt">
+<tr><td class="mono">cin &gt;&gt; p &gt;&gt; q</td><td>nächste zwei Zahlen lesen; Leerzeichen/Zeilen egal</td></tr>
+<tr><td class="mono">while (cin &gt;&gt; …)</td><td>läuft bis Eingabeende (EOF) oder bis keine Zahl kommt</td></tr>
+<tr><td class="mono">cout &lt;&lt; " " &lt;&lt; p</td><td>Leerzeichen, dann p ausgeben (kein Fehler)</td></tr>
+<tr><td class="mono">endl</td><td>Zeilenumbruch + Puffer leeren</td></tr>
+<tr><td class="mono">static const int N = 10000;</td><td>Konstante, als Array-Größe erlaubt</td></tr>
+<tr><td class="mono">int id[N];</td><td>N ints direkt hintereinander: Adresse = Anfang + 4·i</td></tr>
+<tr><td class="mono">id[id[i]]</td><td>doppelte Indirektion: der Eintrag des Elternknotens (Großvater)</td></tr>
+<tr><td class="mono">for (i = p; i != id[i]; i = id[i]) ;</td><td>leerer Rumpf: nur Zeigern folgen, bis zur Wurzel</td></tr>
+<tr><td class="mono">continue</td><td>Rest des Rumpfs überspringen, nächstes Paar</td></tr>
+<tr><td class="mono">unite</td><td>Funktionsname, weil <code class="inl">union</code> reserviert ist</td></tr>
+</table>
+<p class="small"><b>Schleife zählen:</b> <code class="inl">for (i = 0; i &lt; N; i++)</code> → Initialisierung 1-mal, Test N+1-mal, Rumpf N-mal, i++ N-mal.</p>
+</div>
+
+<div class="card sp" id="sp6">
+<h4><span class="spn">6</span>Laufzeit aus Code ablesen (4 Schritte)</h4>
+<p><span class="num">①</span><b>Abstrakte Operation</b> wählen: meist die innerste Zeile.<br>
+<span class="num">②</span><b>Häufigkeit als Summe:</b> Schleife → \(\sum\), Rekursion → Rekurrenz (Kasten 8).<br>
+<span class="num">③</span><b>Summe lösen</b> mit Kasten 7.<br>
+<span class="num">④</span><b>Führender Term</b> → O/Θ; Probe mit Verdopplung.</p>
+<table class="rt">
+<tr><th>Code-Muster</th><th>läuft</th></tr>
+<tr><td class="mono">for i: 0..N−1</td><td>\(N\)</td></tr>
+<tr><td class="mono">for i, for j &lt; N</td><td>\(N^2\)</td></tr>
+<tr><td class="mono">for i, for j &gt; i</td><td>\(\frac{N(N-1)}{2}\sim\frac{N^2}{2}\)</td></tr>
+<tr><td class="mono">for (i = N; i &gt; 0; i /= 2)</td><td>\(\lfloor\lg N\rfloor + 1\)</td></tr>
+<tr><td class="mono">for i, for (j = 1; j &lt; N; j *= 2)</td><td>\(N\lg N\)</td></tr>
+<tr><td class="mono">for i, for (j = i; j &lt; N; j += i)</td><td>\(\approx N H_N \approx N\ln N\)</td></tr>
+</table>
+</div>
+
+<div class="card sp" id="sp7">
+<h4><span class="spn">7</span>Standardsummen und Spezialfunktionen</h4>
+<div class="step">\[ \begin{aligned}
+\sum_{i=1}^{N} i &= \frac{N(N+1)}{2} && \text{Gauß} \\
+\sum_{i=0}^{N-1} i &= \frac{N(N-1)}{2} && \text{jedes } i \lt j \text{ einmal} \\
+N + \frac N2 + \frac N4 + \dots &\approx 2N && \text{geometrisch, halbierend} \\
+\sum_{i=0}^{n} 2^i &= 2^{n+1} - 1 && \text{geometrisch, verdoppelnd} \\
+H_N = \sum_{i=1}^{N}\frac1i &\approx \ln N + 0{,}577 && \text{harmonische Zahl} \\
+\lg N! &\approx N\lg N && \text{Stirling}
+\end{aligned} \]</div>
+<p class="small">\(\lg N = \log_2 N\) = wie oft man N halbieren kann, bis 1 übrig ist. \(\ln N = \log_e N \approx 0{,}69\lg N\). \(\lg^* N\) = wie oft lg anwenden bis ≤ 1 (für alle praktischen N höchstens 5). \(\lg 10^3\approx10\), \(\lg 10^6\approx20\), \(\lg10^9\approx30\).</p>
+</div>
+
+<div class="card sp" id="sp8">
+<h4><span class="spn">8</span>Die fünf Rekurrenzen</h4>
+<table class="rt">
+<tr><th>Formel</th><th>Code-Form</th><th>Anker</th><th>Lösung (N = 2ⁿ)</th></tr>
+<tr><td>2.1 \(C_N = C_{N-1} + N\)</td><td>alle ansehen, eins entfernen</td><td>\(C_1 = 1\)</td><td>\(\frac{N(N+1)}{2}\sim\frac{N^2}{2}\)</td></tr>
+<tr><td>2.2 \(C_N = C_{N/2} + 1\)</td><td>halbieren, 1 Schritt</td><td>\(C_1 = 1\)</td><td>\(\lg N + 1\)</td></tr>
+<tr><td>2.3 \(C_N = C_{N/2} + N\)</td><td>alle ansehen, eine Hälfte weiter</td><td>\(C_1 = 0\)</td><td>\(2N - 2\sim 2N\)</td></tr>
+<tr><td>2.4 \(C_N = 2C_{N/2} + N\)</td><td>alle ansehen, beide Hälften weiter</td><td>\(C_1 = 0\)</td><td>\(N\lg N\)</td></tr>
+<tr><td>2.5 \(C_N = 2C_{N/2} + 1\)</td><td>1 Schritt, beide Hälften weiter</td><td>\(C_1 = 1\)</td><td>\(2N - 1\sim 2N\)</td></tr>
+</table>
+<p><b>Lösen von null (Teleskopieren):</b> N = 2ⁿ setzen, die Formel in sich selbst einsetzen, bis der Anker erscheint, dann aufsummieren. Bei 2.4 erst durch N teilen:</p>
+<div class="step">\[ \begin{aligned}
+\frac{C_{2^n}}{2^n} &= \frac{C_{2^{n-1}}}{2^{n-1}} + 1 && \text{durch } 2^n \text{ geteilt} \\
+&= \frac{C_{2^{0}}}{2^{0}} + n = n && \text{n-mal eingesetzt, } C_1 = 0 \\
+C_N &= N\lg N && \text{Probe: } C_8 = 24 = 8\cdot 3
+\end{aligned} \]</div>
+</div>
+
+<div class="card sp" id="sp9">
+<h4><span class="spn">9</span>O, Ω, Θ, ∼ und die Wachstumsklassen</h4>
+<div class="step">\[ \begin{aligned}
+g \in \Rule{O}(f) &\iff g(N) < c_0 f(N) \text{ für } N > N_0 && \text{obere Schranke} \\
+g \in \Rule{\Omega}(f) &\iff f \in O(g) && \text{untere Schranke} \\
+g \in \Rule{\Theta}(f) &\iff g \in O(f) \text{ und } g \in \Omega(f) && \text{beide Schranken} \\
+g \sim f &\iff g/f \to 1 && \text{inklusive Konstante}
+\end{aligned} \]</div>
+<p><b>Rechenregeln:</b> Konstanten fallen weg; nur der größte Term zählt; \(O(f)+O(g)=O(\max)\); \(O(f)\cdot O(g)=O(fg)\); Logarithmus-Basis egal. <b>Falle:</b> \(N\in O(N^2)\) ist <b>wahr</b> (O ist nur obere Schranke), \(N\in\Theta(N^2)\) ist falsch.</p>
+<table class="rt">
+<tr><th>Klasse</th><th>1</th><th>lg N</th><th>N</th><th>N lg N</th><th>N²</th><th>N³</th><th>2ᴺ</th></tr>
+<tr><td>N verdoppelt → Zeit</td><td>gleich</td><td>+1 Schritt</td><td>×2</td><td>etwas mehr als ×2</td><td>×4</td><td>×8</td><td>quadriert</td></tr>
+</table>
+<p class="small"><b>Verdopplungstest rückwärts:</b> Faktor T(2N)/T(N) messen: ≈ 2 → linear, ≈ 4 → quadratisch, ≈ 8 → kubisch.</p>
+</div>
+
+<div class="card sp" id="sp10">
+<h4><span class="spn">10</span>Suchen</h4>
+<table class="rt">
+<tr><th>Verfahren</th><th>erfolglos</th><th>erfolgreich (Mittel)</th></tr>
+<tr><td>sequentiell, unsortiert (2.1)</td><td>\(N\)</td><td>\(\frac{N+1}{2}\)</td></tr>
+<tr><td>sequentiell, sortiert (2.2)</td><td>\(\frac N2 + \frac{N}{N+1}\approx\frac N2\)</td><td>\(\frac{N+1}{2}\)</td></tr>
+<tr><td>binär, sortiert (2.3)</td><td colspan="2">höchstens \(\lfloor\lg N\rfloor + 1\), Rekurrenz 2.2</td></tr>
+</table>
+<pre class="cpp" data-roles='{}'>while (r &gt;= l)                    // Bereich nicht leer
+  { int m = (l + r) / 2;          // Mitte, abgerundet
+    if (v == a[m]) return m;      // Treffer
+    if (v &lt; a[m]) r = m - 1;      // links weiter
+    else l = m + 1;               // rechts weiter
+  }
+return -1;                        // nicht gefunden</pre>
+<p class="small"><b>Von Hand:</b> l, r, m pro Runde in eine Tabelle; m = ⌊(l+r)/2⌋. Binäre Suche ist vergleichsbasiert optimal, braucht aber eine <b>sortierte</b> Tabelle.</p>
+</div>
+
+<div class="card sp" id="sp11">
+<h4><span class="spn">11</span>Garantien und schnellere Rechner</h4>
+<p><span class="fw">Worst Case</span> = Garantie für jede Eingabe. <span class="fw">Average Case</span> = Vorhersage unter einem Eingabemodell. <span class="fw">Komplexität eines Problems</span> = Worst Case des besten Algorithmus. <span class="fw">optimal</span>: obere Schranke des Algorithmus = untere Schranke des Problems.</p>
+<div class="step">\[ \begin{aligned}
+\text{neue Zeit} &= \frac{T(kN)}{k\cdot T(N)}\cdot\text{alte Zeit} && \text{k-mal schneller, k-mal mehr Daten} \\
+T = N &: \text{gleich} && \text{linear hält Schritt} \\
+T = N\lg N &: \text{etwas länger} && \text{fast gleich} \\
+T = N^2 &: k\text{-mal so lang} && \text{z. B. Quick-Find} \\
+T = N^3 &: k^2\text{-mal so lang} && \text{k = 10: 100-mal}
+\end{aligned} \]</div>
+<p class="small"><b>Faustzahl:</b> QF mit N = 10⁹, M = 10⁶ bei 10⁹ Op./s ≈ 11,6 Tage; WQU ≈ 0,03 s.</p>
+</div>
+
+<div class="card sp" id="sp12">
+<h4><span class="spn">12</span>Die häufigsten Fallen</h4>
+<p>✗ QU hängt <b>p unter q</b>. ✓ Es hängt die <b>Wurzel</b> von p unter die <b>Wurzel</b> von q.</p>
+<p>✗ WQU bei Gleichstand: q-Seite bleibt oben. ✓ <code class="inl">else { id[j] = i; }</code>: q-Wurzel kommt unter p-Wurzel.</p>
+<p>✗ Bei <code class="inl">continue</code> passiert nichts. ✓ Die Halbierung beim find ist schon gelaufen, id[] kann sich trotzdem ändern.</p>
+<p>✗ Mit Halbierung ist jeder Baum flach. ✓ Tiefe bis lg N möglich (Kasten 4).</p>
+<p>✗ \(N \in O(N^2)\) ist falsch. ✓ Wahr, denn O ist nur eine obere Schranke.</p>
+<p>✗ lg = ln. ✓ \(\lg = \log_2\).</p>
+<p>✗ Sortieren hilft der sequentiellen Suche bei Treffern. ✓ Nur erfolglose Suchen werden kürzer (≈ N/2 statt N).</p>
+<p>✗ <code class="inl">cout &lt;&lt; " " &lt;&lt; p</code> ist ein Tippfehler. ✓ Buchstil: Leerzeichen vor jeder Ausgabe.</p>
+</div>
+
 </div>
 <div class="footer">Lernbegleiter Teil 1 · nach R. Sedgewick, <i>Algorithms in C++, Parts 1–4</i> (3. Aufl.), Kap. 1–2 · Code der Programme 1.1–1.4, 2.1, 2.2 wie im Buch (Header modernisiert). Übungslösungen (1.16 u.a.) sind eigene Lösungen. Als Nächstes: Teil 2 (Datenstrukturen).</div>
 </section>
@@ -2603,50 +3018,75 @@ new LB.Tracer({
 
 /* ---------- Glossar ---------- */
 (function(){
+  /* Glossar: [Thema, Fachwort, intuitive Erklärung, Abschnitt-Anker] */
   const G = [
-    ['Algorithmus','Problemlösungs-Methode, als Programm umsetzbar, unabhängig vom Rechner (§1.1)'],
-    ['Datenstruktur','Organisation der Daten, die ein Algorithmus benutzt (z.B. das id[]-Array)'],
-    ['Konnektivitätsproblem','Paare p-q lesen und nur die ausgeben, die nicht schon aus früheren Paaren folgen'],
-    ['transitiv','p–q und q–r ergeben p–r'],
-    ['Zusammenhangskomponente','maximale Menge von Objekten, die alle miteinander verbunden sind'],
-    ['find / union','abstrakte Operationen: Menge von p bestimmen / zwei Mengen vereinigen'],
-    ['Invariante','Aussage, die vor und nach jedem Schritt wahr bleibt (z.B. „verbunden ⇔ id[p]==id[q]“)'],
-    ['Quick-Find','id[i] = Mengenname. find O(1), union O(N)'],
-    ['Quick-Union','id[i] = Elternknoten. union O(1), find O(Tiefe)'],
-    ['Wurzel','Knoten mit id[r] == r, der Repräsentant eines Baums'],
-    ['Wald','Menge von Bäumen, im id[]-Array als Elternzeiger gespeichert'],
-    ['Weighted Quick-Union','kleinen Baum unter großen hängen (sz[]). Tiefe ≤ lg N'],
-    ['Pfadkompression','besuchte Knoten näher an die Wurzel hängen: Halbierung (Prog. 1.4) oder voll (Üb. 1.16)'],
-    ['Online-Algorithmus','verarbeitet jede Eingabe einmal, ohne alle Daten zu speichern'],
-    ['Spannbaum','N−1 Kanten, die alle N Knoten ohne Zyklus verbinden'],
-    ['abstrakte Operation','die gezählte Grundoperation (Vergleich, Array-Zugriff), unabhängig vom Rechner'],
-    ['empirische Analyse','Laufzeit durch Messen bestimmen (echte, zufällige oder bösartige Daten)'],
-    ['Worst Case','maximale Kosten über alle Eingaben der Größe N, ergibt eine Garantie'],
-    ['Average Case','mittlere Kosten unter einem Eingabemodell, ergibt eine Vorhersage'],
-    ['randomisierter Algorithmus','nutzt Zufall selbst (z.B. Eingabe mischen), damit das Zufallsmodell stimmt'],
-    ['innere Schleife','die am häufigsten ausgeführte Code-Stelle, bestimmt den führenden Term'],
-    ['führender Term','der am schnellsten wachsende Summand der Kostenformel'],
-    ['O-Notation','g ∈ O(f): g < c₀·f für alle N > N₀, also eine obere Schranke bis auf eine Konstante'],
-    ['Ω / Θ','untere Schranke / obere und untere Schranke zugleich'],
-    ['∼ (ungefähr)','g ∼ f heißt g/f → 1, genaue Vorhersage inklusive Konstante'],
-    ['proportional zu','g = c·f + kleinere Terme, erlaubt Extrapolation (T(2N) aus T(N))'],
-    ['Rekurrenz','Gleichung C_N = … C_{kleiner} …, spiegelt rekursiven Code wider'],
-    ['Rekursionsanker','Abbruchfall der Rekursion, liefert den Startwert (C_1)'],
-    ['teleskopieren','Rekurrenz immer wieder in sich selbst einsetzen, bis eine Summe entsteht'],
-    ['Divide & Conquer','in Teilprobleme zerlegen, lösen, kombinieren (Formel 2.4)'],
-    ['lg N / ln N','log₂ N / logₑ N. lg N = Anzahl Halbierungen bis 1'],
-    ['lg* N','wie oft lg anwenden, bis ≤ 1. Praktisch ≤ 5'],
-    ['harmonische Zahl H_N','1 + 1/2 + … + 1/N ≈ ln N + γ'],
-    ['Stirling-Formel','N! ≈ √(2πN)·(N/e)^N, lg N! ≈ N lg N'],
-    ['sequentielle Suche','alle Elemente der Reihe nach ansehen, O(N)'],
-    ['binäre Suche','sortierte Tabelle, Mitte vergleichen, Hälfte verwerfen. ≤ ⌊lg N⌋+1'],
-    ['Komplexität eines Problems','Worst-Case-Laufzeit des besten Algorithmus dafür'],
-    ['optimal','obere Schranke des Algorithmus = untere Schranke des Problems'],
-    ['Pointer-Arithmetik','a[i] ≡ *(a+i): Anfangsadresse + i·sizeof(Typ)'],
-    ['Stack / Heap','automatischer Speicher (lokale Arrays) / dynamischer Speicher (new/delete)']
+    ['C++', 'cin / >>', 'Standard-Eingabestrom / Extraktionsoperator: liest die nächste Zahl, Leerzeichen und Zeilenumbrüche trennen nur', 'k1-io'],
+    ['C++', 'cout / <<', 'Standard-Ausgabestrom / Einfügeoperator: schiebt Werte von links nach rechts in die Ausgabe', 'k1-io'],
+    ['C++', 'endl', 'Zeilenumbruch und Puffer leeren, die Zeile erscheint sofort', 'k1-io'],
+    ['C++', 'EOF (Eingabeende)', 'while (cin >> p >> q) wird falsch; Strg+D (Linux/macOS) bzw. Strg+Z (Windows)', 'k1-io'],
+    ['C++', 'Eingabeumleitung', './uf < paare.txt: die Datei wird zu cin', 'k1-io'],
+    ['C++', 'unite', 'Funktionsname für union, weil union in C++ ein reserviertes Schlüsselwort ist', 'k1-io'],
+    ['C++', 'Pointer-Arithmetik', 'a[i] ≡ *(a+i): Anfangsadresse + i·sizeof(Typ)', 'cpp'],
+    ['C++', 'doppelte Indirektion', 'id[id[i]]: erst den Elternknoten nachschlagen, dann dessen Eintrag (Großvater)', 'cpp'],
+    ['C++', 'Stack / Heap', 'automatischer Speicher (lokale Arrays) / dynamischer Speicher (new/delete)', 'cpp'],
+    ['Konnektivität', 'Algorithmus', 'Problemlösungs-Methode, als Programm umsetzbar, unabhängig vom Rechner', 'k1-algo'],
+    ['Konnektivität', 'Datenstruktur', 'Organisation der Daten, die ein Algorithmus benutzt (z. B. das id[]-Array)', 'k1-algo'],
+    ['Konnektivität', 'Konnektivitätsproblem', 'Paare p-q lesen und nur die ausgeben, die nicht schon aus früheren Paaren folgen', 'k1-problem'],
+    ['Konnektivität', 'transitiv', 'p–q und q–r ergeben p–r', 'k1-problem'],
+    ['Konnektivität', 'Zusammenhangskomponente', 'maximale Menge von Objekten, die alle miteinander verbunden sind', 'k1-problem'],
+    ['Konnektivität', 'find / union', 'abstrakte Operationen: Menge von p bestimmen / zwei Mengen vereinigen', 'k1-problem'],
+    ['Konnektivität', 'Repräsentant', 'das Element, das find für eine Menge liefert (bei QU/WQU die Wurzel), also der Name der Menge', 'k1-io'],
+    ['Konnektivität', 'Spannbaum / Spannwald', 'die ausgegebenen Paare: pro Komponente ein Baum mit (Größe − 1) Kanten, ohne Zyklus', 'k1-problem'],
+    ['Konnektivität', 'Online-Algorithmus', 'verarbeitet jede Eingabe einmal, ohne alle Daten zu speichern', 'k1-problem'],
+    ['Union-Find', 'Invariante', 'Aussage, die vor und nach jedem Schritt wahr bleibt (z. B. „verbunden ⇔ id[p]==id[q]“)', 'k1-qf'],
+    ['Union-Find', 'Quick-Find', 'id[i] = Mengenname. find O(1), union O(N)', 'k1-qf'],
+    ['Union-Find', 'Quick-Union', 'id[i] = Elternknoten. union O(1), find O(Tiefe)', 'k1-qu'],
+    ['Union-Find', 'Wurzel', 'Knoten mit id[r] == r, der Repräsentant eines Baums', 'k1-qu'],
+    ['Union-Find', 'Wald', 'Menge von Bäumen, im id[]-Array als Elternzeiger gespeichert', 'k1-qu'],
+    ['Union-Find', 'Tiefe eines Knotens', 'Anzahl der Zeiger von ihm bis zur Wurzel = Kosten von find', 'k1-pc-tiefe'],
+    ['Union-Find', 'Weighted Quick-Union', 'kleinen Baum unter großen hängen (sz[]). Tiefe ≤ lg N', 'k1-wqu'],
+    ['Union-Find', 'Pfadkompression', 'besuchte Knoten näher an die Wurzel hängen: Halbierung (Prog. 1.4) oder voll (Üb. 1.16)', 'k1-pc'],
+    ['Union-Find', 'Pfadhalbierung', 'id[i] = id[id[i]] beim Hochlaufen: jeder besuchte Knoten zeigt auf den Großvater. Macht nicht immer Tiefe 1', 'k1-pc-tiefe'],
+    ['Analyse', 'abstrakte Operation', 'die gezählte Grundoperation (Vergleich, Array-Zugriff), unabhängig vom Rechner', 'k2-ana'],
+    ['Analyse', 'empirische Analyse', 'Laufzeit durch Messen bestimmen (echte, zufällige oder bösartige Daten)', 'k2-emp'],
+    ['Analyse', 'Verdopplungstest', 'N verdoppeln und den Zeitfaktor ablesen: 2 linear, 4 quadratisch, 8 kubisch', 'k2-emp'],
+    ['Analyse', 'Worst Case', 'maximale Kosten über alle Eingaben der Größe N, ergibt eine Garantie', 'k2-guar'],
+    ['Analyse', 'Average Case', 'mittlere Kosten unter einem Eingabemodell, ergibt eine Vorhersage', 'k2-guar'],
+    ['Analyse', 'randomisierter Algorithmus', 'nutzt Zufall selbst (z. B. Eingabe mischen), damit das Zufallsmodell stimmt', 'k2-guar'],
+    ['Analyse', 'innere Schleife', 'die am häufigsten ausgeführte Code-Stelle, bestimmt den führenden Term', 'k2-ana'],
+    ['Analyse', 'führender Term', 'der am schnellsten wachsende Summand der Kostenformel', 'k2-ana'],
+    ['Analyse', 'Komplexität eines Problems', 'Worst-Case-Laufzeit des besten Algorithmus dafür', 'k2-guar'],
+    ['Analyse', 'optimal', 'obere Schranke des Algorithmus = untere Schranke des Problems', 'k2-guar'],
+    ['O-Notation', 'O-Notation', 'g ∈ O(f): g < c₀·f für alle N > N₀, also eine obere Schranke bis auf eine Konstante', 'k2-O'],
+    ['O-Notation', 'Ω / Θ', 'untere Schranke / obere und untere Schranke zugleich', 'k2-O'],
+    ['O-Notation', '∼ (ungefähr)', 'g ∼ f heißt g/f → 1, genaue Vorhersage inklusive Konstante', 'k2-O'],
+    ['O-Notation', 'proportional zu', 'g = c·f + kleinere Terme, erlaubt Extrapolation (T(2N) aus T(N))', 'k2-O'],
+    ['O-Notation', 'lg N / ln N', 'log₂ N / logₑ N. lg N = Anzahl Halbierungen bis 1', 'k2-log'],
+    ['O-Notation', 'lg* N', 'wie oft lg anwenden, bis ≤ 1. Praktisch ≤ 5', 'k2-log'],
+    ['O-Notation', 'harmonische Zahl H_N', '1 + 1/2 + … + 1/N ≈ ln N + 0,577', 'k2-log'],
+    ['O-Notation', 'Stirling-Formel', 'N! ≈ √(2πN)·(N/e)^N, lg N! ≈ N lg N', 'k2-log'],
+    ['Rekurrenzen', 'Rekurrenz', 'Gleichung C_N = … C_{kleiner} …, spiegelt rekursiven Code wider', 'k2-rec'],
+    ['Rekurrenzen', 'Rekursionsanker', 'Abbruchfall der Rekursion, liefert den Startwert (C_1)', 'k2-rec'],
+    ['Rekurrenzen', 'teleskopieren', 'Rekurrenz immer wieder in sich selbst einsetzen, bis eine Summe entsteht', 'k2-rec'],
+    ['Rekurrenzen', 'Divide & Conquer', 'in Teilprobleme zerlegen, lösen, kombinieren (Formel 2.4)', 'k2-rec'],
+    ['Suchen', 'sequentielle Suche', 'alle Elemente der Reihe nach ansehen, O(N)', 'k2-search'],
+    ['Suchen', 'binäre Suche', 'sortierte Tabelle, Mitte vergleichen, Hälfte verwerfen. ≤ ⌊lg N⌋+1', 'k2-search']
   ];
   const t = $('glossTab'); if(!t) return;
-  t.innerHTML = '<tr><th style="width:28%">Fachwort</th><th>intuitive Erklärung</th></tr>' + G.map(([a,b]) => '<tr><td><span class="fw">'+a+'</span></td><td>'+b+'</td></tr>').join('');
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  function draw(f){
+    const q = (f || '').trim().toLowerCase();
+    let h = '<tr><th style="width:24%">Fachwort</th><th>intuitive Erklärung</th><th style="width:8%">wo</th></tr>', last = '', n = 0;
+    G.forEach(([th, a, b, ref]) => {
+      if(q && (a + ' ' + b + ' ' + th).toLowerCase().indexOf(q) < 0) return;
+      if(th !== last){ h += '<tr><td colspan="3" style="background:rgba(188,140,255,.10);font-weight:700;color:var(--rule)">' + th + '</td></tr>'; last = th; }
+      h += '<tr><td><span class="fw">' + esc(a) + '</span></td><td>' + esc(b) + '</td><td><a href="#' + ref + '">→</a></td></tr>'; n++;
+    });
+    t.innerHTML = h;
+    const c = $('glossN'); if(c) c.textContent = n + ' von ' + G.length;
+  }
+  draw('');
+  const inp = $('glossQ'); if(inp) inp.addEventListener('input', () => draw(inp.value));
 })();
 
 /* ---------- Navigation: aktiver Abschnitt ---------- */
@@ -2658,11 +3098,189 @@ new LB.Tracer({
 })();
 </script>
 <script>
+/* ===== P1X-ADDON: Terminal-Simulator (1.2), Tiefen-Labor (1.3d), Spickzettel-Druck ===== */
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* Programm 1.4 in JS, Zeile für Zeile wie das C++: Weighted Quick-Union mit Halbierung */
+function UF(N){
+  this.id = Array.from({length: N}, (_, i) => i);   // jedes Objekt ist seine eigene Wurzel
+  this.sz = Array(N).fill(1);                       // jeder Baum hat einen Knoten
+}
+UF.prototype.find = function(p, ch){                // Wurzel suchen, unterwegs halbieren
+  while(p !== this.id[p]){
+    const old = this.id[p];
+    this.id[p] = this.id[this.id[p]];               // id[p] = id[id[p]]
+    if(ch && old !== this.id[p]) ch.push([p, old, this.id[p]]);
+    p = this.id[p];
+  }
+  return p;
+};
+UF.prototype.link = function(i, j){                 // zwei Wurzeln gewichtet verbinden
+  if(this.sz[i] < this.sz[j]){ this.id[i] = j; this.sz[j] += this.sz[i]; return [i, j]; }
+  this.id[j] = i; this.sz[i] += this.sz[j]; return [j, i];
+};
+UF.prototype.depth = function(x){ let d = 0; while(this.id[x] !== x){ x = this.id[x]; d++; } return d; };
+UF.prototype.sets = function(){                     // wie printComponents(): Wurzel → Elemente
+  const m = new Map(); const keys = [];
+  for(let i = 0; i < this.id.length; i++){
+    let r = i; while(this.id[r] !== r) r = this.id[r];
+    if(!m.has(r)){ m.set(r, []); keys.push(r); }
+    m.get(r).push(i);
+  }
+  keys.sort((a, b) => a - b);                       // map<int,…> ist nach Schlüssel sortiert
+  return keys.map(k => m.get(k));
+};
+
+/* ---------- 1.2 Terminal-Simulator ---------- */
+(function(){
+  if(!$('ioIn')) return;
+  const N = 10;
+  let steps = [], k = 0;
+  function build(){
+    const toks = $('ioIn').value.trim().split(/\s+/).filter(x => x.length);
+    const uf = new UF(N); steps = [];
+    let out = '', pos = 0, stop = '';
+    while(true){
+      if(pos < toks.length && !/^-?\d+$/.test(toks[pos])){ stop = '„' + esc(toks[pos]) + '“ ist keine Zahl: cin geht in den Fehlerzustand, die Schleife endet.'; break; }
+      if(pos + 1 >= toks.length){ stop = toks.length === pos ? 'Eingabeende (EOF): cin &gt;&gt; p &gt;&gt; q schlägt fehl, die Schleife endet.' : 'Nur noch eine Zahl übrig: q kann nicht gelesen werden, die Schleife endet.'; break; }
+      const a = toks[pos], b = toks[pos + 1];
+      if(!/^-?\d+$/.test(a) || !/^-?\d+$/.test(b)){ stop = '„' + esc(/^-?\d+$/.test(a) ? b : a) + '“ ist keine Zahl: cin geht in den Fehlerzustand, die Schleife endet.'; break; }
+      const p = +a, q = +b; pos += 2;
+      if(p < 0 || p >= N || q < 0 || q >= N){ stop = '⚠ ' + p + ' ' + q + ' liegt außerhalb 0 … ' + (N - 1) + '. Im echten Programm wäre id[' + (p < 0 || p >= N ? p : q) + '] ein Zugriff außerhalb des Arrays (undefiniertes Verhalten). Simulation gestoppt.'; break; }
+      const fp = uf.find(p), fq = uf.find(q);
+      let msg = 'cin liest <b>' + p + ' ' + q + '</b>. find(' + p + ') = ' + fp + ', find(' + q + ') = ' + fq + '. ';
+      let printed = false;
+      if(fp === fq){ msg += '<span class="c-res">Gleich</span>: ' + p + ' und ' + q + ' sind schon verbunden → <code class="inl">continue</code>, <b>keine Ausgabe</b>.'; }
+      else {
+        uf.link(fp, fq);
+        out += ' ' + p + ' ' + q + '\n'; printed = true;
+        msg += '<span class="c-idx">Verschieden</span> → unite(' + p + ', ' + q + '), dann cout schreibt <code class="inl">␣' + p + '␣' + q + '</code>.';
+      }
+      steps.push({p, q, printed, msg, out, sets: uf.sets()});
+    }
+    let fin = out; uf.sets().forEach((s, i) => { fin += 'Menge ' + (i + 1) + ': { ' + s.join(' ') + ' }\n'; });
+    steps.push({p: null, msg: stop + ' Danach läuft <code class="inl">printComponents()</code> und gibt alle Mengen aus.', out: fin, sets: uf.sets(), end: true});
+    $('ioM').textContent = steps.length;
+  }
+  function show(){
+    $('ioK').textContent = k;
+    const cur = k > 0 ? steps[k - 1] : null;
+    let r = '';
+    steps.forEach((s, i) => {
+      if(s.end) return;
+      const on = i < k, now = i === k - 1;
+      r += '<div style="' + (now ? 'background:rgba(210,153,34,.18);border-radius:5px;' : '') + (on ? '' : 'opacity:.4') + '">' + s.p + ' ' + s.q + (on ? (s.printed ? ' <span class="c-idx">→ ausgegeben</span>' : ' <span class="c-res">→ continue</span>') : '') + '</div>';
+    });
+    if(!steps.length || steps.length === 1) r += '<div class="muted">(kein vollständiges Paar)</div>';
+    $('ioRead').innerHTML = r;
+    const out = cur ? cur.out : '';
+    $('ioOut').innerHTML = out ? esc(out).replace(/ /g, '<span style="color:var(--muted)">·</span>') : '<span class="muted">(noch leer)</span>';
+    const sets = cur ? cur.sets : new UF(N).sets();
+    $('ioSets').innerHTML = sets.map(s => '<span style="display:inline-block;border:1px solid ' + (s.length > 1 ? 'var(--idx)' : 'var(--line)') + ';border-radius:6px;padding:1px 6px;margin:2px">{ ' + s.join(' ') + ' }</span>').join('');
+    $('ioMsg').innerHTML = cur ? cur.msg : 'Start: <code class="inl">id[i] = i</code>, jede Zahl 0 … 9 ist ihre eigene Menge. Klicke „Paar ▶“.';
+  }
+  $('ioNext').addEventListener('click', () => { if(k < steps.length){ k++; show(); } });
+  $('ioPrev').addEventListener('click', () => { if(k > 0){ k--; show(); } });
+  $('ioAll').addEventListener('click', () => { k = steps.length; show(); });
+  $('ioReset').addEventListener('click', () => { k = 0; show(); });
+  $('ioIn').addEventListener('input', () => { build(); k = 0; show(); });
+  build(); show();
+})();
+
+/* ---------- 1.3d Tiefen-Labor ---------- */
+(function(){
+  if(!$('tdIn')) return;
+  let N = 8, states = [], k = 0;
+  function forest(id, mark, pq){
+    const kids = id.map(() => []), roots = [];
+    id.forEach((par, x) => { if(par === x) roots.push(x); else kids[par].push(x); });
+    const pos = {}; let col = 0, maxD = 0;
+    (function place(list, d){
+      list.forEach(x => {
+        maxD = Math.max(maxD, d);
+        if(kids[x].length){ place(kids[x], d + 1); pos[x] = {x: (pos[kids[x][0]].x + pos[kids[x][kids[x].length - 1]].x) / 2, d}; }
+        else { pos[x] = {x: col++, d}; }
+      });
+    })(roots, 0);
+    const W = Math.max(1, col) * 46 + 20, H = (maxD + 1) * 66 + 30, X = c => 30 + c * 46, Y = d => 26 + d * 66;
+    let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:' + Math.max(W, 360) + 'px;height:auto" role="img" aria-label="Wald der Elternzeiger">';
+    id.forEach((par, x) => { if(par !== x) s += '<line x1="' + X(pos[x].x) + '" y1="' + (Y(pos[x].d) - 15) + '" x2="' + X(pos[par].x) + '" y2="' + (Y(pos[par].d) + 15) + '" stroke="#8b949e" stroke-width="1.5"/>'; });
+    id.forEach((par, x) => {
+      const P = pos[x], root = par === x, m = mark.has(x), isPQ = pq.indexOf(x) >= 0;
+      s += '<circle cx="' + X(P.x) + '" cy="' + Y(P.d) + '" r="15" fill="' + (root ? 'rgba(248,81,73,.18)' : '#161b22') + '" stroke="' + (m ? '#d29922' : (isPQ ? '#58a6ff' : (root ? '#f85149' : '#6e7a88'))) + '" stroke-width="' + (m || isPQ ? 3 : 1.5) + '"/>';
+      s += '<text x="' + X(P.x) + '" y="' + (Y(P.d) + 4.5) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#e6edf3">' + x + '</text>';
+      s += '<text x="' + X(P.x) + '" y="' + (Y(P.d) + 29) + '" text-anchor="middle" font-size="9.5" fill="' + (P.d >= 2 ? '#f85149' : '#8b949e') + '">' + P.d + '</text>';
+    });
+    return s + '</svg>';
+  }
+  function build(){
+    const txt = $('tdIn').value, pairs = [];
+    const re = /(\d+)\s*-\s*(\d+)/g; let m;
+    while((m = re.exec(txt))) pairs.push([+m[1], +m[2]]);
+    let mx = 7; pairs.forEach(([p, q]) => { mx = Math.max(mx, p, q); });
+    N = Math.min(mx + 1, 40);
+    const uf = new UF(N);
+    states = [{id: uf.id.slice(), sz: uf.sz.slice(), mark: new Set(), pq: [], msg: 'Start: N = ' + N + ' Bäume mit je einem Knoten.'}];
+    pairs.forEach(([p, q]) => {
+      if(p >= N || q >= N) return;
+      const ch = [];
+      const i = uf.find(p, ch), j = uf.find(q, ch);
+      let msg = '<b>' + p + '-' + q + '</b>: ';
+      msg += ch.length ? 'Halbierung ' + ch.map(([x, o, n]) => '<span class="c-chg">id[' + x + '] ' + o + '→' + n + '</span>').join(', ') + '. ' : 'keine Halbierung (Wege kürzer als 2). ';
+      const mark = new Set(ch.map(c => c[0]));
+      if(i === j) msg += 'Wurzeln gleich (' + i + ') → continue.';
+      else {
+        const si = uf.sz[i], sj = uf.sz[j];
+        const [c, r] = uf.link(i, j); mark.add(c);
+        msg += 'Wurzeln ' + i + ' (sz ' + si + ') und ' + j + ' (sz ' + sj + '): ' + (si < sj ? 'kleiner unter größer' : (si === sj ? 'Gleichstand → else-Zweig' : 'kleiner unter größer')) + ', <span class="c-chg">id[' + c + '] = ' + r + '</span>.';
+      }
+      states.push({id: uf.id.slice(), sz: uf.sz.slice(), mark, pq: [p, q], msg});
+    });
+    $('tdM').textContent = states.length - 1;
+  }
+  function show(){
+    const s = states[k];
+    $('tdK').textContent = k;
+    const uf = new UF(N); uf.id = s.id;
+    const dep = s.id.map((_, x) => uf.depth(x)), mxd = Math.max.apply(null, dep);
+    $('tdD').textContent = mxd;
+    $('tdSvg').innerHTML = forest(s.id, s.mark, s.pq);
+    const cell = (v, i, hi) => '<td style="border:1px solid var(--line);padding:1px 5px;text-align:center' + (hi ? ';background:rgba(210,153,34,.25)' : '') + '">' + v + '</td>';
+    $('tdTab').innerHTML = '<table style="border-collapse:collapse;font-size:.8rem"><tr><td style="padding-right:6px">i</td>' + s.id.map((_, i) => cell(i, i)).join('') + '</tr>' +
+      '<tr><td style="padding-right:6px;color:var(--mem)">id</td>' + s.id.map((v, i) => cell(v, i, s.mark.has(i))).join('') + '</tr>' +
+      '<tr><td style="padding-right:6px;color:var(--mem)">sz</td>' + s.sz.map((v, i) => cell(s.id[i] === i ? v : '<span style="opacity:.35">' + v + '</span>', i)).join('') + '</tr>' +
+      '<tr><td style="padding-right:6px;color:var(--res)">Tiefe</td>' + dep.map((v, i) => cell(v >= 2 ? '<b style="color:var(--res)">' + v + '</b>' : v, i)).join('') + '</tr></table>';
+    $('tdLog').innerHTML = s.msg + '<br><span class="muted">Grenze: Tiefe ≤ lg ' + N + ' ≈ ' + (Math.log2(N)).toFixed(2) + '. Blasse sz-Werte gehören zu Nicht-Wurzeln und werden nicht mehr gelesen.</span>';
+  }
+  $('tdNext').addEventListener('click', () => { if(k < states.length - 1){ k++; show(); } });
+  $('tdPrev').addEventListener('click', () => { if(k > 0){ k--; show(); } });
+  $('tdLast').addEventListener('click', () => { k = states.length - 1; show(); });
+  $('tdReset').addEventListener('click', () => { k = 0; show(); });
+  $('tdIn').addEventListener('input', () => { build(); k = 0; show(); });
+  document.querySelectorAll('.tdEx').forEach(b => b.addEventListener('click', () => { $('tdIn').value = b.dataset.v; build(); k = states.length - 1; show(); }));
+  build(); show();
+})();
+
+/* ---------- Spickzettel drucken ---------- */
+(function(){
+  const b = $('spPrint'); if(!b) return;
+  b.addEventListener('click', () => {
+    document.body.classList.add('print-spick');
+    window.print();
+    setTimeout(() => document.body.classList.remove('print-spick'), 500);
+  });
+})();
+})();
+</script>
+<script>
 /* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "So liest du die Seite", "Farben, Tracer, Aufbau"], ["bruecke", "Große Brücke", "wo Teil 1 im Buch steht"], ["master", "Master-Anatomie", "Code → Häufigkeit → Formel"], ["cpp", "C++-Werkzeug", "Array, Adresse, Schleife"]]], ["Kapitel 1 · Einführung", [["k1-algo", "1.1 Algorithmus", "Methode + Datenstruktur"], ["k1-problem", "1.2 Konnektivität", "Paare p-q, verbunden?"], ["k1-qf", "1.3a Quick-Find", "find O(1), union O(N)"], ["k1-qu", "1.3b Quick-Union", "Bäume, find = Weg zur Wurzel"], ["k1-wqu", "1.3c Weighted QU", "kleiner Baum unter großen, lg N"], ["k1-pc", "1.3d Pfadkompression", "Wege halbieren, fast linear"], ["k1-lab", "1.3e Labor Tab. 1.1", "Verdopplungs-Experiment"], ["k1-persp", "1.4 Perspektive", "Algorithmus schlägt Hardware"]]], ["Kapitel 2 · Analyse", [["k2-emp", "2.1 Empirisch", "messen, Verdopplung"], ["k2-ana", "2.2 Analyse", "Kosten × Häufigkeit"], ["k2-grow", "2.3 Wachstum", "1, lg N, N, N lg N, N², 2ᴺ"], ["k2-log", "2.3b Spezialfunktionen", "lg, ⌊⌋, H_N, F_N, N!"], ["k2-O", "2.4 O-Notation", "obere Schranke bis auf c₀"], ["k2-rec", "2.5 Rekurrenzen", "Formeln 2.1–2.5, Teleskop"], ["k2-search", "2.6 Suche", "sequentiell N vs. binär lg N"], ["k2-guar", "2.7 Garantien", "worst vs. average, Schranken"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele mit Urteil"], ["abstrakt", "🔧 Abstrakte Anatomie", "Regeln für jedes Kapitel"], ["uebung", "✍️ Übungsgenerator", "Übungen 1.4–1.8, 1.17"], ["quiz", "🎯 Quiz", "Klausurstil"], ["glossar", "📚 Glossar", "Fachwörter"], ["weiter", "➡️ Brücke zu Teil 2", "was weiterlebt"], ["fazit", "🧾 Spickzettel", "alles auf einen Blick"]]]];
+const MENU = [["Start", [["start", "So liest du die Seite", "Farben, Tracer, Aufbau"], ["bruecke", "Große Brücke", "wo Teil 1 im Buch steht"], ["master", "Master-Anatomie", "Code → Häufigkeit → Formel"], ["cpp", "C++-Werkzeug", "Array, Adresse, Schleife"]]], ["Kapitel 1 · Einführung", [["k1-algo", "1.1 Algorithmus", "Methode + Datenstruktur"], ["k1-problem", "1.2 Konnektivität", "Paare p-q, verbunden?"], ["k1-io", "1.2 cin/cout + Programm", "Ein-/Ausgabe, Mengen ausgeben"], ["k1-qf", "1.3a Quick-Find", "find O(1), union O(N)"], ["k1-qu", "1.3b Quick-Union", "Bäume, find = Weg zur Wurzel"], ["k1-wqu", "1.3c Weighted QU", "kleiner Baum unter großen, lg N"], ["k1-pc", "1.3d Pfadkompression", "Wege halbieren, fast linear"], ["k1-pc-tiefe", "1.3d Tiefe 2, 3 möglich?", "Halbierung ≠ flach, ≤ lg N"], ["k1-lab", "1.3e Labor Tab. 1.1", "Verdopplungs-Experiment"], ["k1-persp", "1.4 Perspektive", "Algorithmus schlägt Hardware"]]], ["Kapitel 2 · Analyse", [["k2-emp", "2.1 Empirisch", "messen, Verdopplung"], ["k2-ana", "2.2 Analyse", "Kosten × Häufigkeit"], ["k2-grow", "2.3 Wachstum", "1, lg N, N, N lg N, N², 2ᴺ"], ["k2-log", "2.3b Spezialfunktionen", "lg, ⌊⌋, H_N, F_N, N!"], ["k2-O", "2.4 O-Notation", "obere Schranke bis auf c₀"], ["k2-rec", "2.5 Rekurrenzen", "Formeln 2.1–2.5, Teleskop"], ["k2-search", "2.6 Suche", "sequentiell N vs. binär lg N"], ["k2-guar", "2.7 Garantien", "worst vs. average, Schranken"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele mit Urteil"], ["abstrakt", "🔧 Abstrakte Anatomie", "Regeln für jedes Kapitel"], ["uebung", "✍️ Übungsgenerator", "Übungen 1.4–1.8, 1.17"], ["quiz", "🎯 Quiz", "Klausurstil"], ["glossar", "📚 Glossar", "nach Themen, mit Suche"], ["weiter", "➡️ Brücke zu Teil 2", "was wiederkommt, woran erkennbar"], ["fazit", "🧾 Spickzettel", "12 Kästen: ganze Klausur Teil 1"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "find", "Zusammenhangskomponente*", "Wurzel*", "Laufzeitklasse*"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "union", "Pfadkompression", "Halbierung", "umbenennen"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Quick-Find", "Quick-Union", "Weighted Quick-Union", "gewichtet*", "Baum", "Bäume", "Höhe", "Verdopplung*", "Konnektivität", "Wachstum*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M", "Paar*", "Objekt*"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
@@ -2684,7 +3302,7 @@ const ROLE = {}; const pats = [];
 Object.keys(KW).forEach(r => KW[r].forEach(t => { const base = t.replace(/\*$/, ''); ROLE[base] = r; pats.push({base, suf: t.endsWith('*')}); }));
 pats.sort((a, b) => b.base.length - a.base.length);
 const RE = new RegExp('(?<![\\p{L}\\d_])(' + pats.map(p => esc(p.base) + (p.suf ? '(?:e|en|n|s|es|er|ern)?' : '')).join('|') + ')(?![\\p{L}\\d_])', 'gu');
-const SKIP = 'script,style,pre,code,.katex,svg,textarea,input,select,button,option,table.codet,.hist,.cols,.werk-out,.readout,.cells,.bits,.var,.frames,.stackv,h1,h2,h3,h4,.lbtop,#lbMenu,.kw,.tr-title,.tnote,.lb,.num,.verdict,.ttl,.kop,.legend,[class*="c-"],[style*="color"],.plot,.anat-sym,.s,.vnn,.vn-res,summary,th';
+const SKIP = 'script,style,pre,code,.katex,svg,textarea,input,select,button,option,table.codet,.hist,.cols,.werk-out,.readout,.cells,.bits,.var,.frames,.stackv,h1,h2,h3,h4,.lbtop,#lbMenu,.kw,.tr-title,.tnote,.lb,.num,.verdict,.ttl,.kop,.legend,[class*="c-"],[style*="color"],.plot,.anat-sym,.s,.vnn,.vn-res,.bl-badge,.blarr,.bl-ok,summary,th';
 function roleOf(m){ if(ROLE[m]) return ROLE[m]; for(const suf of ['ern','en','er','es','e','n','s']) if(m.endsWith(suf) && ROLE[m.slice(0, -suf.length)]) return ROLE[m.slice(0, -suf.length)]; return null; }
 LB.kwColor = function(root){
   if(!root) return;
