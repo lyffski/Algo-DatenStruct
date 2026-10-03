@@ -363,6 +363,9 @@ pre.ugc .ugcnt b{color:var(--chg)}
 .tool .katex-display>.katex,.sgrid .katex-display>.katex,.spick .katex-display>.katex{font-size:1.04em}
 @media(max-width:1500px){.tool .katex-display>.katex,.sgrid .katex-display>.katex,.spick .katex-display>.katex{font-size:.95em}}
 </style>
+<style>.ugex button.on{border-color:var(--chg);color:var(--chg)}
+pre.ugc .row{position:relative;display:block;padding-right:8.5em}
+pre.ugc .ugcnt{float:none!important;position:absolute;right:.5em;top:0;text-indent:0}</style>
 </head>
 <body>
 <header class="lbtop"><button id="lbBurger" class="lbburger" title="Inhalt öffnen">☰ Inhalt</button><div class="lbt"><b>Teil 1 · Fundamentals</b><span>Sedgewick Kap. 1–2</span></div><div class="lbq"><a href="#start">Start</a><a href="#k1-algo">Kapitel 1 · Einführung</a><a href="#k2-emp">Kapitel 2 · Analyse</a><a href="#schema">Training</a></div></header>
@@ -1777,6 +1780,34 @@ for (int i = N; i &gt; 0; i /= 2)    // i = N, ⌊N/2⌋, ⌊N/4⌋, …, 1, dan
   </select></label>
   <button id="ugGo">Lösen</button>
 </div>
+<div class="controls" style="margin-top:-4px">
+  <button id="ugReset" title="Startzustand vor dem ersten Paar">↺</button><button id="ugPrev">◀</button><button id="ugNext">Paar ▶</button><button id="ugLast">⏭</button>
+  <span class="readout">Paar <b id="ugK">0</b>/<span id="ugM">0</span> · max. Tiefe <b id="ugD">0</b> · Zugriffe bis hier <b id="ugA">0</b></span>
+</div>
+<div class="controls ugex" style="margin-top:-4px">
+  <span class="small muted" style="min-width:5.5em">Buch:</span>
+  <button class="ugEx" data-a="F" data-n="10" data-v="0-2 1-4 2-5 3-6 0-4 6-0 1-3" data-h="Übung 1.4: Quick-Find. Achte darauf, dass bei jeder union alle N Einträge gelesen werden (Zeile 5 läuft ×10).">Üb. 1.4 Quick-Find</button>
+  <button class="ugEx" data-a="U" data-n="10" data-v="0-2 1-4 2-5 3-6 0-4 6-0 1-3" data-h="Übung 1.5: Quick-Union. Es ändert sich pro union genau eine Stelle; die Kosten stecken in den find-Wegen (6-0 kostet 9).">Üb. 1.5 Quick-Union</button>
+  <button class="ugEx" data-a="W" data-n="10" data-v="0-2 1-4 2-5 3-6 0-4 6-0 1-3" data-h="Übung 1.7: Weighted. Gleiche Folge, aber kleiner Baum unter großen: max. Tiefe bleibt 2, Summe 30 statt 36.">Üb. 1.7 Weighted</button>
+  <button class="ugEx" data-a="H" data-n="10" data-v="0-2 1-4 2-5 3-6 0-4 6-0 1-3" data-h="Übung 1.8: Weighted + Halbierung. Die Halbierung kostet hier mehr Zugriffe (45), weil die Bäume klein sind; sie lohnt sich erst bei langen Wegen.">Üb. 1.8 + Halbierung</button>
+  <button class="ugEx" data-a="P" data-n="10" data-v="0-2 1-4 2-5 3-6 0-4 6-0 1-3" data-h="Übung 1.16/1.17: volle Kompression. Der 2. Pass hängt jeden besuchten Knoten direkt an die Wurzel (Zeilen 4–7).">Üb. 1.17 volle Kompr.</button>
+</div>
+<div class="controls ugex" style="margin-top:-4px">
+  <span class="small muted" style="min-width:5.5em">Tiefe/Worst:</span>
+  <button class="ugEx" data-a="F" data-n="10" data-v="0-1 1-2 2-3 3-4 4-5 5-6 6-7 7-8 8-9" data-h="Quick-Find teuer: Die Menge von p wächst bei jedem Paar und wird jedes Mal ganz umbenannt (1, 2, …, 9 Schreibvorgänge): Gauß-Summe, Werkzeug 2.">QF: Menge wächst</button>
+  <button class="ugEx" data-a="U" data-n="10" data-v="0-1 0-2 0-3 0-4 0-5 0-6 0-7 0-8 0-9 0-9 0-9" data-h="Quick-Union-Kette (Eigenschaft 1.2): die Wurzel wandert immer ans Ende, Tiefe 9 = N−1. Die letzten zwei Paare kosten je 20 Zugriffe, obwohl nichts passiert.">QU-Kette Tiefe 9</button>
+  <button class="ugEx" data-a="W" data-n="10" data-v="0-1 0-2 0-3 0-4 0-5 0-6 0-7 0-8 0-9" data-h="Dieselbe Folge mit Weighted: jedes neue Objekt kommt unter den großen Baum, Tiefe bleibt 1.">dieselbe mit Weighted: Tiefe 1</button>
+  <button class="ugEx" data-a="W" data-n="8" data-v="0-1 2-3 4-5 6-7 0-2 4-6 0-4" data-h="Worst Case für Weighted (Fig. 1.8): immer gleich große Bäume verbinden. N = 8 → Tiefe 3 = lg 8.">Weighted Tiefe 3 (N = 8)</button>
+  <button class="ugEx" data-a="W" data-n="16" data-v="0-1 2-3 4-5 6-7 8-9 10-11 12-13 14-15 0-2 4-6 8-10 12-14 0-4 8-12 0-8" data-h="Dasselbe Muster mit N = 16 → Tiefe 4 = lg 16. Mehr geht mit Weighted nicht (Eigenschaft 1.3).">Weighted Tiefe 4 (N = 16)</button>
+</div>
+<div class="controls ugex" style="margin-top:-4px">
+  <span class="small muted" style="min-width:5.5em">Kompression:</span>
+  <button class="ugEx" data-a="H" data-n="8" data-v="0-1 2-3 0-2 4-3" data-h="Nach 0-2 hängt 3 auf Tiefe 2. Das Paar 4-3 nennt die 3: find(3) halbiert (id[3] = 0), danach ist alles Tiefe 1.">4-3 zieht 3 hoch</button>
+  <button class="ugEx" data-a="H" data-n="10" data-v="0-1 2-3 4-5 6-7 0-2 4-6 0-4 7-8" data-h="Erst Tiefe 3 (7 → 6 → 4 → 0), dann 7-8: Halbierung setzt nur id[7] = 4, die 7 landet auf Tiefe 2.">Tiefe 3, dann 7-8 (Halbierung)</button>
+  <button class="ugEx" data-a="P" data-n="10" data-v="0-1 2-3 4-5 6-7 0-2 4-6 0-4 7-8" data-h="Gleiche Folge mit voller Kompression: bei 7-8 kommen 7 und 6 direkt an die Wurzel 0 (Tiefe 1), dafür 15 statt 13 Zugriffe.">dieselbe, volle Kompression</button>
+  <button class="ugEx" data-a="H" data-n="8" data-v="0-1 2-3 4-5 6-7 0-2 4-6 0-4 7-0 5-1" data-h="7-0 und 5-1 enden mit continue (schon verbunden), aber find hat trotzdem halbiert: id[] ändert sich auch ohne union.">continue halbiert trotzdem</button>
+</div>
+<div id="ugHint" class="step small" style="display:none"></div>
 <div class="grid2"><div class="card" style="padding:8px 12px"><div id="ugCode"></div></div><div id="ugForest" class="card" style="padding:6px;overflow:auto"></div></div>
 <div id="ugOut" class="scroll"></div>
 <p class="small muted">Zählweise: <b>jedes Lesen und jedes Schreiben</b> eines id[]-Elements zählt 1. Bei QU/W: find mit Pfadlänge d kostet 2d+1 (d+1 Tests <code class="inl">i != id[i]</code> + d Schritte <code class="inl">i = id[i]</code>), union 1 Schreibzugriff. sz[] wird nicht mitgezählt. Wenn deine Vorlesung anders zählt, bleibt das Verhältnis zwischen den Algorithmen gleich.</p>
@@ -3215,15 +3246,15 @@ new LB.Tracer({
       '  }']},
     U: {t:'Programm 1.2 · Quick-Union', l:[
       'while (cin >> p >> q)',
-      '  { for (i = p; i != id[i]; i = id[i]) ;   // Wurzel von p: Weg d → 2d+1 Zugriffe',
+      '  { for (i = p; i != id[i]; i = id[i]) ;   // Wurzel von p: 2d+1 Zugriffe',
       '    for (j = q; j != id[j]; j = id[j]) ;   // Wurzel von q',
       '    if (i == j) continue;                  // gleiche Wurzel: verbunden',
-      '    id[i] = j;                             // Wurzel von p unter Wurzel von q: 1 Schreiben',
+      '    id[i] = j;                             // p-Wurzel unter q-Wurzel',
       '    cout << " " << p << " " << q << endl;',
       '  }']},
     W: {t:'Programm 1.3 · Weighted Quick-Union', l:[
       'while (cin >> p >> q)',
-      '  { for (i = p; i != id[i]; i = id[i]) ;   // Wurzel von p: Weg d → 2d+1 Zugriffe',
+      '  { for (i = p; i != id[i]; i = id[i]) ;   // Wurzel von p: 2d+1 Zugriffe',
       '    for (j = q; j != id[j]; j = id[j]) ;   // Wurzel von q',
       '    if (i == j) continue;                  // gleiche Wurzel: verbunden',
       '    if (sz[i] < sz[j])                     // sz[] wird nicht mitgezählt',
@@ -3309,8 +3340,13 @@ new LB.Tracer({
       h += '<div class="step small">' + r.why.map(w => '• ' + LB.esc(w)).join('<br>') + '<br><b>Summe der Zeilen: ' + sum + ' = ' + r.acc + ' Zugriffe</b> (Spalte „Zugriffe“)</div>'; }
     $('ugCode').innerHTML = h;
   }
+  function depthOf(id){ let m = 0; id.forEach((_, x) => { let d = 0, y = x; while(id[y] !== y){ y = id[y]; d++; } if(d > m) m = d; }); return m; }
   function select(t){
+    if(t < -1) t = -1; if(t > states.length - 1) t = states.length - 1;
     cur = t;
+    $('ugK').textContent = t + 1; $('ugM').textContent = states.length;
+    $('ugD').textContent = t >= 0 ? depthOf(states[t].id) : 0;
+    $('ugA').textContent = states.slice(0, t + 1).reduce((a, r) => a + r.acc, 0);
     $('ugOut').querySelectorAll('tr[data-t]').forEach(tr => tr.classList.toggle('ugsel', +tr.dataset.t === t));
     showCode(t); showF(t);
   }
@@ -3330,12 +3366,22 @@ new LB.Tracer({
     h += '<tr><td colspan="'+(N+1)+'" class="r"><b>Summe</b></td><td class="r"><b>'+tot+'</b></td><td></td></tr></table><p class="small muted">Amber = in diesem Schritt geändert. <b>Klicke eine Zeile</b>: Der Code oben zeigt dann, welche Zeilen für dieses Paar liefen (×) und wie viele id[]-Zugriffe jede Zeile beigetragen hat; daneben der Wald.</p>';
     $('ugOut').innerHTML = h;
     $('ugOut').querySelectorAll('tr[data-t]').forEach(tr => tr.addEventListener('click', () => select(+tr.dataset.t)));
-    if(rows.length) select(Math.min(cur, rows.length - 1)); else { showCode(-1); showF(-1); }
+    select(rows.length ? Math.min(cur, rows.length - 1) : -1);
   }
-  function showF(t){ if(!states[t]) { $('ugForest').innerHTML = ''; return; } const r = states[t];
+  function showF(t){ if(!states[t]) { const N = clampInt($('ugN').value, 2, 30, 10); $('ugForest').innerHTML = LB.forest(Array.from({length:N}, (_,i) => i), {}, {caption:'Startzustand: id[i] = i, jeder Knoten ist seine eigene Wurzel', markRoots:true}); return; } const r = states[t];
     const hi = {}; r.id.forEach((v,i) => { if(v !== r.before[i]) hi[i] = 'chg'; });
     $('ugForest').innerHTML = LB.forest(r.id, hi, {caption:'Wald nach Paar '+r.p+'-'+r.q+' (Nr. '+(t+1)+')', markRoots:true}); }
-  go.addEventListener('click', () => { cur = 0; run(); });
+  go.addEventListener('click', () => { cur = 0; $('ugHint').style.display = 'none'; run(); });
+  $('ugReset').addEventListener('click', () => select(-1));
+  $('ugPrev').addEventListener('click', () => select(cur - 1));
+  $('ugNext').addEventListener('click', () => select(cur + 1));
+  $('ugLast').addEventListener('click', () => select(states.length - 1));
+  document.querySelectorAll('.ugEx').forEach(b => b.addEventListener('click', () => {
+    $('ugIn').value = b.dataset.v; $('ugN').value = b.dataset.n; $('ugAlg').value = b.dataset.a;
+    document.querySelectorAll('.ugEx').forEach(x => x.classList.toggle('on', x === b));
+    const h = $('ugHint'); h.style.display = ''; h.innerHTML = '<b>' + b.textContent + ':</b> ' + b.dataset.h + ' Mit ◀ ▶ Paar für Paar durchgehen.';
+    cur = -1; run(); select(-1);
+  }));
   $('ugAlg').addEventListener('change', run);
   run();
 })();
