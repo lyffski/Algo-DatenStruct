@@ -360,6 +360,46 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .lab-math .katex-display,.lab-facts .katex-display{margin:.3em 0}
 .lab-cmp,.lab-math,.lab-facts{overflow-x:auto}
 .lab-mem table.rt{width:auto}
+
+/* ===== P2LAB Farben v2 ===== */
+.lab-tabs button{--tc:var(--purple);border-color:color-mix(in srgb,var(--tc) 45%,transparent);border-left:4px solid var(--tc)}
+.lab-tabs button b{color:var(--tc)}
+.lab-tabs button:hover{background:color-mix(in srgb,var(--tc) 12%,var(--card2))}
+.lab-tabs button.on{background:color-mix(in srgb,var(--tc) 22%,var(--card2));border-color:var(--tc);box-shadow:0 0 0 1px var(--tc) inset,0 0 14px color-mix(in srgb,var(--tc) 35%,transparent)}
+.lab-tabs button.on b{color:#fff}
+.lab-var button.on{background:rgba(210,153,34,.22);border-color:var(--orange);color:#ffd88a;box-shadow:none}
+.lab-ex button{border-color:rgba(86,212,221,.35)}
+.lab-ex button.on{background:rgba(86,212,221,.2);border-color:var(--cyan);color:#b7f3f7;box-shadow:none}
+.lab-var{border-left:4px solid var(--orange)}
+.lab-ex{border-left:4px solid var(--cyan)}
+.lab-ctl{border-left:4px solid var(--green)}
+.lab-auto.on{background:rgba(63,185,80,.25);border-color:var(--green);color:#b6f5c0}
+.lab-ctl .lab-pos{accent-color:var(--orange)}
+.lab-col{border-top:3px solid var(--border)}
+.p-code{border-top-color:var(--orange)} .p-code .lab-h{color:var(--orange)}
+.p-mem{border-top-color:var(--pink)} .p-mem .lab-h{color:var(--pink)}
+.p-math{border-top-color:var(--blue)} .p-math>.lab-h{color:var(--blue)}
+.p-cmp{border-top-color:var(--purple)}
+.p-facts{border-top-color:var(--cyan)} .p-facts .lab-h{color:var(--cyan)}
+.lab-claim{box-shadow:0 0 12px rgba(63,185,80,.18)}
+.lab-vs2{display:grid;grid-template-columns:minmax(0,1.5fr) auto minmax(50px,1fr) auto auto;gap:.15rem .5rem;align-items:center;font-size:.84rem;padding:.2rem .1rem .2rem .45rem;border-left:3px solid var(--vc);margin:.15rem 0;background:color-mix(in srgb,var(--vc) 6%,transparent);border-radius:0 6px 6px 0}
+.lab-vs2 .vs-l{color:var(--text)}
+.lab-vs2 .vs-now{color:var(--vc);font-size:.95rem}
+.lab-vs2 .vs-bar{height:7px;background:#1b222c;border-radius:4px;overflow:hidden}
+.lab-vs2 .vs-bar i{display:block;height:100%;background:var(--vc);border-radius:4px;transition:width .25s}
+.lab-vs2 .vs-t{color:var(--muted);font-size:.78rem}
+.lab-vs2 .vs-t b{color:var(--text)}
+.vs-ok{color:var(--green);font-weight:800}
+.vs-bad{color:var(--orange);font-weight:700}
+.vs-run{color:var(--muted);font-size:.75rem;min-width:2.4em;text-align:right}
+.lab-leg{display:flex;flex-wrap:wrap;gap:.2rem .8rem;font-size:.76rem;margin-top:.2rem}
+.lab-leg i{display:inline-block;width:.8em;height:.8em;border-radius:2px;margin-right:.3em;vertical-align:-.05em}
+.lab-leg small{color:var(--muted)}
+.lab-cmp td.best{color:var(--green);font-weight:800}
+.lab-cmp td.worst{color:var(--orange);font-weight:700}
+.lab-cmp table.rt tr.on td{background:rgba(188,140,255,.16)}
+.lab-cmp table.rt tr.on td:first-child{box-shadow:inset 3px 0 0 var(--purple)}
+.lab-code .row.cur .lnum{color:var(--orange);font-weight:800}
 </style>
 </head>
 <body>
@@ -3593,7 +3633,9 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const clone = o => JSON.parse(JSON.stringify(o));
 const tex = el => { if(LB.tex && el) LB.tex(el); };
-const MAXSNAP = 4000;                                  // höchstens so viele Schritte aufzeichnen
+const MAXSNAP = 4000;
+const PAL = ['#58a6ff', '#3fb950', '#d29922', '#f778ba', '#bc8cff', '#56d4dd', '#f85149'];
+                                  // höchstens so viele Schritte aufzeichnen
 
 /* Recorder: der Algorithmus läuft einmal komplett, jeder rec.step speichert eine Momentaufnahme */
 function Rec(quiet){
@@ -3617,34 +3659,35 @@ LB.Lab = function(o){
     '<div class="lab-row lab-var"></div>' +
     '<div class="lab-row lab-ex"></div>' +
     '<div class="lab-hint"></div>' +
-    '<div class="lab-row lab-ctl"><button data-a="first" title="Anfang">⏮</button><button data-a="prev">◀</button><button data-a="next" class="lab-big">Schritt ▶</button><button data-a="last" title="Ende">⏭</button><button data-a="auto">⏯ auto</button>' +
+    '<div class="lab-row lab-ctl"><button data-a="first" title="Anfang">⏮</button><button data-a="prev" title="zurück">◀</button><button data-a="next" class="lab-big">Schritt ▶</button><button data-a="last" title="Ende">⏭</button><button data-a="auto" class="lab-auto">⏯ auto</button>' +
       '<input type="range" class="lab-pos" min="0" value="0"><span class="readout lab-cnt"></span></div>' +
     '<div class="lab-main">' +
-      '<div class="lab-col"><div class="lab-h">① Code <span class="lab-book"></span></div><pre class="cpp lab-code"></pre></div>' +
-      '<div class="lab-col"><div class="lab-h">② Speicher / Struktur jetzt</div><div class="lab-mem"></div></div>' +
-      '<div class="lab-col"><div class="lab-h">③ Mathematik live</div><div class="lab-math"></div>' +
-        '<div class="lab-h" style="margin-top:.6rem">④ Aussage, die jetzt gilt</div><div class="lab-claim"></div></div>' +
+      '<div class="lab-col p-code"><div class="lab-h">① Code <span class="lab-book"></span></div><pre class="cpp lab-code"></pre></div>' +
+      '<div class="lab-col p-mem"><div class="lab-h">② Speicher / Struktur jetzt</div><div class="lab-mem"></div></div>' +
+      '<div class="lab-col p-math"><div class="lab-h">③ Mathematik live <span>Wert jetzt · Balken = Weg bis zum Ende · Ziel = Formel</span></div><div class="lab-math"></div>' +
+        '<div class="lab-h" style="margin-top:.5rem">③b Verlauf über alle Schritte <span>Linie = Zähler, senkrecht = jetzt</span></div><div class="lab-spark"></div>' +
+        '<div class="lab-h" style="margin-top:.6rem;color:var(--green)">④ Aussage, die jetzt gilt</div><div class="lab-claim"></div></div>' +
     '</div>' +
     '<div class="lab-msg"></div>' +
     '<div class="lab-bottom">' +
-      '<div class="lab-col"><div class="lab-h">⑤ Was wäre wenn? Alle Varianten mit derselben Eingabe</div><div class="lab-cmp"></div></div>' +
-      '<div class="lab-col"><div class="lab-h">⑥ Das musst du hier wissen (gilt immer)</div><div class="lab-facts"></div></div>' +
+      '<div class="lab-col p-cmp"><div class="lab-h">⑤ Was wäre wenn? Alle Varianten mit derselben Eingabe <span>grün = kleinster Wert, orange = größter</span></div><div class="lab-cmp"></div></div>' +
+      '<div class="lab-col p-facts"><div class="lab-h">⑥ Das musst du hier wissen (gilt immer)</div><div class="lab-facts"></div></div>' +
     '</div>';
   const q = s => root.querySelector(s);
   const S = () => o.scenarios[L.sc];
 
   function tabs(){
-    q('.lab-tabs').innerHTML = o.scenarios.map((s, k) => '<button data-sc="' + k + '" class="' + (k === L.sc ? 'on' : '') + '"><b>' + s.icon + ' ' + s.name + '</b><small>' + s.book + '</small></button>').join('');
+    q('.lab-tabs').innerHTML = o.scenarios.map((s, k) => '<button data-sc="' + k + '" style="--tc:' + PAL[k % PAL.length] + '" class="' + (k === L.sc ? 'on' : '') + '"><b>' + s.icon + ' ' + s.name + '</b><small>' + s.book + '</small></button>').join('');
   }
   function controls(){
     const s = S();
     let h = '<span class="lab-lab">Variante:</span>' + s.vars.map(v => '<button data-v="' + v.k + '" class="' + (v.k === L.v ? 'on' : '') + '" title="' + esc(v.d || '') + '">' + v.name + '</button>').join('');
     h += (s.ins || []).map(f => '<label>' + f.label + ' <input data-in="' + f.k + '" value="' + esc(L.inp[f.k]) + '" style="width:' + (f.w || 5) + 'rem"></label>').join('');
     q('.lab-var').innerHTML = h;
-    q('.lab-ex').innerHTML = '<span class="lab-lab">Beispiele:</span>' + (s.presets || []).map((p, k) => '<button data-p="' + k + '">' + p.name + '</button>').join('');
+    q('.lab-ex').innerHTML = '<span class="lab-lab">Beispiele:</span>' + (s.presets || []).map((p, k) => '<button data-p="' + k + '" class="' + (k === L.preset ? 'on' : '') + '">' + p.name + '</button>').join('');
   }
   function select(k){
-    const s = o.scenarios[k]; L.sc = k; L.v = s.vars[0].k; L.inp = {};
+    const s = o.scenarios[k]; L.sc = k; L.v = s.vars[0].k; L.inp = {}; L.preset = null;
     (s.ins || []).forEach(f => L.inp[f.k] = f.def);
     q('.lab-hint').innerHTML = s.intro || ''; q('.lab-hint').style.display = s.intro ? '' : 'none';
     tabs(); controls(); run(); tex(q('.lab-hint'));
@@ -3666,15 +3709,18 @@ LB.Lab = function(o){
     q('.lab-code').innerHTML = code.map((src, k) => '<span class="row" data-l="' + (k + 1) + '"><span class="lnum">' + (k + 1) + '</span>' + (LB.hl ? LB.hl(src.replace(/(\S)\s{3,}\/\//, '$1  //'), s.roles || {}) : esc(src)) + '<span class="labhit"></span></span>').join('');
     q('.lab-facts').innerHTML = s.facts(L.v, L.inp); tex(q('.lab-facts'));
     compare();
+    const keys = (s.cmp || []).map(k => k[0]).filter(k => L.rec.snaps.some(sn => typeof sn.c[k] === 'number' && sn.c[k] !== 0));
+    L.series = keys.map((k, j) => ({k, name: ((s.cmp || []).find(x => x[0] === k) || [k, k])[1], col: PAL[j % PAL.length], v: L.rec.snaps.map(sn => typeof sn.c[k] === 'number' ? sn.c[k] : 0)}));
     show(0);
   }
   function compare(){
     const s = S(), keys = s.cmp || [];
     let h = '<table class="rt"><tr><th>Variante</th>' + keys.map(k => '<th class="r">' + k[1] + '</th>').join('') + '<th class="r">Schritte</th></tr>';
-    s.vars.forEach(v => {
-      const r = runOnce(v.k, true);
-      h += '<tr' + (v.k === L.v ? ' class="on"' : '') + '><td><b>' + v.name + '</b>' + (r.err ? ' <span class="small" style="color:var(--res)">⚠ ' + esc(r.err) + '</span>' : '') + '</td>' +
-        keys.map(k => '<td class="r mono">' + (r.c[k[0]] !== undefined ? r.c[k[0]] : (k[2] ? k[2](r) : '–')) + '</td>').join('') + '<td class="r mono">' + r.n + '</td></tr>';
+    const rows = s.vars.map(v => { const r = runOnce(v.k, true); return {v, r, cells: keys.map(k => r.c[k[0]] !== undefined ? r.c[k[0]] : (k[2] ? k[2](r) : '–')).concat([r.n])}; });
+    const ext = rows.length > 1 ? rows[0].cells.map((_, j) => { const nums = rows.map(x => x.cells[j]).filter(x => typeof x === 'number'); return nums.length > 1 ? [Math.min.apply(null, nums), Math.max.apply(null, nums)] : null; }) : [];
+    rows.forEach(({v, r, cells}) => {
+      h += '<tr' + (v.k === L.v ? ' class="on"' : '') + '><td><b>' + (v.k === L.v ? '▶ ' : '') + v.name + '</b>' + (r.err ? ' <span class="small" style="color:var(--res)">⚠ ' + esc(r.err) + '</span>' : '') + '</td>' +
+        cells.map((x, j) => { const e = ext[j]; const cls = e && e[0] !== e[1] && typeof x === 'number' ? (x === e[0] ? ' best' : x === e[1] ? ' worst' : '') : ''; return '<td class="r mono' + cls + '">' + x + '</td>'; }).join('') + '</tr>';
     });
     h += '</table>';
     if(s.cmpNote) h += '<div class="small" style="margin-top:.4rem">' + s.cmpNote(L.inp) + '</div>';
@@ -3690,29 +3736,49 @@ LB.Lab = function(o){
     root.querySelectorAll('.lab-code .row').forEach(r => { const l = +r.dataset.l;
       r.classList.toggle('cur', l === sn.line); r.querySelector('.labhit').textContent = hits[l] ? '×' + hits[l] : ''; });
     q('.lab-mem').innerHTML = s.view(sn.S, sn, L.inp, L.v);
+    const last = snaps[snaps.length - 1];
+    LB._labCtx = {mode: 'fin', fin: {}, k: 0};
+    try { s.math(last.c, L.inp, L.v, true, last.S); } catch(e){}
+    LB._labCtx.mode = 'now'; LB._labCtx.done = i === snaps.length - 1; LB._labCtx.k = 0;
     q('.lab-math').innerHTML = s.math(sn.c, L.inp, L.v, i === snaps.length - 1, sn.S); tex(q('.lab-math'));
+    LB._labCtx = null;
+    q('.lab-spark').innerHTML = spark(i);
     q('.lab-claim').innerHTML = sn.claim || '<span class="muted">Noch nichts passiert: Startzustand.</span>'; tex(q('.lab-claim'));
     let hist = '';
     for(let k = Math.max(0, i - 4); k < i; k++) hist += '<div class="muted small">' + k + ': ' + snaps[k].msg + '</div>';
     q('.lab-msg').innerHTML = hist + '<div><b>' + i + ':</b> ' + sn.msg + '</div>'; tex(q('.lab-msg'));
   }
-  function stop(){ if(L.timer){ clearInterval(L.timer); L.timer = null; } }
+  function spark(i){
+    const se = L.series || [], n = L.rec.snaps.length; if(!se.length || n < 2) return '<div class="muted small">(keine Zähler)</div>';
+    const W = 420, H = 96, X = k => 6 + k * (W - 12) / (n - 1);
+    let s = '<svg viewBox="0 0 ' + W + ' ' + (H + 4) + '" width="' + W + '" style="width:100%!important;max-width:100%;height:auto">';
+    for(let g = 1; g < 4; g++) s += '<line x1="6" x2="' + (W - 6) + '" y1="' + (4 + g * H / 4) + '" y2="' + (4 + g * H / 4) + '" stroke="#1f2733"/>';
+    se.forEach(t => { const mx = Math.max.apply(null, t.v) || 1;
+      s += '<polyline fill="none" stroke="' + t.col + '" stroke-width="2" points="' + t.v.map((y, k) => X(k).toFixed(1) + ',' + (4 + H - y / mx * (H - 6)).toFixed(1)).join(' ') + '"/>';
+      s += '<circle cx="' + X(i).toFixed(1) + '" cy="' + (4 + H - t.v[i] / mx * (H - 6)).toFixed(1) + '" r="3.5" fill="' + t.col + '"/>'; });
+    s += '<line x1="' + X(i).toFixed(1) + '" x2="' + X(i).toFixed(1) + '" y1="2" y2="' + (H + 2) + '" stroke="#e6edf3" stroke-dasharray="3 3"/></svg>';
+    return s + '<div class="lab-leg">' + se.map(t => '<span><i style="background:' + t.col + '"></i>' + t.name + ' <b>' + t.v[i] + '</b><small> / ' + t.v[n - 1] + '</small></span>').join('') + '</div>';
+  }
+  function stop(){ if(L.timer){ clearInterval(L.timer); L.timer = null; } const a = q('.lab-auto'); if(a) a.classList.remove('on'); }
   root.addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || !root.contains(b)) return;
     if(b.dataset.sc !== undefined) return select(+b.dataset.sc);
     if(b.dataset.v !== undefined){ L.v = b.dataset.v; controls(); return run(); }
-    if(b.dataset.p !== undefined){ const p = S().presets[+b.dataset.p];
+    if(b.dataset.p !== undefined){ const p = S().presets[+b.dataset.p]; L.preset = +b.dataset.p;
       Object.assign(L.inp, p.set || {}); if(p.v) L.v = p.v; controls(); run();
       q('.lab-hint').style.display = ''; q('.lab-hint').innerHTML = '<b>' + p.name + ':</b> ' + p.hint; tex(q('.lab-hint'));
       if(p.to === 'end') show(L.rec.snaps.length - 1);
       return; }
     const a = b.dataset.a, n = L.rec.snaps.length - 1;
     if(a === 'first') show(0); else if(a === 'prev') show(L.i - 1); else if(a === 'next') show(L.i + 1); else if(a === 'last') show(n);
-    else if(a === 'auto'){ if(L.timer) return stop(); L.timer = setInterval(() => { if(L.i >= n) stop(); else show(L.i + 1); }, 650); }
+    else if(a === 'auto'){ if(L.timer) return stop(); if(L.i >= n) show(0); b.classList.add('on'); L.timer = setInterval(() => { if(L.i >= n) stop(); else show(L.i + 1); }, 650); }
   });
-  root.addEventListener('change', e => { const f = e.target.closest('[data-in]'); if(!f) return; L.inp[f.dataset.in] = f.value; run(); });
-  root.addEventListener('keydown', e => { if(e.target.closest('[data-in]') && e.key === 'Enter'){ L.inp[e.target.dataset.in] = e.target.value; run(); } });
-  q('.lab-pos').addEventListener('input', e => show(+e.target.value));
+  let deb = null;
+  const typed = f => { L.inp[f.dataset.in] = f.value; if(L.preset !== null){ L.preset = null; root.querySelectorAll('.lab-ex button.on').forEach(x => x.classList.remove('on')); } run(); };
+  root.addEventListener('input', e => { const f = e.target.closest('[data-in]'); if(!f) return; clearTimeout(deb); deb = setTimeout(() => typed(f), 450); });
+  root.addEventListener('change', e => { const f = e.target.closest('[data-in]'); if(!f) return; clearTimeout(deb); if(L.inp[f.dataset.in] !== f.value) typed(f); });
+  root.addEventListener('keydown', e => { const f = e.target.closest('[data-in]'); if(f && e.key === 'Enter'){ clearTimeout(deb); typed(f); } });
+  q('.lab-pos').addEventListener('input', e => { e.stopPropagation(); show(+e.target.value); });
   select(0);
   L.selectScenario = select; L.root = root;
   (LB.labs = LB.labs || {})[o.id] = L;
@@ -3776,9 +3842,17 @@ LB.labFrames = function(frames, title){
 };
 /* Zahlenzeile „gemessen gegen Formel“ */
 LB.labVs = function(label, got, want, note){
-  if(want === '…') return '<div class="lab-vs"><span>' + label + '</span><b class="mono">' + got + '</b><span class="muted">Formel</span><b class="mono muted">am Ende</b><span></span></div>';
-  const ok = got === want || (typeof want === 'number' && Math.abs(got - want) < 1e-9);
-  return '<div class="lab-vs"><span>' + label + '</span><b class="mono">' + got + '</b><span class="muted">Formel</span><b class="mono">' + want + '</b>' + (ok ? '<span style="color:var(--idx)">✓</span>' : '<span style="color:var(--chg)">' + (note || '≠') + '</span>') + '</div>';
+  const ctx = LB._labCtx;
+  if(ctx && ctx.mode === 'fin'){ ctx.fin[label] = {got, want}; return ''; }
+  const f = (ctx && ctx.fin[label]) || {}, done = ctx ? ctx.done : want !== '…';
+  const target = want === '…' ? f.want : want, total = typeof f.got === 'number' ? f.got : null;
+  const col = PAL[(ctx ? ctx.k++ : 0) % PAL.length];
+  const num = typeof got === 'number' && typeof total === 'number' && total > 0;
+  const pct = num ? Math.max(0, Math.min(100, got / total * 100)) : (done ? 100 : 0);
+  const ok = got === target || (typeof target === 'number' && typeof got === 'number' && Math.abs(got - target) < 1e-9);
+  const mark = done ? (ok ? '<span class="vs-ok">✓</span>' : '<span class="vs-bad">' + (note || '≠') + '</span>') : '<span class="vs-run">' + (num ? Math.round(pct) + '%' : '…') + '</span>';
+  return '<div class="lab-vs2" style="--vc:' + col + '"><span class="vs-l">' + label + '</span><b class="vs-now mono">' + got + '</b>' +
+    '<span class="vs-bar"><i style="width:' + pct.toFixed(1) + '%"></i></span><span class="vs-t">Ziel <b class="mono">' + (target === undefined ? '–' : target) + '</b></span>' + mark + '</div>';
 };
 })();
 
