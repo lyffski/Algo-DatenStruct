@@ -3919,7 +3919,7 @@ const sieve = {
     const N = int(inp.N, 4, 120, 50); let exact = 0;
     const isP = k => { for(let d = 2; d * d <= k; d++) if(k % d === 0) return false; return k >= 2; };
     for(let i = 2; i < N; i++){ if(v === 'wurzel' && i * i >= N) break; if(v !== 'ohne' && !isP(i)) continue; exact += Math.max(0, Math.ceil(N / i) - i); }
-    let h = LB.labVs('Streichungen a[i·j] = 0 bis jetzt', c.w || 0, done ? exact : '…') + LB.labVs('davon doppelt', c.doppelt || 0, '–', ' ');
+    let h = LB.labVs('Streichungen a[i·j] = 0 bis jetzt', c.w || 0, done ? exact : '…') + LB.labVs('davon doppelt', c.doppelt || 0, done ? c.doppelt || 0 : '…', ' ');
     h += '<div class="step">\\[ \\begin{aligned} W &= \\sum_{i} \\max\\left(0,\\ \\lceil N/i \\rceil - i\\right) = ' + exact + ' && \\text{exakt (j von i bis } \\lceil N/i\\rceil - 1) \\\\ ' +
       (v === 'ohne' ? 'W &\\approx N\\,H_N - \\ldots \\approx ' + f2(N * (ln(N) + 0.5772) - N) + ' && \\text{jedes i: harmonisch, Θ(N log N)}'
                     : 'W &\\approx N \\ln\\ln N = ' + f2(N * ln(ln(N))) + ' && \\text{nur Primzahlen p: } \\textstyle\\sum_p \\frac Np') + ' \\end{aligned} \\]</div>';
