@@ -1657,7 +1657,63 @@ for (int i = 1; i &lt;= N; i++)      // Schrittweite i
     <div id="t4Out" class="step small"></div>
   </div>
   </div>
-  <div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
+  <!--P1W:h4-->
+<h4 style="margin:14px 0 6px">🧮 Zwei Rechnungen von Hand: woher die vier Zahlen unter dem Bild kommen</h4>
+<div class="grid2 sgrid">
+<div class="card" style="margin:0;padding:10px 14px">
+<p><b>Rechnung A: N = 4</b> (klein genug, um jedes <code class="inl">cnt++</code> aufzuschreiben)</p>
+<table class="rt">
+<tr><th>Runde i</th><th>j läuft über</th><th>⌊N/i⌋</th><th>N/i exakt</th><th>abgeschnitten</th></tr>
+<tr><td>1</td><td class="mono">1, 2, 3, 4</td><td>4</td><td>4</td><td>0</td></tr>
+<tr><td>2</td><td class="mono">2, 4</td><td>2</td><td>2</td><td>0</td></tr>
+<tr><td>3</td><td class="mono">3</td><td>1</td><td>1,333</td><td>0,333</td></tr>
+<tr><td>4</td><td class="mono">4</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td colspan="2"><b>Summe</b></td><td><b>8</b></td><td><b>8,333</b></td><td><b>0,333</b></td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+\Res{\texttt{cnt}} &= 4 + 2 + 1 + 1 = 8 && \text{Programm, mit Abrunden} \\
+N H_N &= 4\,(1 + 0{,}5 + 0{,}333 + 0{,}25) = 8{,}33 && \text{ohne Abrunden} \\
+N(\ln N + 0{,}577) &= 4\,(1{,}386 + 0{,}577) = 7{,}85 && \text{Näherung} \\
+N \ln N &= 4 \cdot 1{,}386 = 5{,}55 && \text{führender Term}
+\end{aligned} \]</div>
+<p class="small">Die Differenz 8,33 − 8 = 0,33 ist genau das, was in Runde 3 abgeschnitten wird: j = 3 passt, j = 6 wäre schon zu groß.</p>
+</div>
+<div class="card" style="margin:0;padding:10px 14px">
+<p><b>Rechnung B: N = 16</b> (das sind die Zahlen unter dem Bild bei N = 16)</p>
+<table class="rt">
+<tr><th>i</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9–16</td></tr>
+<tr><th>⌊16/i⌋</th><td>16</td><td>8</td><td>5</td><td>4</td><td>3</td><td>2</td><td>2</td><td>2</td><td>je 1</td></tr>
+<tr><th>16/i</th><td>16</td><td>8</td><td>5,33</td><td>4</td><td>3,2</td><td>2,67</td><td>2,29</td><td>2</td><td>1,78 … 1</td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+\Res{\texttt{cnt}} &= 16 + 8 + 5 + 4 + 3 && \text{Säulen im Bild} \\ &\quad + 2 + 2 + 2 + 8 \cdot 1 = 50 && \text{addiert} \\
+H_{16} &= 1 + \tfrac12 + \dots + \tfrac1{16} = 3{,}381 && \text{harmonische Zahl} \\
+N H_N &= 16 \cdot 3{,}381 = 54{,}09 && \text{4,09 mehr} \\
+N(\ln N + 0{,}577) &= 16\,(2{,}773 + 0{,}577) = 53{,}60 && \text{0,5 daneben} \\
+N \ln N &= 16 \cdot 2{,}773 = 44{,}36 && \text{9,2 weniger}
+\end{aligned} \]</div>
+<p class="small">Die 4,09 sind die Nachkommareste aller Säulen: 0,33 + 0,2 + 0,67 + 0,29 + 0,78 + … (die abgeschnittenen Spitzen unter der roten Kurve).</p>
+</div>
+</div>
+<div class="callout key" style="margin-top:10px">
+<h3>Warum stehen dort vier verschiedene Zahlen, und welche zählt?</h3>
+<table class="rt">
+<tr><th>Zahl</th><th>was sie ist</th><th>Rolle</th></tr>
+<tr><td><b style="color:var(--res)">cnt</b></td><td>exakt, was das Programm zählt: \(\sum \lfloor N/i \rfloor\)</td><td>die Wahrheit für dieses N</td></tr>
+<tr><td>\(N H_N\)</td><td>dieselbe Summe <b>ohne Abrunden</b>: \(\sum N/i\)</td><td>obere Grenze, nie kleiner als cnt</td></tr>
+<tr><td>\(N(\ln N + 0{,}577)\)</td><td>Näherungsformel für \(N H_N\), weil \(H_N \approx \ln N + 0{,}577\)</td><td>rechnet \(N H_N\) ohne Summe aus</td></tr>
+<tr><td>\(N \ln N\)</td><td>nur der am schnellsten wachsende Teil</td><td>bestimmt die O-Klasse</td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+N H_N - N &\lt \Res{\texttt{cnt}} \le N H_N && \text{jede der N Säulen verliert beim Abrunden weniger als 1} \\
+\ln N &\lt H_N \lt \ln N + 1 && \text{Treppe gegen Fläche unter 1/x} \\
+N \ln N - N &\lt \Res{\texttt{cnt}} \lt N \ln N + N && \text{beides zusammen} \\
+\Res{\texttt{cnt}} &\in \Theta(N \log N) && \text{die Abweichung } \pm N \text{ wächst langsamer als } N \ln N
+\end{aligned} \]</div>
+<p class="small"><b>Merke:</b> Für die O-Klasse reicht N ln N. Die Konstante 0,577 und das Abrunden ändern nur Terme der Größe N, und die fallen gegen N ln N weg. Für kleine N (wie 16) sind sie aber deutlich sichtbar.</p>
+</div>
+<!--/P1W:h4-->
+<div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
   <p>„Der Code kostet <b>Θ(N log N)</b>, ungefähr <b>N ln N</b>; verdoppelt man N, braucht er etwas mehr als doppelt so lange.“ <b>Beleg:</b> Zeile 3 der Rechnung (H<sub>N</sub> zwischen ln N und ln N + 1); im Bild folgen die Säulen der Kurve N/x.</p>
   <p class="small"><b>Kommt vor in:</b> <a href="#ex3">Beispiel ③</a>, <a href="#k2-log">2.3b</a> (H<sub>N</sub>, Fig. 2.2), <a href="#k2-O">2.4</a> (innere Schleife N H<sub>N</sub>-mal), später in Teil 3 bei Quicksort (im Mittel ≈ 2N ln N Vergleiche).</p></div>
 </div>
@@ -3773,7 +3829,18 @@ if($('t4N')) bind(['t4N'], () => {
   b += txt(36, base + 15, 'Säule i hat ⌊N/i⌋ Kästchen · rote Kurve: N/x', C.idx);
   b += txt(30, base - N * hs + 10, String(N), C.mute, 'end', 10);
   $('t4Svg').innerHTML = svg(base + 26, b);
-  out('t4Out', run4(N), N * H(N), '\\(N H_N\\)', '\\(N\\ln N\\) = ' + fmt(N * Math.log(N)) + ' · \\(N(\\ln N + 0{,}577)\\) = ' + fmt(N * (Math.log(N) + 0.5772)) + '<br>' + dbl(run4, N) + ' → etwas mehr als 2');
+  { const c = run4(N), nh = N * H(N), fl = [];
+    for(let i = 1; i <= N; i++) fl.push(Math.floor(N / i));
+    const ones = fl.filter(x => x === 1).length, head = fl.filter(x => x > 1);
+    const sumTxt = head.join(' + ') + (ones ? (head.length ? ' + ' : '') + (ones > 1 ? ones + ' · 1' : '1') : '');
+    const row = (a, v, m, col) => '<tr><td>' + a + '</td><td class="r mono"' + (col ? ' style="color:' + col + ';font-weight:700"' : '') + '>' + fmt(Math.round(v * 100) / 100) + '</td><td class="small">' + m + '</td></tr>';
+    $('t4Out').innerHTML = '<table class="rt" style="margin:0 0 6px">' +
+      row('<b style="color:' + C.res + '">cnt</b> (Programm gelaufen)', c, 'exakt, mit Abrunden: ' + sumTxt, C.res) +
+      row('\\(N H_N\\)', nh, 'ohne Abrunden; ' + fmt(Math.round((nh - c) * 100) / 100) + ' mehr = abgeschnittene Reste') +
+      row('\\(N(\\ln N + 0{,}577)\\)', N * (Math.log(N) + 0.5772), 'Näherung für \\(N H_N\\)') +
+      row('\\(N \\ln N\\)', N * Math.log(N), 'nur der führende Term (O-Klasse)') +
+      '</table>' + dbl(run4, N) + ' → etwas mehr als 2 · Erklärung: <a href="#sum4">zwei Rechnungen unten</a>';
+    tex($('t4Out')); }
 });
 
 /* Karte 5: halbieren bis 1 */
