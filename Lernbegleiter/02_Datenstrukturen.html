@@ -360,6 +360,69 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .lab-math .katex-display,.lab-facts .katex-display{margin:.3em 0}
 .lab-cmp,.lab-math,.lab-facts{overflow-x:auto}
 .lab-mem table.rt{width:auto}
+
+/* ===== P2LAB Farben v2 ===== */
+.lab-tabs button{--tc:var(--purple);border-color:color-mix(in srgb,var(--tc) 45%,transparent);border-left:4px solid var(--tc)}
+.lab-tabs button b{color:var(--tc)}
+.lab-tabs button:hover{background:color-mix(in srgb,var(--tc) 12%,var(--card2))}
+.lab-tabs button.on{background:color-mix(in srgb,var(--tc) 22%,var(--card2));border-color:var(--tc);box-shadow:0 0 0 1px var(--tc) inset,0 0 14px color-mix(in srgb,var(--tc) 35%,transparent)}
+.lab-tabs button.on b{color:#fff}
+.lab-var button.on{background:rgba(210,153,34,.22);border-color:var(--orange);color:#ffd88a;box-shadow:none}
+.lab-ex button{border-color:rgba(86,212,221,.35)}
+.lab-ex button.on{background:rgba(86,212,221,.2);border-color:var(--cyan);color:#b7f3f7;box-shadow:none}
+.lab-var{border-left:4px solid var(--orange)}
+.lab-ex{border-left:4px solid var(--cyan)}
+.lab-ctl{border-left:4px solid var(--green)}
+.lab-auto.on{background:rgba(63,185,80,.25);border-color:var(--green);color:#b6f5c0}
+.lab-ctl .lab-pos{accent-color:var(--orange)}
+.lab-col{border-top:3px solid var(--border)}
+.p-code{border-top-color:var(--orange)} .p-code .lab-h{color:var(--orange)}
+.p-mem{border-top-color:var(--pink)} .p-mem .lab-h{color:var(--pink)}
+.p-math{border-top-color:var(--blue)} .p-math>.lab-h{color:var(--blue)}
+.p-cmp{border-top-color:var(--purple)}
+.p-facts{border-top-color:var(--cyan)} .p-facts .lab-h{color:var(--cyan)}
+.lab-claim{box-shadow:0 0 12px rgba(63,185,80,.18)}
+.lab-vs2{display:grid;grid-template-columns:minmax(0,1.5fr) auto minmax(50px,1fr) auto auto;gap:.15rem .5rem;align-items:center;font-size:.84rem;padding:.2rem .1rem .2rem .45rem;border-left:3px solid var(--vc);margin:.15rem 0;background:color-mix(in srgb,var(--vc) 6%,transparent);border-radius:0 6px 6px 0}
+.lab-vs2 .vs-l{color:var(--text)}
+.lab-vs2 .vs-now{color:var(--vc);font-size:.95rem}
+.lab-vs2 .vs-bar{height:7px;background:#1b222c;border-radius:4px;overflow:hidden}
+.lab-vs2 .vs-bar i{display:block;height:100%;background:var(--vc);border-radius:4px;transition:width .25s}
+.lab-vs2 .vs-t{color:var(--muted);font-size:.78rem}
+.lab-vs2 .vs-t b{color:var(--text)}
+.vs-ok{color:var(--green);font-weight:800}
+.vs-bad{color:var(--orange);font-weight:700}
+.vs-run{color:var(--muted);font-size:.75rem;min-width:2.4em;text-align:right}
+.lab-leg{display:flex;flex-wrap:wrap;gap:.2rem .8rem;font-size:.76rem;margin-top:.2rem}
+.lab-leg i{display:inline-block;width:.8em;height:.8em;border-radius:2px;margin-right:.3em;vertical-align:-.05em}
+.lab-leg small{color:var(--muted)}
+.lab-cmp td.best{color:var(--green);font-weight:800}
+.lab-cmp td.worst{color:var(--orange);font-weight:700}
+.lab-cmp table.rt tr.on td{background:rgba(188,140,255,.16)}
+.lab-cmp table.rt tr.on td:first-child{box-shadow:inset 3px 0 0 var(--purple)}
+.lab-code .row.cur .lnum{color:var(--orange);font-weight:800}
+</style>
+<style>
+/* ===== SPICK: Spickzettel-Raster + Druck ===== */
+.spick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,640px),1fr));gap:14px;align-items:start;margin-top:.8rem}
+.spick .sp{border:1px solid var(--border);border-top:3px solid var(--pink);border-radius:12px;background:var(--card);padding:12px 16px;min-width:0;overflow-x:auto}
+.spick .sp h4{margin:0 0 .5rem;font-size:1.02rem;display:flex;align-items:center;gap:.5rem}
+.spick .spn{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;background:var(--pink);color:#0d1117;font-weight:800;font-size:.85rem}
+.spick p{margin:.35rem 0;line-height:1.5}
+.spick table.rt{font-size:.82rem;margin:.4rem 0}
+.spick table.rt td.mono{font-size:.76rem;line-height:1.45;font-family:'JetBrains Mono',monospace}
+.spick .step{padding:4px 10px;margin:6px 0}
+.spick pre.cpp{font-size:.76rem}
+.spick .num{width:auto;min-width:1.6em;padding:0 .35em;border-radius:9px}
+.spick .katex-display>.katex{font-size:.92em}
+.sppr{font:inherit;font-size:.85rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--pink);border-radius:8px;padding:.2rem .7rem;margin-left:.4rem}
+@media print{
+  body.print-spick *{visibility:hidden}
+  body.print-spick #spickfig, body.print-spick #spickfig *{visibility:visible}
+  body.print-spick #spickfig{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
+  body.print-spick .sppr, body.print-spick #spickfig > p{display:none!important}
+  body.print-spick .spick{grid-template-columns:1fr 1fr}
+  body.print-spick .sp{break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -2059,6 +2122,210 @@ Hanoi <i>muss</i> exponentiell viele Züge ausgeben, die Ausgabe ist eben so gro
 </div>
 </div>
 
+<!--SPICK-->
+<!-- ═════════════════════════════════════ SPICKZETTEL ═════════════════════════════════════ -->
+<div class="blatt" id="spick"><div class="kop"><span class="bn" style="color:var(--pink);border-color:rgba(247,120,186,.4);background:rgba(247,120,186,.1)">🧾 Spickzettel</span><h2>Spickzettel Teil 2: alles für die Klausur auf einen Blick</h2><span class="tp">Kap. 3–5 · Zeiger, Arrays, Listen, Strings, ADTs, Rekursion, Bäume, Graphen</span></div></div>
+<div class="figure" id="spickfig">
+<p>14 Kästen, jeder <b>von null</b> lesbar: erst die Begriffe, dann das Rezept, dann die Formeln. Erkenne zuerst den <b>Aufgabentyp</b> (Kasten 0), dann gehst du direkt zum passenden Kasten.<button class="sppr" id="spPrint">🖨 nur den Spickzettel drucken</button></p>
+<div class="spick">
+<div class="sp" id="sp2-0">
+<h4><span class="spn">0</span>Aufgabentyp erkennen → Kasten</h4>
+<table class="rt">
+<tr><th>Die Aufgabe sagt …</th><th>Kasten</th></tr>
+<tr><td>„Was steht nach dieser Zeile in p, *p, a[i]? Zeichne den Speicher“</td><td>1</td></tr>
+<tr><td>„Primzahlen mit dem Sieb“, „2D-Array / Matrix“</td><td>2</td></tr>
+<tr><td>„Knoten einfügen/löschen“, „Liste umkehren“, „Josephus“</td><td>3, 4</td></tr>
+<tr><td>„Warum ist diese Schleife quadratisch?“ (Strings)</td><td>5</td></tr>
+<tr><td>„Werte den Postfix-Ausdruck aus“, „Infix → Postfix“, „Stack-Inhalt nach …“</td><td>6</td></tr>
+<tr><td>„Queue als Ringpuffer: head, tail nach …“</td><td>7</td></tr>
+<tr><td>„Was passiert bei Kopie/Zuweisung?“, „Axiome des ADT“</td><td>8</td></tr>
+<tr><td>„Wie viele Aufrufe? Löse die Rekurrenz“, „Hanoi“, „Fibonacci“</td><td>9</td></tr>
+<tr><td>„Wie viele Knoten/Blätter/Kanten? Höhe? Pfadlänge?“</td><td>10</td></tr>
+<tr><td>„Gib Pre-/In-/Post-/Levelorder an“, „Baum aus Traversierungen“</td><td>11</td></tr>
+<tr><td>„DFS/BFS-Reihenfolge ab Knoten s“</td><td>12</td></tr>
+<tr><td>Quiz: „eine, mehrere oder keine richtig“</td><td>13</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp2-1">
+<h4><span class="spn">1</span>Zeiger und Speicherbild (§3.1)</h4>
+<table class="rt">
+<tr><th>Schreibweise</th><th>heißt</th><th>Beispiel</th></tr>
+<tr><td class="mono">&amp;x</td><td>Adresse von x</td><td class="mono">int *p = &amp;x;</td></tr>
+<tr><td class="mono">*p</td><td>Wert an der Adresse p</td><td class="mono">*p = 5;  // x ist jetzt 5</td></tr>
+<tr><td class="mono">p-&gt;next</td><td>Abkürzung für (*p).next</td><td class="mono">t = t-&gt;next;</td></tr>
+<tr><td class="mono">a[i]</td><td>dasselbe wie *(a+i)</td><td class="mono">a[3] == *(a+3)</td></tr>
+<tr><td class="mono">new / delete</td><td>Speicher holen / zurückgeben</td><td class="mono">link t = new node(x); … delete t;</td></tr>
+</table>
+<p><b>Rezept Speicherbild:</b> für jede Variable ein Kasten, für jeden Zeiger ein Pfeil. Zeile für Zeile: nur der Kasten links vom <code class="inl">=</code> ändert sich. Bei <code class="inl">p = q</code> zeigen danach <b>beide</b> auf dasselbe Objekt (keine Kopie).</p>
+<p class="small"><b>Falle:</b> Ein Zeiger nach <code class="inl">delete</code> zeigt ins Leere (dangling). Ein Knoten, auf den kein Zeiger mehr zeigt, ist ein Speicherleck.</p>
+</div>
+
+<div class="sp" id="sp2-2">
+<h4><span class="spn">2</span>Arrays: Index in O(1), Sieb des Eratosthenes (§3.2)</h4>
+<pre class="cpp" data-roles='{"a":"mem","i":"idx","j":"idx","N":"par"}'>for (i = 2; i &lt; N; i++) a[i] = 1;        // alle Kandidaten
+for (i = 2; i &lt; N; i++)
+  if (a[i])                                 // i ist Primzahl
+    for (j = i; i*j &lt; N; j++) a[i*j] = 0;   // Vielfache streichen</pre>
+<div class="step">\[ \begin{aligned}
+\text{Streichungen} &\approx N\Bigl(\tfrac12 + \tfrac13 + \tfrac15 + \dots\Bigr) \approx \Res{N \ln\ln N} && \text{nur Primzahlen } i \\
+\text{2D-Array} &: \Par{a[i][j]} \text{ in } O(1),\ \text{Speicher } \Mem{M \cdot N} && \text{Zeile } i \text{, Spalte } j
+\end{aligned} \]</div>
+<p class="small"><b>Von Hand:</b> Am Ende ist a[k] = 1 genau für die Primzahlen k. Eine Zahl wird mehrfach gestrichen (12 von 2 und von 3).</p>
+</div>
+
+<div class="sp" id="sp2-3">
+<h4><span class="spn">3</span>Verkettete Listen: umhängen in O(1) (§3.3–3.4)</h4>
+<pre class="cpp" data-roles='{"x":"mem","t":"mem","y":"mem","r":"res"}'>struct node { Item item; node* next; };
+typedef node *link;
+t-&gt;next = x-&gt;next; x-&gt;next = t;            // t hinter x einfügen
+t = x-&gt;next; x-&gt;next = t-&gt;next;            // Nachfolger von x löschen
+link reverse(link x)                        // Liste umkehren
+  { link t, y = x, r = 0;
+    while (y != 0)
+      { t = y-&gt;next; y-&gt;next = r; r = y; y = t; }
+    return r; }</pre>
+<table class="rt">
+<tr><th></th><th>Array</th><th>Liste</th></tr>
+<tr><td>k-tes Element</td><td>\(O(1)\)</td><td>\(O(k)\) (laufen)</td></tr>
+<tr><td>einfügen/löschen (Stelle bekannt)</td><td>\(O(N)\) (verschieben)</td><td>\(O(1)\) (2 Zeiger)</td></tr>
+<tr><td>Speicher</td><td>N</td><td>N Items + N Zeiger</td></tr>
+</table>
+<p class="small"><b>Reihenfolge beim Einfügen:</b> erst <code class="inl">t-&gt;next</code> setzen, dann <code class="inl">x-&gt;next</code>. Umgekehrt geht der Rest der Liste verloren.</p>
+</div>
+
+<div class="sp" id="sp2-4">
+<h4><span class="spn">4</span>Josephus und zirkuläre Listen (§3.3)</h4>
+<p>N Personen im Kreis, jede <b>M-te</b> scheidet aus. Zirkuläre Liste: der letzte Knoten zeigt auf den ersten.</p>
+<pre class="cpp" data-roles='{"x":"mem","N":"par","M":"par","i":"idx"}'>for (i = 2; i &lt;= N; i++) x = (x-&gt;next = new node(i, t));
+x-&gt;next = t;                                // Kreis schließen
+while (x != x-&gt;next)                        // mehr als einer übrig
+  { for (i = 1; i &lt; M; i++) x = x-&gt;next;    // M−1 Schritte
+    x-&gt;next = x-&gt;next-&gt;next; N--; }         // den M-ten aushängen
+cout &lt;&lt; x-&gt;item;                            // Überlebender</pre>
+<div class="step">\[ \begin{aligned}
+\text{Kosten} &= \Res{(N-1)\,M} \text{ Schritte} && \text{je Ausscheiden M Schritte} \\
+\text{Beispiel} &: N = 9,\ M = 5 \Rightarrow \Res{8} && \text{Reihenfolge } 5\,1\,7\,4\,3\,6\,9\,2
+\end{aligned} \]</div>
+<p class="small"><b>Von Hand:</b> Zahlen im Kreis aufschreiben, abzählen, Ausgeschiedene durchstreichen; beim nächsten weiterzählen.</p>
+</div>
+
+<div class="sp" id="sp2-5">
+<h4><span class="spn">5</span>Strings: die strlen-Falle (§3.6)</h4>
+<p>Ein String ist ein char-Array, das mit <code class="inl">'\0'</code> endet. <code class="inl">strlen</code> muss bis zur 0 <b>laufen</b>: \(O(N)\).</p>
+<pre class="cpp" data-roles='{"a":"mem","i":"idx"}'>for (i = 0; i &lt; strlen(a); i++) …         // strlen bei JEDEM Test: N²
+for (i = 0, n = strlen(a); i &lt; n; i++) …   // einmal: N
+for (i = 0; a[i] != 0; i++) …              // ohne strlen: N</pre>
+<div class="step">\[ \begin{aligned}
+\text{Falle} &= \textstyle\sum_{i=0}^{N} N \approx \Res{N^2} && \text{Bedingung läuft N+1-mal} \\
+\text{richtig} &= \Idx{N} && \text{Länge einmal merken}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp2-6">
+<h4><span class="spn">6</span>Stack: Postfix auswerten, Infix → Postfix (§4.2–4.4)</h4>
+<pre class="cpp" data-roles='{"s":"mem","N":"par"}'>void push(Item x) { s[N++] = x; }           // Array-Stack
+Item pop()        { return s[--N]; }        // LIFO: zuletzt rein, zuerst raus</pre>
+<p><span class="num">P</span><b>Postfix auswerten:</b> Zahl → push. Operator → <code class="inl">b = pop(); a = pop(); push(a op b)</code>. Am Ende steht das Ergebnis allein auf dem Stack. Achtung bei − und /: zuerst gepoppt ist der <b>rechte</b> Operand.</p>
+<p><span class="num">I</span><b>Infix → Postfix</b> (voll geklammert): Zahl → ausgeben. Operator → push. <code class="inl">)</code> → pop und ausgeben. <code class="inl">(</code> → ignorieren.</p>
+<p class="small"><b>Probe:</b> In einem gültigen Postfix-Ausdruck gilt immer: #Zahlen = #Operatoren + 1. Beispiel 5 9 8 + 4 6 * * 7 + * = 2075.</p>
+</div>
+
+<div class="sp" id="sp2-7">
+<h4><span class="spn">7</span>FIFO-Queue als Ringpuffer (§4.6)</h4>
+<pre class="cpp" data-roles='{"q":"mem","head":"idx","tail":"idx","N":"par"}'>void put(Item x) { q[tail++] = x; tail = tail % N; }
+Item get()       { Item t = q[head++]; head = head % N; return t; }
+int empty()      { return head % N == tail; }</pre>
+<p><b>Rezept:</b> zwei Indizes; <span class="c-idx">tail</span> = nächster freier Platz, <span class="c-idx">head</span> = ältestes Element. Beide laufen nur vorwärts und springen mit <code class="inl">% N</code> an den Anfang.</p>
+<p class="small"><b>Falle:</b> head == tail heißt <b>leer</b>. Deshalb ist die Queue bei N−1 Elementen schon „voll“ (Buch: Array der Größe maxN+1).</p>
+</div>
+
+<div class="sp" id="sp2-8">
+<h4><span class="spn">8</span>ADT, Kopiersemantik und Axiome (§4.1, §4.8)</h4>
+<p><span class="fw">ADT</span>: Daten nur über das Interface (public) erreichbar, die Darstellung ist private. Gleicher Client-Code für Array- und Listen-Implementierung.</p>
+<table class="rt">
+<tr><th>Fall</th><th>ohne eigene Funktionen</th><th>Lösung</th></tr>
+<tr><td class="mono">Stack b = a;</td><td>flache Kopie: beide teilen die Knoten</td><td>Kopierkonstruktor</td></tr>
+<tr><td class="mono">b = a;</td><td>flach + alte Knoten von b verloren (Leck)</td><td>operator= (erst freigeben, dann tief kopieren)</td></tr>
+<tr><td>Ende des Blocks</td><td>Knoten bleiben liegen</td><td>Destruktor</td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+\Rule{\text{Axiome Stack}} &: \text{pop}(\text{push}(s, t)) = s, \quad \text{top}(\text{push}(s, t)) = t && \text{LIFO} \\
+\text{empty}(\text{new}) &= \text{true}, \quad \text{empty}(\text{push}(s, t)) = \text{false} && \text{leer genau am Anfang}
+\end{aligned} \]</div>
+<p class="small"><b>Faustregel (Rule of Three):</b> Braucht die Klasse einen Destruktor, braucht sie auch Kopierkonstruktor und Zuweisung.</p>
+</div>
+
+<div class="sp" id="sp2-9">
+<h4><span class="spn">9</span>Rekursion und Divide &amp; Conquer (§5.1–5.3)</h4>
+<p><b>Jede Rekursion:</b> ein Anker (ohne Aufruf) und Aufrufe mit <b>kleinerem</b> Problem. Aufrufe zählen = Rekurrenz aufstellen.</p>
+<table class="rt">
+<tr><th>Programm</th><th>Rekurrenz</th><th>Lösung</th></tr>
+<tr><td>Fakultät, N!</td><td>\(C_N = C_{N-1} + 1\)</td><td>N Aufrufe</td></tr>
+<tr><td>Maximum teilen (5.6)</td><td>\(C_N = C_{\lceil N/2\rceil} + C_{\lfloor N/2\rfloor} + 1\)</td><td>\(2N-1\) Aufrufe, Tiefe \(\lceil\lg N\rceil + 1\)</td></tr>
+<tr><td>Hanoi (5.7)</td><td>\(T_N = 2T_{N-1} + 1\)</td><td>\(2^N - 1\) Züge, \(2^{N+1}-1\) Aufrufe</td></tr>
+<tr><td>Fibonacci naiv</td><td>\(C_N = C_{N-1} + C_{N-2} + 1\)</td><td>\(2F_{N+1} - 1\) Aufrufe, exponentiell</td></tr>
+<tr><td>Fibonacci mit Memo (DP)</td><td>jedes \(F_k\) einmal</td><td>\(2N - 1\) Aufrufe, linear</td></tr>
+</table>
+<p class="small"><b>Dynamische Programmierung:</b> Teilergebnisse merken, wenn dieselben Teilprobleme mehrfach vorkommen (Fibonacci, Rucksack). Bei D&amp;C sind die Teile disjunkt: Merken bringt nichts.</p>
+</div>
+
+<div class="sp" id="sp2-10">
+<h4><span class="spn">10</span>Baum-Mathematik (§5.4–5.5)</h4>
+<div class="step">\[ \begin{aligned}
+\text{Baum mit } N \text{ Knoten} &: \Res{N - 1} \text{ Kanten} && \text{jeder außer der Wurzel hat einen Elternknoten} \\
+\text{Binärbaum, } N \text{ innere} &: \Res{N + 1} \text{ externe Knoten} && \text{Eig. 5.6} \\
+\text{Pfadlängen} &: \Res{E = I + 2N} && \text{extern = intern + 2N (Eig. 5.7)} \\
+\text{Höhe} &: \lfloor \lg N \rfloor \le h \le N - 1 && \text{vollständig … entartet} \\
+\text{Ebene } k &: \le 2^k \text{ Knoten},\ \text{Höhe } h: \le 2^{h+1} - 1 && \text{voller Binärbaum}
+\end{aligned} \]</div>
+<p class="small"><b>Begriffe:</b> Höhe = längster Weg Wurzel → Blatt (Kanten). Tiefe eines Knotens = Kanten bis zur Wurzel. Interne Pfadlänge I = Summe aller Tiefen der inneren Knoten.</p>
+</div>
+
+<div class="sp" id="sp2-11">
+<h4><span class="spn">11</span>Traversierungen (§5.6)</h4>
+<pre class="cpp" data-roles='{"h":"mem"}'>void traverse(link h)
+  { if (h == 0) return;
+    visit(h);              // hier: Preorder  (Wurzel, L, R)
+    traverse(h-&gt;l);        // hier: Inorder   (L, Wurzel, R)
+    traverse(h-&gt;r);        // hier: Postorder (L, R, Wurzel)
+  }</pre>
+<p><span class="num">L</span><b>Levelorder:</b> mit Queue statt Rekursion: Wurzel rein; solange nicht leer: holen, besuchen, Kinder hinten anstellen.</p>
+<p><span class="num">R</span><b>Baum rekonstruieren:</b> Preorder liefert die Wurzel (erstes Element), in der Inorder steht links davon der linke, rechts der rechte Teilbaum. Rekursiv weiter. Pre + Post allein reicht <b>nicht</b> eindeutig.</p>
+<p class="small"><b>Klausur (Fädelung):</b> In einem gefädelten Baum zeigen leere rechte Links auf den Inorder-Nachfolger; Inorder geht dann ohne Stack.</p>
+</div>
+
+<div class="sp" id="sp2-12">
+<h4><span class="spn">12</span>Graphen: DFS und BFS (§5.8, §3.7)</h4>
+<table class="rt">
+<tr><th></th><th>DFS (Tiefensuche)</th><th>BFS (Breitensuche)</th></tr>
+<tr><td>Hilfsstruktur</td><td>Stack bzw. Rekursion</td><td>Queue</td></tr>
+<tr><td>Reihenfolge</td><td>so tief wie möglich, dann zurück</td><td>Schicht für Schicht nach Abstand</td></tr>
+<tr><td>liefert</td><td>Erreichbarkeit, Zusammenhang</td><td>kürzeste Wege (Kantenzahl)</td></tr>
+<tr><td>Kosten (Adjazenzliste)</td><td>\(O(V + E)\)</td><td>\(O(V + E)\)</td></tr>
+</table>
+<p><b>Von Hand:</b> Nachbarn in der Reihenfolge der Adjazenzliste abarbeiten (meist aufsteigend). Besuchte Knoten markieren, sonst Endlosschleife.</p>
+<p class="small"><b>Speicher:</b> Adjazenzmatrix \(V^2\) Bits, Adjazenzliste \(V + 2E\) Einträge (ungerichtet: jede Kante zweimal).</p>
+</div>
+
+<div class="sp" id="sp2-13">
+<h4><span class="spn">13</span>Quiz-Fallen Teil 2</h4>
+<table class="rt">
+<tr><th>Aussage</th><th>stimmt?</th></tr>
+<tr><td>„Einfügen in eine Liste ist immer O(1)“</td><td>nur wenn die Stelle (Vorgänger) bekannt ist; Suchen kostet O(N)</td></tr>
+<tr><td>„a[i] und *(a+i) sind dasselbe“</td><td>ja</td></tr>
+<tr><td>„Rekursion braucht keinen Speicher“</td><td>nein: Aufrufstapel, Tiefe × Rahmen</td></tr>
+<tr><td>„Ein Binärbaum mit N Knoten hat N+1 leere Links“</td><td>ja</td></tr>
+<tr><td>„Inorder eines BST ist sortiert“</td><td>ja</td></tr>
+<tr><td>„BFS findet kürzeste Wege in gewichteten Graphen“</td><td>nein, nur nach Kantenzahl</td></tr>
+<tr><td>„b = a kopiert einen listenbasierten Stack“</td><td>nein, nur den Zeiger (flach), solange kein operator= definiert ist</td></tr>
+<tr><td>„Hanoi mit N Scheiben braucht 2ᴺ − 1 Züge“</td><td>ja, und das ist optimal</td></tr>
+</table>
+</div>
+</div>
+</div>
+<!--/SPICK-->
+
 <div class="foot">Lernbegleiter Teil 2 · nach R. Sedgewick, <i>Algorithms in C++, Parts 1–4</i> (3. Aufl.), Kap. 3–5 · Programmcode wie im Buch (Header modernisiert, einzelne Zeilen zur Schrittanzeige umbrochen) · Axiome: Prüfungsergänzung · Bildatlas-Stil · als Nächstes Teil 3: Sortieren.</div>
 </div><!-- /wrap -->
 
@@ -3593,7 +3860,9 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const clone = o => JSON.parse(JSON.stringify(o));
 const tex = el => { if(LB.tex && el) LB.tex(el); };
-const MAXSNAP = 4000;                                  // höchstens so viele Schritte aufzeichnen
+const MAXSNAP = 4000;
+const PAL = ['#58a6ff', '#3fb950', '#d29922', '#f778ba', '#bc8cff', '#56d4dd', '#f85149'];
+                                  // höchstens so viele Schritte aufzeichnen
 
 /* Recorder: der Algorithmus läuft einmal komplett, jeder rec.step speichert eine Momentaufnahme */
 function Rec(quiet){
@@ -3617,34 +3886,35 @@ LB.Lab = function(o){
     '<div class="lab-row lab-var"></div>' +
     '<div class="lab-row lab-ex"></div>' +
     '<div class="lab-hint"></div>' +
-    '<div class="lab-row lab-ctl"><button data-a="first" title="Anfang">⏮</button><button data-a="prev">◀</button><button data-a="next" class="lab-big">Schritt ▶</button><button data-a="last" title="Ende">⏭</button><button data-a="auto">⏯ auto</button>' +
+    '<div class="lab-row lab-ctl"><button data-a="first" title="Anfang">⏮</button><button data-a="prev" title="zurück">◀</button><button data-a="next" class="lab-big">Schritt ▶</button><button data-a="last" title="Ende">⏭</button><button data-a="auto" class="lab-auto">⏯ auto</button>' +
       '<input type="range" class="lab-pos" min="0" value="0"><span class="readout lab-cnt"></span></div>' +
     '<div class="lab-main">' +
-      '<div class="lab-col"><div class="lab-h">① Code <span class="lab-book"></span></div><pre class="cpp lab-code"></pre></div>' +
-      '<div class="lab-col"><div class="lab-h">② Speicher / Struktur jetzt</div><div class="lab-mem"></div></div>' +
-      '<div class="lab-col"><div class="lab-h">③ Mathematik live</div><div class="lab-math"></div>' +
-        '<div class="lab-h" style="margin-top:.6rem">④ Aussage, die jetzt gilt</div><div class="lab-claim"></div></div>' +
+      '<div class="lab-col p-code"><div class="lab-h">① Code <span class="lab-book"></span></div><pre class="cpp lab-code"></pre></div>' +
+      '<div class="lab-col p-mem"><div class="lab-h">② Speicher / Struktur jetzt</div><div class="lab-mem"></div></div>' +
+      '<div class="lab-col p-math"><div class="lab-h">③ Mathematik live <span>Wert jetzt · Balken = Weg bis zum Ende · Ziel = Formel</span></div><div class="lab-math"></div>' +
+        '<div class="lab-h" style="margin-top:.5rem">③b Verlauf über alle Schritte <span>Linie = Zähler, senkrecht = jetzt</span></div><div class="lab-spark"></div>' +
+        '<div class="lab-h" style="margin-top:.6rem;color:var(--green)">④ Aussage, die jetzt gilt</div><div class="lab-claim"></div></div>' +
     '</div>' +
     '<div class="lab-msg"></div>' +
     '<div class="lab-bottom">' +
-      '<div class="lab-col"><div class="lab-h">⑤ Was wäre wenn? Alle Varianten mit derselben Eingabe</div><div class="lab-cmp"></div></div>' +
-      '<div class="lab-col"><div class="lab-h">⑥ Das musst du hier wissen (gilt immer)</div><div class="lab-facts"></div></div>' +
+      '<div class="lab-col p-cmp"><div class="lab-h">⑤ Was wäre wenn? Alle Varianten mit derselben Eingabe <span>grün = kleinster Wert, orange = größter</span></div><div class="lab-cmp"></div></div>' +
+      '<div class="lab-col p-facts"><div class="lab-h">⑥ Das musst du hier wissen (gilt immer)</div><div class="lab-facts"></div></div>' +
     '</div>';
   const q = s => root.querySelector(s);
   const S = () => o.scenarios[L.sc];
 
   function tabs(){
-    q('.lab-tabs').innerHTML = o.scenarios.map((s, k) => '<button data-sc="' + k + '" class="' + (k === L.sc ? 'on' : '') + '"><b>' + s.icon + ' ' + s.name + '</b><small>' + s.book + '</small></button>').join('');
+    q('.lab-tabs').innerHTML = o.scenarios.map((s, k) => '<button data-sc="' + k + '" style="--tc:' + PAL[k % PAL.length] + '" class="' + (k === L.sc ? 'on' : '') + '"><b>' + s.icon + ' ' + s.name + '</b><small>' + s.book + '</small></button>').join('');
   }
   function controls(){
     const s = S();
     let h = '<span class="lab-lab">Variante:</span>' + s.vars.map(v => '<button data-v="' + v.k + '" class="' + (v.k === L.v ? 'on' : '') + '" title="' + esc(v.d || '') + '">' + v.name + '</button>').join('');
     h += (s.ins || []).map(f => '<label>' + f.label + ' <input data-in="' + f.k + '" value="' + esc(L.inp[f.k]) + '" style="width:' + (f.w || 5) + 'rem"></label>').join('');
     q('.lab-var').innerHTML = h;
-    q('.lab-ex').innerHTML = '<span class="lab-lab">Beispiele:</span>' + (s.presets || []).map((p, k) => '<button data-p="' + k + '">' + p.name + '</button>').join('');
+    q('.lab-ex').innerHTML = '<span class="lab-lab">Beispiele:</span>' + (s.presets || []).map((p, k) => '<button data-p="' + k + '" class="' + (k === L.preset ? 'on' : '') + '">' + p.name + '</button>').join('');
   }
   function select(k){
-    const s = o.scenarios[k]; L.sc = k; L.v = s.vars[0].k; L.inp = {};
+    const s = o.scenarios[k]; L.sc = k; L.v = s.vars[0].k; L.inp = {}; L.preset = null;
     (s.ins || []).forEach(f => L.inp[f.k] = f.def);
     q('.lab-hint').innerHTML = s.intro || ''; q('.lab-hint').style.display = s.intro ? '' : 'none';
     tabs(); controls(); run(); tex(q('.lab-hint'));
@@ -3666,15 +3936,18 @@ LB.Lab = function(o){
     q('.lab-code').innerHTML = code.map((src, k) => '<span class="row" data-l="' + (k + 1) + '"><span class="lnum">' + (k + 1) + '</span>' + (LB.hl ? LB.hl(src.replace(/(\S)\s{3,}\/\//, '$1  //'), s.roles || {}) : esc(src)) + '<span class="labhit"></span></span>').join('');
     q('.lab-facts').innerHTML = s.facts(L.v, L.inp); tex(q('.lab-facts'));
     compare();
+    const keys = (s.cmp || []).map(k => k[0]).filter(k => L.rec.snaps.some(sn => typeof sn.c[k] === 'number' && sn.c[k] !== 0));
+    L.series = keys.map((k, j) => ({k, name: ((s.cmp || []).find(x => x[0] === k) || [k, k])[1], col: PAL[j % PAL.length], v: L.rec.snaps.map(sn => typeof sn.c[k] === 'number' ? sn.c[k] : 0)}));
     show(0);
   }
   function compare(){
     const s = S(), keys = s.cmp || [];
     let h = '<table class="rt"><tr><th>Variante</th>' + keys.map(k => '<th class="r">' + k[1] + '</th>').join('') + '<th class="r">Schritte</th></tr>';
-    s.vars.forEach(v => {
-      const r = runOnce(v.k, true);
-      h += '<tr' + (v.k === L.v ? ' class="on"' : '') + '><td><b>' + v.name + '</b>' + (r.err ? ' <span class="small" style="color:var(--res)">⚠ ' + esc(r.err) + '</span>' : '') + '</td>' +
-        keys.map(k => '<td class="r mono">' + (r.c[k[0]] !== undefined ? r.c[k[0]] : (k[2] ? k[2](r) : '–')) + '</td>').join('') + '<td class="r mono">' + r.n + '</td></tr>';
+    const rows = s.vars.map(v => { const r = runOnce(v.k, true); return {v, r, cells: keys.map(k => r.c[k[0]] !== undefined ? r.c[k[0]] : (k[2] ? k[2](r) : '–')).concat([r.n])}; });
+    const ext = rows.length > 1 ? rows[0].cells.map((_, j) => { const nums = rows.map(x => x.cells[j]).filter(x => typeof x === 'number'); return nums.length > 1 ? [Math.min.apply(null, nums), Math.max.apply(null, nums)] : null; }) : [];
+    rows.forEach(({v, r, cells}) => {
+      h += '<tr' + (v.k === L.v ? ' class="on"' : '') + '><td><b>' + (v.k === L.v ? '▶ ' : '') + v.name + '</b>' + (r.err ? ' <span class="small" style="color:var(--res)">⚠ ' + esc(r.err) + '</span>' : '') + '</td>' +
+        cells.map((x, j) => { const e = ext[j]; const cls = e && e[0] !== e[1] && typeof x === 'number' ? (x === e[0] ? ' best' : x === e[1] ? ' worst' : '') : ''; return '<td class="r mono' + cls + '">' + x + '</td>'; }).join('') + '</tr>';
     });
     h += '</table>';
     if(s.cmpNote) h += '<div class="small" style="margin-top:.4rem">' + s.cmpNote(L.inp) + '</div>';
@@ -3690,29 +3963,49 @@ LB.Lab = function(o){
     root.querySelectorAll('.lab-code .row').forEach(r => { const l = +r.dataset.l;
       r.classList.toggle('cur', l === sn.line); r.querySelector('.labhit').textContent = hits[l] ? '×' + hits[l] : ''; });
     q('.lab-mem').innerHTML = s.view(sn.S, sn, L.inp, L.v);
+    const last = snaps[snaps.length - 1];
+    LB._labCtx = {mode: 'fin', fin: {}, k: 0};
+    try { s.math(last.c, L.inp, L.v, true, last.S); } catch(e){}
+    LB._labCtx.mode = 'now'; LB._labCtx.done = i === snaps.length - 1; LB._labCtx.k = 0;
     q('.lab-math').innerHTML = s.math(sn.c, L.inp, L.v, i === snaps.length - 1, sn.S); tex(q('.lab-math'));
+    LB._labCtx = null;
+    q('.lab-spark').innerHTML = spark(i);
     q('.lab-claim').innerHTML = sn.claim || '<span class="muted">Noch nichts passiert: Startzustand.</span>'; tex(q('.lab-claim'));
     let hist = '';
     for(let k = Math.max(0, i - 4); k < i; k++) hist += '<div class="muted small">' + k + ': ' + snaps[k].msg + '</div>';
     q('.lab-msg').innerHTML = hist + '<div><b>' + i + ':</b> ' + sn.msg + '</div>'; tex(q('.lab-msg'));
   }
-  function stop(){ if(L.timer){ clearInterval(L.timer); L.timer = null; } }
+  function spark(i){
+    const se = L.series || [], n = L.rec.snaps.length; if(!se.length || n < 2) return '<div class="muted small">(keine Zähler)</div>';
+    const W = 420, H = 96, X = k => 6 + k * (W - 12) / (n - 1);
+    let s = '<svg viewBox="0 0 ' + W + ' ' + (H + 4) + '" width="' + W + '" style="width:100%!important;max-width:100%;height:auto">';
+    for(let g = 1; g < 4; g++) s += '<line x1="6" x2="' + (W - 6) + '" y1="' + (4 + g * H / 4) + '" y2="' + (4 + g * H / 4) + '" stroke="#1f2733"/>';
+    se.forEach(t => { const mx = Math.max.apply(null, t.v) || 1;
+      s += '<polyline fill="none" stroke="' + t.col + '" stroke-width="2" points="' + t.v.map((y, k) => X(k).toFixed(1) + ',' + (4 + H - y / mx * (H - 6)).toFixed(1)).join(' ') + '"/>';
+      s += '<circle cx="' + X(i).toFixed(1) + '" cy="' + (4 + H - t.v[i] / mx * (H - 6)).toFixed(1) + '" r="3.5" fill="' + t.col + '"/>'; });
+    s += '<line x1="' + X(i).toFixed(1) + '" x2="' + X(i).toFixed(1) + '" y1="2" y2="' + (H + 2) + '" stroke="#e6edf3" stroke-dasharray="3 3"/></svg>';
+    return s + '<div class="lab-leg">' + se.map(t => '<span><i style="background:' + t.col + '"></i>' + t.name + ' <b>' + t.v[i] + '</b><small> / ' + t.v[n - 1] + '</small></span>').join('') + '</div>';
+  }
+  function stop(){ if(L.timer){ clearInterval(L.timer); L.timer = null; } const a = q('.lab-auto'); if(a) a.classList.remove('on'); }
   root.addEventListener('click', e => {
     const b = e.target.closest('button'); if(!b || !root.contains(b)) return;
     if(b.dataset.sc !== undefined) return select(+b.dataset.sc);
     if(b.dataset.v !== undefined){ L.v = b.dataset.v; controls(); return run(); }
-    if(b.dataset.p !== undefined){ const p = S().presets[+b.dataset.p];
+    if(b.dataset.p !== undefined){ const p = S().presets[+b.dataset.p]; L.preset = +b.dataset.p;
       Object.assign(L.inp, p.set || {}); if(p.v) L.v = p.v; controls(); run();
       q('.lab-hint').style.display = ''; q('.lab-hint').innerHTML = '<b>' + p.name + ':</b> ' + p.hint; tex(q('.lab-hint'));
       if(p.to === 'end') show(L.rec.snaps.length - 1);
       return; }
     const a = b.dataset.a, n = L.rec.snaps.length - 1;
     if(a === 'first') show(0); else if(a === 'prev') show(L.i - 1); else if(a === 'next') show(L.i + 1); else if(a === 'last') show(n);
-    else if(a === 'auto'){ if(L.timer) return stop(); L.timer = setInterval(() => { if(L.i >= n) stop(); else show(L.i + 1); }, 650); }
+    else if(a === 'auto'){ if(L.timer) return stop(); if(L.i >= n) show(0); b.classList.add('on'); L.timer = setInterval(() => { if(L.i >= n) stop(); else show(L.i + 1); }, 650); }
   });
-  root.addEventListener('change', e => { const f = e.target.closest('[data-in]'); if(!f) return; L.inp[f.dataset.in] = f.value; run(); });
-  root.addEventListener('keydown', e => { if(e.target.closest('[data-in]') && e.key === 'Enter'){ L.inp[e.target.dataset.in] = e.target.value; run(); } });
-  q('.lab-pos').addEventListener('input', e => show(+e.target.value));
+  let deb = null;
+  const typed = f => { L.inp[f.dataset.in] = f.value; if(L.preset !== null){ L.preset = null; root.querySelectorAll('.lab-ex button.on').forEach(x => x.classList.remove('on')); } run(); };
+  root.addEventListener('input', e => { const f = e.target.closest('[data-in]'); if(!f) return; clearTimeout(deb); deb = setTimeout(() => typed(f), 450); });
+  root.addEventListener('change', e => { const f = e.target.closest('[data-in]'); if(!f) return; clearTimeout(deb); if(L.inp[f.dataset.in] !== f.value) typed(f); });
+  root.addEventListener('keydown', e => { const f = e.target.closest('[data-in]'); if(f && e.key === 'Enter'){ clearTimeout(deb); typed(f); } });
+  q('.lab-pos').addEventListener('input', e => { e.stopPropagation(); show(+e.target.value); });
   select(0);
   L.selectScenario = select; L.root = root;
   (LB.labs = LB.labs || {})[o.id] = L;
@@ -3776,9 +4069,17 @@ LB.labFrames = function(frames, title){
 };
 /* Zahlenzeile „gemessen gegen Formel“ */
 LB.labVs = function(label, got, want, note){
-  if(want === '…') return '<div class="lab-vs"><span>' + label + '</span><b class="mono">' + got + '</b><span class="muted">Formel</span><b class="mono muted">am Ende</b><span></span></div>';
-  const ok = got === want || (typeof want === 'number' && Math.abs(got - want) < 1e-9);
-  return '<div class="lab-vs"><span>' + label + '</span><b class="mono">' + got + '</b><span class="muted">Formel</span><b class="mono">' + want + '</b>' + (ok ? '<span style="color:var(--idx)">✓</span>' : '<span style="color:var(--chg)">' + (note || '≠') + '</span>') + '</div>';
+  const ctx = LB._labCtx;
+  if(ctx && ctx.mode === 'fin'){ ctx.fin[label] = {got, want}; return ''; }
+  const f = (ctx && ctx.fin[label]) || {}, done = ctx ? ctx.done : want !== '…';
+  const target = want === '…' ? f.want : want, total = typeof f.got === 'number' ? f.got : null;
+  const col = PAL[(ctx ? ctx.k++ : 0) % PAL.length];
+  const num = typeof got === 'number' && typeof total === 'number' && total > 0;
+  const pct = num ? Math.max(0, Math.min(100, got / total * 100)) : (done ? 100 : 0);
+  const ok = got === target || (typeof target === 'number' && typeof got === 'number' && Math.abs(got - target) < 1e-9);
+  const mark = done ? (ok ? '<span class="vs-ok">✓</span>' : '<span class="vs-bad">' + (note || '≠') + '</span>') : '<span class="vs-run">' + (num ? Math.round(pct) + '%' : '…') + '</span>';
+  return '<div class="lab-vs2" style="--vc:' + col + '"><span class="vs-l">' + label + '</span><b class="vs-now mono">' + got + '</b>' +
+    '<span class="vs-bar"><i style="width:' + pct.toFixed(1) + '%"></i></span><span class="vs-t">Ziel <b class="mono">' + (target === undefined ? '–' : target) + '</b></span>' + mark + '</div>';
 };
 })();
 
@@ -3845,7 +4146,7 @@ const sieve = {
     const N = int(inp.N, 4, 120, 50); let exact = 0;
     const isP = k => { for(let d = 2; d * d <= k; d++) if(k % d === 0) return false; return k >= 2; };
     for(let i = 2; i < N; i++){ if(v === 'wurzel' && i * i >= N) break; if(v !== 'ohne' && !isP(i)) continue; exact += Math.max(0, Math.ceil(N / i) - i); }
-    let h = LB.labVs('Streichungen a[i·j] = 0 bis jetzt', c.w || 0, done ? exact : '…') + LB.labVs('davon doppelt', c.doppelt || 0, '–', ' ');
+    let h = LB.labVs('Streichungen a[i·j] = 0 bis jetzt', c.w || 0, done ? exact : '…') + LB.labVs('davon doppelt', c.doppelt || 0, done ? c.doppelt || 0 : '…', ' ');
     h += '<div class="step">\\[ \\begin{aligned} W &= \\sum_{i} \\max\\left(0,\\ \\lceil N/i \\rceil - i\\right) = ' + exact + ' && \\text{exakt (j von i bis } \\lceil N/i\\rceil - 1) \\\\ ' +
       (v === 'ohne' ? 'W &\\approx N\\,H_N - \\ldots \\approx ' + f2(N * (ln(N) + 0.5772) - N) + ' && \\text{jedes i: harmonisch, Θ(N log N)}'
                     : 'W &\\approx N \\ln\\ln N = ' + f2(N * ln(ln(N))) + ' && \\text{nur Primzahlen p: } \\textstyle\\sum_p \\frac Np') + ' \\end{aligned} \\]</div>';
@@ -4826,7 +5127,7 @@ document.addEventListener('DOMContentLoaded', () => {LB.Lab({id:'labK3', scenari
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"], ["lab3", "🧪 Labor Kap. 3", "alles in einem interaktiven Bild"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"], ["lab4", "🧪 Labor Kap. 4", "alles in einem interaktiven Bild"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["gp-p2-thread", "★ Klausur: Fädelung", "Gedächtnisprotokoll A1 d"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"], ["lab5", "🧪 Labor Kap. 5", "alles in einem interaktiven Bild"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"], ["lab3", "🧪 Labor Kap. 3", "alles in einem interaktiven Bild"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"], ["lab4", "🧪 Labor Kap. 4", "alles in einem interaktiven Bild"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["gp-p2-thread", "★ Klausur: Fädelung", "Gedächtnisprotokoll A1 d"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"], ["lab5", "🧪 Labor Kap. 5", "alles in einem interaktiven Bild"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"], ["spick", "🧾 Spickzettel", "alles für die Klausur Teil 2"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Überlebende*", "Wurzel"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "push", "pop", "put", "get", "insert", "delete", "new"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Stack", "Queue", "FIFO", "LIFO", "Binärbaum*", "Baum", "Bäume", "Traversierung", "Preorder", "Inorder", "Postorder", "Level-Order", "Divide & Conquer", "Teile und Herrsche", "Memoisierung", "dynamische Programmierung", "Klasse*", "Template", "Axiom*", "Tiefensuche", "Breitensuche", "Graph*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Null-Link"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger", "Links", "Kopfknoten", "Dummy", "Heap-Speicher", "Stackframe*", "Ringpuffer", "Adjazenzliste*", "Adjazenzmatrix"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
@@ -4872,6 +5173,11 @@ function patch(){
 }
 window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
+</script>
+<script>
+/* ===== SPICK: nur den Spickzettel drucken ===== */
+(function(){ const b = document.getElementById('spPrint'); if(!b) return;
+  b.addEventListener('click', () => { document.body.classList.add('print-spick'); window.print(); setTimeout(() => document.body.classList.remove('print-spick'), 500); }); })();
 </script>
 </body>
 </html>

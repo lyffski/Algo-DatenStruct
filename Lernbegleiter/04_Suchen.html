@@ -370,6 +370,130 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .bltree{font-family:'JetBrains Mono',Consolas,monospace;font-size:.8rem;line-height:1.35;white-space:pre;overflow-x:auto;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:8px;padding:.4rem .7rem;margin:.35rem 0}
 .blsol svg{width:auto!important;max-width:100%;height:auto;display:block;margin:.3rem 0}
 </style>
+<style>
+/* ===== P2LAB: All-in-one-Labore ===== */
+.figure.labfig{border-color:rgba(188,140,255,.45);background:linear-gradient(160deg,#16121f,#0d1117)}
+.figure.labfig .ttl .n{background:rgba(188,140,255,.16);color:var(--purple);border-color:rgba(188,140,255,.35)}
+.lab{margin-top:.6rem}
+.lab svg{width:auto!important;max-width:100%;height:auto;display:block}
+.lab button{font:inherit;font-size:.86rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:.22rem .6rem}
+.lab button.on{border-color:var(--purple);color:var(--purple);box-shadow:0 0 0 1px rgba(188,140,255,.35) inset}
+.lab-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
+.lab-tabs button{display:flex;flex-direction:column;align-items:flex-start;padding:.35rem .7rem;text-align:left}
+.lab-tabs button small{color:var(--muted);font-size:.72rem}
+.lab-row{display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.45rem .7rem;margin:.35rem 0}
+.lab-row label{font-size:.86rem;font-weight:600}
+.lab-row input{font:inherit;font-family:'JetBrains Mono',monospace;font-size:.84rem;background:#0a0d12;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:.15rem .4rem;max-width:100%}
+.lab-lab{font-size:.8rem;color:var(--muted);min-width:5.6em}
+.lab-ctl .lab-pos{flex:1 1 220px}
+.lab-ctl .lab-big{border-color:var(--orange);color:var(--orange);font-weight:700}
+.lab-hint{border-left:4px solid var(--purple);background:#13101b;border-radius:8px;padding:.45rem .8rem;margin:.35rem 0;font-size:.9rem}
+.lab-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,.95fr);gap:.7rem;margin-top:.5rem}
+.lab-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.7rem;margin-top:.6rem}
+.lab-col{background:#0b0f14;border:1px solid var(--border);border-radius:10px;padding:.55rem .7rem;min-width:0}
+.lab-h{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--purple);margin-bottom:.35rem}
+.lab-h span{color:var(--muted);font-weight:400;letter-spacing:0}
+.lab-code{margin:0;font-size:.8rem}
+.lab-code .row{position:relative;display:block;padding-right:3.2em}
+.lab-code .row.cur{background:rgba(210,153,34,.22);outline:1px solid var(--orange)}
+.lab-code .labhit{position:absolute;right:.3em;top:0;color:var(--green);font-size:.72rem;text-indent:0}
+.lab-mem{overflow:hidden}
+.lab-msg{background:var(--card2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:8px;padding:.4rem .8rem;margin-top:.6rem;font-size:.92rem}
+.lab-claim{border:1.5px solid var(--green);border-radius:8px;padding:.45rem .7rem;background:rgba(63,185,80,.07);font-size:.9rem}
+.lab-math{font-size:.88rem}
+.lab-math .step{margin:.3rem 0}
+.lab-vs{display:grid;grid-template-columns:minmax(0,1.6fr) auto auto auto auto;gap:.15rem .5rem;align-items:baseline;font-size:.84rem;padding:.12rem 0;border-bottom:1px dashed #243040}
+.lab-cmp table.rt tr.on td{background:rgba(188,140,255,.10)}
+.lab-cmp table.rt,.lab-facts table.rt{font-size:.84rem;margin:0}
+.lab-facts{font-size:.88rem}
+.lab-facts p{margin:.3rem 0}
+.lab-cells{display:flex;flex-wrap:wrap;gap:3px;margin:.25rem 0;align-items:center}
+.lab-cells .lab-cl{font-size:.75rem;color:var(--muted);margin-right:.35rem}
+.lab-cells .c{min-width:2rem;text-align:center;border:1px solid var(--border);border-radius:5px;padding:.05rem .2rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;background:var(--card2)}
+.lab-cells .c i{display:block;font-style:normal;font-size:.58rem;font-weight:400;color:var(--muted)}
+.lab-cells .c.m-res{border-color:var(--red);background:rgba(248,81,73,.22)}
+.lab-cells .c.m-chg{border-color:var(--orange);background:rgba(210,153,34,.28)}
+.lab-cells .c.m-idx{border-color:var(--green);background:rgba(63,185,80,.22)}
+.lab-cells .c.m-par{border-color:var(--blue);background:rgba(88,166,255,.22)}
+.lab-cells .c.m-cond{border-color:var(--cyan);background:rgba(86,212,221,.22)}
+.lab-cells .c.m-off{opacity:.3}
+.lab-stack{display:inline-flex;flex-direction:column;gap:2px;min-width:5rem;vertical-align:top;margin:0 .6rem .4rem 0}
+.lab-sti{border:1px solid var(--border);border-radius:5px;padding:.08rem .45rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;background:var(--card2);text-align:center}
+.lab-sti.top{border-color:var(--orange);background:rgba(210,153,34,.22)}
+.lab-frames{display:inline-flex;flex-direction:column;gap:2px;min-width:9rem;vertical-align:top;margin:0 .6rem .4rem 0}
+.lab-fr{border:1px solid var(--border);border-radius:5px;padding:.08rem .5rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--card2)}
+.lab-fr.top{border-color:var(--purple);background:rgba(188,140,255,.16)}
+.lab-out{font-family:'JetBrains Mono',monospace;font-size:.84rem;background:#0a0d12;border:1px solid var(--border);border-radius:6px;padding:.2rem .5rem;margin:.3rem 0;white-space:pre-wrap;word-break:break-word}
+@media(max-width:1500px){.lab-main{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.lab-main>.lab-col:last-child{grid-column:1 / -1}}
+@media(max-width:900px){.lab-main,.lab-bottom{grid-template-columns:minmax(0,1fr)}}
+.lab-math .katex-display>.katex,.lab-facts .katex-display>.katex,.lab-cmp .katex-display>.katex{font-size:.9em}
+.lab-math .katex-display,.lab-facts .katex-display{margin:.3em 0}
+.lab-cmp,.lab-math,.lab-facts{overflow-x:auto}
+.lab-mem table.rt{width:auto}
+
+/* ===== P2LAB Farben v2 ===== */
+.lab-tabs button{--tc:var(--purple);border-color:color-mix(in srgb,var(--tc) 45%,transparent);border-left:4px solid var(--tc)}
+.lab-tabs button b{color:var(--tc)}
+.lab-tabs button:hover{background:color-mix(in srgb,var(--tc) 12%,var(--card2))}
+.lab-tabs button.on{background:color-mix(in srgb,var(--tc) 22%,var(--card2));border-color:var(--tc);box-shadow:0 0 0 1px var(--tc) inset,0 0 14px color-mix(in srgb,var(--tc) 35%,transparent)}
+.lab-tabs button.on b{color:#fff}
+.lab-var button.on{background:rgba(210,153,34,.22);border-color:var(--orange);color:#ffd88a;box-shadow:none}
+.lab-ex button{border-color:rgba(86,212,221,.35)}
+.lab-ex button.on{background:rgba(86,212,221,.2);border-color:var(--cyan);color:#b7f3f7;box-shadow:none}
+.lab-var{border-left:4px solid var(--orange)}
+.lab-ex{border-left:4px solid var(--cyan)}
+.lab-ctl{border-left:4px solid var(--green)}
+.lab-auto.on{background:rgba(63,185,80,.25);border-color:var(--green);color:#b6f5c0}
+.lab-ctl .lab-pos{accent-color:var(--orange)}
+.lab-col{border-top:3px solid var(--border)}
+.p-code{border-top-color:var(--orange)} .p-code .lab-h{color:var(--orange)}
+.p-mem{border-top-color:var(--pink)} .p-mem .lab-h{color:var(--pink)}
+.p-math{border-top-color:var(--blue)} .p-math>.lab-h{color:var(--blue)}
+.p-cmp{border-top-color:var(--purple)}
+.p-facts{border-top-color:var(--cyan)} .p-facts .lab-h{color:var(--cyan)}
+.lab-claim{box-shadow:0 0 12px rgba(63,185,80,.18)}
+.lab-vs2{display:grid;grid-template-columns:minmax(0,1.5fr) auto minmax(50px,1fr) auto auto;gap:.15rem .5rem;align-items:center;font-size:.84rem;padding:.2rem .1rem .2rem .45rem;border-left:3px solid var(--vc);margin:.15rem 0;background:color-mix(in srgb,var(--vc) 6%,transparent);border-radius:0 6px 6px 0}
+.lab-vs2 .vs-l{color:var(--text)}
+.lab-vs2 .vs-now{color:var(--vc);font-size:.95rem}
+.lab-vs2 .vs-bar{height:7px;background:#1b222c;border-radius:4px;overflow:hidden}
+.lab-vs2 .vs-bar i{display:block;height:100%;background:var(--vc);border-radius:4px;transition:width .25s}
+.lab-vs2 .vs-t{color:var(--muted);font-size:.78rem}
+.lab-vs2 .vs-t b{color:var(--text)}
+.vs-ok{color:var(--green);font-weight:800}
+.vs-bad{color:var(--orange);font-weight:700}
+.vs-run{color:var(--muted);font-size:.75rem;min-width:2.4em;text-align:right}
+.lab-leg{display:flex;flex-wrap:wrap;gap:.2rem .8rem;font-size:.76rem;margin-top:.2rem}
+.lab-leg i{display:inline-block;width:.8em;height:.8em;border-radius:2px;margin-right:.3em;vertical-align:-.05em}
+.lab-leg small{color:var(--muted)}
+.lab-cmp td.best{color:var(--green);font-weight:800}
+.lab-cmp td.worst{color:var(--orange);font-weight:700}
+.lab-cmp table.rt tr.on td{background:rgba(188,140,255,.16)}
+.lab-cmp table.rt tr.on td:first-child{box-shadow:inset 3px 0 0 var(--purple)}
+.lab-code .row.cur .lnum{color:var(--orange);font-weight:800}
+</style>
+<style>
+/* ===== SPICK: Spickzettel-Raster + Druck ===== */
+.spick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,640px),1fr));gap:14px;align-items:start;margin-top:.8rem}
+.spick .sp{border:1px solid var(--border);border-top:3px solid var(--pink);border-radius:12px;background:var(--card);padding:12px 16px;min-width:0;overflow-x:auto}
+.spick .sp h4{margin:0 0 .5rem;font-size:1.02rem;display:flex;align-items:center;gap:.5rem}
+.spick .spn{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;background:var(--pink);color:#0d1117;font-weight:800;font-size:.85rem}
+.spick p{margin:.35rem 0;line-height:1.5}
+.spick table.rt{font-size:.82rem;margin:.4rem 0}
+.spick table.rt td.mono{font-size:.76rem;line-height:1.45;font-family:'JetBrains Mono',monospace}
+.spick .step{padding:4px 10px;margin:6px 0}
+.spick pre.cpp{font-size:.76rem}
+.spick .num{width:auto;min-width:1.6em;padding:0 .35em;border-radius:9px}
+.spick .katex-display>.katex{font-size:.92em}
+.sppr{font:inherit;font-size:.85rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--pink);border-radius:8px;padding:.2rem .7rem;margin-left:.4rem}
+@media print{
+  body.print-spick *{visibility:hidden}
+  body.print-spick #spickfig, body.print-spick #spickfig *{visibility:visible}
+  body.print-spick #spickfig{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
+  body.print-spick .sppr, body.print-spick #spickfig > p{display:none!important}
+  body.print-spick .spick{grid-template-columns:1fr 1fr}
+  body.print-spick .sp{break-inside:avoid}
+}
+</style>
 </head>
 <body>
 
@@ -541,6 +665,7 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 
 <!-- ═════════════════════════════════════ KAPITEL 12 ═════════════════════════════════════ -->
 <div class="blatt part" id="k12"><div class="kop"><span class="bn">Kapitel 12</span><h2>Symboltabellen und binäre Suchbäume</h2><span class="tp">ST-ADT · Key-Indexing · sequentiell · binär · BST · Rotation · select · remove · join · Buch S. 489–541</span></div></div>
+<!--LAB:link12--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab12">All-in-one-Labor zu Kapitel 12</a>: alle Programme, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/LAB:link12-->
 
 <div class="blatt" id="s121"><div class="kop"><span class="bn">§12.1</span><h2>Der ADT Symboltabelle</h2><span class="tp">Def. 12.1 · Prog. 12.1 · 12.2 · Tab. 12.1</span></div></div>
 <div class="vonnull" id="vn-12-1">
@@ -1216,8 +1341,15 @@ public:
 <div id="trJoin"></div>
 </div>
 
+<!--LAB:12-->
+<div class="blatt" id="lab12"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 12: Symboltabellen und binäre Suchbäume</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 12</span> Suchen im Feld (sequentiell, binär, Interpolation), BST einfügen am Blatt oder an der Wurzel, BST löschen nach Vorlesung und Buch.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt oder ⏯ automatisch. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung live, ihr Verlauf und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK12"></div></div>
+<!--/LAB:12-->
 <!-- ═════════════════════════════════════ KAPITEL 13 ═════════════════════════════════════ -->
 <div class="blatt part" id="k13"><div class="kop"><span class="bn">Kapitel 13</span><h2>Balancierte Bäume</h2><span class="tp">randomisiert · Splay · 2-3-4 · Rot-Schwarz · AVL (Vorlesung) · Skip-Liste · Buch S. 543–588</span></div></div>
+<!--LAB:link13--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab13">All-in-one-Labor zu Kapitel 13</a>: alle Programme, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/LAB:link13-->
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§13 · Problem</span> Der BST ist im Mittel gut, aber im schlechtesten Fall linear</div>
@@ -2578,8 +2710,15 @@ public:
 </table></div>
 </div>
 
+<!--LAB:13-->
+<div class="blatt" id="lab13"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 13: balancierte Bäume</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 13</span> AVL einfügen und löschen mit allen Übungsblatt-Aufgaben, Rot-Schwarz-Baum, alle Baumarten im Vergleich.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt oder ⏯ automatisch. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung live, ihr Verlauf und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK13"></div></div>
+<!--/LAB:13-->
 <!-- ═════════════════════════════════════ KAPITEL 14 ═════════════════════════════════════ -->
 <div class="blatt part" id="k14"><div class="kop"><span class="bn">Kapitel 14</span><h2>Hashing</h2><span class="tp">Hashfunktion · getrennte Verkettung · lineare Sondierung · Doppel-Hashing · dynamische Tabellen · Buch S. 589–621</span></div></div>
+<!--LAB:link14--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab14">All-in-one-Labor zu Kapitel 14</a>: alle Programme, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/LAB:link14-->
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§14 · Idee</span> Key-Indexing für beliebige Schlüssel: erst umrechnen, dann Kollisionen auflösen</div>
@@ -2947,7 +3086,14 @@ t = 4: \quad \alpha_{\text{linear}} &\le 0{,}5,\quad \alpha_{\text{doppelt}} \le
 </div>
 </div>
 <!--/BL:gp-p4-hash-->
+<!--LAB:14-->
+<div class="blatt" id="lab14"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 14: Hashing</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 14</span> Hashfunktionen, Verkettung gegen Sondierung, Löschen bei linearer Sondierung, dynamische Tabellen.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt oder ⏯ automatisch. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung live, ihr Verlauf und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK14"></div></div>
+<!--/LAB:14-->
 <div class="blatt part" id="k15"><div class="kop"><span class="bn">Kapitel 15</span><h2>Radix-Suche</h2><span class="tp">digitaler Suchbaum · Trie · Patricia · Mehrweg-Trie · TST · Text-Index · Buch S. 623–667</span></div></div>
+<!--LAB:link15--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab15">All-in-one-Labor zu Kapitel 15</a>: alle Programme, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/LAB:link15-->
 
 <div class="figure theorie">
 <div class="ttl"><span class="n">§15 · Idee</span> Nicht den ganzen Schlüssel vergleichen, sondern Bit für Bit (bzw. Zeichen für Zeichen) verzweigen</div>
@@ -3307,8 +3453,15 @@ public:
 \end{aligned} \]</div>
 </div>
 
+<!--LAB:15-->
+<div class="blatt" id="lab15"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 15: Radix-Suche</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 15</span> Digitaler Suchbaum, Trie und BST auf denselben Bits, TST gegen Mehrweg-Trie.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt oder ⏯ automatisch. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung live, ihr Verlauf und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK15"></div></div>
+<!--/LAB:15-->
 <!-- ═════════════════════════════════════ KAPITEL 16 ═════════════════════════════════════ -->
 <div class="blatt part" id="k16"><div class="kop"><span class="bn">Kapitel 16</span><h2>Externes Suchen</h2><span class="tp">Seiten und Sonden · indexsequentiell · B-Baum · erweiterbares Hashing · Buch S. 669–715</span></div></div>
+<!--LAB:link16--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab16">All-in-one-Labor zu Kapitel 16</a>: alle Programme, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/LAB:link16-->
 
 <div class="blatt" id="s161"><div class="kop"><span class="bn">§16.1</span><h2>Spielregeln</h2><span class="tp">Seiten · Sonden · Speicherhierarchie</span></div></div>
 <div class="vonnull" id="vn-16-1">
@@ -3609,6 +3762,12 @@ public:
 <div class="cap"><b>Der Bogen über Teil 4:</b> Binäre Suche → BST → 2-3-4-Baum → Rot-Schwarz-Baum → B-Baum ist eine Linie: Knoten werden breiter, der Baum flacher, und die Balance wird zur strukturellen Invariante. Key-Indexing → Hashing → erweiterbares Hashing ist die andere Linie: Man rechnet den Platz aus, statt ihn zu suchen.</div>
 </div>
 
+<!--LAB:16-->
+<div class="blatt" id="lab16"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 16: externe Suche</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 16</span> B-Baum nach Vorlesung und Buch, erweiterbares Hashing.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt oder ⏯ automatisch. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung live, ihr Verlauf und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK16"></div></div>
+<!--/LAB:16-->
 <!-- ═════════════════════════════════════ SCHEMA ═════════════════════════════════════ -->
 <div class="blatt part" id="schema"><div class="kop"><span class="bn">📐 Schema</span><h2>Suchkosten eines Codes bestimmen</h2><span class="tp">abstrakte Anatomie · 3 Beispiele mit steigender Schwierigkeit</span></div></div>
 
@@ -3782,6 +3941,205 @@ for (N = 1; N &lt; maxN; N++)
 <div class="excard"><span class="lb r">Für die Klausur</span>Die Prüfungstabelle oben ist die Antwort auf die Worst-Case-Aufgabe. Die Von-null-Karten in jedem Abschnitt sind Aufgaben im Klausurstil mit vollständigem Lösungsweg.</div>
 </div>
 </div>
+
+<!--SPICK-->
+<!-- ═════════════════════════════════════ SPICKZETTEL ═════════════════════════════════════ -->
+<div class="blatt" id="spick"><div class="kop"><span class="bn" style="color:var(--pink);border-color:rgba(247,120,186,.4);background:rgba(247,120,186,.1)">🧾 Spickzettel</span><h2>Spickzettel Teil 4: alles für die Klausur auf einen Blick</h2><span class="tp">Kap. 12–16 · Symboltabellen, BST, AVL, Hashing, Tries, B-Baum</span></div></div>
+<div class="figure" id="spickfig">
+<p>14 Kästen, jeder <b>von null</b> lesbar: erst die Begriffe, dann das Rezept, dann die Formeln. Erkenne zuerst den <b>Aufgabentyp</b> (Kasten 0), dann gehst du direkt zum passenden Kasten.<button class="sppr" id="spPrint">🖨 nur den Spickzettel drucken</button></p>
+<div class="spick">
+<div class="sp" id="sp4-0">
+<h4><span class="spn">0</span>Aufgabentyp erkennen → Kasten</h4>
+<table class="rt">
+<tr><th>Die Aufgabe sagt …</th><th>Kasten</th></tr>
+<tr><td>„Welche Symboltabelle wann? Kosten von search/insert?“</td><td>1</td></tr>
+<tr><td>„Binäre Suche: welche Elemente werden angesehen?“</td><td>2</td></tr>
+<tr><td>„Füge in einen BST ein / lösche aus einem BST“, „Preorder danach“</td><td>3</td></tr>
+<tr><td>„Rotiere um x“, „Einfügen an der Wurzel“</td><td>4</td></tr>
+<tr><td>„AVL: füge ein …, welche Rotation, Wurzel, Preorder?“</td><td>5</td></tr>
+<tr><td>„AVL: lösche … (Nachfolger / Vorgänger)“</td><td>6</td></tr>
+<tr><td>„Maximale Höhe eines AVL-Baums mit N Knoten?“</td><td>7</td></tr>
+<tr><td>„2-3-4-Baum, Rot-Schwarz, Splay, randomisiert“</td><td>8</td></tr>
+<tr><td>„Hashtabelle nach dem Einfügen von …“, „Sonden?“</td><td>9</td></tr>
+<tr><td>„Löschen beim Hashing“, „dynamische Tabelle“, „Hashing oder Baum?“</td><td>10</td></tr>
+<tr><td>„Trie / DST / Patricia / TST zeichnen“</td><td>11</td></tr>
+<tr><td>„B-Baum mit t = … einfügen“, „erweiterbares Hashing“</td><td>12</td></tr>
+<tr><td>Quiz: „eine, mehrere oder keine richtig“</td><td>13</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp4-1">
+<h4><span class="spn">1</span>Symboltabellen: alle Implementierungen (Tab. 12.1, 13.1, 14.1)</h4>
+<table class="rt">
+<tr><th>Implementierung</th><th>search</th><th>insert</th><th>schlechtester Fall</th><th>Ordnung (select, sortiert)</th></tr>
+<tr><td>Key-Indexed (Schlüssel klein)</td><td>1</td><td>1</td><td>1</td><td>ja</td></tr>
+<tr><td>Feld ungeordnet</td><td>N/2 (Treffer)</td><td>1</td><td>N</td><td>nein</td></tr>
+<tr><td>Feld geordnet + binär</td><td>lg N</td><td>N/2</td><td>N (insert)</td><td>ja</td></tr>
+<tr><td>BST</td><td>\(\approx 1{,}39\lg N\)</td><td>\(\approx 1{,}39\lg N\)</td><td>N</td><td>ja</td></tr>
+<tr><td>AVL / Rot-Schwarz</td><td>\(\le 1{,}44\lg N\) / \(\le 2\lg N\)</td><td>gleich</td><td>\(O(\log N)\)</td><td>ja</td></tr>
+<tr><td>Hashing</td><td>\(O(1)\) im Mittel</td><td>\(O(1)\)</td><td>N</td><td>nein</td></tr>
+<tr><td>B-Baum (Platte)</td><td>\(\log_{M/2} N\) Sonden</td><td>gleich</td><td>\(O(\log_M N)\)</td><td>ja</td></tr>
+</table>
+<p class="small"><b>Faustregel:</b> nur suchen/einfügen, Reihenfolge egal → Hashing. Bereichsanfragen, Minimum, sortiert ausgeben → balancierter Baum. Daten auf Platte → B-Baum.</p>
+</div>
+
+<div class="sp" id="sp4-2">
+<h4><span class="spn">2</span>Binäre Suche (§12.4, Prog. 12.7)</h4>
+<pre class="cpp" data-roles='{"l":"par","r":"par","m":"idx","v":"res"}'>Item searchR(int l, int r, Key v)
+  { if (l &gt; r) return nullItem;
+    int m = (l+r)/2;                        // Mitte, abgerundet
+    if (v == st[m].key()) return st[m];
+    if (l == r) return nullItem;
+    if (v &lt; st[m].key()) return searchR(l, m-1, v);
+    else                 return searchR(m+1, r, v); }</pre>
+<div class="step">\[ \begin{aligned}
+C_N &\le \lfloor\lg N\rfloor + 1 && \text{Treffer und Fehlschlag (Eig. 12.5)} \\
+\text{Interpolation} &: m = l + \tfrac{(v - a[l])(r - l)}{a[r] - a[l]} && \approx \lg\lg N \text{ bei gleichmäßigen Schlüsseln}
+\end{aligned} \]</div>
+<p class="small"><b>Von Hand:</b> Liste der angesehenen Indizes m aufschreiben; jedes Mal den Bereich [l..r] neu notieren.</p>
+</div>
+
+<div class="sp" id="sp4-3">
+<h4><span class="spn">3</span>BST: einfügen, suchen, löschen (§12.5–12.9)</h4>
+<pre class="cpp" data-roles='{"h":"mem","x":"par"}'>void insertR(link&amp; h, Item x)
+  { if (h == 0) { h = new node(x); return; }   // leerer Link: hier
+    if (x.key() &lt; h-&gt;item.key()) insertR(h-&gt;l, x);
+    else                         insertR(h-&gt;r, x); }</pre>
+<p><span class="num">L</span><b>Löschen:</b> Blatt → weg. Ein Kind → Kind rückt hoch. Zwei Kinder → Schlüssel durch den <b>symmetrischen Nachfolger</b> (kleinster im rechten Teilbaum: einmal rechts, dann ganz links) ersetzen und diesen dort löschen. Wenn verlangt: <b>Vorgänger</b> (einmal links, dann ganz rechts).</p>
+<div class="step">\[ \begin{aligned}
+\bar C_{\text{Treffer}} &= 1 + \tfrac{\text{IPL}}{N} \approx \Res{2\ln N \approx 1{,}39\lg N} && \text{zufällige Reihenfolge (Eig. 12.6)} \\
+C_{\text{worst}} &= N && \text{sortierte Eingabe: Liste}
+\end{aligned} \]</div>
+<p class="small"><b>Probe:</b> Die Inorder-Folge ist immer sortiert. Die Form hängt nur von der Einfügereihenfolge ab.</p>
+</div>
+
+<div class="sp" id="sp4-4">
+<h4><span class="spn">4</span>Rotationen und Einfügen an der Wurzel (§12.8)</h4>
+<pre class="cpp" data-roles='{"h":"mem","x":"chg"}'>void rotR(link&amp; h) { link x = h-&gt;l; h-&gt;l = x-&gt;r; x-&gt;r = h; h = x; }
+void rotL(link&amp; h) { link x = h-&gt;r; h-&gt;r = x-&gt;l; x-&gt;l = h; h = x; }
+void insertT(link&amp; h, Item x)               // neuer Schlüssel wird Wurzel
+  { if (h == 0) { h = new node(x); return; }
+    if (x.key() &lt; h-&gt;item.key()) { insertT(h-&gt;l, x); rotR(h); }
+    else                         { insertT(h-&gt;r, x); rotL(h); } }</pre>
+<p><b>Rechtsrotation um h:</b> das linke Kind x wird neue Wurzel, h wird rechtes Kind von x, der rechte Teilbaum von x wird linker Teilbaum von h. Es ändern sich genau <b>3 Zeiger</b>; die Inorder bleibt gleich.</p>
+</div>
+
+<div class="sp" id="sp4-5">
+<h4><span class="spn">5</span>AVL einfügen (Vorlesung)</h4>
+<p><span class="fw">Balancefaktor</span> BF = h(rechts) − h(links); leerer Baum h = −1, Blatt h = 0. Erlaubt: −1, 0, +1. Einfügen wie im BST, dann auf dem Rückweg BF prüfen; am <b>tiefsten</b> Knoten mit ±2 reparieren.</p>
+<table class="rt">
+<tr><th>BF Knoten</th><th>BF Kind</th><th>Fall</th><th>Rotation</th></tr>
+<tr><td>−2</td><td>≤ 0</td><td>LL</td><td>rechts um den Knoten</td></tr>
+<tr><td>−2</td><td>+1</td><td>LR</td><td>links um das Kind, dann rechts um den Knoten</td></tr>
+<tr><td>+2</td><td>≥ 0</td><td>RR</td><td>links um den Knoten</td></tr>
+<tr><td>+2</td><td>−1</td><td>RL</td><td>rechts um das Kind, dann links um den Knoten</td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel} &: 30, 10, 40, 5, 20, 15, 50, 60, 70 && \text{Übungsblatt A10} \\
+\text{Rotationen} &: \Chg{LR,\ RR,\ RR} && \\
+\text{Preorder} &: \Res{20\ 10\ 5\ 15\ 40\ 30\ 60\ 50\ 70} && \text{Wurzel 20}
+\end{aligned} \]</div>
+<p class="small"><b>Beim Einfügen</b> genügt immer <b>eine</b> (Einfach- oder Doppel-)Rotation; danach ist der ganze Baum wieder AVL.</p>
+</div>
+
+<div class="sp" id="sp4-6">
+<h4><span class="spn">6</span>AVL löschen (Vorlesung)</h4>
+<p><b>Rezept:</b> wie im BST löschen (zwei Kinder: Nachfolger, wenn verlangt Vorgänger). Dann auf dem <b>ganzen</b> Rückweg bis zur Wurzel BF prüfen und rotieren. Es können <b>mehrere</b> Rotationen nötig sein.</p>
+<p><b>Besonderheit:</b> Das Kind des kritischen Knotens kann BF 0 haben (beim Einfügen unmöglich). Dann Einfachrotation (LL bzw. RR).</p>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel} &: \text{Baum } 30\,20\,40\,10\,25\,50\,5,\ \text{lösche } 40 && \text{Übungsblatt L7} \\
+\text{BF}(30) &= -2,\ \text{BF}(20) = -1 \Rightarrow \Chg{LL} && \\
+\text{Preorder} &: \Res{20\ 10\ 5\ 30\ 25\ 50} && \text{Wurzel 20}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp4-7">
+<h4><span class="spn">7</span>AVL-Mathematik</h4>
+<div class="step">\[ \begin{aligned}
+N_{\min}(h) &= N_{\min}(h-1) + N_{\min}(h-2) + 1 && \text{Fibonacci-Bäume} \\
+N_{\min}(0..5) &= 1,\ 2,\ 4,\ 7,\ 12,\ 20 && \text{kleinster AVL-Baum der Höhe h} \\
+h &\le 1{,}44\lg(N + 2) && \text{Satz (Vorlesung)} \\
+\text{Operationen} &: O(\log N) && \text{suchen, einfügen, löschen}
+\end{aligned} \]</div>
+<p class="small"><b>Klausurtrick:</b> „Größte Höhe bei N = 7 Knoten?“ → größtes h mit N_min(h) ≤ 7, also h = 3.</p>
+</div>
+
+<div class="sp" id="sp4-8">
+<h4><span class="spn">8</span>2-3-4, Rot-Schwarz, Splay, randomisiert (Kap. 13)</h4>
+<table class="rt">
+<tr><th>Baum</th><th>Idee</th><th>Garantie</th></tr>
+<tr><td>2-3-4 (top-down)</td><td>4-Knoten auf dem Weg nach unten teilen, mittleren Schlüssel hochschieben</td><td>alle Blätter gleich tief, Höhe ≤ lg N</td></tr>
+<tr><td>Rot-Schwarz</td><td>2-3-4 als BST: rote Kante = gleicher 2-3-4-Knoten</td><td>Höhe ≤ 2 lg N (Eig. 13.8)</td></tr>
+<tr><td>Splay</td><td>gesuchten/neuen Schlüssel mit Doppelrotationen an die Wurzel</td><td>amortisiert O(log N)</td></tr>
+<tr><td>randomisiert</td><td>mit W. 1/(N+1) an der Wurzel einfügen</td><td>wie zufällige Eingabe, unabhängig von der Reihenfolge</td></tr>
+<tr><td>Skip-Liste</td><td>Ebenen mit W. 1/2 (bzw. 1/t)</td><td>erwartet O(log N)</td></tr>
+</table>
+<p class="small"><b>Rot-Schwarz-Regeln:</b> Wurzel schwarz; kein Rot auf Rot; jeder Weg zu einem leeren Link hat gleich viele schwarze Knoten.</p>
+</div>
+
+<div class="sp" id="sp4-9">
+<h4><span class="spn">9</span>Hashing von Hand (Kap. 14)</h4>
+<p><b>Hashfunktion:</b> \(h(k) = k \bmod M\), M prim. Strings mit Horner: \(h = (a\cdot h + c) \bmod M\) Zeichen für Zeichen.</p>
+<table class="rt">
+<tr><th>Verfahren</th><th>Kollision</th><th>Treffer</th><th>Fehlschlag</th></tr>
+<tr><td>Verkettung</td><td>vorne in Liste h(k)</td><td>\(1 + \alpha/2\)</td><td>\(\alpha\)</td></tr>
+<tr><td>lineare Sondierung</td><td>i = (i+1) % M</td><td>\(\tfrac12(1 + \tfrac{1}{1-\alpha})\)</td><td>\(\tfrac12(1 + \tfrac{1}{(1-\alpha)^2})\)</td></tr>
+<tr><td>Doppel-Hashing</td><td>i = (i + h₂(k)) % M</td><td>\(\tfrac1\alpha\ln\tfrac1{1-\alpha}\)</td><td>\(\tfrac{1}{1-\alpha}\)</td></tr>
+</table>
+<p><b>Rezept:</b> Für jeden Schlüssel h(k) ausrechnen, Platz belegt → nach der Regel weiter, Sonden mitzählen (der freie Platz zählt mit). α = N/M. Bei offener Adressierung muss N &lt; M bleiben; h₂(k) ≠ 0 und teilerfremd zu M.</p>
+</div>
+
+<div class="sp" id="sp4-10">
+<h4><span class="spn">10</span>Löschen, dynamische Tabellen, Hashing gegen Bäume</h4>
+<p><span class="num">L</span><b>Löschen bei linearer Sondierung:</b> Platz leeren <b>und</b> alle folgenden Schlüssel des Clusters herausnehmen und neu einfügen (Prog. 14.5). Nur leeren ist falsch: Die Suche bricht an der Lücke ab.</p>
+<p><span class="num">D</span><b>Dynamisch:</b> bei N ≥ M/2 Tabelle verdoppeln und alles neu hashen. Insgesamt &lt; 2N Neueinfügungen: amortisiert O(1).</p>
+<div class="step">\[ \begin{aligned}
+\text{Hashing} &: O(1), \text{ aber keine Ordnung} && \text{kein select, kein Bereich} \\
+\text{Baum} &: O(\log N), \text{ dafür sortiert} && \text{min, max, Bereich, Rang}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp4-11">
+<h4><span class="spn">11</span>Radix-Suche (Kap. 15)</h4>
+<table class="rt">
+<tr><th>Struktur</th><th>Schlüssel stehen</th><th>verzweigt nach</th><th>Kosten</th></tr>
+<tr><td>Digitaler Suchbaum</td><td>in jedem Knoten</td><td>Bit d auf Tiefe d</td><td>≈ lg N, Höhe ≤ b Bits</td></tr>
+<tr><td>Trie</td><td>nur in Blättern</td><td>Bit d; Form unabhängig von der Reihenfolge</td><td>≈ lg N Bits + 1 Vergleich, ≈ 1,44 N Knoten</td></tr>
+<tr><td>Patricia</td><td>in N Knoten</td><td>gespeicherter Bitindex, Rückwärtslinks</td><td>≈ lg N Bits, genau N Knoten</td></tr>
+<tr><td>Mehrweg-Trie</td><td>Wortende-Markierung</td><td>Zeichen (R Links je Knoten)</td><td>Wortlänge; viel leerer Speicher</td></tr>
+<tr><td>TST</td><td>Wortende-Knoten</td><td>kleiner | gleich | größer</td><td>≈ ln N + Wortlänge</td></tr>
+</table>
+<p class="small"><b>Von Hand (Buchstaben):</b> A = 00001 … Z = 11010; Bit 0 ist das <b>linke</b> (höchste) Bit. 0 = links, 1 = rechts.</p>
+</div>
+
+<div class="sp" id="sp4-12">
+<h4><span class="spn">12</span>B-Baum und erweiterbares Hashing (Kap. 16)</h4>
+<p><b>B-Baum (Vorlesung, Mindestgrad t):</b> jeder Knoten außer der Wurzel hat t−1 … 2t−1 Schlüssel; alle Blätter gleich tief. Einfügen: auf dem Weg nach unten jeden <b>vollen</b> Knoten (2t−1) teilen, der Median wandert in den Elternknoten; volle Wurzel ⇒ neue Wurzel, Baum wächst oben.</p>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel } t = 2 &: 10, 20, 5, 6, 12, 30, 7, 17 && \text{Splits bei 6 und 17} \\
+\text{Ergebnis} &: \Res{[10\ 20]} \to [5\ 6\ 7]\ [12\ 17]\ [30] && \text{2 Sonden je Suche} \\
+h &\le \log_t \tfrac{N+1}{2} && \text{Vorlesung; Buch: Ordnung } M = 2t
+\end{aligned} \]</div>
+<p><b>Erweiterbares Hashing:</b> die ersten d Bits wählen einen von 2^d Verzeichniseinträgen → Seite (≤ M Schlüssel). Seite voll → nach dem nächsten Bit teilen; nur wenn ihre lokale Tiefe = d ist, verdoppelt sich das Verzeichnis. Suche: 2 Sonden, Seiten ≈ 1,44 N/M.</p>
+</div>
+
+<div class="sp" id="sp4-13">
+<h4><span class="spn">13</span>Quiz-Fallen Teil 4</h4>
+<table class="rt">
+<tr><th>Aussage</th><th>stimmt?</th></tr>
+<tr><td>„Jeder AVL-Baum ist ein Rot-Schwarz-Baum (färbbar)“</td><td>ja</td></tr>
+<tr><td>„AVL-Löschen braucht höchstens eine Rotation“</td><td>nein: bis zu einer je Ebene</td></tr>
+<tr><td>„Ein BST hat garantiert Höhe O(log N)“</td><td>nein: bis N − 1</td></tr>
+<tr><td>„Hashing liefert die Schlüssel sortiert“</td><td>nein</td></tr>
+<tr><td>„Lineare Sondierung ist bei α = 0,9 noch schnell“</td><td>nein: Fehlschlag ≈ 50 Sonden</td></tr>
+<tr><td>„Die Form eines Tries hängt von der Einfügereihenfolge ab“</td><td>nein (beim BST und DST schon)</td></tr>
+<tr><td>„Ein B-Baum mit t = 2 ist ein 2-3-4-Baum“</td><td>ja</td></tr>
+<tr><td>„Die Rotation ändert die Inorder“</td><td>nein</td></tr>
+</table>
+</div>
+</div>
+</div>
+<!--/SPICK-->
 
 <div class="foot">Lernbegleiter Teil 4 · nach R. Sedgewick, <i>Algorithms in C++, Parts 1–4</i> (3. Aufl.), Kap. 12–16 · Programmcode wie im Buch (Header modernisiert, einzelne Zeilen zur Schrittanzeige umbrochen, Abweichungen im Text begründet) · AVL-Teil nach Vorlesungsskript und Übungsblättern, an den Musterlösungen geprüft · Bildatlas-Stil</div>
 </div><!-- /wrap -->
@@ -6100,6 +6458,7 @@ new LB.Tracer({
     const M = inp.M, P = {}; let c = 0;
     const mk = () => { const id = ++c; P[id] = {m:0, b:new Array(M).fill(0), k:0}; return id; };
     const bits = (x, s, n) => n === 0 ? 0 : (x >> (8 - s - n)) & ((1 << n) - 1);
+    const SPL = {h: 0, k0: 0};
     const S = {v:{v:'?', d:0, D:1, k:'?'}, P, dir:[mk()], M};
     rec.peek(EL.itop - 1, 'Leeres Verzeichnis mit D = 1 Eintrag auf eine leere Seite.', S);
     function insertDIR(t, k){
@@ -6108,15 +6467,16 @@ new LB.Tracer({
       while(S.v.d < k){
         const old = S.dir; S.v.d++; S.v.D *= 2; S.dir = Array.from({length:S.v.D}, (_, i) => old[i >> 1]);
         rec.step(EL.ddbl, 'd &lt; k: Verzeichnis verdoppeln auf D = '+S.v.D+'. Jeder alte Eintrag wird zu zwei.', S, {p:{[t]:'new'}});
-        if(S.v.d < k){ const q = (x >> (k - S.v.d)) ^ 1; const np = mk(); S.dir[q] = np; rec.step(EL.dnew, 'd immer noch &lt; k: Der Nachbarbereich '+q.toString(2).padStart(S.v.d, '0')+' hat keine Items und bekommt eine leere Seite P'+np+'.', S, {p:{[np]:'new'}, d:{[q]:1}}); }
+        if(S.v.d < k){ const q = (x >> (k - S.v.d)) ^ 1; const np = mk(); P[np].k = S.v.d; S.dir[q] = np; rec.step(EL.dnew, 'd immer noch &lt; k: Der Nachbarbereich '+q.toString(2).padStart(S.v.d, '0')+' hat keine Items und bekommt eine leere Seite P'+np+'.', S, {p:{[np]:'new'}, d:{[q]:1}}); }
       }
+      for(let j = SPL.k0 + 1; j < k; j++){ const s = (x >> (k - j)) ^ 1, w = 1 << (S.v.d - j); if(S.dir[s * w] === SPL.h){ const np = mk(); P[np].k = j; for(let i = 0; i < w; i++) S.dir[s * w + i] = np; rec.step(EL.dnew, 'Der Bereich '+s.toString(2).padStart(j, '0')+' enthält keine Items von P'+SPL.h+' mehr und bekommt eine eigene leere Seite P'+np+'.', S, {p:{[np]:'new'}}); } }
       const m = 1 << (S.v.d - k), hd = {};
       for(let i = 0; i < m; i++){ S.dir[x * m + i] = t; hd[x * m + i] = 1; }
       rec.step(EL.dset, m+' Verzeichniseintrag'+(m > 1 ? 'e' : '')+' (ab '+(x * m)+') zeigen jetzt auf P'+t+'.', S, {p:{[t]:'new'}, d:hd});
     }
     function split(h){
       const t = mk(); rec.step(EL.sp, 'Seite P'+h+' ist voll: neue Seite P'+t+'.', S, {p:{[h]:'on', [t]:'new'}});
-      const H = P[h], Tn = P[t];
+      const H = P[h], Tn = P[t]; SPL.h = h; SPL.k0 = H.k;
       while(H.m === 0 || H.m === M){
         H.m = Tn.m = 0;
         for(let j = 0; j < M; j++){ if(bits(H.b[j], H.k, 1) === 0) H.b[H.m++] = H.b[j]; else Tn.b[Tn.m++] = H.b[j]; }
@@ -6452,11 +6812,960 @@ if($('schPlot')){
 })();
 </script>
 <script>
+/* ===== P2LAB: All-in-one-Labor-Engine (ein Labor pro Kapitel) ===== */
+(function(){
+'use strict';
+const LB = window.LB = window.LB || {};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const clone = o => JSON.parse(JSON.stringify(o));
+const tex = el => { if(LB.tex && el) LB.tex(el); };
+const MAXSNAP = 4000;
+const PAL = ['#58a6ff', '#3fb950', '#d29922', '#f778ba', '#bc8cff', '#56d4dd', '#f85149'];
+                                  // höchstens so viele Schritte aufzeichnen
+
+/* Recorder: der Algorithmus läuft einmal komplett, jeder rec.step speichert eine Momentaufnahme */
+function Rec(quiet){
+  this.S = {}; this.c = {}; this.snaps = []; this.quiet = quiet; this.n = 0; this.cut = false; this.lastClaim = '';
+}
+Rec.prototype.add = function(k, v){ this.c[k] = (this.c[k] || 0) + (v === undefined ? 1 : v); };
+Rec.prototype.step = function(line, msg, claim, hi){
+  this.n++;
+  if(claim) this.lastClaim = claim;
+  if(this.quiet) return;
+  if(this.snaps.length >= MAXSNAP){ this.cut = true; return; }
+  this.snaps.push({line, msg, claim: this.lastClaim, hi: hi || {}, S: clone(this.S), c: clone(this.c)});
+};
+
+LB.Lab = function(o){
+  const root = $(o.id); if(!root) return;
+  const L = {o, sc: 0, v: null, inp: {}, rec: null, i: 0, timer: null};
+  root.classList.add('lab');
+  root.innerHTML =
+    '<div class="lab-tabs"></div>' +
+    '<div class="lab-row lab-var"></div>' +
+    '<div class="lab-row lab-ex"></div>' +
+    '<div class="lab-hint"></div>' +
+    '<div class="lab-row lab-ctl"><button data-a="first" title="Anfang">⏮</button><button data-a="prev" title="zurück">◀</button><button data-a="next" class="lab-big">Schritt ▶</button><button data-a="last" title="Ende">⏭</button><button data-a="auto" class="lab-auto">⏯ auto</button>' +
+      '<input type="range" class="lab-pos" min="0" value="0"><span class="readout lab-cnt"></span></div>' +
+    '<div class="lab-main">' +
+      '<div class="lab-col p-code"><div class="lab-h">① Code <span class="lab-book"></span></div><pre class="cpp lab-code"></pre></div>' +
+      '<div class="lab-col p-mem"><div class="lab-h">② Speicher / Struktur jetzt</div><div class="lab-mem"></div></div>' +
+      '<div class="lab-col p-math"><div class="lab-h">③ Mathematik live <span>Wert jetzt · Balken = Weg bis zum Ende · Ziel = Formel</span></div><div class="lab-math"></div>' +
+        '<div class="lab-h" style="margin-top:.5rem">③b Verlauf über alle Schritte <span>Linie = Zähler, senkrecht = jetzt</span></div><div class="lab-spark"></div>' +
+        '<div class="lab-h" style="margin-top:.6rem;color:var(--green)">④ Aussage, die jetzt gilt</div><div class="lab-claim"></div></div>' +
+    '</div>' +
+    '<div class="lab-msg"></div>' +
+    '<div class="lab-bottom">' +
+      '<div class="lab-col p-cmp"><div class="lab-h">⑤ Was wäre wenn? Alle Varianten mit derselben Eingabe <span>grün = kleinster Wert, orange = größter</span></div><div class="lab-cmp"></div></div>' +
+      '<div class="lab-col p-facts"><div class="lab-h">⑥ Das musst du hier wissen (gilt immer)</div><div class="lab-facts"></div></div>' +
+    '</div>';
+  const q = s => root.querySelector(s);
+  const S = () => o.scenarios[L.sc];
+
+  function tabs(){
+    q('.lab-tabs').innerHTML = o.scenarios.map((s, k) => '<button data-sc="' + k + '" style="--tc:' + PAL[k % PAL.length] + '" class="' + (k === L.sc ? 'on' : '') + '"><b>' + s.icon + ' ' + s.name + '</b><small>' + s.book + '</small></button>').join('');
+  }
+  function controls(){
+    const s = S();
+    let h = '<span class="lab-lab">Variante:</span>' + s.vars.map(v => '<button data-v="' + v.k + '" class="' + (v.k === L.v ? 'on' : '') + '" title="' + esc(v.d || '') + '">' + v.name + '</button>').join('');
+    h += (s.ins || []).map(f => '<label>' + f.label + ' <input data-in="' + f.k + '" value="' + esc(L.inp[f.k]) + '" style="width:' + (f.w || 5) + 'rem"></label>').join('');
+    q('.lab-var').innerHTML = h;
+    q('.lab-ex').innerHTML = '<span class="lab-lab">Beispiele:</span>' + (s.presets || []).map((p, k) => '<button data-p="' + k + '" class="' + (k === L.preset ? 'on' : '') + '">' + p.name + '</button>').join('');
+  }
+  function select(k){
+    const s = o.scenarios[k]; L.sc = k; L.v = s.vars[0].k; L.inp = {}; L.preset = null;
+    (s.ins || []).forEach(f => L.inp[f.k] = f.def);
+    q('.lab-hint').innerHTML = s.intro || ''; q('.lab-hint').style.display = s.intro ? '' : 'none';
+    tabs(); controls(); run(); tex(q('.lab-hint'));
+  }
+  function runOnce(v, quiet){
+    const s = S(), rec = new Rec(quiet);
+    try { s.run(rec, L.inp, v); }
+    catch(e){ if(!quiet){ rec.S = rec.S || {}; rec.snaps.push({line: 0, msg: '⚠ ' + esc(e.message), claim: '', hi: {}, S: clone(rec.S), c: clone(rec.c)}); } rec.err = e.message; }
+    if(!quiet && !rec.snaps.length) rec.snaps.push({line: 0, msg: '(keine Schritte)', claim: '', hi: {}, S: clone(rec.S), c: clone(rec.c)});
+    return rec;
+  }
+  function run(){
+    stop();
+    const s = S();
+    L.rec = runOnce(L.v, false); L.i = 0;
+    q('.lab-pos').max = L.rec.snaps.length - 1;
+    const code = s.code(L.v, L.inp);
+    q('.lab-book').textContent = (s.vars.find(v => v.k === L.v) || {}).book || s.book;
+    q('.lab-code').innerHTML = code.map((src, k) => '<span class="row" data-l="' + (k + 1) + '"><span class="lnum">' + (k + 1) + '</span>' + (LB.hl ? LB.hl(src.replace(/(\S)\s{3,}\/\//, '$1  //'), s.roles || {}) : esc(src)) + '<span class="labhit"></span></span>').join('');
+    q('.lab-facts').innerHTML = s.facts(L.v, L.inp); tex(q('.lab-facts'));
+    compare();
+    const keys = (s.cmp || []).map(k => k[0]).filter(k => L.rec.snaps.some(sn => typeof sn.c[k] === 'number' && sn.c[k] !== 0));
+    L.series = keys.map((k, j) => ({k, name: ((s.cmp || []).find(x => x[0] === k) || [k, k])[1], col: PAL[j % PAL.length], v: L.rec.snaps.map(sn => typeof sn.c[k] === 'number' ? sn.c[k] : 0)}));
+    show(0);
+  }
+  function compare(){
+    const s = S(), keys = s.cmp || [];
+    let h = '<table class="rt"><tr><th>Variante</th>' + keys.map(k => '<th class="r">' + k[1] + '</th>').join('') + '<th class="r">Schritte</th></tr>';
+    const rows = s.vars.map(v => { const r = runOnce(v.k, true); return {v, r, cells: keys.map(k => r.c[k[0]] !== undefined ? r.c[k[0]] : (k[2] ? k[2](r) : '–')).concat([r.n])}; });
+    const ext = rows.length > 1 ? rows[0].cells.map((_, j) => { const nums = rows.map(x => x.cells[j]).filter(x => typeof x === 'number'); return nums.length > 1 ? [Math.min.apply(null, nums), Math.max.apply(null, nums)] : null; }) : [];
+    rows.forEach(({v, r, cells}) => {
+      h += '<tr' + (v.k === L.v ? ' class="on"' : '') + '><td><b>' + (v.k === L.v ? '▶ ' : '') + v.name + '</b>' + (r.err ? ' <span class="small" style="color:var(--res)">⚠ ' + esc(r.err) + '</span>' : '') + '</td>' +
+        cells.map((x, j) => { const e = ext[j]; const cls = e && e[0] !== e[1] && typeof x === 'number' ? (x === e[0] ? ' best' : x === e[1] ? ' worst' : '') : ''; return '<td class="r mono' + cls + '">' + x + '</td>'; }).join('') + '</tr>';
+    });
+    h += '</table>';
+    if(s.cmpNote) h += '<div class="small" style="margin-top:.4rem">' + s.cmpNote(L.inp) + '</div>';
+    q('.lab-cmp').innerHTML = h; tex(q('.lab-cmp'));
+  }
+  function show(i){
+    const s = S(), snaps = L.rec.snaps; i = Math.max(0, Math.min(snaps.length - 1, i)); L.i = i;
+    const sn = snaps[i];
+    q('.lab-pos').value = i;
+    q('.lab-cnt').innerHTML = 'Schritt <b>' + i + '</b> / ' + (snaps.length - 1) + (L.rec.cut ? ' <span title="nur die ersten ' + MAXSNAP + ' Schritte aufgezeichnet">(gekürzt)</span>' : '');
+    const hits = {};
+    for(let k = 0; k <= i; k++){ const l = snaps[k].line; hits[l] = (hits[l] || 0) + 1; }
+    root.querySelectorAll('.lab-code .row').forEach(r => { const l = +r.dataset.l;
+      r.classList.toggle('cur', l === sn.line); r.querySelector('.labhit').textContent = hits[l] ? '×' + hits[l] : ''; });
+    q('.lab-mem').innerHTML = s.view(sn.S, sn, L.inp, L.v);
+    const last = snaps[snaps.length - 1];
+    LB._labCtx = {mode: 'fin', fin: {}, k: 0};
+    try { s.math(last.c, L.inp, L.v, true, last.S); } catch(e){}
+    LB._labCtx.mode = 'now'; LB._labCtx.done = i === snaps.length - 1; LB._labCtx.k = 0;
+    q('.lab-math').innerHTML = s.math(sn.c, L.inp, L.v, i === snaps.length - 1, sn.S); tex(q('.lab-math'));
+    LB._labCtx = null;
+    q('.lab-spark').innerHTML = spark(i);
+    q('.lab-claim').innerHTML = sn.claim || '<span class="muted">Noch nichts passiert: Startzustand.</span>'; tex(q('.lab-claim'));
+    let hist = '';
+    for(let k = Math.max(0, i - 4); k < i; k++) hist += '<div class="muted small">' + k + ': ' + snaps[k].msg + '</div>';
+    q('.lab-msg').innerHTML = hist + '<div><b>' + i + ':</b> ' + sn.msg + '</div>'; tex(q('.lab-msg'));
+  }
+  function spark(i){
+    const se = L.series || [], n = L.rec.snaps.length; if(!se.length || n < 2) return '<div class="muted small">(keine Zähler)</div>';
+    const W = 420, H = 96, X = k => 6 + k * (W - 12) / (n - 1);
+    let s = '<svg viewBox="0 0 ' + W + ' ' + (H + 4) + '" width="' + W + '" style="width:100%!important;max-width:100%;height:auto">';
+    for(let g = 1; g < 4; g++) s += '<line x1="6" x2="' + (W - 6) + '" y1="' + (4 + g * H / 4) + '" y2="' + (4 + g * H / 4) + '" stroke="#1f2733"/>';
+    se.forEach(t => { const mx = Math.max.apply(null, t.v) || 1;
+      s += '<polyline fill="none" stroke="' + t.col + '" stroke-width="2" points="' + t.v.map((y, k) => X(k).toFixed(1) + ',' + (4 + H - y / mx * (H - 6)).toFixed(1)).join(' ') + '"/>';
+      s += '<circle cx="' + X(i).toFixed(1) + '" cy="' + (4 + H - t.v[i] / mx * (H - 6)).toFixed(1) + '" r="3.5" fill="' + t.col + '"/>'; });
+    s += '<line x1="' + X(i).toFixed(1) + '" x2="' + X(i).toFixed(1) + '" y1="2" y2="' + (H + 2) + '" stroke="#e6edf3" stroke-dasharray="3 3"/></svg>';
+    return s + '<div class="lab-leg">' + se.map(t => '<span><i style="background:' + t.col + '"></i>' + t.name + ' <b>' + t.v[i] + '</b><small> / ' + t.v[n - 1] + '</small></span>').join('') + '</div>';
+  }
+  function stop(){ if(L.timer){ clearInterval(L.timer); L.timer = null; } const a = q('.lab-auto'); if(a) a.classList.remove('on'); }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b || !root.contains(b)) return;
+    if(b.dataset.sc !== undefined) return select(+b.dataset.sc);
+    if(b.dataset.v !== undefined){ L.v = b.dataset.v; controls(); return run(); }
+    if(b.dataset.p !== undefined){ const p = S().presets[+b.dataset.p]; L.preset = +b.dataset.p;
+      Object.assign(L.inp, p.set || {}); if(p.v) L.v = p.v; controls(); run();
+      q('.lab-hint').style.display = ''; q('.lab-hint').innerHTML = '<b>' + p.name + ':</b> ' + p.hint; tex(q('.lab-hint'));
+      if(p.to === 'end') show(L.rec.snaps.length - 1);
+      return; }
+    const a = b.dataset.a, n = L.rec.snaps.length - 1;
+    if(a === 'first') show(0); else if(a === 'prev') show(L.i - 1); else if(a === 'next') show(L.i + 1); else if(a === 'last') show(n);
+    else if(a === 'auto'){ if(L.timer) return stop(); if(L.i >= n) show(0); b.classList.add('on'); L.timer = setInterval(() => { if(L.i >= n) stop(); else show(L.i + 1); }, 650); }
+  });
+  let deb = null;
+  const typed = f => { L.inp[f.dataset.in] = f.value; if(L.preset !== null){ L.preset = null; root.querySelectorAll('.lab-ex button.on').forEach(x => x.classList.remove('on')); } run(); };
+  root.addEventListener('input', e => { const f = e.target.closest('[data-in]'); if(!f) return; clearTimeout(deb); deb = setTimeout(() => typed(f), 450); });
+  root.addEventListener('change', e => { const f = e.target.closest('[data-in]'); if(!f) return; clearTimeout(deb); if(L.inp[f.dataset.in] !== f.value) typed(f); });
+  root.addEventListener('keydown', e => { const f = e.target.closest('[data-in]'); if(f && e.key === 'Enter'){ clearTimeout(deb); typed(f); } });
+  q('.lab-pos').addEventListener('input', e => { e.stopPropagation(); show(+e.target.value); });
+  select(0);
+  L.selectScenario = select; L.root = root;
+  (LB.labs = LB.labs || {})[o.id] = L;
+  return L;
+};
+
+/* ---------- gemeinsame Zeichenhelfer ---------- */
+const COL = {res:'#f85149', chg:'#d29922', rule:'#bc8cff', par:'#58a6ff', idx:'#3fb950', cond:'#56d4dd', mem:'#f778ba', line:'#30363d', mute:'#8b949e', ink:'#e6edf3', card:'#161b22'};
+LB.LC = COL;
+/* Zellreihe: a = Werte, mk = {index: 'res'|'chg'|...}, opt.lab = Beschriftung, opt.idx = Indizes zeigen */
+LB.labCells = function(a, mk, opt){
+  opt = opt || {}; mk = mk || {};
+  return '<div class="lab-cells">' + (opt.lab ? '<span class="lab-cl">' + opt.lab + '</span>' : '') + a.map((x, k) => {
+    const c = mk[k]; return '<span class="c' + (c ? ' m-' + c : '') + '">' + esc(x === null || x === undefined ? '' : x) + (opt.idx === false ? '' : '<i>' + (opt.base !== undefined ? opt.base + k : k) + '</i>') + '</span>'; }).join('') + '</div>';
+};
+/* Liste von Knoten als SVG: nodes = [{id, item}], next = {id: id|null}, ptr = {name: id} (Zeiger-Etiketten), circ: Kreis */
+LB.labList = function(order, item, next, ptr, opt){
+  opt = opt || {}; const n = order.length, W = Math.max(320, 74 * n + 40), H = 112, X = k => 26 + k * 74;
+  const pos = {}; order.forEach((id, k) => pos[id] = k);
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto"><defs><marker id="la' + (opt.mid || '') + '" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="' + COL.chg + '"/></marker></defs>';
+  order.forEach((id, k) => {
+    const hl = (opt.hi || {})[id];
+    s += '<rect x="' + X(k) + '" y="38" width="44" height="28" rx="5" fill="' + (hl ? 'rgba(210,153,34,.25)' : COL.card) + '" stroke="' + (hl ? COL.chg : COL.mute) + '" stroke-width="1.5"/>';
+    s += '<line x1="' + (X(k) + 30) + '" y1="38" x2="' + (X(k) + 30) + '" y2="66" stroke="' + COL.line + '"/>';
+    s += '<text x="' + (X(k) + 15) + '" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="' + COL.ink + '">' + esc(item[id]) + '</text>';
+    const nx = next[id];
+    if(nx === null || nx === undefined) s += '<text x="' + (X(k) + 37) + '" y="57" text-anchor="middle" font-size="11" fill="' + COL.mute + '">∅</text>';
+    else if(pos[nx] === k + 1) s += '<line x1="' + (X(k) + 37) + '" y1="52" x2="' + (X(k + 1) - 2) + '" y2="52" stroke="' + COL.chg + '" stroke-width="1.6" marker-end="url(#la' + (opt.mid || '') + ')"/>';
+    else if(pos[nx] !== undefined){ const a = X(k) + 37, b = X(pos[nx]) + 15, up = pos[nx] <= k;
+      s += '<path d="M' + a + ' 66 C ' + a + ' ' + (up ? 104 : 96) + ', ' + b + ' ' + (up ? 104 : 96) + ', ' + b + ' 68" fill="none" stroke="' + (up ? COL.idx : COL.chg) + '" stroke-width="1.5" marker-end="url(#la' + (opt.mid || '') + ')"/>'; }
+  });
+  const lab = {}; Object.keys(ptr || {}).forEach(p => { const id = ptr[p]; if(id === null || id === undefined || pos[id] === undefined) return; (lab[pos[id]] = lab[pos[id]] || []).push(p); });
+  Object.keys(lab).forEach(k => { s += '<text x="' + (X(+k) + 22) + '" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="' + COL.par + '">' + lab[k].join(', ') + ' ↓</text>'; });
+  return s + '</svg>';
+};
+/* Binärbaum als SVG: T = {id: {item, l, r}}, root; mark = {id: farbe}; info = {id: kleiner Text} */
+LB.labTree = function(T, root, mark, info){
+  mark = mark || {}; info = info || {};
+  if(root === null || root === undefined) return '<div class="muted">(leerer Baum)</div>';
+  const pos = {}; let col = 0, maxd = 0;
+  (function place(id, d){ if(id === null || id === undefined) return; maxd = Math.max(maxd, d);
+    place(T[id].l, d + 1); pos[id] = {x: col++, d}; place(T[id].r, d + 1); })(root, 0);
+  const W = Math.max(260, col * 52 + 30), H = (maxd + 1) * 62 + 30, X = c => 26 + c * 52, Y = d => 24 + d * 62;
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+  Object.keys(pos).forEach(id => { ['l', 'r'].forEach(sd => { const c = T[id][sd]; if(c !== null && c !== undefined && pos[c])
+    s += '<line x1="' + X(pos[id].x) + '" y1="' + (Y(pos[id].d) + 15) + '" x2="' + X(pos[c].x) + '" y2="' + (Y(pos[c].d) - 15) + '" stroke="' + COL.mute + '" stroke-width="1.4"/>'; }); });
+  Object.keys(pos).forEach(id => { const p = pos[id], m = mark[id];
+    s += '<circle cx="' + X(p.x) + '" cy="' + Y(p.d) + '" r="16" fill="' + (m ? m + '33' : COL.card) + '" stroke="' + (m || COL.mute) + '" stroke-width="' + (m ? 2.6 : 1.4) + '"/>';
+    s += '<text x="' + X(p.x) + '" y="' + (Y(p.d) + 4.5) + '" text-anchor="middle" font-size="13" font-weight="700" fill="' + COL.ink + '">' + esc(T[id].item) + '</text>';
+    if(info[id] !== undefined) s += '<text x="' + (X(p.x) + 19) + '" y="' + (Y(p.d) - 10) + '" font-size="10" fill="' + COL.cond + '">' + esc(info[id]) + '</text>'; });
+  return s + '</svg>';
+};
+/* Stapel / Schlange als Kästchen, oben = zuletzt */
+LB.labStack = function(items, title, opt){
+  opt = opt || {};
+  return '<div class="lab-stack"><div class="small muted">' + title + '</div>' + (items.length ? items.slice().reverse().map((x, k) => '<div class="lab-sti' + (k === 0 && opt.top ? ' top' : '') + '">' + esc(x) + '</div>').join('') : '<div class="muted small">(leer)</div>') + '</div>';
+};
+/* Aufrufstapel: frames = [{f, args, note}] */
+LB.labFrames = function(frames, title){
+  return '<div class="lab-frames"><div class="small muted">' + (title || 'Aufrufstapel (oben = aktiv)') + '</div>' + (frames.length ? frames.slice().reverse().map((f, k) => '<div class="lab-fr' + (k === 0 ? ' top' : '') + '"><b>' + esc(f.f) + '</b>(' + esc(f.args) + ')' + (f.note ? ' <span class="small">' + esc(f.note) + '</span>' : '') + '</div>').join('') : '<div class="muted small">(leer)</div>') + '</div>';
+};
+/* Zahlenzeile „gemessen gegen Formel“ */
+LB.labVs = function(label, got, want, note){
+  const ctx = LB._labCtx;
+  if(ctx && ctx.mode === 'fin'){ ctx.fin[label] = {got, want}; return ''; }
+  const f = (ctx && ctx.fin[label]) || {}, done = ctx ? ctx.done : want !== '…';
+  const target = want === '…' ? f.want : want, total = typeof f.got === 'number' ? f.got : null;
+  const col = PAL[(ctx ? ctx.k++ : 0) % PAL.length];
+  const num = typeof got === 'number' && typeof total === 'number' && total > 0;
+  const pct = num ? Math.max(0, Math.min(100, got / total * 100)) : (done ? 100 : 0);
+  const ok = got === target || (typeof target === 'number' && typeof got === 'number' && Math.abs(got - target) < 1e-9);
+  const mark = done ? (ok ? '<span class="vs-ok">✓</span>' : '<span class="vs-bad">' + (note || '≠') + '</span>') : '<span class="vs-run">' + (num ? Math.round(pct) + '%' : '…') + '</span>';
+  return '<div class="lab-vs2" style="--vc:' + col + '"><span class="vs-l">' + label + '</span><b class="vs-now mono">' + got + '</b>' +
+    '<span class="vs-bar"><i style="width:' + pct.toFixed(1) + '%"></i></span><span class="vs-t">Ziel <b class="mono">' + (target === undefined ? '–' : target) + '</b></span>' + mark + '</div>';
+};
+})();
+
+/* ===== LAB Teil 4: gemeinsame Such-Helfer ===== */
+(function(){
+'use strict';
+const LB = window.LB, C = LB.LC;
+const S4 = LB.S4 = {};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+/* Schlüssel: Zahlen, wenn alle Zahlen sind, sonst Buchstaben/Wörter */
+S4.keys = (s, max) => { const t = String(s).trim().split(/[\s,]+/).filter(Boolean).slice(0, max || 24); const num = t.length && t.every(x => /^-?\d+$/.test(x)); return num ? t.map(Number) : t.map(x => x.toUpperCase()); };
+S4.fmt = x => (Math.round(x * 100) / 100).toLocaleString('de-DE');
+S4.code5 = k => typeof k === 'number' ? k : (String(k).charCodeAt(0) - 64);   // A = 1 … Z = 26
+/* Binärbäume als verschachtelte, JSON-fähige Objekte {k, l, r, ...} */
+S4.node = k => ({k, l: null, r: null, h: 0, n: 1});
+S4.H = t => t ? t.h : -1;
+S4.N = t => t ? t.n : 0;
+S4.upd = t => { t.h = 1 + Math.max(S4.H(t.l), S4.H(t.r)); t.n = 1 + S4.N(t.l) + S4.N(t.r); return t; };
+S4.fix = t => { if(!t) return -1; S4.fix(t.l); S4.fix(t.r); S4.upd(t); return t.h; };
+S4.height = t => t ? 1 + Math.max(S4.height(t.l), S4.height(t.r)) : -1;
+S4.size = t => t ? 1 + S4.size(t.l) + S4.size(t.r) : 0;
+S4.ipl = (t, d) => t ? (d || 0) + S4.ipl(t.l, (d || 0) + 1) + S4.ipl(t.r, (d || 0) + 1) : 0;
+S4.pre = t => t ? [t.k].concat(S4.pre(t.l), S4.pre(t.r)) : [];
+S4.ino = t => t ? S4.ino(t.l).concat([t.k], S4.ino(t.r)) : [];
+S4.rotR = t => { const x = t.l; t.l = x.r; x.r = t; S4.upd(t); S4.upd(x); return x; };
+S4.rotL = t => { const x = t.r; t.r = x.l; x.l = t; S4.upd(t); S4.upd(x); return x; };
+/* Baum zeichnen: opt.mark = {key: 'chg'|...}, opt.info = t => kleiner Text, opt.fill = t => Farbe */
+S4.draw = (root, opt) => { opt = opt || {}; const T = {}, info = {}, mark = {}; let n = 0;
+  const go = t => { if(!t) return null; const id = ++n; T[id] = {item: t.k, l: null, r: null}; if(opt.info){ const s = opt.info(t); if(s !== undefined && s !== '') info[id] = s; }
+    const m = opt.mark && opt.mark[t.k]; if(m) mark[id] = C[m] || m; else if(opt.fill){ const f = opt.fill(t); if(f) mark[id] = f; }
+    T[id].l = go(t.l); T[id].r = go(t.r); return id; };
+  const r = go(root); return (opt.title ? '<div class="small muted">' + opt.title + '</div>' : '') + LB.labTree(T, r, mark, info); };
+/* Mehrwegbaum: node = {lab, kids: [{n: node, tag}], mark}; Breite aus den Blättern */
+S4.mtree = (root, opt) => { opt = opt || {}; if(!root) return '<div class="muted">(leer)</div>';
+  const CW = 8.2, PAD = 14, GAP = 10, LH = 58; let x = 0, maxd = 0; const pos = [];
+  const w = n => Math.max(26, String(n.lab).length * CW + PAD);
+  const place = (n, d) => { maxd = Math.max(maxd, d); const ks = (n.kids || []).filter(k => k && k.n);
+    if(!ks.length){ const p = {n, d, x: x + w(n) / 2}; x += w(n) + GAP; pos.push(p); return p; }
+    const cs = ks.map(k => Object.assign(place(k.n, d + 1), {tag: k.tag})); const p = {n, d, x: (cs[0].x + cs[cs.length - 1].x) / 2, cs}; pos.push(p); return p; };
+  place(root, 0); const W = Math.max(200, x + 10), H = (maxd + 1) * LH + 16;
+  const TC = {l: C.par, m: C.mute, r: C.chg, 0: C.par, 1: C.chg};
+  let s = '<svg viewBox="-4 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+  pos.forEach(p => (p.cs || []).forEach(c => { s += '<line x1="' + p.x + '" y1="' + (p.d * LH + 30) + '" x2="' + c.x + '" y2="' + (c.d * LH + 12) + '" stroke="' + (TC[c.tag] || C.mute) + '" stroke-width="1.4"/>';
+    if(c.tag !== undefined && opt.tags !== false) s += '<text x="' + ((p.x + c.x) / 2 + 3) + '" y="' + ((p.d * LH + 30 + c.d * LH + 12) / 2) + '" font-size="9" fill="' + (TC[c.tag] || C.mute) + '">' + c.tag + '</text>'; }));
+  pos.forEach(p => { const ww = w(p.n), m = p.n.mark ? (C[p.n.mark] || p.n.mark) : null;
+    s += '<rect x="' + (p.x - ww / 2) + '" y="' + (p.d * LH + 10) + '" width="' + ww + '" height="22" rx="5" fill="' + (m ? m + '33' : C.card) + '" stroke="' + (m || C.mute) + '" stroke-width="' + (m ? 2.2 : 1.2) + '"/>' +
+      '<text x="' + p.x + '" y="' + (p.d * LH + 25) + '" text-anchor="middle" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace" fill="' + C.ink + '">' + esc(p.n.lab) + '</text>';
+    if(p.n.sub) s += '<text x="' + p.x + '" y="' + (p.d * LH + 43) + '" text-anchor="middle" font-size="9.5" fill="' + C.cond + '">' + esc(p.n.sub) + '</text>'; });
+  return (opt.title ? '<div class="small muted">' + opt.title + '</div>' : '') + s + '</svg>'; };
+/* Bits eines Buchstabens (A = 00001) */
+S4.bits = (k, b) => S4.code5(k).toString(2).padStart(b || 5, '0');
+})();
+
+/* ===== LAB Kapitel 12: Symboltabellen und binäre Suchbäume ===== */
+(function(){
+'use strict';
+const LB = window.LB, S4 = LB.S4;
+const lg = Math.log2, ln = Math.log;
+const BOOK = 'A S E R C H I N G X M P L';
+const srt = a => a.slice().sort((x, y) => x < y ? -1 : x > y ? 1 : 0);
+const uniq = a => a.filter((x, i) => a.indexOf(x) === i);
+
+/* ---------------- 1 · Suchen im Feld ---------------- */
+const SEQ = ['Item search(Key v)  // ungeordnetes Feld', '  { for (int i = 0; i < N; i++)', '      if (v == st[i].key()) return st[i];', '    return nullItem;  // alle N angesehen', '  }'];
+const SQO = ['Item search(Key v)  // Prog. 12.5: geordnet', '  { int i;', '    for (i = 0; i < N; i++)', '      if (!(st[i].key() < v)) break;  // ≥ v: stopp', '    if (i < N && v == st[i].key()) return st[i];', '    return nullItem;', '  }'];
+const BIN = ['Item searchR(int l, int r, Key v)  // Prog. 12.7', '  { if (l > r) return nullItem;', '    int m = (l+r)/2;', '    if (v == st[m].key()) return st[m];', '    if (l == r) return nullItem;', '    if (v < st[m].key())', '         return searchR(l, m-1, v);', '    else return searchR(m+1, r, v);', '  }'];
+const INT = ['Item search(Key v)  // Interpolationssuche', '  { int l = 0, r = N-1;', '    while (l <= r && v >= st[l].key() && v <= st[r].key())', '      { int m = (st[r].key() == st[l].key()) ? l :', '          l + (v - st[l].key())*(r-l) / (st[r].key() - st[l].key());', '        if (v == st[m].key()) return st[m];', '        if (v < st[m].key()) r = m-1; else l = m+1;', '      }', '    return nullItem;', '  }'];
+const arr = {
+  icon:'🔎', name:'Suchen im Feld', book:'§12.3–12.4 · Prog. 12.5/12.7',
+  intro:'Dieselben Schlüssel, vier Suchverfahren. Gezählt werden die <b>Sonden</b>: wie oft ein Feldelement angesehen wird. Für die Interpolationssuche braucht man Zahlen (Buchstaben zählen als A = 1 … Z = 26).',
+  vars:[{k:'seq', name:'sequentiell, ungeordnet', book:'§12.3'}, {k:'seqo', name:'sequentiell, geordnet', book:'Prog. 12.5'}, {k:'bin', name:'binär', book:'Prog. 12.7'}, {k:'ip', name:'Interpolation', book:'§12.4'}],
+  ins:[{k:'A', label:'Schlüssel', def:'5 9 12 17 21 26 30 34 41 47 52 58 63 69 74 80', w:26}, {k:'q', label:'suche', def:'47 3', w:7}],
+  presets:[{name:'gleichmäßig 16', set:{A:'5 9 12 17 21 26 30 34 41 47 52 58 63 69 74 80', q:'47 3'}, hint:'Gleichmäßig verteilte Zahlen: Die Interpolationssuche trifft fast sofort.'}, {name:'Buch ASERCH…', set:{A:BOOK, q:'M Z'}, hint:'Buchstaben-Beispiel aus Kapitel 12.'},
+    {name:'ungleich verteilt', set:{A:'1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 1000', q:'14'}, hint:'Ein Ausreißer verdirbt die Schätzung der Interpolationssuche: sie wird fast sequentiell.'}, {name:'32 Schlüssel', set:{A:Array.from({length: 32}, (_, k) => 3 * k + 2).join(' '), q:'71 1 95'}, hint:'Binär: höchstens ⌊lg 32⌋ + 1 = 6 Sonden.'}],
+  roles:{st:'mem', v:'par', i:'idx', l:'par', r:'par', m:'idx', N:'par'},
+  code: v => ({seq: SEQ, seqo: SQO, bin: BIN, ip: INT})[v],
+  run(rec, inp, v){
+    const raw = uniq(S4.keys(inp.A, 32)), a = v === 'seq' ? raw : srt(raw), qs = S4.keys(inp.q, 4), N = a.length, S = rec.S; S.a = a; S.mk = {}; S.res = [];
+    const val = x => S4.code5(x);
+    rec.step(1, (v === 'seq' ? 'Feld in Eingabereihenfolge' : 'Feld sortiert') + ', N = ' + N + '.', v === 'seq' ? 'Keine Ordnung: man muss im schlimmsten Fall alles ansehen.' : 'Sortiert: man kann früher aufhören oder halbieren.');
+    for(const q of qs){ let found = -1, probes = 0; const pr = k => { probes++; rec.add('probe'); S.mk = {[k]: 'chg'}; };
+      if(v === 'seq'){ for(let i = 0; i < N; i++){ pr(i); rec.step(3, 'search(' + q + '): st[' + i + '] = ' + a[i] + (a[i] === q ? ' Treffer!' : '') + '.'); if(a[i] === q){ found = i; break; } } }
+      else if(v === 'seqo'){ let i = 0; for(; i < N; i++){ pr(i); const stop = !(a[i] < q); rec.step(4, 'search(' + q + '): st[' + i + '] = ' + a[i] + (stop ? ' ≥ ' + q + ': stopp.' : ' < ' + q + ': weiter.')); if(stop) break; } if(i < N && a[i] === q) found = i; }
+      else if(v === 'bin'){ let l = 0, r = N - 1; while(l <= r){ const m = (l + r) >> 1; pr(m); S.rng = [l, r];
+          const t = a[m] === q ? 'Treffer!' : q < a[m] ? q + ' < ' + a[m] + ': links weiter.' : q + ' > ' + a[m] + ': rechts weiter.'; rec.step(a[m] === q ? 4 : q < a[m] ? 7 : 8, 'search(' + q + '): [' + l + '..' + r + '], m = ' + m + ', st[m] = ' + a[m] + ': ' + t, 'Der Suchbereich hat ' + (r - l + 1) + ' Elemente; nach dem Vergleich höchstens ' + Math.floor((r - l + 1) / 2) + '.');
+          if(a[m] === q){ found = m; break; } if(l === r) break; if(q < a[m]) r = m - 1; else l = m + 1; } S.rng = null; }
+      else { let l = 0, r = N - 1; while(l <= r && val(q) >= val(a[l]) && val(q) <= val(a[r])){ const m = val(a[r]) === val(a[l]) ? l : l + Math.floor((val(q) - val(a[l])) * (r - l) / (val(a[r]) - val(a[l]))); pr(m); S.rng = [l, r];
+          rec.step(6, 'search(' + q + '): geschätzt m = ' + m + ', st[m] = ' + a[m] + (a[m] === q ? ': Treffer!' : '.'), 'Die Schätzung nimmt an, dass die Schlüssel gleichmäßig verteilt sind.'); if(a[m] === q){ found = m; break; } if(q < a[m]) r = m - 1; else l = m + 1; } S.rng = null; }
+      S.res.push(q + ': ' + (found >= 0 ? 'gefunden an ' + found : 'nicht da') + ' (' + probes + ' Sonden)'); S.mk = found >= 0 ? {[found]: 'idx'} : {};
+      rec.c.last = probes; rec.step(v === 'seq' ? 4 : v === 'bin' ? 2 : 9, 'search(' + q + '): ' + (found >= 0 ? 'Treffer' : 'Fehlschlag') + ' nach ' + probes + ' Sonden.', '\\(\\Res{' + probes + '\\text{ Sonden}}\\) für ' + q + '.'); }
+  },
+  view(S){ const mk = Object.assign({}, S.mk); if(S.rng) S.a.forEach((_, k) => { if((k < S.rng[0] || k > S.rng[1]) && !mk[k]) mk[k] = 'off'; }); return LB.labCells(S.a, mk, {lab: 'st:'}) + (S.res.length ? '<div class="lab-out">' + S.res.join('<br>') + '</div>' : ''); },
+  math(c, inp, v, done){ const N = uniq(S4.keys(inp.A, 32)).length;
+    return LB.labVs('Sonden gesamt', c.probe || 0, done ? c.probe || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{seq. Treffer} &: \\tfrac{N+1}{2} = ' + S4.fmt((N + 1) / 2) + ' && \\text{Eig. 12.2} \\\\ \\text{seq. Fehlschlag} &: N = ' + N + ' && \\text{ungeordnet} \\\\ \\text{geordnet} &: \\approx \\tfrac N2 && \\text{auch Fehlschlag} \\\\ \\text{binär} &: \\le \\lfloor\\lg N\\rfloor + 1 = ' + (N ? Math.floor(lg(N)) + 1 : 0) + ' && \\text{Eig. 12.5} \\\\ \\text{Interpolation} &: \\approx \\lg\\lg N + 1 = ' + S4.fmt(N > 1 ? lg(Math.max(1, lg(N))) + 1 : 1) + ' && \\text{gleichmäßig} \\end{aligned} \\]</div>'; },
+  cmp:[['probe', 'Sonden gesamt'], ['last', 'Sonden letzte Suche']],
+  cmpNote: () => 'Binäre Suche braucht ein sortiertes Feld (Einfügen kostet dann N/2 Verschiebungen). Interpolation ist nur bei gleichmäßig verteilten Zahlen schneller, sonst kann sie auf N fallen.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 12.5:}}\\) Binäre Suche braucht nie mehr als \\(\\lfloor\\lg N\\rfloor + 1\\) Vergleiche, für Treffer wie Fehlschlag.</p><p><b>Aussage:</b> Ein sortiertes Feld ist eine gute Symboltabelle, wenn fast nur gesucht und selten eingefügt wird. Sonst braucht man einen Baum.</p>'; }
+};
+
+/* ---------------- 2 · BST: Einfügen am Blatt oder an der Wurzel ---------------- */
+const BSTI = ['void insertR(link& h, Item x)  // Prog. 12.8', '  { if (h == 0) { h = new node(x); return; }', '    if (x.key() < h->item.key())', '         insertR(h->l, x);', '    else insertR(h->r, x);', '  }', 'Item searchR(link h, Key v)', '  { if (h == 0) return nullItem;', '    Key t = h->item.key();', '    if (v == t) return h->item;', '    if (v < t) return searchR(h->l, v);', '    else return searchR(h->r, v);', '  }'];
+const ROOTI = ['void rotR(link& h)', '  { link x = h->l; h->l = x->r; x->r = h; h = x; }', 'void rotL(link& h)', '  { link x = h->r; h->r = x->l; x->l = h; h = x; }', 'void insertT(link& h, Item x)  // Prog. 12.13', '  { if (h == 0) { h = new node(x); return; }', '    if (x.key() < h->item.key())', '         { insertT(h->l, x); rotR(h); }  // neu nach oben', '    else { insertT(h->r, x); rotL(h); }', '  }'];
+const bst = {
+  icon:'🌳', name:'BST einfügen und suchen', book:'§12.5–12.8 · Prog. 12.8/12.13',
+  intro:'Einfügen am <b>Blatt</b>: suchen bis zum leeren Link und dort anhängen. Einfügen an der <b>Wurzel</b>: erst unten anhängen, dann auf dem Rückweg mit Rotationen nach oben holen. Der neue Schlüssel ist danach die Wurzel, gut wenn kürzlich Eingefügtes oft gesucht wird.',
+  vars:[{k:'leaf', name:'am Blatt', book:'Prog. 12.8'}, {k:'root', name:'an der Wurzel', book:'Prog. 12.13'}],
+  ins:[{k:'A', label:'einfügen', def:BOOK, w:24}, {k:'q', label:'suche', def:'M Z', w:6}],
+  presets:[{name:'Buch ASERCH…', set:{A:BOOK, q:'M Z'}, hint:'Fig. 12.4 / 12.7 (am Blatt) und Fig. 12.14 (an der Wurzel).'}, {name:'sortiert', set:{A:'A B C D E F G H I J K L', q:'L'}, hint:'Schlimmster Fall: der Baum wird eine Liste, Höhe N − 1.'}, {name:'zufällig 15', set:{A:'50 25 75 12 37 62 87 6 18 31 43 56 68 81 93', q:'43 44'}, hint:'Ideale Reihenfolge: ein vollständiger Baum der Höhe 3.'}, {name:'Zickzack', set:{A:'1 12 2 11 3 10 4 9 5 8 6 7', q:'7'}, hint:'Auch abwechselnd groß und klein ergibt einen entarteten Baum.'}],
+  roles:{h:'mem', x:'par', v:'par', t:'idx', head:'mem'},
+  code: v => v === 'leaf' ? BSTI : ROOTI.concat(BSTI.slice(6)),
+  run(rec, inp, v){
+    const ks = S4.keys(inp.A, 20), qs = S4.keys(inp.q, 3), S = rec.S; S.t = null; S.mk = {}; S.path = [];
+    const code = this.code(v), LS = code.indexOf('Item searchR(link h, Key v)') + 1;
+    rec.step(1, 'Leerer Baum.', 'N = 0.');
+    const insL = (h, x) => { if(!h) return S4.node(x); rec.add('cmp'); S.path.push(h.k); if(x < h.k) h.l = insL(h.l, x); else h.r = insL(h.r, x); return S4.upd(h); };
+    const insT = (h, x) => { if(!h) return S4.node(x); rec.add('cmp'); S.path.push(h.k); if(x < h.k){ h.l = insT(h.l, x); rec.add('rot'); return S4.rotR(h); } h.r = insT(h.r, x); rec.add('rot'); return S4.rotL(h); };
+    for(const x of ks){ S.path = []; const r0 = rec.c.rot || 0; S.t = (v === 'leaf' ? insL : insT)(S.t, x); S.mk = {[x]: 'chg'};
+      rec.step(v === 'leaf' ? 2 : 8, 'insert(' + x + '): Weg ' + (S.path.length ? S.path.join(' → ') : '(leer)') + (v === 'root' ? ', dann ' + ((rec.c.rot || 0) - r0) + ' Rotationen nach oben' : '') + '.', 'N = ' + S4.size(S.t) + ', Höhe ' + S4.height(S.t) + ', interne Pfadlänge ' + S4.ipl(S.t) + '.'); }
+    for(const q of qs){ let h = S.t, n = 0; S.path = [];
+      while(h){ n++; rec.add('scmp'); S.path.push(h.k); S.mk = {[h.k]: h.k === q ? 'idx' : 'chg'}; if(h.k === q) break; h = q < h.k ? h.l : h.r; }
+      rec.step(LS + (h ? 3 : 1), 'search(' + q + '): ' + S.path.join(' → ') + (h ? ' Treffer' : ' → leer: Fehlschlag') + ' (' + n + ' Vergleiche).', '\\(\\Res{' + n + '\\text{ Vergleiche}}\\); Tiefe ' + (h ? n - 1 : '–') + '.'); }
+    rec.c.height = S4.height(S.t); rec.c.ipl = S4.ipl(S.t);
+  },
+  view(S){ return S4.draw(S.t, {mark: S.mk, title: 'Baum (klein = Teilbaumgröße)', info: t => t.n}); },
+  math(c, inp, v, done, S){ const N = uniq(S4.keys(inp.A, 20)).length, ipl = S && S.t ? S4.ipl(S.t) : 0, h = S && S.t ? S4.height(S.t) : -1;
+    return LB.labVs('Vergleiche beim Einfügen', c.cmp || 0, done ? c.cmp || 0 : '…', ' ') + LB.labVs('Höhe', h, done ? h : '…', ' ') + LB.labVs('interne Pfadlänge', ipl, done ? ipl : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\bar C_{\\text{Treffer}} &= 1 + \\tfrac{\\text{IPL}}{N} = ' + S4.fmt(N ? 1 + ipl / N : 0) + ' && \\text{dieser Baum} \\\\ &\\approx 2\\ln N = ' + S4.fmt(N ? 2 * ln(N) : 0) + ' && \\text{zufällige Reihenfolge, Eig. 12.6} \\\\ C_{\\text{worst}} &= N = ' + N + ' && \\text{sortierte Eingabe, Eig. 12.8} \\end{aligned} \\]</div>'; },
+  cmp:[['cmp', 'Vergleiche'], ['rot', 'Rotationen'], ['height', 'Höhe'], ['ipl', 'IPL'], ['scmp', 'Such-Vgl.']],
+  cmpNote: () => 'Beide Varianten enthalten danach dieselben Schlüssel in derselben Inorder-Reihenfolge, nur die Form ist anders. An der Wurzel kostet jedes Einfügen zusätzlich so viele Rotationen, wie der Weg lang ist.',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. 12.2:}}\\) Im BST sind alle Schlüssel im linken Teilbaum kleiner, alle im rechten größer oder gleich.</p><p>\\(\\Rule{\\text{Eigenschaft 12.6:}}\\) Bei zufälliger Reihenfolge kostet eine Suche im Mittel \\(\\approx 2\\ln N \\approx 1{,}39\\lg N\\) Vergleiche. \\(\\Rule{\\text{12.8:}}\\) Im schlechtesten Fall N.</p><p><b>Aussage:</b> Die Form hängt nur von der Einfügereihenfolge ab. Genau dagegen helfen die balancierten Bäume aus Kapitel 13.</p>'; }
+};
+
+/* ---------------- 3 · BST: Löschen ---------------- */
+const DEL = v => v === 'buch' ? ['link joinLR(link a, link b)  // Prog. 12.16', '  { if (b == 0) return a;', '    partR(b, 0);  // kleinstes von b an die Wurzel', '    b->l = a;', '    return b; }', 'void removeR(link& h, Key v)', '  { if (h == 0) return;', '    Key w = h->item.key();', '    if (v < w) removeR(h->l, v);', '    if (w < v) removeR(h->r, v);', '    if (v == w)', '      { link t = h;', '        h = joinLR(h->l, h->r); delete t; }', '  }']
+  : ['void remove(link& t, int k)  // Vorlesung', '  { if (t == 0) return;', '    if (k < t->key) remove(t->l, k);', '    else if (k > t->key) remove(t->r, k);', '    else if (t->l == 0 || t->r == 0)  // 0 oder 1 Kind', '      { t = (t->l != 0) ? t->l : t->r; }', '    else  // 2 Kinder',
+      v === 'succ' ? '      { t->key = minKey(t->r);  // Nachfolger' : '      { t->key = maxKey(t->l);  // Vorgänger', v === 'succ' ? '        remove(t->r, t->key); }' : '        remove(t->l, t->key); }', '  }'];
+const del = {
+  icon:'✂', name:'BST löschen', book:'§12.9 · Prog. 12.16 · Vorlesung',
+  intro:'Blatt oder ein Kind: einfach aushängen. Zwei Kinder: Die Vorlesung ersetzt den Schlüssel durch den <b>symmetrischen Nachfolger</b> (kleinster rechts) oder <b>Vorgänger</b> (größter links). Das Buch verbindet die beiden Teilbäume mit <b>join</b>: das Kleinste rechts wird per Rotationen zur neuen Wurzel.',
+  vars:[{k:'succ', name:'Nachfolger', book:'Vorlesung'}, {k:'pred', name:'Vorgänger', book:'Vorlesung'}, {k:'buch', name:'join (Buch)', book:'Prog. 12.16'}],
+  ins:[{k:'A', label:'Baum aus', def:'50 25 75 10 35 60 90 5 30 40 65', w:24}, {k:'d', label:'löschen', def:'25 75 50', w:8}],
+  presets:[{name:'zwei Kinder', set:{A:'50 25 75 10 35 60 90 5 30 40 65', d:'25 75 50'}, hint:'Alle drei gelöschten Knoten haben zwei Kinder: hier unterscheiden sich die Varianten.'}, {name:'Blatt und ein Kind', set:{A:'30 20 40 10 25 50', d:'25 40'}, hint:'Blatt (25) und ein Kind (40): alle Varianten gleich.'}, {name:'Buch ASERCH…', set:{A:BOOK, d:'E'}, hint:'Fig. 12.18: E hat zwei Kinder.'}, {name:'Wurzel mehrfach', set:{A:'8 4 12 2 6 10 14 1 3 5 7 9 11 13 15', d:'8 9 10'}, hint:'Immer wieder die Wurzel löschen.'}],
+  roles:{t:'mem', h:'mem', k:'par', v:'par', a:'mem', b:'mem'},
+  code: v => DEL(v),
+  run(rec, inp, v){
+    const ks = S4.keys(inp.A, 20), ds = S4.keys(inp.d, 6), S = rec.S; let t = null;
+    const ins = (h, x) => { if(!h) return S4.node(x); if(x < h.k) h.l = ins(h.l, x); else if(x > h.k) h.r = ins(h.r, x); return S4.upd(h); };
+    for(const x of ks) t = ins(t, x); S.t = t; S.mk = {};
+    rec.step(1, 'Ausgangsbaum aus ' + ks.length + ' Schlüsseln.', 'Höhe ' + S4.height(t) + ', IPL ' + S4.ipl(t) + '.');
+    const partR = (h, k) => { const tt = S4.N(h.l); if(tt > k){ h.l = partR(h.l, k); rec.add('rot'); h = S4.rotR(h); } if(tt < k){ h.r = partR(h.r, k - tt - 1); rec.add('rot'); h = S4.rotL(h); } return h; };
+    let kind = '';
+    const rm = (h, k) => { if(!h){ kind = 'nicht gefunden'; return null; } rec.add('cmp');
+      if(k < h.k) h.l = rm(h.l, k); else if(k > h.k) h.r = rm(h.r, k);
+      else if(v === 'buch'){ kind = !h.l && !h.r ? 'Blatt' : !h.l || !h.r ? 'ein Kind' : 'zwei Kinder: join, ' + (function(){ let m = h.r; while(m.l) m = m.l; return m.k; })() + ' wird Wurzel des Teilbaums';
+        const b = h.r; if(!b) return h.l; const nb = partR(b, 0); nb.l = h.l; return S4.upd(nb); }
+      else if(!h.l || !h.r){ kind = kind || (!h.l && !h.r ? 'Blatt' : 'ein Kind'); return h.l || h.r; }
+      else if(v === 'succ'){ let m = h.r; while(m.l) m = m.l; kind = 'zwei Kinder: Nachfolger ' + m.k + ' rückt nach'; h.k = m.k; h.r = rm(h.r, m.k); }
+      else { let m = h.l; while(m.r) m = m.r; kind = 'zwei Kinder: Vorgänger ' + m.k + ' rückt nach'; h.k = m.k; h.l = rm(h.l, m.k); }
+      return S4.upd(h); };
+    for(const d of ds){ kind = ''; const before = S4.size(t); t = rm(t, d); S.t = t; S.mk = {}; if(S4.size(t) < before) rec.add('del');
+      rec.step(v === 'buch' ? 13 : kind.indexOf('zwei') === 0 ? 8 : 6, 'remove(' + d + '): ' + (kind.indexOf('zwei') === 0 ? kind.slice(0, 11) + ' – ' + kind.slice(13) : kind) + '.', 'Inorder bleibt sortiert: ' + S4.ino(t).join(' ') + '. Höhe ' + S4.height(t) + '.'); }
+    rec.c.height = S4.height(t); rec.c.ipl = S4.ipl(t);
+  },
+  view(S){ return S4.draw(S.t, {title: 'Baum nach der Operation', info: t => t.n}) + '<div class="small">Preorder: <span class="mono">' + S4.pre(S.t).join(' ') + '</span></div>'; },
+  math(c, inp, v, done, S){ const h = S && S.t ? S4.height(S.t) : -1, ipl = S && S.t ? S4.ipl(S.t) : 0;
+    return LB.labVs('gelöscht', c.del || 0, done ? c.del || 0 : '…', ' ') + LB.labVs('Höhe danach', h, done ? h : '…', ' ') + LB.labVs('IPL danach', ipl, done ? ipl : '…', ' ') + (v === 'buch' ? LB.labVs('Rotationen (join)', c.rot || 0, done ? c.rot || 0 : '…', ' ') : '') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Blatt} &: \\text{Link} = 0 && \\text{einfach weg} \\\\ \\text{1 Kind} &: \\text{Kind rückt hoch} && \\text{Inorder bleibt} \\\\ \\text{2 Kinder} &: \\text{min rechts / max links} && \\text{hat höchstens 1 Kind} \\end{aligned} \\]</div>'; },
+  cmp:[['del', 'gelöscht'], ['cmp', 'Vergleiche'], ['rot', 'Rotationen'], ['height', 'Höhe'], ['ipl', 'IPL']],
+  cmpNote: () => 'Alle drei Varianten liefern dieselbe Inorder-Folge; nur die Form unterscheidet sich. Immer nur den Nachfolger zu nehmen macht den Baum auf Dauer linkslastig; abwechseln hilft.',
+  facts(){ return '<p>\\(\\Rule{\\text{Satz:}}\\) Der symmetrische Nachfolger (kleinster Schlüssel im rechten Teilbaum) hat kein linkes Kind, lässt sich also leicht aushängen.</p><p><b>Aussage:</b> In der Klausur gilt die Konvention der Aufgabe: Nachfolger, sofern nicht „Vorgänger“ verlangt ist.</p>'; }
+};
+
+LB.labCh12 = [arr, bst, del];
+})();
+
+/* ===== LAB Kapitel 13: balancierte Bäume ===== */
+(function(){
+'use strict';
+const LB = window.LB, S4 = LB.S4, C = LB.LC;
+const lg = Math.log2;
+const BOOK = 'A S E R C H I N G X M P L';
+/* Übungsblätter AVL (Vorlesung): Ausgangsbaum g, Operationen o (negativ = löschen), Vorgänger p, Musterlösung e = {root, pre, h} */
+const BL = {"ins":[{"nr":1,"t":"Einfügen ohne Rotation","g":[10,5,15],"o":[3],"p":false,"both":false,"e":{"root":10}},{"nr":2,"t":"Einfache Rotation (RR-Fall)","g":[10,20],"o":[30],"p":false,"both":false,"e":{"root":20}},{"nr":3,"t":"Einfache Rotation (LL-Fall)","g":[30,20],"o":[10],"p":false,"both":false,"e":{"root":20}},{"nr":4,"t":"Doppelrotation (LR-Fall)","g":[30,10],"o":[20],"p":false,"both":false,"e":{"root":20}},{"nr":5,"t":"Doppelrotation (RL-Fall)","g":[10,30],"o":[20],"p":false,"both":false,"e":{"root":20}},{"nr":6,"t":"RL-Rotation nicht an der Wurzel","g":[20,10,40,5,30,50,35],"o":[33],"p":false,"both":false,"e":{"root":20}},{"nr":7,"t":"LR-Rotation an der Wurzel","g":[30,10,40,5,20],"o":[15],"p":false,"both":false,"e":{"root":20}},{"nr":8,"t":"Klausurniveau (WS25 Moodle)","g":[12,6,16,2,8,13,4],"o":[15],"p":false,"both":false,"e":{"root":12}},{"nr":9,"t":"Groÿer Baum mit tiefer Rotation","g":[40,20,60,10,30,50,70,5,25,45,65,80],"o":[27],"p":false,"both":false,"e":{"root":40}},{"nr":10,"t":"Mehrere Einfügungen mit mehreren Rotationen","g":[],"o":[30,10,40,5,20,15,50,60,70],"p":false,"both":false,"e":{"pre":[20,10,5,15,40,30,60,50,70],"root":20}},{"nr":11,"t":"Aufsteigende Eingabefolge \u0015 Viele Rotationen","g":[],"o":[1,2,3,4,5,6,7],"p":false,"both":false,"e":{"root":4,"h":2}},{"nr":12,"t":"Boss-Level: Maximale Rotationsoperationen (nur Doppelrotationen)","g":[],"o":[30,45,33,12,21,24,6,9,39],"p":false,"both":false,"e":{"pre":[30,21,9,6,12,24,39,33,45],"root":30}},{"nr":13,"t":"Alle 4 Rotationstypen mit 3 verschiedenen Wurzeln","g":[],"o":[30,12,24,45,33,39,9,6,21],"p":false,"both":false,"e":{"pre":[33,12,9,6,24,21,30,45,39],"root":33}},{"nr":14,"t":"Variante: Gleiche Zahlen, andere Reihenfolge","g":[],"o":[30,45,33,21,6,24,9,12,39],"p":false,"both":false,"e":{"pre":[30,21,9,6,12,24,39,33,45],"root":30}},{"nr":15,"t":"Kompakte Aufgabe: 3 Rotationstypen, 2 Wurzel-Wechsel","g":[],"o":[30,45,33,12,24,21,9,6,39],"p":false,"both":false,"e":{"pre":[24,12,9,6,21,33,30,45,39],"root":24}},{"nr":16,"t":"Ultimative Herausforderung: Alle 4 Rotationstypen, 3 Wurzel-Rotationen, Wurzel kehrt zurück!","g":[],"o":[5,11,7,8,9,10,6,2,3,4,1],"p":false,"both":false,"e":{"pre":[5,3,2,1,4,9,7,6,8,11,10],"root":5}},{"nr":17,"t":"Extreme Herausforderung: 15 Zahlen, 11 Rotationen, 36 Knoten bewegt!","g":[],"o":[1,14,12,4,3,11,5,2,8,10,6,15,13,7,9],"p":false,"both":false,"e":{"pre":[8,4,2,1,3,6,5,7,12,10,9,11,14,13,15],"root":8}}],"del":[{"nr":1,"t":"Einfaches Blatt löschen","g":[30,20,40,10,25],"o":[-25],"p":false,"both":false,"e":{"pre":[30,20,10,40],"root":30}},{"nr":2,"t":"Blatt löschen im rechten Teilbaum","g":[30,20,40,35,50],"o":[-35],"p":false,"both":false,"e":{"pre":[30,20,40,50]}},{"nr":3,"t":"Knoten mit einem Kind löschen","g":[30,20,40,10,50],"o":[-20],"p":false,"both":false,"e":{"pre":[30,10,40,50],"root":30}},{"nr":4,"t":"Knoten mit zwei Kindern löschen (symmetrischer Nachfolger)","g":[50,25,75,10,35],"o":[-25],"p":false,"both":false,"e":{"pre":[50,35,10,75],"root":50}},{"nr":5,"t":"Symmetrischer Nachfolger tiefer im Baum","g":[50,25,75,10,35,60,90,30,40],"o":[-25],"p":false,"both":false,"e":{"pre":[50,30,10,35,40,75,60,90]}},{"nr":6,"t":"Wurzel löschen","g":[50,25,75,10,35,60],"o":[-50],"p":false,"both":false,"e":{"pre":[60,25,10,35,75],"root":60}},{"nr":7,"t":"Löschen verursacht Rotation","g":[30,20,40,10,25,50,5],"o":[-40],"p":false,"both":false,"e":{"pre":[20,10,5,30,25,50],"root":20}},{"nr":8,"t":"Löschen verursacht RR-Rotation","g":[30,10,50,5,40,60,70],"o":[-5],"p":false,"both":false,"e":{"pre":[50,30,10,40,60,70],"root":50}},{"nr":9,"t":"Löschen verursacht LR-Doppelrotation","g":[40,20,50,10,30,60,35],"o":[-60],"p":false,"both":false,"e":{"pre":[30,20,10,40,35,50],"root":30}},{"nr":10,"t":"Löschen verursacht RL-Doppelrotation","g":[30,10,50,5,40,60,35],"o":[-5],"p":false,"both":false,"e":{"pre":[40,30,10,35,50,60],"root":40}},{"nr":11,"t":"Mehrere Löschungen hintereinander","g":[50,25,75,10,35,60,90,5,30,40,65],"o":[-75,-60],"p":false,"both":false,"e":{"pre":[50,25,10,5,35,30,40,65,90],"root":50}},{"nr":12,"t":"Wurzel-Löschung mit Rotation","g":[8,4,12,2,6,10,14,1,3,5,7,9,11,13,15],"o":[-8,-9],"p":false,"both":false,"e":{"pre":[10,4,2,1,3,6,5,7,12,11,14,13,15],"root":10}},{"nr":13,"t":"Komplexe Lösch-Sequenz mit Rotationen","g":[8,4,12,2,6,10,14,1,3,5,7,9,11,13,15],"o":[-8,-14,-9,-10],"p":false,"both":false,"e":{"pre":[11,4,2,1,3,6,5,7,13,12,15],"root":11}},{"nr":14,"t":"Extreme Lösch-Sequenz mit mehreren Rotationen","g":[8,4,12,2,6,10,14,1,3,5,7,9,11,13,15],"o":[-9,-15,-8,-10,-11,-12],"p":false,"both":false,"e":{"pre":[4,2,1,3,13,6,5,7,14],"root":4}},{"nr":15,"t":"Ultimative Herausforderung: Alle Lösch-Typen und Rotationen","g":[8,4,12,2,6,10,14,1,3,5,7,9,11,13,15],"o":[-7,-4,-8,-9,-10,-11,-12,-6],"p":false,"both":false,"e":{"pre":[13,2,1,5,3,14,15],"root":13}},{"nr":16,"t":"Einfaches Löschen mit symmetrischem Vorgänger","g":[50,25,75,10,35],"o":[-25],"p":true,"both":false,"e":{"pre":[50,10,35,75],"root":50}},{"nr":17,"t":"Vorgänger hat selbst ein linkes Kind","g":[50,25,75,10,35,60,90,5,30],"o":[-25],"p":true,"both":false,"e":{"pre":[50,10,5,35,30,75,60,90]}},{"nr":18,"t":"Wurzel löschen mit symmetrischem Vorgänger","g":[50,25,75,10,35,60],"o":[-50],"p":true,"both":false,"e":{"pre":[35,25,10,75,60],"root":35}},{"nr":19,"t":"Löschen mit Vorgänger verursacht Rotation","g":[50,25,75,10,60,90,80],"o":[-50],"p":true,"both":false,"e":{"pre":[75,25,10,60,90,80],"root":75}},{"nr":20,"t":"Vergleich: Nachfolger vs. Vorgänger","g":[50,25,75,10,35,60,90,5,40,65],"o":[-50],"p":false,"both":true,"e":{"pre":[60,25,10,5,35,40,75,65,90],"root":60}},{"nr":21,"t":"Komplexe Lösch-Sequenz mit symmetrischem Vorgänger","g":[8,4,12,2,6,10,14,1,3,5,7,9,11,13,15],"o":[-8,-7,-4],"p":true,"both":false,"e":{"pre":[6,3,2,1,5,12,10,9,11,14,13,15],"root":6}}]};
+
+/* AVL wie Vorlesung: BF = h(rechts) − h(links), leerer Baum h = −1 */
+const bfR = t => S4.height(t.r) - S4.height(t.l);
+const bf = t => S4.H(t.r) - S4.H(t.l);
+function avlOps(rec, S, opt){
+  /* Schnappschuss nur, wenn der Baum gerade konsistent ist (vor einer Rotation) */
+  const reb = (t, line) => { S4.upd(t); const b = bf(t);
+    if(b === -2 || b === 2){ const c = b < 0 ? t.l : t.r, bc = bf(c), kind = b < 0 ? (bc > 0 ? 'LR' : 'LL') : (bc < 0 ? 'RL' : 'RR');
+      if(opt.snap){ S.mk = {[t.k]: 'res', [c.k]: 'chg'}; opt.snap(opt.LD ? line : {LL: 9, LR: 8, RR: 12, RL: 11}[kind], 'Knoten ' + t.k + ' hat BF ' + (b > 0 ? '+' : '') + b + ', Kind ' + c.k + ' BF ' + (bc > 0 ? '+' : '') + bc + ': ' + kind + '-Fall.', '\\(\\Rule{\\text{' + (kind === 'LL' || kind === 'RR' ? 'Einfachrotation' : 'Doppelrotation') + '}}\\): ' + (kind === 'LL' ? 'rechts um ' + t.k : kind === 'RR' ? 'links um ' + t.k : kind === 'LR' ? 'erst links um ' + c.k + ', dann rechts um ' + t.k : 'erst rechts um ' + c.k + ', dann links um ' + t.k) + '.'); }
+      rec.add('rot', kind.length === 2 && kind[0] === kind[1] ? 1 : 2); opt.rots.push(kind);
+      if(b < 0){ if(bc > 0) t.l = S4.rotL(c); return S4.rotR(t); } if(bc < 0) t.r = S4.rotR(c); return S4.rotL(t); }
+    return t; };
+  const ins = (t, k) => { if(!t){ opt.path.push('neu'); return S4.node(k); } rec.add('cmp'); opt.path.push(t.k);
+    if(k < t.k) t.l = ins(t.l, k); else if(k > t.k) t.r = ins(t.r, k); else { opt.dup = true; return t; } return reb(t, opt.LI); };
+  const rm = (t, k) => { if(!t){ opt.kind = 'nicht vorhanden'; return null; } rec.add('cmp'); if(!opt.found) opt.path.push(t.k);
+    if(k < t.k) t.l = rm(t.l, k); else if(k > t.k) t.r = rm(t.r, k);
+    else if(!t.l || !t.r){ opt.found = true; opt.kind = opt.kind || (!t.l && !t.r ? 'Blatt' : 'ein Kind'); t = t.l || t.r; }
+    else { opt.found = true; let m;
+      if(opt.pred){ m = t.l; while(m.r) m = m.r; opt.kind = 'zwei Kinder → Vorgänger ' + m.k; t.k = m.k; t.l = rm(t.l, m.k); }
+      else { m = t.r; while(m.l) m = m.l; opt.kind = 'zwei Kinder → Nachfolger ' + m.k; t.k = m.k; t.r = rm(t.r, m.k); } }
+    return t ? reb(t, opt.LD) : t; };
+  return {ins, rm};
+}
+const bstOf = keys => { let t = null; const ins = (h, k) => { if(!h) return S4.node(k); if(k < h.k) h.l = ins(h.l, k); else if(k > h.k) h.r = ins(h.r, k); return h; }; keys.forEach(k => { t = ins(t, k); }); S4.fix(t); return t; };
+const AVC = ['int height(link t)', '  { return (t == 0) ? -1 : t->h; }', 'int bf(link t)  // Balancefaktor', '  { return height(t->r) - height(t->l); }', 'void rebalance(link& t)', '  { update(t);', '    if (bf(t) == -2)  // links zu hoch', '      { if (bf(t->l) > 0) rotL(t->l);  // LR', '        rotR(t); }  // LL', '    else if (bf(t) == +2)  // rechts zu hoch', '      { if (bf(t->r) < 0) rotR(t->r);  // RL', '        rotL(t); }  // RR', '  }'];
+const AVI = AVC.concat(['void insert(link& t, int k)', '  { if (t == 0) { t = new node(k); return; }', '    if (k < t->key) insert(t->l, k);', '    else if (k > t->key) insert(t->r, k);', '    else return;', '    rebalance(t);  // auf dem Rückweg', '  }']);
+const AVD = p => AVC.concat(['void remove(link& t, int k)', '  { if (t == 0) return;', '    if (k < t->key) remove(t->l, k);', '    else if (k > t->key) remove(t->r, k);', '    else if (t->l == 0 || t->r == 0)', '      t = (t->l != 0) ? t->l : t->r;',
+  p ? '    else { t->key = maxKey(t->l);  // Vorgänger' : '    else { t->key = minKey(t->r);  // Nachfolger', p ? '           remove(t->l, t->key); }' : '           remove(t->r, t->key); }', '    if (t != 0) rebalance(t);', '  }']);
+const bfInfo = t => { const b = bfR(t); return (b > 0 ? '+' : '') + b; };
+const bfFill = t => { const b = Math.abs(bfR(t)); return b >= 2 ? C.res : b === 1 ? C.chg : null; };
+const avlView = (S, title) => S4.draw(S.t, {mark: S.mk, info: bfInfo, fill: bfFill, title: title || 'AVL-Baum (klein = Balancefaktor, orange ±1, rot ±2)'}) + '<div class="small">Preorder: <span class="mono">' + S4.pre(S.t).join(' ') + '</span></div>';
+const avlMath = (c, done, S, e) => { const t = S && S.t, N = t ? S4.size(t) : 0, h = t ? S4.height(t) : -1;
+  let s = '';
+  if(e && e.root !== undefined) s += LB.labVs('Wurzel = Musterlösung', t ? t.k : '–', done ? e.root : '…', '≠');
+  if(e && e.pre) s += LB.labVs('Preorder = Musterlösung', t ? (S4.pre(t).join(' ') === e.pre.join(' ') ? 'ja' : 'nein') : '…', 'ja');
+  if(e && e.h !== undefined) s += LB.labVs('Höhe = Musterlösung', h, done ? e.h : '…', '≠');
+  s += LB.labVs('Rotationen', c.rot || 0, done ? c.rot || 0 : '…', ' ') + LB.labVs('Höhe', h, done ? h : '…', ' ');
+  const Nh = []; let a = 1, b = 2; Nh.push(1, 2); for(let k = 2; k <= 8; k++){ const n = Nh[k - 1] + Nh[k - 2] + 1; Nh.push(n); }
+  return s + '<div class="step">\\[ \\begin{aligned} h &\\le 1{,}44\\lg(N+2) = ' + S4.fmt(N ? 1.44 * lg(N + 2) : 0) + ' && \\text{Satz (AVL)} \\\\ N_{\\min}(h) &= N_{\\min}(h-1) + N_{\\min}(h-2) + 1 && \\text{Fibonacci-Bäume} \\\\ N_{\\min}(' + Math.max(h, 0) + ') &= ' + (Nh[Math.max(h, 0)] || '–') + ' \\le N = ' + N + ' && \\text{dieser Baum} \\end{aligned} \\]</div>'; };
+
+/* ---------------- 1 · AVL einfügen ---------------- */
+const blattE = (list, k) => list.find(b => b.g.join(' ') === S4.keys(k.G || '', 24).join(' ') && b.o.map(Math.abs).join(' ') === S4.keys(k.A || '', 24).join(' '));
+const avlIns = {
+  icon:'⚖', name:'AVL einfügen', book:'Vorlesung · Übungsblatt AVL',
+  intro:'Einfügen wie im BST, dann auf dem Rückweg in jedem Knoten den <b>Balancefaktor</b> BF = h(rechts) − h(links) prüfen. Bei ±2 entscheidet das Kind: gleiches Vorzeichen (oder 0) ⇒ Einfachrotation, anderes ⇒ Doppelrotation. A1–A17 sind die Aufgaben des Übungsblatts.',
+  vars:[{k:'avl', name:'AVL', book:'Vorlesung'}, {k:'bst', name:'ohne Balancieren', book:'BST, Prog. 12.8'}],
+  ins:[{k:'G', label:'Ausgangsbaum', def:'', w:16}, {k:'A', label:'einfügen', def:'30 10 40 5 20 15 50 60 70', w:20}],
+  presets: [],
+  roles:{t:'mem', k:'par', x:'mem'},
+  code: () => AVI,
+  run(rec, inp, v){
+    const S = rec.S, opt = {rots: [], path: [], LI: 19, LD: 0}; S.t = bstOf(S4.keys(inp.G, 24)); S.mk = {};
+    if(v === 'avl') opt.snap = (line, msg, claim) => rec.step(line, msg, claim);
+    const ops = avlOps(rec, S, opt);
+    rec.step(1, S.t ? 'Ausgangsbaum (AVL): ' + S4.pre(S.t).join(' ') : 'Leerer Baum.', 'Alle Balancefaktoren in {−1, 0, +1}.');
+    for(const k of S4.keys(inp.A, 24)){ opt.path = []; opt.dup = false; const r0 = opt.rots.length;
+      if(v === 'avl') S.t = ops.ins(S.t, k); else { const ins = (h) => { if(!h) return S4.node(k); rec.add('cmp'); opt.path.push(h.k); if(k < h.k) h.l = ins(h.l); else if(k > h.k) h.r = ins(h.r); return S4.upd(h); }; S.t = ins(S.t); }
+      S.mk = {[k]: 'idx'}; const rs = opt.rots.slice(r0);
+      rec.step(v === 'avl' ? 19 : 16, 'insert(' + k + '): Pfad ' + opt.path.join(' → ') + (opt.dup ? ' (schon vorhanden)' : '') + (rs.length ? '; Rotation ' + rs.join(', ') : '; keine Rotation') + '.', 'Höhe ' + S4.height(S.t) + ', Wurzel ' + S.t.k + (v === 'avl' ? '; alle BF wieder in {−1, 0, +1}.' : '.')); }
+    rec.c.height = S4.height(S.t);
+  },
+  view(S){ return avlView(S); },
+  math(c, inp, v, done, S){ const b = v === 'avl' ? blattE(BL.ins, inp) : null; return avlMath(c, done, S, b && b.e); },
+  cmp:[['rot', 'Rotationen'], ['cmp', 'Vergleiche'], ['height', 'Höhe']],
+  cmpNote: () => 'Ohne Balancieren hängt die Höhe von der Reihenfolge ab (sortiert ⇒ N − 1). AVL hält sie bei ≤ 1,44 lg N; dafür kostet jedes Einfügen höchstens eine (Doppel-)Rotation.',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. (AVL):}}\\) In jedem Knoten unterscheiden sich die Höhen der Teilbäume höchstens um 1.</p><p>\\(\\Rule{\\text{Satz:}}\\) Nach dem Einfügen genügt <b>eine</b> Einfach- oder Doppelrotation am tiefsten unbalancierten Knoten; danach ist der ganze Baum wieder AVL.</p><p><b>Klausur:</b> LL/RR = Kind hat dasselbe Vorzeichen, LR/RL = entgegengesetzt. Erst am Kind drehen, dann am kritischen Knoten.</p>'; }
+};
+/* ---------------- 2 · AVL löschen ---------------- */
+const avlDel = {
+  icon:'🗑', name:'AVL löschen', book:'Vorlesung · Übungsblatt AVL löschen',
+  intro:'Löschen wie im BST (zwei Kinder: symmetrischer Nachfolger oder Vorgänger), dann auf dem <b>ganzen</b> Rückweg rebalancieren. Anders als beim Einfügen können mehrere Rotationen nötig sein, und ein Kind mit BF 0 ergibt eine Einfachrotation. L1–L21 sind die Aufgaben des Blatts.',
+  vars:[{k:'succ', name:'Nachfolger', book:'Standard'}, {k:'pred', name:'Vorgänger', book:'wenn verlangt'}],
+  ins:[{k:'G', label:'Ausgangsbaum', def:'50 25 75 10 35 60 90 5 30 40 65', w:22}, {k:'A', label:'löschen', def:'75 60', w:10}],
+  presets: [],
+  roles:{t:'mem', k:'par'},
+  code: v => AVD(v === 'pred'),
+  run(rec, inp, v){
+    const S = rec.S, opt = {rots: [], path: [], LI: 0, LD: 22, pred: v === 'pred'}; S.t = bstOf(S4.keys(inp.G, 24)); S.mk = {};
+    opt.snap = (line, msg, claim) => rec.step(line, msg, claim);
+    const ops = avlOps(rec, S, opt);
+    rec.step(1, 'Ausgangsbaum: ' + S4.pre(S.t).join(' '), 'Höhe ' + S4.height(S.t) + '.');
+    for(const k of S4.keys(inp.A, 12)){ opt.path = []; opt.found = false; opt.kind = ''; const r0 = opt.rots.length; S.t = ops.rm(S.t, k); S.mk = {}; const rs = opt.rots.slice(r0); rec.add('del');
+      rec.step(22, 'remove(' + k + '): ' + (opt.path.length ? 'Pfad ' + opt.path.join(' → ') + ', ' : '') + opt.kind + (rs.length ? '; Rotation ' + rs.join(', ') : '; keine Rotation') + '.', S.t ? 'Höhe ' + S4.height(S.t) + ', Wurzel ' + S.t.k + '.' : 'Baum leer.'); }
+    rec.c.height = S4.height(S.t);
+  },
+  view(S){ return avlView(S); },
+  math(c, inp, v, done, S){ const b = BL.del.find(x => x.g.join(' ') === S4.keys(inp.G, 24).join(' ') && x.o.map(Math.abs).join(' ') === S4.keys(inp.A, 12).join(' ') && (x.both ? v === 'succ' : x.p === (v === 'pred')));
+    return avlMath(c, done, S, b && b.e); },
+  cmp:[['rot', 'Rotationen'], ['cmp', 'Vergleiche'], ['height', 'Höhe']],
+  cmpNote: () => 'Nachfolger und Vorgänger liefern oft verschiedene Bäume. Beides ist korrekt; die Aufgabe sagt, welche Konvention gilt.',
+  facts(){ return '<p>\\(\\Rule{\\text{Satz:}}\\) Löschen kostet \\(O(\\log N)\\), braucht aber im schlechtesten Fall eine Rotation auf <b>jeder</b> Ebene des Rückwegs.</p><p><b>Klausur:</b> Beim Löschen ist ein Kind mit BF 0 möglich: dann Einfachrotation (die Höhe bleibt danach gleich, der Rückweg endet).</p>'; }
+};
+avlIns.presets = BL.ins.map(b => ({name:'A' + b.nr, v:'avl', set:{G: b.g.join(' '), A: b.o.join(' ')}, hint:'Übungsblatt AVL, Aufgabe ' + b.nr + ': ' + b.t + '. Musterlösung: Wurzel ' + b.e.root + (b.e.pre ? ', Preorder ' + b.e.pre.join(' ') : '') + (b.e.h !== undefined ? ', Höhe ' + b.e.h : '') + '.'}));
+avlDel.presets = BL.del.map(b => ({name:'L' + b.nr, v: b.p ? 'pred' : 'succ', set:{G: b.g.join(' '), A: b.o.map(Math.abs).join(' ')}, hint:'Übungsblatt AVL löschen, Aufgabe ' + b.nr + ': ' + b.t + (b.p ? ' (Vorgänger)' : b.both ? ' (Musterlösung mit Nachfolger)' : ' (Nachfolger)') + '. Musterlösung: ' + (b.e.root !== undefined ? 'Wurzel ' + b.e.root + ', ' : '') + 'Preorder ' + (b.e.pre || []).join(' ') + '.'}));
+
+/* ---------------- 3 · Rot-Schwarz-Baum (Prog. 13.6) ---------------- */
+const RBC = ['int red(link x)', '  { if (x == 0) return 0; return x->red; }', 'void RBinsert(link& h, Item x, int sw)', '  { if (h == 0) { h = new node(x); return; }  // neu = rot', '    if (red(h->l) && red(h->r))  // 4-Knoten?', '      { h->red = 1; h->l->red = 0; h->r->red = 0; }  // teilen', '    if (x.key() < h->item.key())', '      {', '        RBinsert(h->l, x, 0);', '        if (red(h) && red(h->l) && sw) rotR(h);', '        if (red(h->l) && red(h->l->l))', '          { rotR(h); h->red = 0; h->r->red = 1; }', '      }', '    else', '      {', '        RBinsert(h->r, x, 1);', '        if (red(h) && red(h->r) && !sw) rotL(h);', '        if (red(h->r) && red(h->r->r))', '          { rotL(h); h->red = 0; h->l->red = 1; }', '      }', '  }', 'void insert(Item x)', '  { RBinsert(head, x, 0); head->red = 0; }  // Wurzel schwarz'];
+const isR = x => !!(x && x.red);
+const rb = {
+  icon:'🔴', name:'Rot-Schwarz-Baum', book:'§13.3–13.4 · Prog. 13.6',
+  intro:'Ein Rot-Schwarz-Baum ist ein 2-3-4-Baum als BST: eine <b>rote</b> Kante verbindet Schlüssel desselben 2-3-4-Knotens. Auf dem Weg nach unten werden 4-Knoten (zwei rote Kinder) durch <b>Umfärben</b> geteilt, auf dem Rückweg zwei rote Kanten hintereinander durch Rotation repariert.',
+  vars:[{k:'rb', name:'Rot-Schwarz', book:'Prog. 13.6'}, {k:'bst', name:'ohne Balancieren', book:'Prog. 12.8'}],
+  ins:[{k:'A', label:'einfügen', def:BOOK, w:24}],
+  presets:[{name:'Buch ASERCH…', set:{A:BOOK}, hint:'Fig. 13.17 / 13.18.'}, {name:'sortiert 15', set:{A:'A B C D E F G H I J K L M N O'}, hint:'Auch sortiert bleibt die Höhe ≤ 2 lg N.'}, {name:'zufällig 15', set:{A:'50 25 75 12 37 62 87 6 18 31 43 56 68 81 93'}, hint:'Ideal verteilt: kaum Rotationen.'}],
+  roles:{h:'mem', x:'par', sw:'cond', red:'cond'},
+  code: v => v === 'rb' ? RBC : ['void insertR(link& h, Item x)  // Prog. 12.8', '  { if (h == 0) { h = new node(x); return; }', '    if (x.key() < h->item.key())', '         insertR(h->l, x);', '    else insertR(h->r, x);', '  }'],
+  run(rec, inp, v){
+    const S = rec.S; S.t = null; S.mk = {};
+    const rR = h => { rec.add('rot'); const x = h.l; h.l = x.r; x.r = h; return x; }, rL = h => { rec.add('rot'); const x = h.r; h.r = x.l; x.l = h; return x; };
+    const ins = (h, x, sw) => { if(!h){ const n = S4.node(x); n.red = v === 'rb'; return n; } rec.add('cmp');
+      if(v === 'rb' && isR(h.l) && isR(h.r)){ h.red = true; h.l.red = false; h.r.red = false; rec.add('flip'); }
+      if(x < h.k){ h.l = ins(h.l, x, 0); if(v === 'rb'){ if(isR(h) && isR(h.l) && sw) h = rR(h); if(isR(h.l) && isR(h.l.l)){ h = rR(h); h.red = false; h.r.red = true; } } }
+      else { h.r = ins(h.r, x, 1); if(v === 'rb'){ if(isR(h) && isR(h.r) && !sw) h = rL(h); if(isR(h.r) && isR(h.r.r)){ h = rL(h); h.red = false; h.l.red = true; } } }
+      return h; };
+    rec.step(v === 'rb' ? 22 : 1, 'Leerer Baum.', 'Höhe −1.');
+    for(const x of S4.keys(inp.A, 20)){ const f0 = rec.c.flip || 0, r0 = rec.c.rot || 0; S.t = ins(S.t, x, 0); if(v === 'rb') S.t.red = false; S4.fix(S.t); S.mk = v === 'rb' ? {} : {[x]: 'idx'};
+      const bh = t => { let n = 0; while(t){ if(!t.red) n++; t = t.l; } return n; };
+      rec.step(v === 'rb' ? 23 : 2, 'insert(' + x + ')' + (v === 'rb' ? ': ' + ((rec.c.flip || 0) - f0) + ' Umfärbungen, ' + ((rec.c.rot || 0) - r0) + ' Rotationen.' : '.'), v === 'rb' ? 'Schwarzhöhe ' + bh(S.t) + ' auf jedem Weg; kein Rot folgt auf Rot. Höhe ' + S4.height(S.t) + '.' : 'Höhe ' + S4.height(S.t) + '.'); }
+    rec.c.height = S4.height(S.t);
+  },
+  view(S){ return S4.draw(S.t, {mark: S.mk, fill: t => t.red ? C.res : null, title: 'rot = roter Knoten (gehört zum Elternknoten im 2-3-4-Baum)'}); },
+  math(c, inp, v, done, S){ const N = S && S.t ? S4.size(S.t) : 0, h = S && S.t ? S4.height(S.t) : -1;
+    return LB.labVs('Höhe', h, done ? h : '…', ' ') + LB.labVs('Rotationen', c.rot || 0, done ? c.rot || 0 : '…', ' ') + LB.labVs('Umfärbungen (Splits)', c.flip || 0, done ? c.flip || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} h &\\le 2\\lg(N+1) = ' + S4.fmt(2 * lg(N + 1)) + ' && \\text{Eig. 13.8} \\\\ \\text{Suche} &\\approx \\lg N = ' + S4.fmt(N ? lg(N) : 0) + ' && \\text{im Mittel fast optimal (Eig. 13.9)} \\end{aligned} \\]</div>'; },
+  cmp:[['height', 'Höhe'], ['rot', 'Rotationen'], ['flip', 'Umfärbungen'], ['cmp', 'Vergleiche']],
+  cmpNote: () => 'Rot-Schwarz-Bäume balancieren weniger streng als AVL (Höhe ≤ 2 lg N statt 1,44 lg N), rotieren dafür seltener.',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. (Rot-Schwarz):}}\\) Wurzel schwarz; kein roter Knoten hat ein rotes Kind; jeder Weg von der Wurzel zu einem leeren Link hat gleich viele schwarze Knoten.</p><p>\\(\\Rule{\\text{Eigenschaft 13.8:}}\\) Höhe \\(\\le 2\\lg N\\).</p><p><b>Aussage:</b> Ein roter Knoten und sein schwarzer Elternknoten bilden zusammen einen 3- oder 4-Knoten des 2-3-4-Baums.</p>'; }
+};
+
+/* ---------------- 4 · alle Bäume im Vergleich ---------------- */
+const lcg = seed => { let s = seed >>> 0; return () => { s = (s * 1103515245 + 12345) >>> 0; return (s >>> 8) / 16777216; }; };
+const CMPC = {bst: ['insertR(head, x);  // Prog. 12.8: am Blatt'], avl: ['insert(head, x);  // AVL, Vorlesung'], rb: ['RBinsert(head, x, 0);  // Prog. 13.6'], splay: ['splay(head, x);  // Prog. 13.5: Splay-Einfügen'], rnd: ['insertR(head, x);  // Prog. 13.2: randomisiert']};
+const cmpAll = {
+  icon:'🏆', name:'Alle Bäume im Vergleich', book:'§13.6 · Tab. 13.1',
+  intro:'Dieselbe Einfügefolge in fünf Baumarten. Entscheidend ist die <b>Höhe</b> (schlechteste Suche) und die <b>interne Pfadlänge</b> (mittlere Suche). Der Splay-Baum holt jeden neuen Schlüssel an die Wurzel, der randomisierte BST würfelt, ob er es tut.',
+  vars:[{k:'bst', name:'BST', book:'Prog. 12.8'}, {k:'avl', name:'AVL', book:'Vorlesung'}, {k:'rb', name:'Rot-Schwarz', book:'Prog. 13.6'}, {k:'splay', name:'Splay', book:'Prog. 13.5'}, {k:'rnd', name:'randomisiert', book:'Prog. 13.2'}],
+  ins:[{k:'A', label:'einfügen', def:'A B C D E F G H I J K L M N O', w:24}, {k:'s', label:'Zufall', def:'5', w:3}],
+  presets:[{name:'sortiert 15', set:{A:'A B C D E F G H I J K L M N O'}, hint:'Sortiert: der BST entartet, alle anderen bleiben flach.'}, {name:'Buch ASERCH…', set:{A:BOOK}, hint:'Zufällige Reihenfolge: auch der BST ist ordentlich.'}, {name:'sortiert 31', set:{A:Array.from({length: 31}, (_, k) => k + 1).join(' ')}, hint:'Bei N = 31 wäre ein vollständiger Baum Höhe 4.'}, {name:'Zickzack', set:{A:'1 20 2 19 3 18 4 17 5 16 6 15 7 14 8 13'}, hint:'Abwechselnd klein und groß.'}],
+  roles:{head:'mem', x:'par'},
+  code: v => CMPC[v],
+  run(rec, inp, v){
+    const S = rec.S; S.t = null; S.mk = {}; const rnd = lcg(parseInt(inp.s, 10) || 5);
+    const rR = h => { rec.add('rot'); return S4.rotR(h); }, rL = h => { rec.add('rot'); return S4.rotL(h); };
+    const bst = (h, x) => { if(!h) return S4.node(x); rec.add('cmp'); if(x < h.k) h.l = bst(h.l, x); else h.r = bst(h.r, x); return S4.upd(h); };
+    const opt = {rots: [], path: [], LI: 0}; const avl = avlOps(rec, S, opt).ins;
+    const rbI = (h, x, sw) => { if(!h){ const n = S4.node(x); n.red = true; return n; } rec.add('cmp'); if(isR(h.l) && isR(h.r)){ h.red = true; h.l.red = false; h.r.red = false; }
+      if(x < h.k){ h.l = rbI(h.l, x, 0); if(isR(h) && isR(h.l) && sw) h = rR(h); if(isR(h.l) && isR(h.l.l)){ h = rR(h); h.red = false; h.r.red = true; } }
+      else { h.r = rbI(h.r, x, 1); if(isR(h) && isR(h.r) && !sw) h = rL(h); if(isR(h.r) && isR(h.r.r)){ h = rL(h); h.red = false; h.l.red = true; } } return S4.upd(h); };
+    const splay = (h, x) => { if(!h) return S4.node(x); rec.add('cmp');
+      if(x < h.k){ if(!h.l){ const n = S4.node(x); n.r = h; return S4.upd(n); } rec.add('cmp'); if(x < h.l.k){ h.l.l = splay(h.l.l, x); h = rR(h); } else { h.l.r = splay(h.l.r, x); h.l = rL(h.l); } return rR(h); }
+      if(!h.r){ const n = S4.node(x); n.l = h; return S4.upd(n); } rec.add('cmp'); if(h.r.k < x){ h.r.r = splay(h.r.r, x); h = rL(h); } else { h.r.l = splay(h.r.l, x); h.r = rR(h.r); } return rL(h); };
+    const insT = (h, x) => { if(!h) return S4.node(x); rec.add('cmp'); if(x < h.k){ h.l = insT(h.l, x); return rR(h); } h.r = insT(h.r, x); return rL(h); };
+    const rz = (h, x) => { if(!h) return S4.node(x); if(rnd() < 1 / (S4.N(h) + 1)) return insT(h, x); rec.add('cmp'); if(x < h.k) h.l = rz(h.l, x); else h.r = rz(h.r, x); return S4.upd(h); };
+    rec.step(1, 'Leerer Baum.', 'Höhe −1.');
+    for(const x of S4.keys(inp.A, 32)){ S.t = v === 'bst' ? bst(S.t, x) : v === 'avl' ? avl(S.t, x) : v === 'rb' ? rbI(S.t, x, 0) : v === 'splay' ? splay(S.t, x) : rz(S.t, x); if(v === 'rb') S.t.red = false; S4.fix(S.t); S.mk = v === 'rb' ? {} : {[x]: 'idx'};
+      rec.c.height = S4.height(S.t); rec.c.ipl = S4.ipl(S.t); rec.step(1, 'insert(' + x + '): Höhe ' + rec.c.height + ', IPL ' + rec.c.ipl + '.', 'Mittlere Suchkosten jetzt 1 + IPL/N = ' + S4.fmt(1 + rec.c.ipl / S4.size(S.t)) + '.'); }
+  },
+  view(S){ return S4.draw(S.t, {mark: S.mk, fill: t => t.red ? C.res : null}); },
+  math(c, inp, v, done, S){ const N = S && S.t ? S4.size(S.t) : 0, opt = N ? Math.floor(lg(N)) : -1; let ipo = 0; for(let k = 1; k <= N; k++) ipo += Math.floor(lg(k));
+    return LB.labVs('Höhe', c.height === undefined ? -1 : c.height, done ? c.height : '…', ' ') + LB.labVs('IPL', c.ipl || 0, done ? c.ipl || 0 : '…', ' ') + LB.labVs('Rotationen', c.rot || 0, done ? c.rot || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} h_{\\min} &= \\lfloor\\lg N\\rfloor = ' + opt + ' && \\text{vollständiger Baum} \\\\ \\text{IPL}_{\\min} &= \\textstyle\\sum_{k=1}^{N} \\lfloor\\lg k\\rfloor = ' + ipo + ' && \\text{untere Schranke} \\\\ h_{\\text{BST}} &\\le N - 1 = ' + Math.max(N - 1, -1) + ' && \\text{ohne Balancieren} \\end{aligned} \\]</div>'; },
+  cmp:[['height', 'Höhe'], ['ipl', 'IPL'], ['rot', 'Rotationen'], ['cmp', 'Vergleiche']],
+  cmpNote: () => 'Grün = kleinster Wert. AVL ist am flachsten, Rot-Schwarz knapp dahinter mit weniger Rotationen. Splay kann kurzzeitig hoch werden, ist aber amortisiert gut. Der randomisierte BST ist unabhängig von der Eingabereihenfolge im Mittel gut.',
+  facts(){ return '<p>\\(\\Rule{\\text{Tab. 13.1:}}\\) Alle balancierten Varianten garantieren (ggf. amortisiert oder erwartet) \\(O(\\log N)\\) je Operation.</p><p><b>Aussage:</b> In der Praxis: Rot-Schwarz in Bibliotheken (std::map), AVL bei vielen Suchen, Splay bei Zugriffslokalität, B-Bäume auf Platte (Kap. 16).</p>'; }
+};
+
+LB.labCh13 = [avlIns, avlDel, rb, cmpAll];
+})();
+
+/* ===== LAB Kapitel 14: Hashing ===== */
+(function(){
+'use strict';
+const LB = window.LB, S4 = LB.S4;
+const ln = Math.log;
+const BOOK = 'A S E R C H I N G X M P L';
+/* Hashwerte aus den Buchfiguren (M = 13): Fig. 14.7 (hash), Fig. 14.9 (hashtwo) */
+const F147 = {A: 7, S: 3, E: 9, R: 9, C: 8, H: 4, I: 11, N: 7, G: 10, X: 12, M: 0, P: 8, L: 6};
+const F149 = {A: 1, S: 3, E: 1, R: 5, C: 5, H: 5, I: 3, N: 3, G: 2, X: 3, M: 5, P: 4, L: 2};
+const useBook = (keys, M) => M === 13 && keys.every(k => F147[k] !== undefined);
+const mkH = (keys, M) => { const b = useBook(keys, M); return k => b && F147[k] !== undefined ? F147[k] : (11 * S4.code5(k) % M + M) % M; };
+const mkH2 = (keys, M) => { const b = useBook(keys, M); return k => b && F149[k] !== undefined ? F149[k] : 8 - (S4.code5(k) % 8); };
+const uniq = a => a.filter((x, i) => a.indexOf(x) === i);
+const Mof = inp => Math.max(2, Math.min(31, parseInt(inp.M, 10) || 13));
+
+/* ---------------- 1 · Hashfunktionen ---------------- */
+const HF = {horner: ['int hash(char *v, int M)  // Prog. 14.1', '  { int h = 0, a = 127;', '    for (; *v != 0; v++)', '      h = (a*h + *v) % M;  // Horner, jede Stelle zählt', '    return h;', '  }'],
+  univ: ['int hashU(char *v, int M)  // Prog. 14.2', '  { int h, a = 31415, b = 27183;', '    for (h = 0; *v != 0; v++, a = a*b % (M-1))', '      h = (a*h + *v) % M;  // a ändert sich je Zeichen', '    return (h < 0) ? (h + M) : h;', '  }'],
+  sum: ['int hashSum(char *v, int M)  // schlecht', '  { int h = 0;', '    for (; *v != 0; v++)', '      h = (h + *v) % M;  // Anagramme kollidieren!', '    return h;', '  }'],
+  first: ['int hashFirst(char *v, int M)  // schlecht', '  { return v[0] % M; }  // nur der Anfangsbuchstabe']};
+const hf = {
+  icon:'#️⃣', name:'Hashfunktionen', book:'§14.1 · Prog. 14.1/14.2',
+  intro:'Eine gute Hashfunktion verteilt die Schlüssel <b>gleichmäßig</b> auf die M Plätze und hängt von <b>allen</b> Zeichen ab. Hier werden Wörter auf M Fächer verteilt; die Höhe jedes Fachs zeigt, wie viele Wörter dort landen.',
+  vars:[{k:'horner', name:'Horner, a = 127', book:'Prog. 14.1'}, {k:'univ', name:'universell', book:'Prog. 14.2'}, {k:'sum', name:'Zeichensumme', book:'Abweichung'}, {k:'first', name:'erster Buchstabe', book:'Abweichung'}],
+  ins:[{k:'A', label:'Wörter', def:'now for tip ilk dim tag jot sob nob sky hut ace bet men egg few jay owl joy rap', w:34}, {k:'M', label:'M =', def:'13', w:3}],
+  presets:[{name:'20 Wörter, M = 13', set:{A:'now for tip ilk dim tag jot sob nob sky hut ace bet men egg few jay owl joy rap', M:'13'}, hint:'M ist eine Primzahl: alle Verfahren außer „erster Buchstabe“ verteilen ordentlich.'}, {name:'Anagramme', set:{A:'abc acb bac bca cab cba ate eat tea eta', M:'13'}, hint:'Die Zeichensumme ignoriert die Reihenfolge: alle Anagramme landen im selben Fach.'},
+    {name:'gleicher Anfang', set:{A:'sort sorted sorting sorter sorts sore sorry sorrow sound south', M:'13'}, hint:'Nur der erste Buchstabe: alles in einem Fach.'}, {name:'M = 16', set:{A:'now for tip ilk dim tag jot sob nob sky hut ace bet men egg few jay owl joy rap', M:'16'}, hint:'M = 2⁴ bei Horner mit a = 127: nur die letzten Bits zählen stark. Primzahlen sind sicherer.'}],
+  roles:{h:'res', a:'par', b:'par', v:'mem', M:'par'},
+  code: v => HF[v],
+  run(rec, inp, v){
+    const ws = String(inp.A).toLowerCase().split(/[^a-z]+/).filter(Boolean).slice(0, 30), M = Mof(inp), S = rec.S; S.M = M; S.cnt = new Array(M).fill(0); S.who = Array.from({length: M}, () => []); S.cur = -1;
+    const hash = w => { let h = 0;
+      if(v === 'horner') for(const ch of w){ h = (127 * h + ch.charCodeAt(0)) % M; rec.add('ops'); }
+      else if(v === 'univ'){ let a = 31415; const b = 27183; for(const ch of w){ h = (a * h + ch.charCodeAt(0)) % M; a = a * b % (M - 1); rec.add('ops'); } if(h < 0) h += M; }
+      else if(v === 'sum') for(const ch of w){ h = (h + ch.charCodeAt(0)) % M; rec.add('ops'); }
+      else { h = w.charCodeAt(0) % M; rec.add('ops'); }
+      return h; };
+    rec.step(1, ws.length + ' Wörter auf M = ' + M + ' Fächer.', 'Ideal: jedes Fach etwa N/M = ' + S4.fmt(ws.length / M) + ' Wörter.');
+    for(const w of ws){ const h = hash(w); if(S.cnt[h]) rec.add('coll'); S.cnt[h]++; S.who[h].push(w); S.cur = h; rec.c.maxb = Math.max(rec.c.maxb || 0, S.cnt[h]);
+      rec.step(v === 'first' ? 2 : 4, 'hash("' + w + '") = ' + h + (S.cnt[h] > 1 ? ': Kollision, Fach hat jetzt ' + S.cnt[h] + '.' : '.'), 'Kollisionen bisher ' + (rec.c.coll || 0) + ', volles Fach max. ' + rec.c.maxb + '.'); }
+    rec.c.empty = S.cnt.filter(x => !x).length; S.cur = -1;
+    rec.step(v === 'first' ? 2 : 5, 'Fertig: ' + rec.c.empty + ' leere Fächer, größtes Fach ' + (rec.c.maxb || 0) + '.', '\\(\\Res{' + (rec.c.coll || 0) + '\\text{ Kollisionen}}\\) bei N = ' + ws.length + ', M = ' + M + '.');
+  },
+  view(S){ const mx = Math.max(1, ...S.cnt), W = Math.max(260, S.M * 30 + 20), H = 120;
+    let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+    S.cnt.forEach((c, k) => { const h = c / mx * 80, x = 10 + k * 30; s += '<rect x="' + x + '" y="' + (95 - h) + '" width="24" height="' + h + '" rx="3" fill="' + (k === S.cur ? LB.LC.chg : c > 1 ? LB.LC.res : LB.LC.par) + '" opacity=".85"/><text x="' + (x + 12) + '" y="110" text-anchor="middle" font-size="10" fill="' + LB.LC.mute + '">' + k + '</text>' + (c ? '<text x="' + (x + 12) + '" y="' + (91 - h) + '" text-anchor="middle" font-size="11" font-weight="700" fill="' + LB.LC.ink + '">' + c + '</text>' : ''); });
+    return s + '</svg>' + (S.cur >= 0 ? '<div class="small">Fach ' + S.cur + ': <span class="mono">' + S.who[S.cur].join(' ') + '</span></div>' : '<div class="small muted">rot = mehrfach belegt, blau = einfach</div>'); },
+  math(c, inp, v, done){ const N = String(inp.A).toLowerCase().split(/[^a-z]+/).filter(Boolean).slice(0, 30).length, M = Mof(inp), e0 = M * Math.pow(1 - 1 / M, N);
+    return LB.labVs('Kollisionen', c.coll || 0, done ? c.coll || 0 : '…', ' ') + LB.labVs('leere Fächer', c.empty === undefined ? '…' : c.empty, done ? c.empty : '…', ' ') + LB.labVs('größtes Fach', c.maxb || 0, done ? c.maxb || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} E[\\text{leer}] &= M(1 - \\tfrac1M)^N = ' + S4.fmt(e0) + ' && \\text{zufällige Hashwerte} \\\\ E[\\text{Kollisionen}] &= N - M + E[\\text{leer}] = ' + S4.fmt(N - M + e0) + ' && \\text{Erwartung} \\end{aligned} \\]</div>'; },
+  cmp:[['coll', 'Kollisionen'], ['empty', 'leere Fächer'], ['maxb', 'größtes Fach']],
+  cmpNote: () => 'Eine gute Hashfunktion kommt nahe an den Erwartungswert für zufällige Werte. Zeichensumme und Anfangsbuchstabe verschenken Information und erzeugen Häufungen.',
+  facts(){ return '<p>\\(\\Rule{\\text{Modulares Hashing:}}\\) \\(h(k) = k \\bmod M\\) mit M prim. Für Strings Horner: \\(h = (a\\cdot h + c) \\bmod M\\) Zeichen für Zeichen, ohne Überlauf.</p><p><b>Aussage:</b> Universelles Hashing (Prog. 14.2) wählt die Koeffizienten so, dass zwei verschiedene Schlüssel nur mit Wahrscheinlichkeit ≈ 1/M kollidieren, egal welche Eingabe.</p>'; }
+};
+
+/* ---------------- 2 · Kollisionen auflösen ---------------- */
+const CH = ['void insert(Item item)  // Prog. 14.3', '  { int i = hash(item.key(), M);', '    heads[i] = new node(item, heads[i]); N++; }  // vorne', 'Item search(Key v)', '  { for (link t = heads[hash(v, M)]; t != 0; t = t->next)', '      if (t->item.key() == v) return t->item;', '    return nullItem;', '  }'];
+const LP = ['void insert(Item item)  // Prog. 14.4', '  { int i = hash(item.key(), M);', '    while (!st[i].null()) i = (i+1) % M;  // nächster', '    st[i] = item; N++;', '  }', 'Item search(Key v)', '  { int i = hash(v, M);', '    while (!st[i].null())', '      if (v == st[i].key()) return st[i];', '        else i = (i+1) % M;', '    return nullItem;', '  }'];
+const DH = ['void insert(Item item)  // Prog. 14.6', '  { Key v = item.key();', '    int i = hash(v, M), k = hashtwo(v, M);', '    while (!st[i].null()) i = (i+k) % M;  // um k springen', '    st[i] = item; N++;', '  }', 'Item search(Key v)', '  { int i = hash(v, M), k = hashtwo(v, M);', '    while (!st[i].null())', '      if (v == st[i].key()) return st[i];', '        else i = (i+k) % M;', '    return nullItem;', '  }'];
+const coll = {
+  icon:'🧲', name:'Kollisionen auflösen', book:'§14.2–14.4 · Prog. 14.3/14.4/14.6',
+  intro:'Dieselben Schlüssel, dieselbe Hashfunktion, drei Arten mit Kollisionen umzugehen. <b>Verkettung</b>: Liste pro Platz. <b>Lineare Sondierung</b>: nächster freier Platz (Cluster wachsen zusammen). <b>Doppel-Hashing</b>: in Schritten der Weite hashtwo(k). Bei M = 13 und Buchstaben gelten die Hashwerte aus Fig. 14.7 und 14.9.',
+  vars:[{k:'chain', name:'Verkettung', book:'Prog. 14.3'}, {k:'lin', name:'lineare Sondierung', book:'Prog. 14.4'}, {k:'dbl', name:'Doppel-Hashing', book:'Prog. 14.6'}],
+  ins:[{k:'A', label:'einfügen', def:'A S E R C H I N G X M P', w:22}, {k:'M', label:'M =', def:'13', w:3}, {k:'q', label:'suche', def:'L Z', w:6}],
+  presets:[{name:'Buch, M = 13', set:{A:'A S E R C H I N G X M P', M:'13', q:'L Z'}, hint:'Fig. 14.6 / 14.7 / 14.9 mit denselben Hashwerten.'}, {name:'Verkettung, M = 5', set:{A:BOOK, M:'5', q:'I Z'}, hint:'Fig. 14.6: 13 Schlüssel auf 5 Listen (α = 2,6). Offene Adressierung geht hier nicht: N > M.'}, {name:'halb voll, M = 31', set:{A:'3 17 42 8 25 11 30 6 19 50 2 37 61 14 27', M:'31', q:'42 43'}, hint:'α ≈ 0,5: alle drei Verfahren sind schnell.'}, {name:'Zahlen, M = 7', set:{A:'10 17 24 31 3', M:'7', q:'38'}, hint:'Alle haben denselben Hashwert (mod 7 = 3): ein Cluster.'}],
+  roles:{st:'mem', heads:'mem', i:'idx', k:'idx', v:'par', M:'par', N:'par'},
+  code: v => v === 'chain' ? CH : v === 'lin' ? LP : DH,
+  run(rec, inp, v){
+    const ks = uniq(S4.keys(inp.A, 30)), qs = S4.keys(inp.q, 3), M = Mof(inp), h = mkH(ks, M), h2 = mkH2(ks, M), S = rec.S;
+    S.M = M; S.v = v; S.st = v === 'chain' ? Array.from({length: M}, () => []) : new Array(M).fill(''); S.mk = {}; S.res = []; S.book = useBook(ks, M);
+    const code = this.code(v); rec.step(1, 'Leere Tabelle, M = ' + M + (S.book ? ' (Hashwerte aus dem Buch)' : ' (hash = 11k mod M)') + '.', 'α = N/M = 0.');
+    let N = 0;
+    for(const k of ks){ let i = h(k), p = 1; rec.add('iprobe');
+      if(v === 'chain'){ S.st[i].unshift(k); N++; S.mk = {[i]: 'chg'}; rec.step(3, 'insert(' + k + '): hash = ' + i + ', vorne in Liste ' + i + ' (Länge ' + S.st[i].length + ').', 'α = ' + N + '/' + M + ' = ' + S4.fmt(N / M) + ' (mittlere Listenlänge).'); continue; }
+      if(N >= M){ rec.step(1, 'insert(' + k + '): Tabelle voll!', '⚠ Bei offener Adressierung muss N < M bleiben.'); continue; }
+      const st = v === 'dbl' ? h2(k) : 1, path = [i];
+      let guard = 0; while(S.st[i] !== '' && guard++ < M){ i = (i + st) % M; p++; rec.add('iprobe'); path.push(i); }
+      if(S.st[i] !== ''){ rec.step(4, 'insert(' + k + '): mit Schrittweite ' + st + ' wird kein freier Platz erreicht.', '⚠ hashtwo und M sind nicht teilerfremd: M sollte prim sein.'); continue; }
+      S.st[i] = k; N++; S.mk = {}; path.forEach(x => { S.mk[x] = 'off'; }); path.slice(0, -1).forEach(x => { S.mk[x] = 'par'; }); S.mk[i] = 'chg';
+      rec.step(v === 'lin' ? 4 : 5, 'insert(' + k + '): hash = ' + path[0] + (v === 'dbl' ? ', hashtwo = ' + st : '') + (p > 1 ? ', Sonden ' + path.join(' → ') : '') + ' ⇒ Platz ' + i + ' (' + p + ' Sonde' + (p > 1 ? 'n' : '') + ').', 'α = ' + N + '/' + M + ' = ' + S4.fmt(N / M) + '.'); }
+    for(const q of qs){ let i = h(q), p = 0, found = false;
+      if(v === 'chain'){ for(const x of S.st[i]){ p++; rec.add('sprobe'); if(x === q){ found = true; break; } } if(!S.st[i].length){ p = 0; } S.mk = {[i]: found ? 'idx' : 'res'}; }
+      else { const st = v === 'dbl' ? h2(q) : 1; const seen = {}; while(S.st[i] !== '' && !seen[i]){ seen[i] = 1; p++; rec.add('sprobe'); if(S.st[i] === q){ found = true; break; } i = (i + st) % M; } if(!found && S.st[i] === ''){ p++; rec.add('sprobe'); } S.mk = {[i]: found ? 'idx' : 'res'}; }
+      S.res.push(q + ': ' + (found ? 'Treffer' : 'Fehlschlag') + ' nach ' + p + (v === 'chain' ? ' Vergleichen' : ' Sonden'));
+      rec.step(v === 'chain' ? 6 : v === 'lin' ? 9 : 10, 'search(' + q + '): ' + (found ? 'Treffer' : 'Fehlschlag') + ' nach ' + p + (v === 'chain' ? ' Listenelementen.' : ' Sonden.'), '\\(\\Res{' + p + '}\\) ' + (v === 'chain' ? 'Vergleiche' : 'Sonden') + ' für ' + q + '.'); }
+  },
+  view(S){ if(S.v === 'chain') return '<div class="small muted">heads[i] → Liste</div>' + S.st.map((L, k) => '<div class="mono small"' + (S.mk[k] ? ' style="color:' + (S.mk[k] === 'chg' ? 'var(--orange)' : S.mk[k] === 'idx' ? 'var(--green)' : 'var(--red)') + '"' : '') + '>' + String(k).padStart(2) + ': ' + (L.length ? L.join(' → ') + ' → 0' : '0') + '</div>').join('') + (S.res.length ? '<div class="lab-out">' + S.res.join('<br>') + '</div>' : '');
+    return LB.labCells(S.st.map(x => x === '' ? '·' : x), S.mk, {lab: 'st:'}) + '<div class="small muted">orange = neuer Platz, blau = belegt (übersprungen), grün = Treffer, rot = Fehlschlag-Ende</div>' + (S.res.length ? '<div class="lab-out">' + S.res.join('<br>') + '</div>' : ''); },
+  math(c, inp, v, done){ const ks = uniq(S4.keys(inp.A, 30)), M = Mof(inp), N = v === 'chain' ? ks.length : Math.min(ks.length, M), a = N / M, a1 = Math.min(a, 0.95);
+    const F = v === 'chain' ? '\\text{Treffer} &\\approx 1 + \\tfrac{\\alpha}{2} = ' + S4.fmt(1 + a / 2) + ' && \\text{Eig. 14.1} \\\\ \\text{Fehlschlag} &\\approx \\alpha = ' + S4.fmt(a) + ' && \\text{Listenlänge}'
+      : v === 'lin' ? '\\text{Treffer} &\\approx \\tfrac12\\bigl(1 + \\tfrac{1}{1-\\alpha}\\bigr) = ' + S4.fmt(0.5 * (1 + 1 / (1 - a1))) + ' && \\text{Eig. 14.3} \\\\ \\text{Fehlschlag} &\\approx \\tfrac12\\bigl(1 + \\tfrac{1}{(1-\\alpha)^2}\\bigr) = ' + S4.fmt(0.5 * (1 + 1 / ((1 - a1) * (1 - a1)))) + ' && \\text{Cluster!}'
+      : '\\text{Treffer} &\\approx \\tfrac1\\alpha \\ln\\tfrac{1}{1-\\alpha} = ' + S4.fmt(a ? Math.log(1 / (1 - a1)) / a : 1) + ' && \\text{Eig. 14.4} \\\\ \\text{Fehlschlag} &\\approx \\tfrac{1}{1-\\alpha} = ' + S4.fmt(1 / (1 - a1)) + ' && \\text{wie zufällig}';
+    return LB.labVs('Sonden beim Einfügen', c.iprobe || 0, done ? c.iprobe || 0 : '…', ' ') + LB.labVs('Sonden beim Suchen', c.sprobe || 0, done ? c.sprobe || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\alpha &= N/M = ' + S4.fmt(a) + ' && \\text{Belegungsfaktor} \\\\ ' + F + ' \\end{aligned} \\]</div>'; },
+  cmp:[['iprobe', 'Sonden einfügen'], ['sprobe', 'Sonden suchen']],
+  cmpNote: () => 'Verkettung verträgt α > 1, braucht aber Zeiger. Lineare Sondierung ist bis α ≈ 1/2 sehr schnell, danach wachsen die Cluster quadratisch. Doppel-Hashing hält auch bei α ≈ 0,8 durch.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 14.3:}}\\) Lineare Sondierung: Treffer \\(\\tfrac12(1 + \\tfrac1{1-\\alpha})\\), Fehlschlag \\(\\tfrac12(1 + \\tfrac1{(1-\\alpha)^2})\\) Sonden.</p><p>\\(\\Rule{\\text{Doppel-Hashing:}}\\) hashtwo(k) ≠ 0 und teilerfremd zu M (M prim), sonst werden nicht alle Plätze erreicht.</p><p><b>Aussage:</b> Hashing kostet im Mittel O(1), unabhängig von N, solange α beschränkt bleibt. Dafür gibt es keine Ordnung (kein select, kein sortiertes Ausgeben).</p>'; }
+};
+
+/* ---------------- 3 · Löschen bei linearer Sondierung ---------------- */
+const LDC = v => v === 'buch' ? ['void remove(Item x)  // Prog. 14.5', '  { int i = hash(x.key(), M), j;', '    while (!st[i].null())', '      if (x.key() == st[i].key()) break;', '        else i = (i+1) % M;', '    if (st[i].null()) return;', '    st[i] = nullItem; N--;', '    for (j = i+1; !st[j].null(); j = (j+1) % M, N--)  // Rest des Clusters', '      { Item v = st[j]; st[j] = nullItem; insert(v); }  // neu einfügen', '  }']
+  : v === 'grab' ? ['void remove(Item x)  // Grabstein', '  { int i = hash(x.key(), M);', '    while (!st[i].null())', '      if (x.key() == st[i].key()) break;', '        else i = (i+1) % M;', '    if (st[i].null()) return;', '    st[i] = DELETED;  // Platz bleibt „belegt“ für die Suche', '  }']
+  : ['void remove(Item x)  // naiv: FALSCH', '  { int i = hash(x.key(), M);', '    while (!st[i].null())', '      if (x.key() == st[i].key()) break;', '        else i = (i+1) % M;', '    if (st[i].null()) return;', '    st[i] = nullItem;  // reißt eine Lücke in den Cluster!', '  }'];
+const ld = {
+  icon:'🩹', name:'Löschen bei Sondierung', book:'§14.3 · Prog. 14.5',
+  intro:'Bei linearer Sondierung darf man einen Platz nicht einfach leeren: Die Suche hört beim ersten leeren Platz auf und findet dann Schlüssel <b>hinter</b> der Lücke nicht mehr. Das Buch fügt deshalb den Rest des Clusters neu ein; die Alternative ist ein Grabstein.',
+  vars:[{k:'buch', name:'Cluster neu einfügen', book:'Prog. 14.5'}, {k:'grab', name:'Grabstein', book:'§14.3, Alternative'}, {k:'naiv', name:'einfach leeren', book:'Abweichung: falsch'}],
+  ins:[{k:'A', label:'Tabelle aus', def:BOOK.slice(0, 23), w:22}, {k:'d', label:'löschen', def:'E', w:5}],
+  presets:[{name:'Buch: E löschen', set:{A:'A S E R C H I N G X M P', d:'E'}, hint:'Fig. 14.8: E steht mitten im Cluster 7–12.'}, {name:'zwei löschen', set:{A:'A S E R C H I N G X M P', d:'A N'}, hint:'A und N haben beide Hashwert 7.'}, {name:'Ende eines Clusters', set:{A:'A S E R C H I N G X M P', d:'P'}, hint:'P steht am Ende des großen Clusters (Platz 5): dahinter liegt nichts, deshalb schadet hier auch das naive Leeren nicht.'}],
+  roles:{st:'mem', i:'idx', j:'idx', v:'par', N:'par', M:'par'},
+  code: v => LDC(v).concat(['// danach: jeden verbliebenen Schlüssel suchen']),
+  run(rec, inp, v){
+    const M = 13, ks = uniq(S4.keys(inp.A, 12)), ds = S4.keys(inp.d, 3), h = mkH(ks.concat(ds), M), S = rec.S; S.st = new Array(M).fill(''); S.mk = {}; S.res = [];
+    for(const k of ks){ let i = h(k); while(S.st[i] !== '') i = (i + 1) % M; S.st[i] = k; }
+    rec.step(1, 'Tabelle mit ' + ks.length + ' Schlüsseln (lineare Sondierung, M = 13).', 'Jeder Schlüssel ist von seinem Hashwert aus ohne Lücke erreichbar.');
+    const ins = k => { let i = h(k); rec.add('probe'); while(S.st[i] !== '' && S.st[i] !== '†'){ i = (i + 1) % M; rec.add('probe'); } S.st[i] = k; return i; };
+    for(const d of ds){ let i = h(d); rec.add('probe'); while(S.st[i] !== '' && S.st[i] !== d){ i = (i + 1) % M; rec.add('probe'); }
+      if(S.st[i] === ''){ const there = S.st.indexOf(d) >= 0; rec.step(6, 'remove(' + d + '): ' + (there ? 'nicht gefunden, obwohl ' + d + ' noch in der Tabelle steht: die Suche bricht an einer Lücke ab!' : 'nicht vorhanden.'), there ? '⚠ Die Lücke von vorher macht ' + d + ' unerreichbar.' : ''); if(there) rec.add('lostdel'); continue; }
+      if(v === 'grab'){ S.st[i] = '†'; S.mk = {[i]: 'res'}; rec.step(7, 'remove(' + d + '): st[' + i + '] = Grabstein †.', 'Die Suche läuft über † hinweg; einfügen darf † wieder belegen.'); continue; }
+      S.st[i] = ''; S.mk = {[i]: 'res'}; rec.step(7, 'remove(' + d + '): st[' + i + '] geleert.', v === 'naiv' ? '⚠ Hinter der Lücke liegende Schlüssel mit kleinerem Hashwert sind jetzt unerreichbar.' : 'Jetzt den Rest des Clusters neu einfügen.');
+      if(v === 'buch') for(let j = (i + 1) % M; S.st[j] !== ''; j = (j + 1) % M){ const x = S.st[j]; S.st[j] = ''; rec.add('reins'); const to = ins(x); S.mk = {[j]: 'par', [to]: 'chg'};
+        rec.step(9, x + ' aus Platz ' + j + ' herausnehmen und neu einfügen → Platz ' + to + (to === j ? ' (bleibt)' : '') + '.', 'Der Cluster bleibt lückenlos.'); } }
+    S.mk = {}; let lost = 0;
+    for(const k of ks.filter(k => ds.indexOf(k) < 0)){ let i = h(k), ok = false; const seen = {}; while(S.st[i] !== '' && !seen[i]){ seen[i] = 1; rec.add('sprobe'); if(S.st[i] === k){ ok = true; break; } i = (i + 1) % M; } if(!ok){ lost++; const pos = S.st.indexOf(k); if(pos >= 0) S.mk[pos] = 'res'; S.res.push(k); } }
+    rec.c.lost = lost + (rec.c.lostdel || 0); rec.step(LDC(v).length + 1, 'Alle verbliebenen Schlüssel gesucht: ' + (lost ? lost + ' nicht mehr gefunden (' + S.res.join(', ') + ')!' : 'alle gefunden.'), lost ? '\\(\\Res{\\text{Tabelle kaputt}}\\): die Suche bricht an der Lücke ab.' : '\\(\\Res{\\text{korrekt}}\\): jeder Schlüssel bleibt erreichbar.');
+  },
+  view(S){ return LB.labCells(S.st.map(x => x === '' ? '·' : x), S.mk, {lab: 'st:'}) + (S.res.length ? '<div class="lab-out" style="border-color:var(--red)">nicht mehr auffindbar: ' + S.res.join(' ') + '</div>' : ''); },
+  math(c, inp, v, done){ return LB.labVs('verlorene Schlüssel', c.lost === undefined ? '…' : c.lost, done ? 0 : '…', ' ⚠') + LB.labVs('neu eingefügt', c.reins || 0, done ? c.reins || 0 : '…', ' ') +
+    '<div class="step">\\[ \\begin{aligned} \\text{Kosten Prog. 14.5} &\\approx \\text{Clusterlänge} && \\text{im Mittel klein bei } \\alpha \\le \\tfrac12 \\\\ \\text{Grabsteine} &\\Rightarrow \\text{Suche wird langsamer} && \\text{bis zum Neuaufbau} \\end{aligned} \\]</div>'; },
+  cmp:[['lost', 'verloren'], ['reins', 'neu eingefügt'], ['probe', 'Sonden'], ['sprobe', 'Such-Sonden']],
+  cmpNote: () => 'Nur „einfach leeren“ verliert Schlüssel. Grabsteine sind billig, machen die Tabelle aber mit der Zeit voller, als sie ist.',
+  facts(){ return '<p>\\(\\Rule{\\text{Invariante (lineare Sondierung):}}\\) Zwischen hash(k) und dem Platz von k liegt kein leerer Platz.</p><p><b>Aussage:</b> Löschen muss diese Invariante erhalten. Bei Verkettung ist Löschen dagegen einfach (Listenelement aushängen).</p>'; }
+};
+
+/* ---------------- 4 · dynamische Hashtabelle ---------------- */
+const DY = ['void expand()  // Prog. 14.7', '  { Item *t = st;', '    init(M+M);  // doppelt so groß, leer', '    for (int i = 0; i < M/2; i++)', '      if (!t[i].null()) insert(t[i]);  // neu hashen', '    delete t;', '  }', 'void insert(Item item)', '  { int i = hash(item.key(), M);', '    while (!st[i].null()) i = (i+1) % M;', '    st[i] = item;', '    if (N++ >= M/2) expand();  // halb voll: verdoppeln', '  }'];
+const dyn = {
+  icon:'📈', name:'Dynamische Hashtabelle', book:'§14.5 · Prog. 14.7',
+  intro:'Wenn N nicht vorher bekannt ist: Start mit kleinem M und <b>verdoppeln</b>, sobald die Tabelle halb voll ist. Jedes Verdoppeln fügt alles neu ein, aber über alle Operationen gerechnet bleibt jedes insert billig (amortisiert O(1)).',
+  vars:[{k:'dyn', name:'verdoppeln bei N ≥ M/2', book:'Prog. 14.7'}, {k:'late', name:'verdoppeln erst bei N ≥ M−1', book:'Abweichung'}, {k:'fix', name:'fest M = 17', book:'ohne Wachsen'}],
+  ins:[{k:'A', label:'einfügen', def:'17 3 42 8 25 11 30 6 19 50 2 37 61 14 27', w:28}],
+  presets:[{name:'15 Zahlen', set:{A:'17 3 42 8 25 11 30 6 19 50 2 37 61 14 27'}, hint:'Verdoppeln bei M = 4, 8, 16, 32.'}, {name:'aufsteigend', set:{A:'1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16'}, hint:'hash = k mod M verteilt aufsteigende Zahlen perfekt.'}, {name:'Vielfache von 4', set:{A:'4 8 12 16 20 24 28 32 36 40 44 48'}, hint:'Bei M = 4, 8, 16 … haben Vielfache von 4 schlechte Hashwerte: lange Cluster.'}],
+  roles:{st:'mem', t:'mem', i:'idx', N:'par', M:'par'},
+  code: v => v === 'fix' ? ['void insert(Item item)  // feste Tabelle', '  { int i = hash(item.key(), M);', '    while (!st[i].null()) i = (i+1) % M;', '    st[i] = item; N++;', '  }'] : v === 'late' ? DY.slice(0, 11).concat(['    if (N++ >= M-1) expand();  // erst fast voll', '  }']) : DY,
+  run(rec, inp, v){
+    const ks = uniq(S4.keys(inp.A, 30)).filter(x => typeof x === 'number'), S = rec.S; let M = v === 'fix' ? 17 : 4; S.st = new Array(M).fill(''); S.mk = {}; let N = 0;
+    const put = x => { let i = x % M; rec.add('probe'); while(S.st[i] !== ''){ i = (i + 1) % M; rec.add('probe'); } S.st[i] = x; return i; };
+    rec.step(v === 'fix' ? 1 : 8, 'Leere Tabelle, M = ' + M + ', hash = k mod M.', 'α = 0.');
+    for(const x of ks){ if(N >= M){ rec.step(1, 'insert(' + x + '): Tabelle voll!', '⚠ Feste Tabelle zu klein.'); continue; } const p0 = rec.c.probe || 0, i = put(x); S.mk = {[i]: 'chg'};
+      rec.step(v === 'fix' ? 4 : 11, 'insert(' + x + ') → Platz ' + i + ' (' + ((rec.c.probe || 0) - p0) + ' Sonden).', 'N = ' + (N + 1) + ', M = ' + M + ', α = ' + S4.fmt((N + 1) / M) + '.');
+      const grow = v === 'dyn' ? N >= M / 2 : v === 'late' ? N >= M - 1 : false; N++;
+      if(grow){ const old = S.st.filter(y => y !== ''); M *= 2; S.st = new Array(M).fill(''); rec.add('expand'); old.forEach(y => { put(y); rec.add('move'); }); S.mk = {};
+        rec.step(5, 'expand(): M = ' + M + ', ' + old.length + ' Schlüssel neu gehasht.', 'Neu eingefügt bisher insgesamt ' + rec.c.move + ' (< 2N = ' + 2 * N + ').'); } }
+    rec.c.M = M; rec.step(v === 'fix' ? 5 : 13, 'Fertig: N = ' + N + ', M = ' + M + '.', '\\(\\Res{' + S4.fmt((rec.c.probe || 0) / Math.max(1, N + (rec.c.move || 0))) + '\\text{ Sonden je Einfügung}}\\) im Mittel.');
+  },
+  view(S){ return LB.labCells(S.st.map(x => x === '' ? '·' : x), S.mk, {lab: 'st:'}) + '<div class="small muted">M = ' + S.st.length + ', belegt ' + S.st.filter(x => x !== '').length + '</div>'; },
+  math(c, inp, v, done){ const N = uniq(S4.keys(inp.A, 30)).filter(x => typeof x === 'number').length;
+    return LB.labVs('Sonden gesamt', c.probe || 0, done ? c.probe || 0 : '…', ' ') + LB.labVs('neu gehasht', c.move || 0, done ? c.move || 0 : '…', ' ') + LB.labVs('Verdopplungen', c.expand || 0, done ? c.expand || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{neu gehasht} &\\lt 1 + 2 + 4 + \\dots \\lt 2N = ' + 2 * N + ' && \\text{geometrische Reihe} \\\\ \\alpha &\\le \\tfrac12 \\Rightarrow \\text{Sonden} \\le 2{,}5 && \\text{Eig. 14.3 bei } \\alpha = \\tfrac12 \\end{aligned} \\]</div>'; },
+  cmp:[['probe', 'Sonden'], ['move', 'neu gehasht'], ['expand', 'Verdopplungen'], ['M', 'M am Ende']],
+  cmpNote: () => 'Spät verdoppeln spart Speicher und Umzüge, aber die Sonden steigen stark (α nahe 1). Die feste Tabelle hat keinen Umzug, läuft aber voll, wenn N wächst.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 14.6:}}\\) Mit Verdoppeln bei halber Belegung kostet eine Folge von N Operationen insgesamt O(N): amortisiert konstant je insert.</p><p><b>Aussage:</b> Dieselbe Idee wie bei std::vector: gelegentlich teuer umziehen, dafür im Schnitt billig.</p>'; }
+};
+
+LB.labCh14 = [hf, coll, ld, dyn];
+})();
+
+/* ===== LAB Kapitel 15: Radix-Suche ===== */
+(function(){
+'use strict';
+const LB = window.LB, S4 = LB.S4;
+const lg = Math.log2;
+const BOOK = 'A S E R C H I N G X M P L';
+const letters = s => String(s).toUpperCase().replace(/[^A-Z]/g, '').split('').filter((x, i, a) => a.indexOf(x) === i).slice(0, 16);
+const B = 5, dig = (k, d) => (S4.code5(k) >> (B - 1 - d)) & 1;
+
+/* ---------------- 1 · DST, Trie und BST auf denselben Schlüsseln ---------------- */
+const DST = ['void insertR(link& h, Item x, int d)  // Prog. 15.1', '  { if (h == 0) { h = new node(x); return; }', '    if (digit(x.key(), d) == 0)  // Bit d entscheidet', '         insertR(h->l, x, d+1);', '    else insertR(h->r, x, d+1);', '  }', 'Item searchR(link h, Key v, int d)', '  { if (h == 0) return nullItem;', '    if (v == h->item.key()) return h->item;  // ganzer Schlüssel', '    if (digit(v, d) == 0)', '         return searchR(h->l, v, d+1);', '    else return searchR(h->r, v, d+1);', '  }'];
+const TRIE = ['link split(link p, link q, int d)  // Prog. 15.3', '  { link t = new node(nullItem);', '    switch (digit(p->key, d)*2 + digit(q->key, d))', '      { case 0: t->l = split(p, q, d+1); break;  // 00', '        case 1: t->l = p; t->r = q; break;  // 01', '        case 2: t->r = p; t->l = q; break;  // 10', '        case 3: t->r = split(p, q, d+1); break;  // 11', '      }', '    return t;', '  }', 'void insertR(link& h, Item x, int d)', '  { if (h == 0) { h = new node(x); return; }', '    if (h->l == 0 && h->r == 0)  // Blatt: teilen', '      { h = split(new node(x), h, d); return; }', '    if (digit(x.key(), d) == 0)', '         insertR(h->l, x, d+1);', '    else insertR(h->r, x, d+1);', '  }'];
+const BSTC = ['void insertR(link& h, Item x)  // Prog. 12.8', '  { if (h == 0) { h = new node(x); return; }', '    if (x.key() < h->item.key())  // ganzer Vergleich', '         insertR(h->l, x);', '    else insertR(h->r, x);', '  }'];
+const toM = (t, kind, hi) => { if(!t) return null; const leaf = !t.l && !t.r;
+  const n = {lab: kind === 'trie' && t.k === null ? '•' : t.k, sub: kind !== 'bst' && t.k !== null ? S4.bits(t.k) : '', mark: hi && t.k === hi ? 'chg' : null, kids: []};
+  if(t.l) n.kids.push({n: toM(t.l, kind, hi), tag: kind === 'bst' ? 'l' : 0}); if(t.r) n.kids.push({n: toM(t.r, kind, hi), tag: kind === 'bst' ? 'r' : 1}); return n; };
+const hgt = t => t ? 1 + Math.max(hgt(t.l), hgt(t.r)) : -1, cnt = t => t ? 1 + cnt(t.l) + cnt(t.r) : 0;
+const dst = {
+  icon:'🔀', name:'DST, Trie und BST', book:'§15.1–15.2 · Prog. 15.1/15.3',
+  intro:'Buchstaben als 5-Bit-Zahlen (A = 00001 … Z = 11010). Der <b>digitale Suchbaum</b> verzweigt nach Bit d, speichert aber Schlüssel in jedem Knoten. Der <b>Trie</b> speichert Schlüssel nur in Blättern; seine Form hängt <b>nicht</b> von der Einfügereihenfolge ab. Der BST vergleicht ganze Schlüssel.',
+  vars:[{k:'dst', name:'digitaler Suchbaum', book:'Prog. 15.1'}, {k:'trie', name:'Trie', book:'Prog. 15.2/15.3'}, {k:'bst', name:'BST', book:'Prog. 12.8'}],
+  ins:[{k:'A', label:'einfügen', def:BOOK, w:22}, {k:'q', label:'suche', def:'M Z', w:5}],
+  presets:[{name:'Buch ASERCH…', set:{A:BOOK, q:'M Z'}, hint:'Fig. 15.2 (DST) und Fig. 15.6 (Trie).'}, {name:'sortiert A…H', set:{A:'A B C D E F G H', q:'H'}, hint:'BST entartet zur Liste, DST und Trie bleiben durch die Bits beschränkt (Höhe ≤ 5).'}, {name:'umgekehrte Reihenfolge', set:{A:'L P M X G N I H C R E S A', q:'M'}, hint:'Gleiche Schlüssel, andere Reihenfolge: nur der Trie sieht genauso aus wie vorher.'}, {name:'gemeinsame Präfixe', set:{A:'P Q R S', q:'S'}, hint:'P = 10000, Q = 10001, R = 10010, S = 10011: der Trie braucht lange Ketten bis zum ersten Unterschied.'}],
+  roles:{h:'mem', x:'par', v:'par', d:'idx', p:'mem', q:'mem', t:'mem'},
+  code: v => v === 'dst' ? DST : v === 'trie' ? TRIE : BSTC,
+  run(rec, inp, v){
+    const ks = letters(inp.A), qs = letters(inp.q).slice(0, 3), S = rec.S; S.t = null; S.hi = null; S.v = v;
+    const nd = k => ({k, l: null, r: null});
+    const insD = (h, x, d) => { if(!h) return nd(x); rec.add('kcmp'); rec.add('bit'); if(dig(x, d) === 0) h.l = insD(h.l, x, d + 1); else h.r = insD(h.r, x, d + 1); return h; };
+    const split = (p, q, d) => { const t = nd(null); rec.add('bit', 2); rec.add('inner'); const c = dig(p.k, d) * 2 + dig(q.k, d);
+      if(c === 0) t.l = split(p, q, d + 1); else if(c === 1){ t.l = p; t.r = q; } else if(c === 2){ t.r = p; t.l = q; } else t.r = split(p, q, d + 1); return t; };
+    const insT = (h, x, d) => { if(!h) return nd(x); if(!h.l && !h.r){ rec.add('kcmp'); return split(nd(x), h, d); } rec.add('bit'); if(dig(x, d) === 0) h.l = insT(h.l, x, d + 1); else h.r = insT(h.r, x, d + 1); return h; };
+    const insB = (h, x) => { if(!h) return nd(x); rec.add('kcmp'); if(x < h.k) h.l = insB(h.l, x); else h.r = insB(h.r, x); return h; };
+    rec.step(1, 'Leerer Baum.', 'Bits: A = ' + S4.bits('A') + ', M = ' + S4.bits('M') + ', Z = ' + S4.bits('Z') + '.');
+    for(const x of ks){ S.t = v === 'dst' ? insD(S.t, x, 0) : v === 'trie' ? insT(S.t, x, 0) : insB(S.t, x); S.hi = x; rec.c.height = hgt(S.t); rec.c.nodes = cnt(S.t);
+      rec.step(v === 'trie' ? 14 : 2, 'insert(' + x + ' = ' + S4.bits(x) + ').', 'Höhe ' + hgt(S.t) + ', ' + cnt(S.t) + ' Knoten' + (v === 'trie' ? ' (davon ' + (rec.c.inner || 0) + ' innere ohne Schlüssel)' : '') + '.'); }
+    for(const q of qs){ let h = S.t, d = 0, n = 0, b = 0, ok = false;
+      while(h){ if(v === 'trie'){ if(!h.l && !h.r){ n++; ok = h.k === q; break; } b++; h = dig(q, d) ? h.r : h.l; d++; continue; }
+        n++; if(h.k === q){ ok = true; break; } if(v === 'dst'){ b++; h = dig(q, d) ? h.r : h.l; d++; } else h = q < h.k ? h.l : h.r; }
+      rec.add('sk', n); rec.add('sb', b); S.hi = q;
+      rec.step(v === 'dst' ? 9 : 2, 'search(' + q + ' = ' + S4.bits(q) + '): ' + (ok ? 'Treffer' : 'Fehlschlag') + ' nach ' + n + ' Schlüsselvergleichen und ' + b + ' Bittests.', '\\(\\Res{' + n + '\\text{ Vergleiche}, ' + b + '\\text{ Bits}}\\).'); }
+  },
+  view(S){ return S4.mtree(toM(S.t, S.v, S.hi), {title: S.v === 'bst' ? 'BST (l = kleiner, r = größer)' : 'Kante 0 = links, 1 = rechts; • = innerer Trie-Knoten ohne Schlüssel'}); },
+  math(c, inp, v, done){ const N = letters(inp.A).length;
+    return LB.labVs('Höhe', c.height === undefined ? '…' : c.height, done ? c.height : '…', ' ') + LB.labVs('Knoten', c.nodes || 0, done ? c.nodes || 0 : '…', ' ') + LB.labVs('Bittests (einfügen)', c.bit || 0, done ? c.bit || 0 : '…', ' ') + LB.labVs('Schlüsselvergleiche', c.kcmp || 0, done ? c.kcmp || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} h_{\\text{DST}} &\\le b = 5 && \\text{Bits je Schlüssel} \\\\ \\text{Trie: Suche} &\\approx \\lg N = ' + S4.fmt(N ? lg(N) : 0) + ' \\text{ Bits} && \\text{Eig. 15.3} \\\\ \\text{Trie: Knoten} &\\approx N/\\ln 2 = ' + S4.fmt(N / Math.LN2) + ' && \\text{Eig. 15.4 (zufällige Bits)} \\end{aligned} \\]</div>'; },
+  cmp:[['height', 'Höhe'], ['nodes', 'Knoten'], ['bit', 'Bittests'], ['kcmp', 'Schlüsselvgl.'], ['sk', 'Such-Vgl.']],
+  cmpNote: () => 'Der Trie macht beim Suchen nur einen einzigen Schlüsselvergleich (am Blatt), sonst nur Bittests. Dafür hat er zusätzliche innere Knoten ohne Schlüssel.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 15.1:}}\\) Ein DST mit N zufälligen Schlüsseln braucht ≈ lg N Vergleiche; höchstens b (Bits je Schlüssel).</p><p>\\(\\Rule{\\text{Eigenschaft 15.2:}}\\) Die Form eines Tries hängt nur von der Schlüsselmenge ab, nicht von der Reihenfolge.</p><p><b>Aussage:</b> Patricia (§15.3) spart die einwegigen inneren Knoten: genau N Knoten.</p>'; }
+};
+
+/* ---------------- 2 · TST gegen Mehrweg-Trie ---------------- */
+const TSTC = ['link insertR(link h, char *v, int d)  // Prog. 15.8', '  { int i = v[d];  // Zeichen d (0 = Wortende)', '    if (h == 0) h = new node(i);', '    if (i == 0 && h->d == 0) return h;  // Buch: nur i == 0', '    if (i < h->d) h->l = insertR(h->l, v, d);  // links, gleiches d', '      else if (i == h->d) h->m = insertR(h->m, v, d+1);  // Mitte: nächstes', '      else h->r = insertR(h->r, v, d);  // rechts, gleiches d', '    return h;', '  }'];
+const RWC = ['struct node { node* next[R]; };  // R = 27 Links je Knoten', 'link insertR(link h, char *v, int d)  // Mehrweg-Trie', '  { if (h == 0) h = new node();  // alle R Links = 0', '    if (v[d] == 0) { h->next[0] = END; return h; }', '    int i = v[d] - \'a\' + 1;', '    h->next[i] = insertR(h->next[i], v, d+1);', '    return h;', '  }'];
+const tst = {
+  icon:'🌲', name:'TST gegen Mehrweg-Trie', book:'§15.4 · Prog. 15.7–15.8',
+  intro:'Für Wörter: Der <b>Mehrweg-Trie</b> hat in jedem Knoten R = 27 Links (a … z und Wortende) und findet jedes Zeichen in einem Schritt, verschwendet aber viele leere Links. Der <b>ternäre Suchtrie</b> hat drei Links (kleiner | gleich | größer) und spart Speicher.',
+  vars:[{k:'tst', name:'TST', book:'Prog. 15.8'}, {k:'rway', name:'Mehrweg-Trie, R = 27', book:'Prog. 15.7'}],
+  ins:[{k:'A', label:'Wörter', def:'the time to tea ten now is', w:26}, {k:'q', label:'suche', def:'ten tim', w:8}],
+  presets:[{name:'Buch: the time …', set:{A:'the time to tea ten now is', q:'ten tim'}, hint:'Fig. 15.17: gemeinsame Präfixe t, te, ti.'}, {name:'gemeinsamer Anfang', set:{A:'sort sorted sorting sorter sorts sore', q:'sorter sor'}, hint:'Lange gemeinsame Präfixe: beide teilen sie, der Mehrweg-Trie zahlt 27 Links pro Zeichen.'}, {name:'Präfix eines Wortes', set:{A:'tea te ten t', q:'te t'}, hint:'„te“ ist Präfix von „tea“. Mit der gedruckten Bedingung (nur i == 0) würde das Wortende von „te“ nie angelegt und „te“ nicht gefunden.'}, {name:'alle verschieden', set:{A:'ant bee cat dog eel fox gnu', q:'cat cow'}, hint:'Keine Präfixe: der TST ist an der Wurzel ein BST über die ersten Buchstaben.'}],
+  roles:{h:'mem', v:'par', d:'idx', i:'idx', R:'par'},
+  code: v => v === 'tst' ? TSTC : RWC,
+  run(rec, inp, v){
+    const ws = String(inp.A).toLowerCase().split(/[^a-z]+/).filter(Boolean).filter((x, i, a) => a.indexOf(x) === i).slice(0, 10), qs = String(inp.q).toLowerCase().split(/[^a-z]+/).filter(Boolean).slice(0, 3), S = rec.S; S.t = null; S.v = v;
+    const ch = (w, d) => d < w.length ? w.charCodeAt(d) : 0;
+    const insT = (h, w, d) => { const i = ch(w, d); if(!h){ h = {c: i, l: null, m: null, r: null}; rec.add('nodes'); rec.add('links', 3); } if(i === 0 && h.c === 0) return h; rec.add('cc');
+      if(i < h.c) h.l = insT(h.l, w, d); else if(i === h.c) h.m = insT(h.m, w, d + 1); else h.r = insT(h.r, w, d); return h; };
+    const insR = (h, w, d) => { if(!h){ h = {end: false, nx: {}}; rec.add('nodes'); rec.add('links', 27); } if(d === w.length){ h.end = true; return h; } rec.add('cc'); const i = w[d]; h.nx[i] = insR(h.nx[i] || null, w, d + 1); return h; };
+    rec.step(v === 'tst' ? 1 : 2, 'Leerer Trie.', '0 Knoten.');
+    for(const w of ws){ S.t = v === 'tst' ? insT(S.t, w, 0) : insR(S.t, w, 0); S.w = w; rec.step(v === 'tst' ? 6 : 6, 'insert("' + w + '").', rec.c.nodes + ' Knoten, ' + rec.c.links + ' Links (davon belegt ' + (rec.c.nodes - 1) + ').'); }
+    for(const q of qs){ let n = 0, ok = false;
+      if(v === 'tst'){ let h = S.t, d = 0; while(h){ const i = ch(q, d); n++; if(i < h.c) h = h.l; else if(i > h.c) h = h.r; else { if(i === 0){ ok = true; break; } h = h.m; d++; } } }
+      else { let h = S.t, d = 0; while(h){ if(d === q.length){ ok = h.end; break; } n++; h = h.nx[q[d]] || null; d++; } }
+      rec.add('sc', n); rec.step(v === 'tst' ? 6 : 6, 'search("' + q + '"): ' + (ok ? 'Treffer' : 'Fehlschlag') + ' nach ' + n + ' Zeichenschritten.', '\\(\\Res{' + n + '\\text{ Schritte}}\\) für „' + q + '“.'); }
+  },
+  view(S){ const lab = c => c === 0 ? '$' : String.fromCharCode(c);
+    const toT = h => h ? {lab: lab(h.c), kids: [h.l ? {n: toT(h.l), tag: 'l'} : null, h.m ? {n: toT(h.m), tag: 'm'} : null, h.r ? {n: toT(h.r), tag: 'r'} : null].filter(Boolean)} : null;
+    const toR = h => h ? {lab: h.end ? '•$' : '•', sub: '', kids: Object.keys(h.nx).sort().map(k => ({n: toR(h.nx[k]), tag: k}))} : null;
+    return S.t ? S4.mtree(S.v === 'tst' ? toT(S.t) : toR(S.t), {title: S.v === 'tst' ? 'TST: l = kleiner, m = gleich (nächstes Zeichen), r = größer; $ = Wortende' : 'Mehrweg-Trie: Kante = Zeichen, •$ = hier endet ein Wort; jeder Knoten hat 27 Links'}) : '<div class="muted">(leer)</div>'; },
+  math(c, inp, v, done){ const ws = String(inp.A).toLowerCase().split(/[^a-z]+/).filter(Boolean).filter((x, i, a) => a.indexOf(x) === i).slice(0, 10), L = ws.reduce((s, w) => s + w.length, 0);
+    return LB.labVs('Knoten', c.nodes || 0, done ? c.nodes || 0 : '…', ' ') + LB.labVs('Links (Speicher)', c.links || 0, done ? c.links || 0 : '…', ' ') + LB.labVs('Such-Schritte', c.sc || 0, done ? c.sc || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Zeichen gesamt} &= ' + L + ' && \\text{obere Schranke für innere Knoten} \\\\ \\text{Mehrweg} &: R \\cdot \\text{Knoten} && \\text{Links, meist leer (Eig. 15.6)} \\\\ \\text{TST} &: 3 \\cdot \\text{Knoten} && \\text{Suche} \\approx \\text{Wortlänge} + \\ln N \\end{aligned} \\]</div>'; },
+  cmp:[['nodes', 'Knoten'], ['links', 'Links'], ['cc', 'Zeichenschritte'], ['sc', 'Such-Schritte']],
+  cmpNote: () => 'Der Mehrweg-Trie ist pro Zeichen am schnellsten (ein Arrayzugriff), braucht aber R-mal so viele Links. Der TST braucht wenig Speicher und unterstützt Präfix- und Bereichssuchen.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 15.6:}}\\) Ein R-Wege-Trie mit N Schlüsseln hat ≈ N/ln R Knoten und damit ≈ RN/ln R Links.</p><p>\\(\\Rule{\\text{Eigenschaft 15.7:}}\\) Eine TST-Suche braucht ≈ ln N + Wortlänge Zeichenvergleiche.</p><p><b>Aussage:</b> Für Wörterbücher mit vielen gemeinsamen Präfixen (Autovervollständigung) ist der TST das Mittel der Wahl.</p>'; }
+};
+
+LB.labCh15 = [dst, tst];
+})();
+
+/* ===== LAB Kapitel 16: externe Suche ===== */
+(function(){
+'use strict';
+const LB = window.LB, S4 = LB.S4;
+const nums = (s, max) => String(s).split(/[^0-9]+/).filter(Boolean).map(Number).filter((x, i, a) => a.indexOf(x) === i).slice(0, max || 30);
+const logb = (x, b) => Math.log(x) / Math.log(b);
+
+/* ---------------- 1 · B-Baum: Vorlesung (Mindestgrad t) und Buch (B⁺, Ordnung M) ---------------- */
+const VLC = ['void insert(int k)  // Vorlesung: Mindestgrad t', '  { if (root->n == 2*t-1)  // Wurzel voll?', '      { node *s = new node(); s->c[0] = root;', '        splitChild(s, 0); root = s; }  // Baum wächst oben', '    insertNonFull(root, k);', '  }', 'void insertNonFull(node *x, int k)', '  { int i = x->n - 1;', '    if (x->leaf)', '      { while (i >= 0 && k < x->key[i])', '          { x->key[i+1] = x->key[i]; i--; }', '        x->key[i+1] = k; x->n++; return; }', '    while (i >= 0 && k < x->key[i]) i--;', '    i++;', '    if (x->c[i]->n == 2*t-1)  // Kind voll: vorher teilen', '      { splitChild(x, i);', '        if (k > x->key[i]) i++; }', '    insertNonFull(x->c[i], k);', '  }', 'void splitChild(node *x, int i)  // Median nach oben', '  { node *y = x->c[i], *z = new node();', '    z->keys = y->key[t .. 2t-2]; y->n = t-1;  // je t-1', '    x->key.insert(i, y->key[t-1]); x->c.insert(i+1, z);', '  }'];
+const BPC = ['link split(link h)  // Prog. 16.3', '  { link t = new node();', '    for (int j = 0; j < M/2; j++)', '      t->b[j] = h->b[M/2+j];  // obere Hälfte', '    h->m = M/2; t->m = M/2;', '    return t;', '  }', 'link insertR(link h, Item x, int ht)', '  { int i, j; Key v = x.key(); entry t;', '    t.key = v; t.item = x;', '    if (ht == 0)  // Blatt', '      for (j = 0; j < h->m; j++)', '        { if (v < h->b[j].key) break; }', '    else', '      for (j = 0; j < h->m; j++)', '        if ((j+1 == h->m) || (v < h->b[j+1].key))', '          { link u = insertR(h->b[j++].next, x, ht-1);', '            if (u == 0) return 0;', '            t.key = u->b[0].key; t.next = u;', '            break; }', '    for (i = h->m; i > j; i--) h->b[i] = h->b[i-1];', '    h->b[j] = t;', '    if (++h->m < M) return 0; else return split(h);', '  }', 'void insert(Item item)', '  { link u = insertR(head, item, HT);', '    if (u == 0) return;', '    link t = new node(); t->m = 2;  // neue Wurzel', '    t->b[0].key = head->b[0].key; t->b[1].key = u->b[0].key;', '    t->b[0].next = head; t->b[1].next = u;', '    head = t; HT++;', '  }'];
+const BV = {vl2: ['vl', 2], vl3: ['vl', 3], b4: ['buch', 4], b6: ['buch', 6]};
+const bt = {
+  icon:'🗄', name:'B-Baum', book:'§16.3 · Prog. 16.1–16.4 · Vorlesung Def. 4.13',
+  intro:'Ein Knoten ist eine Plattenseite mit vielen Schlüsseln; gezählt werden <b>Sonden</b> (Seitenzugriffe). Die <b>Vorlesung</b> (Mindestgrad t) teilt volle Knoten schon auf dem Weg nach unten und schiebt den Median hoch. Das <b>Buch</b> speichert alle Items in den Blättern (B⁺-Baum) und teilt erst, wenn eine Seite M Einträge hat.',
+  vars:[{k:'vl2', name:'Vorlesung t = 2', book:'Def. 4.13, ≤ 3 Schlüssel'}, {k:'vl3', name:'Vorlesung t = 3', book:'≤ 5 Schlüssel'}, {k:'b4', name:'Buch M = 4', book:'Prog. 16.3'}, {k:'b6', name:'Buch M = 6', book:'Prog. 16.3'}],
+  ins:[{k:'A', label:'einfügen', def:'10 20 5 6 12 30 7 17', w:28}, {k:'q', label:'suche', def:'6 13', w:6}],
+  presets:[{name:'Prüfungsaufgabe', v:'vl2', set:{A:'10 20 5 6 12 30 7 17', q:'6 13'}, hint:'Von-null-Karte §16.3: t = 2, jeden Split angeben.'}, {name:'Buch Fig. 16.5', v:'b6', set:{A:'70 17 60 15 51 77 74 37 52 76 27 73 57 43 64 20 1 26', q:'43 44'}, hint:'Die Schlüsselfolge aus dem Buch, M = 6.'}, {name:'sortiert 1–20', set:{A:Array.from({length: 20}, (_, k) => k + 1).join(' '), q:'20'}, hint:'Sortierte Eingabe: Seiten bleiben halb voll, der Baum bleibt trotzdem perfekt balanciert.'}],
+  roles:{x:'mem', y:'mem', z:'mem', h:'mem', t:'mem', k:'par', v:'par', ht:'idx', HT:'par', M:'par', i:'idx', j:'idx'},
+  code: v => BV[v][0] === 'vl' ? VLC : BPC,
+  run(rec, inp, v){
+    const [kind, P] = BV[v], ks = nums(inp.A, 30), qs = nums(inp.q, 3), S = rec.S; S.kind = kind; S.hi = null;
+    if(kind === 'vl'){ const t = P; S.root = {keys: [], kids: []};
+      const split = (x, i) => { const y = x.kids[i], z = {keys: y.keys.slice(t), kids: y.kids.slice(t)}; const med = y.keys[t - 1]; y.keys = y.keys.slice(0, t - 1); y.kids = y.kids.slice(0, y.kids.length ? t : 0);
+        x.keys.splice(i, 0, med); x.kids.splice(i + 1, 0, z); rec.add('split'); S.hi = med; rec.step(22, 'splitChild: Median ' + med + ' wandert nach oben, links ' + y.keys.join(' ') + ' | rechts ' + z.keys.join(' ') + '.', 'Jeder Knoten hat zwischen t − 1 = ' + (t - 1) + ' und 2t − 1 = ' + (2 * t - 1) + ' Schlüssel.'); };
+      const nonfull = (x, k) => { rec.add('probe'); let i = x.keys.length - 1;
+        if(!x.kids.length){ while(i >= 0 && k < x.keys[i]) i--; x.keys.splice(i + 1, 0, k); return; }
+        while(i >= 0 && k < x.keys[i]) i--; i++;
+        if(x.kids[i].keys.length === 2 * t - 1){ split(x, i); if(k > x.keys[i]) i++; } nonfull(x.kids[i], k); };
+      rec.step(1, 'Leerer B-Baum, t = ' + t + '.', 'Höhe 0.');
+      for(const k of ks){ if(S.root.keys.indexOf(k) >= 0) continue;
+        if(S.root.keys.length === 2 * t - 1){ const s = {keys: [], kids: [S.root]}; S.root = s; rec.add('grow'); split(s, 0); }
+        nonfull(S.root, k); S.hi = k; rec.c.height = bh(S.root); rec.c.nodes = cntN(S.root); rec.step(5, 'insert(' + k + ').', 'Höhe ' + bh(S.root) + ', ' + cntN(S.root) + ' Knoten.'); }
+      for(const q of qs){ let x = S.root, p = 0, ok = false; while(x){ p++; rec.add('sprobe'); let i = 0; while(i < x.keys.length && q > x.keys[i]) i++; if(i < x.keys.length && x.keys[i] === q){ ok = true; break; } x = x.kids.length ? x.kids[i] : null; }
+        S.hi = q; rec.step(1, 'search(' + q + '): ' + (ok ? 'Treffer' : 'Fehlschlag') + ' nach ' + p + ' Sonden.', '\\(\\Res{' + p + '\\text{ Sonden}}\\) = Anzahl besuchter Seiten.'); } }
+    else { const M = P; let head = {m: 0, b: []}, HT = 0; S.root = head; S.HT = 0;
+      const split = h => { const t = {m: M / 2, b: h.b.slice(M / 2)}; h.b = h.b.slice(0, M / 2); h.m = M / 2; rec.add('split'); S.hi = t.b[0].key; return t; };
+      const insR = (h, v0, ht) => { rec.add('probe'); let j; const e = {key: v0, next: null};
+        if(ht === 0){ for(j = 0; j < h.m; j++) if(v0 < h.b[j].key) break; }
+        else { for(j = 0; j < h.m; j++) if(j + 1 === h.m || v0 < h.b[j + 1].key){ const u = insR(h.b[j++].next, v0, ht - 1); if(!u) return null; e.key = u.b[0].key; e.next = u; break; } }
+        h.b.splice(j, 0, e); h.m++; if(h.m < M) return null; const t = split(h); rec.step(23, 'Seite voll (' + M + ' Einträge): teilen in ' + h.b.map(x => x.key).join(' ') + ' | ' + t.b.map(x => x.key).join(' ') + '.', 'Beide Hälften haben M/2 = ' + M / 2 + ' Einträge.'); return t; };
+      rec.step(25, 'Leerer B⁺-Baum, M = ' + M + '.', 'HT = 0.');
+      for(const k of ks){ const u = insR(head, k, HT); if(u){ head = {m: 2, b: [{key: head.b[0].key, next: head}, {key: u.b[0].key, next: u}]}; HT++; rec.add('grow'); S.root = head; S.HT = HT; rec.step(31, 'Wurzel geteilt: neue Wurzel ' + head.b[0].key + ' | ' + head.b[1].key + ', HT = ' + HT + '.', 'Der Baum wächst nur an der Wurzel: alle Blätter bleiben gleich tief.'); }
+        S.root = head; S.hi = k; rec.c.height = HT; rec.c.nodes = cntB(head); rec.step(26, 'insert(' + k + ').', 'HT = ' + HT + ': jede Suche braucht HT + 1 = ' + (HT + 1) + ' Sonden.'); }
+      for(const q of qs){ let h = head, ht = HT, p = 0, ok = false; while(true){ p++; rec.add('sprobe'); if(ht === 0){ ok = h.b.some(e => e.key === q); break; } let j = 0; while(j + 1 < h.m && !(q < h.b[j + 1].key)) j++; h = h.b[j].next; ht--; }
+        S.hi = q; rec.step(26, 'search(' + q + '): ' + (ok ? 'Treffer' : 'Fehlschlag') + ' nach ' + p + ' Sonden.', '\\(\\Res{' + p + '\\text{ Sonden}}\\).'); } }
+  },
+  view(S){ const hiOf = keys => keys.indexOf(S.hi) >= 0 ? 'chg' : null;
+    const toV = x => ({lab: x.keys.join(' ') || '∅', mark: hiOf(x.keys), kids: x.kids.map(c => ({n: toV(c)}))});
+    const toB = h => { const leaf = !h.b.length || !h.b[0].next; return {lab: h.b.map(e => e.key).join(' ') || '∅', mark: hiOf(h.b.map(e => e.key)), kids: leaf ? [] : h.b.map(e => ({n: toB(e.next)}))}; };
+    return S4.mtree(S.kind === 'vl' ? toV(S.root) : toB(S.root), {tags: false, title: S.kind === 'vl' ? 'B-Baum (Vorlesung): Schlüssel in allen Knoten' : 'B⁺-Baum (Buch): innere Seiten enthalten Kopien, Items stehen in den Blättern'}); },
+  math(c, inp, v, done){ const [kind, P] = BV[v], N = nums(inp.A, 30).length, t = kind === 'vl' ? P : P / 2, M = kind === 'vl' ? 2 * P : P;
+    return LB.labVs('Höhe', c.height || 0, done ? c.height || 0 : '…', ' ') + LB.labVs('Splits', c.split || 0, done ? c.split || 0 : '…', ' ') + LB.labVs('Seiten', c.nodes || 0, done ? c.nodes || 0 : '…', ' ') + LB.labVs('Such-Sonden', c.sprobe || 0, done ? c.sprobe || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} ' + (kind === 'vl' ? 'h &\\le \\log_t\\tfrac{N+1}{2} = ' + S4.fmt(N ? logb((N + 1) / 2, t) : 0) + ' && \\text{Vorlesung, } t = ' + t : '\\text{Sonden} &\\ge \\log_M N = ' + S4.fmt(N ? logb(N, M) : 0) + ' && \\text{Eig. 16.2} \\\\ \\text{Sonden} &\\le \\log_{M/2} N = ' + S4.fmt(N ? logb(N, M / 2) : 0) + ' && \\text{halbvolle Seiten}') + ' \\\\ M &= 2t = ' + M + ' && \\text{VL ↔ Buch} \\end{aligned} \\]</div>'; },
+  cmp:[['height', 'Höhe'], ['split', 'Splits'], ['nodes', 'Seiten'], ['sprobe', 'Such-Sonden']],
+  cmpNote: () => 'Größere Seiten ⇒ flacherer Baum ⇒ weniger Sonden. In der Praxis hat eine Seite Hunderte Einträge: Bei M = 1000 reichen drei bis vier Sonden für eine Milliarde Schlüssel.',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. (Vorlesung):}}\\) Jeder Knoten außer der Wurzel hat zwischen t − 1 und 2t − 1 Schlüssel, alle Blätter liegen auf derselben Tiefe.</p><p>\\(\\Rule{\\text{Eigenschaft 16.2:}}\\) Eine Suche in einem B-Baum der Ordnung M mit N Items braucht zwischen \\(\\log_M N\\) und \\(\\log_{M/2} N\\) Sonden.</p><p><b>Aussage:</b> Mit t = 2 (M = 4) ist der B-Baum genau der 2-3-4-Baum aus Kapitel 13.</p>'; }
+};
+function bh(x){ return x.kids.length ? 1 + bh(x.kids[0]) : 0; }
+function cntN(x){ return 1 + x.kids.reduce((s, c) => s + cntN(c), 0); }
+function cntB(h){ return 1 + (h.b.length && h.b[0].next ? h.b.reduce((s, e) => s + cntB(e.next), 0) : 0); }
+
+/* ---------------- 2 · erweiterbares Hashing ---------------- */
+const EXC = ['// nach Prog. 16.5–16.8 (k = lokale Tiefe einer Seite, d = globale Tiefe)', 'void split(link h)', '  { if (h->k == d)  // Seite nutzt schon alle d Bits:', '      { link *old = dir; d += 1; D += D;  // Verzeichnis verdoppeln', '        dir = new link[D];', '        for (int i = 0; i < D; i++) dir[i] = old[i/2]; }', '    link t = new node; t->k = ++(h->k);  // ein Bit mehr', '    for (int j = 0; j < h->m; j++)  // nach Bit k−1 aufteilen', '      if (bits(h->b[j].key(), h->k - 1, 1) == 1) move(h->b[j], t);', '    for (int i = 0; i < D; i++)  // Einträge mit Bit k−1 = 1 auf t', '      if (dir[i] == h && bits(i, h->k - 1, 1) == 1) dir[i] = t;', '    if (h->m == M) split(h);  // alles blieb in h: noch ein Bit', '    if (t->m == M) split(t);  // alles ging nach t: noch ein Bit', '  }', 'void insert(Item x)', '  { link h = dir[bits(x.key(), 0, d)];  // erste d Bits', '    insert sortiert in h;', '    if (h->m == M) split(h);  // voll: teilen', '  }', 'Item search(Key v)  // 2 Sonden: Verzeichnis, Seite', '  { link h = dir[bits(v, 0, d)]; suche v in h; }'];
+const EV = {m2: 2, m4: 4, m8: 8};
+const ext = {
+  icon:'📚', name:'Erweiterbares Hashing', book:'§16.4 · Prog. 16.5–16.8',
+  intro:'Die ersten d Bits des Schlüssels wählen einen Eintrag im <b>Verzeichnis</b> (D = 2^d Einträge), der auf eine Seite mit höchstens M Schlüsseln zeigt. Läuft eine Seite über, wird sie nach dem nächsten Bit geteilt; nur wenn nötig verdoppelt sich das Verzeichnis. Jede Suche kostet 2 Sonden: Verzeichnis und Seite.',
+  vars:[{k:'m2', name:'M = 2', book:'kleine Seiten'}, {k:'m4', name:'M = 4', book:'Fig. 16.10'}, {k:'m8', name:'M = 8', book:'große Seiten'}],
+  ins:[{k:'A', label:'Schlüssel (0–255)', def:'10 200 37 130 90 250 66 12 150 175 40 220 5 99 111 140', w:30}, {k:'q', label:'suche', def:'99 100', w:7}],
+  presets:[{name:'16 Schlüssel', set:{A:'10 200 37 130 90 250 66 12 150 175 40 220 5 99 111 140', q:'99 100'}, hint:'Gleichmäßig gestreute 8-Bit-Schlüssel.'}, {name:'gleicher Anfang', set:{A:'128 129 130 131 132 133 134 135', q:'131'}, hint:'Alle beginnen mit 10000…: Das Verzeichnis muss mehrfach auf einmal verdoppeln, um sie zu trennen.'}, {name:'aufsteigend', set:{A:'0 16 32 48 64 80 96 112 128 144 160 176 192 208 224 240', q:'112'}, hint:'Die ersten 4 Bits sind alle verschieden: ideal verteilt.'}],
+  roles:{dir:'mem', h:'mem', t:'mem', d:'idx', D:'par', k:'idx', M:'par', x:'par'},
+  code: () => EXC,
+  run(rec, inp, v){
+    const M = EV[v], ks = nums(inp.A, 30).map(x => x & 255).filter((x, i, a) => a.indexOf(x) === i), qs = nums(inp.q, 3).map(x => x & 255), S = rec.S;
+    S.P = []; S.d = 0; S.D = 1; S.hi = {}; S.dhi = {};
+    const mk = k => { S.P.push({k, b: []}); rec.add('pages'); return S.P.length - 1; };
+    const bit = (x, pos) => (x >> (7 - pos)) & 1, pre = x => S.d ? x >> (8 - S.d) : 0, ibit = (i, pos) => (i >> (S.d - 1 - pos)) & 1;
+    S.dir = [mk(0)];
+    rec.step(15, 'Leeres Verzeichnis (d = 0, D = 1) auf eine leere Seite.', 'Jede Suche: 1 Sonde im Verzeichnis + 1 Sonde in der Seite.');
+    const split = h => { const H = S.P[h]; rec.add('split');
+      if(H.k === S.d){ const old = S.dir; S.d++; S.D *= 2; S.dir = Array.from({length: S.D}, (_, i) => old[i >> 1]); rec.add('dbl'); S.dhi = {};
+        S.hi = {[h]: 'par'}; rec.step(6, 'P' + h + ' nutzt schon alle d Bits: Verzeichnis verdoppelt auf d = ' + S.d + ', D = ' + S.D + '.', 'Jeder alte Eintrag wird zu zwei; die Seiten bleiben, wo sie sind.'); }
+      const k = ++H.k, t = mk(k), T = S.P[t]; T.b = H.b.filter(x => bit(x, k - 1) === 1); H.b = H.b.filter(x => bit(x, k - 1) === 0); S.dhi = {};
+      S.dir.forEach((p, i) => { if(p === h && ibit(i, k - 1) === 1){ S.dir[i] = t; S.dhi[i] = 1; } });
+      S.hi = {[h]: 'par', [t]: 'chg'}; rec.step(11, 'P' + h + ' nach Bit ' + (k - 1) + ' geteilt: P' + h + ' behält ' + H.b.length + ', neue Seite P' + t + ' bekommt ' + T.b.length + '.' + (H.b.length === M || T.b.length === M ? ' Alles auf einer Seite: noch ein Bit.' : ''), 'Beide Seiten haben jetzt lokale Tiefe k = ' + k + ' ≤ d = ' + S.d + '.');
+      if(H.b.length === M) split(h); else if(T.b.length === M) split(t); };
+    for(const x of ks){ const di = pre(x), h = S.dir[di], H = S.P[h]; H.b.push(x); H.b.sort((u, w) => u - w);
+      S.hi = {[h]: 'chg'}; S.dhi = {[di]: 1}; rec.c.D = S.D; rec.c.used = new Set(S.dir).size;
+      rec.step(17, 'insert(' + x + ' = ' + x.toString(2).padStart(8, '0') + '): erste ' + S.d + ' Bits → Eintrag ' + di + ' → Seite P' + h + ' (' + H.b.length + '/' + M + ').', 'd = ' + S.d + ', D = ' + S.D + ', ' + new Set(S.dir).size + ' Seiten.');
+      if(H.b.length === M){ split(h); rec.c.D = S.D; rec.c.used = new Set(S.dir).size; } }
+    for(const q of qs){ const di = pre(q), h = S.dir[di], ok = S.P[h].b.indexOf(q) >= 0; rec.add('sprobe', 2); S.hi = {[h]: ok ? 'idx' : 'res'}; S.dhi = {[di]: 1};
+      rec.step(21, 'search(' + q + '): Eintrag ' + di + ' → P' + h + ': ' + (ok ? 'Treffer' : 'Fehlschlag') + ' (2 Sonden).', '\\(\\Res{2\\text{ Sonden}}\\), unabhängig von N.'); }
+  },
+  view(S){ const used = [...new Set(S.dir)];
+    const dirs = S.dir.map((p, i) => '<span class="c' + (S.dhi[i] ? ' m-chg' : '') + '">P' + p + '<i>' + (S.d ? i.toString(2).padStart(S.d, '0') : '–') + '</i></span>').join('');
+    const pages = used.map(p => { const P = S.P[p]; return '<div class="mono small"' + (S.hi[p] ? ' style="color:var(--' + (S.hi[p] === 'chg' ? 'orange' : S.hi[p] === 'idx' ? 'green' : S.hi[p] === 'res' ? 'red' : 'blue') + ')"' : '') + '><b>P' + p + '</b> (k = ' + P.k + '): ' + (P.b.map(x => x + '<sub>' + x.toString(2).padStart(8, '0').slice(0, Math.max(P.k, 1)) + '…</sub>').join(' ') || '–') + '</div>'; }).join('');
+    return '<div class="small muted">Verzeichnis (d = ' + S.d + ', D = ' + S.D + '), klein = Bitpräfix:</div><div class="lab-cells">' + dirs + '</div><div class="small muted">Seiten:</div>' + pages; },
+  math(c, inp, v, done){ const M = EV[v], N = nums(inp.A, 30).length;
+    return LB.labVs('Verzeichnisgröße D', c.D || 1, done ? c.D || 1 : '…', ' ') + LB.labVs('benutzte Seiten', c.used || 0, done ? c.used || 0 : '…', ' ') + LB.labVs('Splits', c.split || 0, done ? c.split || 0 : '…', ' ') + LB.labVs('Such-Sonden', c.sprobe || 0, done ? c.sprobe || 0 : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Seiten} &\\approx \\tfrac{N}{M\\ln 2} = 1{,}44\\,\\tfrac NM = ' + S4.fmt(1.44 * N / M) + ' && \\text{Eig. 16.4 (69 \\% voll)} \\\\ D &\\approx \\tfrac{3{,}92}{M}\\,N^{1+1/M} = ' + S4.fmt(3.92 / M * Math.pow(N, 1 + 1 / M)) + ' && \\text{Eig. 16.5} \\\\ \\text{Suche} &= 2 \\text{ Sonden} && \\text{Verzeichnis im Speicher: 1} \\end{aligned} \\]</div>'; },
+  cmp:[['D', 'Verzeichnis D'], ['used', 'Seiten'], ['split', 'Splits'], ['dbl', 'Verdopplungen']],
+  cmpNote: () => 'Kleine Seiten brauchen ein großes Verzeichnis; große Seiten halten es klein. Schlüssel mit langen gemeinsamen Präfixen blähen das Verzeichnis auf, weil erst viele Bits sie trennen.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 16.4:}}\\) Erweiterbares Hashing braucht im Mittel ≈ 1,44 N/M Seiten.</p><p>\\(\\Rule{\\text{Eigenschaft 16.5:}}\\) Das Verzeichnis hat im Mittel ≈ \\(3{,}92\\,N^{1+1/M}/M\\) Einträge.</p><p><b>Aussage:</b> Suchen in genau 2 Sonden (1, wenn das Verzeichnis im Speicher liegt), dafür keine Ordnung: Bereichsanfragen kann nur der B-Baum.</p>'; }
+};
+
+LB.labCh16 = [bt, ext];
+})();
+
+document.addEventListener('DOMContentLoaded', () => {if(LB.labCh12) LB.Lab({id:'labK12', scenarios:LB.labCh12});if(LB.labCh13) LB.Lab({id:'labK13', scenarios:LB.labCh13});if(LB.labCh14) LB.Lab({id:'labK14', scenarios:LB.labCh14});if(LB.labCh15) LB.Lab({id:'labK15', scenarios:LB.labCh15});if(LB.labCh16) LB.Lab({id:'labK16', scenarios:LB.labCh16});});
+</script>
+<script>
 /* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 4 steht"], ["master", "Master-Anatomie", "Start + Test + nächster Kandidat"], ["erkennen", "Woran erkennbar?", "Such-Kino: 4 Verfahren"]]], ["Kapitel 12 · Symboltabellen & BST", [["s121", "12.1 ST-ADT", "insert, search, Tab. 12.1"], ["s122", "12.2 Key-indexed", "Schlüssel = Index, O(1)"], ["s123", "12.3 Sequentiell", "N/2 Treffer, N Fehlschlag"], ["s124", "12.4 Binäre Suche", "⌊lg N⌋ + 1"], ["s125", "12.5 BST", "links kleiner, rechts größer"], ["s126", "12.6 BST-Leistung", "2 ln N, worst N"], ["s127", "12.7 Index", "Text-Index mit Suffixen"], ["s128", "12.8 Wurzel-Einfügen", "Rotationen rotR, rotL"], ["s129", "12.9 select/remove", "Rang, Nachfolger, join"]]], ["Kapitel 13 · Balancierte Bäume", [["s131", "13.1 Randomisiert", "Wurzel mit W. 1/(N+1)"], ["s132", "13.2 Splay", "zig-zig, amortisiert"], ["s133", "13.3 2-3-4-Baum", "top-down splitten"], ["s134", "13.4 Rot-Schwarz", "rote Links, &lt; 2 lg N"], ["savl", "★ AVL (Vorlesung)", "BF, LL/RR/LR/RL, Löschen"], ["s135", "13.5 Skip-Liste", "Ebenen mit W. 1/2ʲ"], ["s136", "13.6 Vergleich", "Messung aller Bäume"]]], ["Kapitel 14 · Hashing", [["s141", "14.1 Hashfunktion", "mod M, Horner, universell"], ["s142", "14.2 Verkettung", "Listen, N/M"], ["s143", "14.3 Linear", "Cluster, ½(1+1/(1−α)²)"], ["s144", "14.4 Doppel-Hashing", "zweite Schrittweite"], ["s145", "14.5 Dynamisch", "verdoppeln, amortisiert"], ["s146", "14.6 Perspektive", "Hashing vs. Bäume"]]], ["Kapitel 15 · Radix-Suche", [["s151", "15.1 DST", "Bits lenken, lg N"], ["s152", "15.2 Trie", "Blätter tragen Schlüssel"], ["s153", "15.3 Patricia", "nur trennende Bits"], ["s154", "15.4 TST", "3-Wege-Trie für Strings"], ["s155", "15.5 Text-Index", "Suffixe in TST/Array"]]], ["Kapitel 16 · Extern", [["s161", "16.1 Spielregeln", "Seiten, Sonden"], ["s162", "16.2 Index-sequentiell", "M-äres Index-Array"], ["s163", "16.3 B-Baum", "Split, log_M N"], ["s164", "16.4 Erweiterbar", "Verzeichnis 2ᵈ"], ["s165", "16.5 Perspektive", "alles im Vergleich"]]], ["Übungsblätter gelöst", [["bl-avlins", "AVL einfügen", "17 Aufgaben, alle Rotationsfälle"], ["bl-avldel", "AVL löschen", "21 Aufgaben, Nachfolger/Vorgänger"], ["bl-avlgen", "AVL löschen (2)", "21 Aufgaben, generiertes Blatt"], ["gp-p4-avl", "Klausur: AVL", "Gedächtnisprotokoll A2"], ["gp-p4-trie", "Klausur: Tries", "Gedächtnisprotokoll A1 a–c"], ["gp-p4-hash", "Klausur: Hashtabelle", "Gedächtnisprotokoll A1 e"], ["gp-p4-worst", "Klausur: Worst Case", "Gedächtnisprotokoll A3"]]], ["Training", [["schema", "📐 Schema", "3 Such-Beispiele"], ["werkbank", "🛠 Werkbank", "AVL-, BST-, Hash-, B-Baum-Blätter"], ["pruefung", "🎯 Prüfungstabelle", "Worst Case aller Strukturen"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "alle 4 Teile"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 4 steht"], ["master", "Master-Anatomie", "Start + Test + nächster Kandidat"], ["erkennen", "Woran erkennbar?", "Such-Kino: 4 Verfahren"]]], ["Kapitel 12 · Symboltabellen & BST", [["s121", "12.1 ST-ADT", "insert, search, Tab. 12.1"], ["s122", "12.2 Key-indexed", "Schlüssel = Index, O(1)"], ["s123", "12.3 Sequentiell", "N/2 Treffer, N Fehlschlag"], ["s124", "12.4 Binäre Suche", "⌊lg N⌋ + 1"], ["s125", "12.5 BST", "links kleiner, rechts größer"], ["s126", "12.6 BST-Leistung", "2 ln N, worst N"], ["s127", "12.7 Index", "Text-Index mit Suffixen"], ["s128", "12.8 Wurzel-Einfügen", "Rotationen rotR, rotL"], ["s129", "12.9 select/remove", "Rang, Nachfolger, join"], ["lab12", "🧪 Labor Kap. 12", "alles in einem interaktiven Bild"]]], ["Kapitel 13 · Balancierte Bäume", [["s131", "13.1 Randomisiert", "Wurzel mit W. 1/(N+1)"], ["s132", "13.2 Splay", "zig-zig, amortisiert"], ["s133", "13.3 2-3-4-Baum", "top-down splitten"], ["s134", "13.4 Rot-Schwarz", "rote Links, &lt; 2 lg N"], ["savl", "★ AVL (Vorlesung)", "BF, LL/RR/LR/RL, Löschen"], ["s135", "13.5 Skip-Liste", "Ebenen mit W. 1/2ʲ"], ["s136", "13.6 Vergleich", "Messung aller Bäume"], ["lab13", "🧪 Labor Kap. 13", "alles in einem interaktiven Bild"]]], ["Kapitel 14 · Hashing", [["s141", "14.1 Hashfunktion", "mod M, Horner, universell"], ["s142", "14.2 Verkettung", "Listen, N/M"], ["s143", "14.3 Linear", "Cluster, ½(1+1/(1−α)²)"], ["s144", "14.4 Doppel-Hashing", "zweite Schrittweite"], ["s145", "14.5 Dynamisch", "verdoppeln, amortisiert"], ["s146", "14.6 Perspektive", "Hashing vs. Bäume"], ["lab14", "🧪 Labor Kap. 14", "alles in einem interaktiven Bild"]]], ["Kapitel 15 · Radix-Suche", [["s151", "15.1 DST", "Bits lenken, lg N"], ["s152", "15.2 Trie", "Blätter tragen Schlüssel"], ["s153", "15.3 Patricia", "nur trennende Bits"], ["s154", "15.4 TST", "3-Wege-Trie für Strings"], ["s155", "15.5 Text-Index", "Suffixe in TST/Array"], ["lab15", "🧪 Labor Kap. 15", "alles in einem interaktiven Bild"]]], ["Kapitel 16 · Extern", [["s161", "16.1 Spielregeln", "Seiten, Sonden"], ["s162", "16.2 Index-sequentiell", "M-äres Index-Array"], ["s163", "16.3 B-Baum", "Split, log_M N"], ["s164", "16.4 Erweiterbar", "Verzeichnis 2ᵈ"], ["s165", "16.5 Perspektive", "alles im Vergleich"], ["lab16", "🧪 Labor Kap. 16", "alles in einem interaktiven Bild"]]], ["Übungsblätter gelöst", [["bl-avlins", "AVL einfügen", "17 Aufgaben, alle Rotationsfälle"], ["bl-avldel", "AVL löschen", "21 Aufgaben, Nachfolger/Vorgänger"], ["bl-avlgen", "AVL löschen (2)", "21 Aufgaben, generiertes Blatt"], ["gp-p4-avl", "Klausur: AVL", "Gedächtnisprotokoll A2"], ["gp-p4-trie", "Klausur: Tries", "Gedächtnisprotokoll A1 a–c"], ["gp-p4-hash", "Klausur: Hashtabelle", "Gedächtnisprotokoll A1 e"], ["gp-p4-worst", "Klausur: Worst Case", "Gedächtnisprotokoll A3"]]], ["Training", [["schema", "📐 Schema", "3 Such-Beispiele"], ["werkbank", "🛠 Werkbank", "AVL-, BST-, Hash-, B-Baum-Blätter"], ["pruefung", "🎯 Prüfungstabelle", "Worst Case aller Strukturen"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "alle 4 Teile"], ["spick", "🧾 Spickzettel", "alles für die Klausur Teil 4"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Treffer", "Fehlschlag", "Fehlschläge", "search hit", "search miss", "gefunden", "Suchkosten", "Sonde*", "Sondierung*", "Wurzel", "Hashwert*", "symmetrische* Nachfolger*", "Nachfolger", "Rang"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "Rotation*", "rotieren", "rotiert", "Rechtsrotation*", "Linksrotation*", "Doppelrotation*", "Einfache Rotation", "Split", "Splits", "splitten", "gesplittet", "aufteilen", "aufgeteilt", "Umfärben", "umgefärbt", "umfärben", "Verdopplung", "verdoppeln", "verdoppelt", "löschen", "gelöscht", "Löschen", "Rebalancierung", "rebalancieren", "hochrotieren", "hochrotiert"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "BST", "BSTs", "Suchbaum", "Suchbäume", "Symboltabelle*", "Binärbaum*", "AVL-Baum", "AVL-Bäume", "AVL-Eigenschaft", "AVL-Kriterium", "Balancefaktor*", "balanciert*", "Rot-Schwarz-Baum", "Rot-Schwarz-Bäume", "2-3-4-Baum", "2-3-4-Bäume", "B-Baum", "B-Bäume", "Trie", "Tries", "Patricia", "TST", "TSTs", "Skip-Liste*", "Splay-Baum", "Splay-Bäume", "Hashing", "Hashfunktion*", "Kollision*", "Cluster*", "Primärcluster", "Belegungsfaktor", "Lastfaktor", "amortisiert*", "randomisiert*", "Inorder", "Präfix", "Suffix*", "Höhe", "Blatt", "Blätter", "Seite*", "Verzeichnis", "Heap-Ordnung"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M", "Schlüssel", "Suchschlüssel", "Tabellengröße"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife", "Tiefe", "Bitposition", "Ebene*"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Bittest*", "Bit", "Bits", "leerer Link", "leere Link*", "Nullzeiger", "Gleichheit"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger", "Tabelle*", "Links", "Teilbaum", "Teilbäume", "Kind", "Kinder", "Elternknoten", "Verkettung", "Kopf", "head", "Wurzelseite"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
@@ -6502,6 +7811,11 @@ function patch(){
 }
 window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
+</script>
+<script>
+/* ===== SPICK: nur den Spickzettel drucken ===== */
+(function(){ const b = document.getElementById('spPrint'); if(!b) return;
+  b.addEventListener('click', () => { document.body.classList.add('print-spick'); window.print(); setTimeout(() => document.body.classList.remove('print-spick'), 500); }); })();
 </script>
 </body>
 </html>
