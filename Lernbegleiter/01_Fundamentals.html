@@ -346,6 +346,23 @@ svg text:not([fill]){fill:#e6edf3}
   body.print-spick .sp{break-inside:avoid}
 }
 </style>
+<style>
+/* ===== P1Y-ADDON: Werkzeug-Karten, Übungsgenerator-Code ===== */
+.tool{padding:14px 18px}
+.tool h3{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.tnum{display:inline-flex;align-items:center;justify-content:center;min-width:1.8em;height:1.8em;border-radius:50%;background:var(--rule);color:#0d1117;font-weight:800;font-size:.9rem}
+.tshape{font-size:.78rem;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:7px;padding:.05rem .5rem;margin-left:auto}
+.tsvg{background:#0b0f14;border:1px solid var(--line);border-radius:10px;padding:6px;margin:6px 0}
+.tclaim{margin:10px 0 0}
+.tclaim h3{margin:0 0 .3rem;font-size:1rem}
+.steps3 p{margin:.35rem 0}
+pre.ugc .row.on{background:rgba(210,153,34,.13)}
+pre.ugc .ugcnt{float:right;color:var(--idx);font-size:.78rem;margin-left:.6rem;text-indent:0}
+pre.ugc .ugcnt b{color:var(--chg)}
+#ugOut tr.ugsel td{outline:1px solid var(--chg)}
+.tool .katex-display>.katex,.sgrid .katex-display>.katex,.spick .katex-display>.katex{font-size:1.04em}
+@media(max-width:1500px){.tool .katex-display>.katex,.sgrid .katex-display>.katex,.spick .katex-display>.katex{font-size:.95em}}
+</style>
 </head>
 <body>
 <header class="lbtop"><button id="lbBurger" class="lbburger" title="Inhalt öffnen">☰ Inhalt</button><div class="lbt"><b>Teil 1 · Fundamentals</b><span>Sedgewick Kap. 1–2</span></div><div class="lbq"><a href="#start">Start</a><a href="#k1-algo">Kapitel 1 · Einführung</a><a href="#k2-emp">Kapitel 2 · Analyse</a><a href="#schema">Training</a></div></header>
@@ -1386,6 +1403,76 @@ int b = N - N / 2;   // ⌈N/2⌉
 <h3>👁️ Tabelle 2.4 live: Vergleiche pro Suche bei wachsendem N</h3>
 <div class="controls"><button id="srRun">▶ messen</button><span class="small muted">je 2000 zufällige Suchen (halb erfolgreich, halb erfolglos) pro N</span></div>
 <div id="srPlot" class="plot sm"></div>
+<!--P1Y:suche-->
+<h3 id="k2-cmp">⚖ Sequentiell gegen binär, Seite an Seite: was wann abweicht</h3>
+<p><span class="fw">Lineare Suche</span> und <span class="fw">sequentielle Suche</span> sind <b>dasselbe Verfahren</b>. „Sequentiell“ beschreibt das Vorgehen (eins nach dem anderen), „linear“ die Laufzeit (Θ(N)).</p>
+<div class="grid2">
+<div class="card" style="padding:10px 12px">
+<h4 style="margin-top:0">Sequentiell auf <b>sortierter</b> Tabelle (früher Abbruch)</h4>
+<pre class="cpp" data-roles='{"v":"par","a":"mem"}'>int search(int a[], int v, int l, int r)
+{ for (int i = l; i &lt;= r; i++)      // von links nach rechts
+    { if (v == a[i]) return i;       // Treffer: Position
+      if (v &lt; a[i]) return -1;       // a[i] schon größer: v kommt nicht mehr
+    }
+  return -1;                         // bis zum Ende nichts gefunden
+}</pre>
+<p class="small">Ohne die Zeile mit <code class="inl">v &lt; a[i]</code> ist es Programm 2.1 (unsortiert): Eine erfolglose Suche muss dann immer bis zum Ende laufen.</p>
+</div>
+<div class="card" style="padding:10px 12px">
+<h4 style="margin-top:0">Binär (Programm 2.2), Tabelle muss sortiert sein</h4>
+<pre class="cpp" data-roles='{"v":"par","a":"mem"}'>int search(int a[], int v, int l, int r)
+{ while (r &gt;= l)                     // Bereich nicht leer
+    { int m = (l + r) / 2;           // Mitte, abgerundet
+      if (v == a[m]) return m;       // Treffer: Position
+      if (v &lt; a[m]) r = m - 1;       // links weitersuchen
+      else l = m + 1;                // rechts weitersuchen
+    }
+  return -1;                         // Bereich leer: nicht gefunden
+}</pre>
+<p class="small">Jede Runde halbiert den Bereich: das ist Werkzeug 5 (<a href="#sum5">halbieren bis 1</a>).</p>
+</div>
+</div>
+
+<div class="grid2 sgrid">
+<div>
+<h4>Erfolgreich: die Gauß-Summe gegen die Ebenen-Summe</h4>
+<div class="step">\[ \begin{aligned}
+\text{sequentiell: } \bar C &= \frac{1 + 2 + \dots + N}{N} = \frac{N+1}{2} && \text{Position k kostet k (Gauß)} \\
+\text{binär: } \bar C &= \frac{1\cdot 1 + 2\cdot 2 + 3\cdot 4 + \dots + h\cdot 2^{h-1}}{N} && \text{Ebene k: } 2^{k-1} \text{ Einträge, je k} \\
+&= \frac{(h-1)\,2^h + 1}{2^h - 1} \approx h - 1 && \text{für } N = 2^h - 1 \\
+&\approx \lg N - 1 && \text{die meisten liegen unten}
+\end{aligned} \]</div>
+</div>
+<div>
+<h4>Erfolglos: wo die Unterschiede entstehen</h4>
+<div class="step">\[ \begin{aligned}
+\text{unsortiert: } \bar C &= N && \text{erst am Ende sicher} \\
+\text{sortiert: } \bar C &= \frac N2 + \frac{N}{N+1} \approx \frac N2 && \text{Abbruch bei größerer Zahl} \\
+\text{binär: } \bar C &= h = \lg(N+1) && \text{alle Lücken ganz unten}
+\end{aligned} \]</div>
+</div>
+</div>
+
+<h4>Entscheidungsbaum der binären Suche für N = 15: woher \(\lg N - 1\) und \(\lg N\) kommen</h4>
+<svg viewBox="0 0 760 250" style="width:100%;max-width:760px;height:auto" role="img" aria-label="Entscheidungsbaum der binären Suche für N = 15"><line x1="270" y1="43" x2="150" y2="69" stroke="#6e7a88" stroke-width="1.3"/><line x1="150" y1="95" x2="90" y2="121" stroke="#6e7a88" stroke-width="1.3"/><line x1="90" y1="147" x2="60" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="90" y1="147" x2="120" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="150" y1="95" x2="210" y2="121" stroke="#6e7a88" stroke-width="1.3"/><line x1="210" y1="147" x2="180" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="210" y1="147" x2="240" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="270" y1="43" x2="390" y2="69" stroke="#6e7a88" stroke-width="1.3"/><line x1="390" y1="95" x2="330" y2="121" stroke="#6e7a88" stroke-width="1.3"/><line x1="330" y1="147" x2="300" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="330" y1="147" x2="360" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="390" y1="95" x2="450" y2="121" stroke="#6e7a88" stroke-width="1.3"/><line x1="450" y1="147" x2="420" y2="173" stroke="#6e7a88" stroke-width="1.3"/><line x1="450" y1="147" x2="480" y2="173" stroke="#6e7a88" stroke-width="1.3"/><circle cx="270" cy="30" r="13" fill="#161b22" stroke="#f85149" stroke-width="2"/><text x="270" y="34" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">7</text><circle cx="150" cy="82" r="13" fill="#161b22" stroke="#d29922" stroke-width="2"/><text x="150" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">3</text><circle cx="90" cy="134" r="13" fill="#161b22" stroke="#3fb950" stroke-width="2"/><text x="90" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">1</text><circle cx="60" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="60" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">0</text><circle cx="120" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="120" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">2</text><circle cx="210" cy="134" r="13" fill="#161b22" stroke="#3fb950" stroke-width="2"/><text x="210" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">5</text><circle cx="180" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="180" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">4</text><circle cx="240" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="240" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">6</text><circle cx="390" cy="82" r="13" fill="#161b22" stroke="#d29922" stroke-width="2"/><text x="390" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">11</text><circle cx="330" cy="134" r="13" fill="#161b22" stroke="#3fb950" stroke-width="2"/><text x="330" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">9</text><circle cx="300" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="300" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">8</text><circle cx="360" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="360" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">10</text><circle cx="450" cy="134" r="13" fill="#161b22" stroke="#3fb950" stroke-width="2"/><text x="450" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">13</text><circle cx="420" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="420" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">12</text><circle cx="480" cy="186" r="13" fill="#161b22" stroke="#58a6ff" stroke-width="2"/><text x="480" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e6edf3">14</text><rect x="39" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="69" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="99" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="129" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="159" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="189" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="219" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="249" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="279" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="309" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="339" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="369" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="399" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="429" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="459" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><rect x="489" y="230" width="12" height="10" rx="2" fill="none" stroke="#8b949e" stroke-dasharray="2 2"/><text x="530" y="34" font-size="11.5" fill="#f85149">Ebene 1: 1 Index · je 1 Vergl.</text><text x="530" y="86" font-size="11.5" fill="#d29922">Ebene 2: 2 Indexe · je 2 Vergl.</text><text x="530" y="138" font-size="11.5" fill="#3fb950">Ebene 3: 4 Indexe · je 3 Vergl.</text><text x="530" y="190" font-size="11.5" fill="#58a6ff">Ebene 4: 8 Indexe · je 4 Vergl.</text><text x="530" y="239" font-size="11.5" fill="#8b949e">16 Lücken (erfolglos) · je 4</text></svg>
+<p class="small">Erfolgreich im Mittel: \((1\cdot1 + 2\cdot2 + 3\cdot4 + 4\cdot8)/15 = 49/15 \approx 3{,}27\), also etwa \(\lg 16 - 1 = 3\). Erfolglos: alle 16 Lücken liegen auf Ebene 4, also immer 4 = \(\lg 16\) Vergleiche.</p>
+
+<div class="controls"><label>N = 2<sup>h</sup> − 1 mit h = <span class="readout"><b id="scNv">15</b></span></label><input id="scN" type="range" min="2" max="30" value="4"></div>
+<div id="scTab" class="scroll"></div>
+
+<div class="callout key">
+<h3>Was weicht wann ab?</h3>
+<p><span class="num">1</span><b>Sortieren hilft der sequentiellen Suche nur bei erfolglosen Suchen</b> (N → ≈ N/2). Erfolgreiche Suchen kosten unsortiert wie sortiert \((N+1)/2\), denn der Treffer steht im Mittel in der Mitte.</p>
+<p><span class="num">2</span><b>Binär: erfolgreich ist im Mittel etwa 1 Vergleich billiger als erfolglos</b> (\(\lg N - 1\) gegen \(\lg N\)). Ein Treffer kann schon weiter oben im Baum enden, eine erfolglose Suche läuft immer bis ganz unten.</p>
+<p><span class="num">3</span><b>Wachstum:</b> N verdoppelt → sequentiell doppelt so viele Vergleiche, binär genau <b>einer</b> mehr.</p>
+<p><span class="num">4</span><b>Sortieren kostet selbst</b> mindestens etwa N lg N Vergleiche (Teil 3). Es lohnt sich, wenn danach <b>viele</b> Suchen kommen. Und wer schon sortiert hat, sucht binär, nicht sequentiell.</p>
+</div>
+<div class="step">\[ \begin{aligned}
+M = 10^9 \text{ Suchen},\ N = 10^6 &: && c \text{ µs pro Vergleich} \\
+\text{sequentiell: } M \cdot \tfrac N2 = 5\cdot 10^{14} \text{ Vergl.} &\to 5\cdot 10^{8}\,c \text{ s} \approx 16\,c \text{ Jahre} && \text{unbrauchbar} \\
+\text{binär: } M \cdot (\lfloor\lg N\rfloor + 1) = 2\cdot 10^{10} \text{ Vergl.} &\to 2\cdot 10^{4}\,c \text{ s} \approx 5{,}6\,c \text{ Stunden} && \text{höchstens 20 Vergleiche pro Suche}
+\end{aligned} \]</div>
+<!--/P1Y:suche-->
 </section>
 
 <!-- ======================= 2.7 ======================= -->
@@ -1416,6 +1503,21 @@ int b = N - N / 2;   // ⌈N/2⌉
   <p class="anat-read">📖 <b>Vorlesen:</b> „Die Komplexität eines Problems ist die Worst-Case-Laufzeit des besten Algorithmus. Passt die obere Schranke eines Verfahrens zur unteren Schranke des Problems, ist das Verfahren optimal.“</p>
 </div>
 <p><b>Beispiele:</b> Die binäre Suche ist <b>optimal</b> unter allen vergleichsbasierten Verfahren. Für Union-Find zeigte Tarjan 1975, dass Weighted QU mit Pfadkompression weniger als \(O(\lg^* V)\) Zeiger pro Operation braucht und <b>jedes</b> zeigerbasierte Verfahren mehr als konstant viele. Ein garantiert linearer Algorithmus existiert also nicht, der Unterschied ist aber praktisch bedeutungslos, weil \(\lg^* V \le 5\).</p>
+<!--P1Y:tarjan-->
+<div class="callout note">
+<h3>⚖ Buch gegen Forschungsstand: die Union-Find-Schranken genauer</h3>
+<p>Das Buch fasst die Geschichte in einem Satz zusammen („Tarjan showed in 1975 …“). Für die Klausur reicht die Buchaussage. Genauer:</p>
+<div class="scroll"><table class="rt">
+<tr><th>Jahr</th><th>Wer</th><th>Ergebnis</th><th>Art</th></tr>
+<tr><td>1973</td><td>Hopcroft, Ullman</td><td>Weighted + Pfadkompression: \(O(M \lg^* N)\) für M Operationen</td><td>obere Schranke</td></tr>
+<tr><td>1975</td><td>Tarjan</td><td>schärfer: \(O(M\,\alpha(M, N))\), α = inverse Ackermann-Funktion, wächst noch langsamer als \(\lg^*\); für dieses Verfahren scharf</td><td>obere Schranke</td></tr>
+<tr><td>1979</td><td>Tarjan</td><td>jedes Verfahren einer großen Klasse von Zeiger-Algorithmen braucht \(\Omega(M\,\alpha(M, N))\)</td><td>untere Schranke</td></tr>
+<tr><td>1989</td><td>Fredman, Saks</td><td>dieselbe untere Schranke sogar im allgemeineren Cell-Probe-Modell</td><td>untere Schranke</td></tr>
+</table></div>
+<p><b>Was du sicher sagen darfst:</b> Es gibt <b>keine Garantie für lineare Zeit</b> (also O(M) für M Operationen), weil die untere Schranke über jeder Konstanten liegt. Praktisch ist das egal: \(\lg^* N \le 5\) und \(\alpha \le 4\) für jede Eingabegröße, die je gespeichert werden kann. Deshalb steht in der Vergleichstabelle der <a href="#abstrakt">Abstrakten Anatomie</a> \(O(M \lg^* N)\), wie im Buch.</p>
+</div>
+<!--/P1Y:tarjan-->
+
 <div class="callout warn"><p class="small">⚠️ Ein häufiger Fehler: grobe Schranken aus der Komplexitätstheorie direkt als „schnell in der Praxis“ lesen. Das kann böse Überraschungen geben (versteckte Konstanten, N₀ riesig). Sedgewick kombiniert deshalb Theorie, sorgfältige Implementierung und Messung.</p></div>
 </section>
 
@@ -1430,10 +1532,174 @@ int b = N - N / 2;   // ⌈N/2⌉
   <h3>Das 4-Schritte-Schema (gilt für jeden Code im Buch)</h3>
   <p><span class="num">①</span><b>Abstrakte Operation wählen</b>, meist die innerste Zeile (Vergleich, Array-Zugriff, <code class="inl">cnt++</code>).</p>
   <p><span class="num">②</span><b>Häufigkeit als Summe hinschreiben</b>: eine Schleife wird zu \(\sum\), eine Rekursion zu einer Rekurrenz.</p>
-  <p><span class="num">③</span><b>Lösen</b> mit den Standardsummen: \(\sum_{i=1}^{N} 1 = N\) · \(\sum_{i=1}^{N} i = \frac{N(N+1)}{2}\) · \(N+\frac N2+\frac N4+\dots\approx 2N\) · \(\sum_{i=1}^{N}\frac Ni = N H_N\) · „halbieren bis 1“ \(=\lg N\).</p>
+  <p><span class="num">③</span><b>Lösen</b> mit einem der <b>fünf Standardwerkzeuge</b> (jedes hat unten eine eigene Karte):</p>
+  <div class="steps3" style="margin-left:2.2em">
+  <p><a href="#sum1"><b>Werkzeug 1</b></a> konstante Summe: \(\sum_{i=1}^{N} 1 = N\) (Rumpf gleich teuer in jeder Runde)</p>
+  <p><a href="#sum2"><b>Werkzeug 2</b></a> Gauß: \(\sum_{i=1}^{N} i = \frac{N(N+1)}{2}\) (innere Schleife wächst mit i)</p>
+  <p><a href="#sum3"><b>Werkzeug 3</b></a> geometrisch: \(N+\frac N2+\frac N4+\dots \lt 2N\) (innere Schleife halbiert sich)</p>
+  <p><a href="#sum4"><b>Werkzeug 4</b></a> harmonisch: \(\sum_{i=1}^{N}\frac Ni = N H_N \approx N\ln N\) (Schrittweite i)</p>
+  <p><a href="#sum5"><b>Werkzeug 5</b></a> „halbieren bis 1“: \(\lfloor\lg N\rfloor + 1\) Runden (Laufvariable halbiert sich)</p>
+  <p class="small muted">Früher stand hier eine Zeile mit „·“ dazwischen. Der Punkt war nur ein Trennzeichen zwischen den Werkzeugen, kein Malzeichen.</p>
+  </div>
   <p><span class="num">④</span><b>Führenden Term → O/Θ</b>, dann Probe mit dem Verdopplungstest (Fig. 2.3).</p>
 </div>
 
+<!--P1Y:werkzeuge-->
+<h3 id="werkzeuge">🧰 Die fünf Werkzeuge aus Schritt ③ einzeln: Code → Summe → Bild → Aussage</h3>
+<p>Jede Karte ist für sich lesbar. Sie zeigt immer dieselben vier Dinge: den <b>Code</b>, der die Summe erzeugt; die <b>Rechnung</b> Zeile für Zeile; das <b>Bild</b>, das die gezählten Operationen als Kästchen zeigt (jedes Kästchen = ein <code class="inl">cnt++</code>); und die <b>Aussage</b>, die du danach treffen darfst, mit Verweis auf die Stelle, die sie belegt. Der Zähler unter dem Bild lässt das Programm wirklich laufen und vergleicht mit der Formel.</p>
+
+<div class="card tool" id="sum1">
+  <h3 style="margin-top:0"><span class="tnum">1</span>Konstante Summe: \(\sum_{i=1}^{N} 1 = \Res{N}\) <span class="tshape">Bild: eine Reihe (Rechteck)</span></h3>
+  <div class="grid2">
+  <div>
+<pre class="cpp" data-roles='{"cnt":"res","M":"par"}'>int cnt = 0;                      // zählt die abstrakte Operation
+for (int i = 1; i &lt;= N; i++)      // Runde i = 1, 2, …, N
+  for (int k = 1; k &lt;= M; k++)    // M fest, hängt NICHT von i ab (M = 1: keine innere Schleife)
+    cnt++;                        // eine Operation</pre>
+    <p><span class="num">①</span><b>Operation:</b> <code class="inl">cnt++</code>. <span class="num">②</span><b>Summe:</b> jede Runde liefert denselben Summanden, egal welches <span class="c-idx">i</span>.</p>
+    <div class="step">\[ \begin{aligned}
+    \Res{\texttt{cnt}} &= \sum_{i=1}^{N} 1 && \text{jede Runde zählt 1 (M = 1)} \\
+    &= \underbrace{1 + 1 + \dots + 1}_{N \text{ Summanden}} = \Res{N} && \text{N-mal die 1 addiert} \\
+    \sum_{i=1}^{N} \sum_{k=1}^{M} 1 &= \sum_{i=1}^{N} M = \Res{N \cdot M} && \text{Summand ohne i: multiplizieren erlaubt}
+    \end{aligned} \]</div>
+    <p class="small"><b>Ist das die Gauß-Formel?</b> Nein. Gauß summiert die <i>wachsenden</i> Zahlen \(1+2+\dots+N\) (Karte 2). Hier wird immer <b>dieselbe</b> Zahl 1 addiert, deshalb ist das Ergebnis einfach die Anzahl der Summanden.</p>
+  </div>
+  <div>
+    <div class="controls"><label>N = <span class="readout"><b id="t1Nv">12</b></span></label><input id="t1N" type="range" min="1" max="40" value="12"><label>M = <span class="readout"><b id="t1Mv">1</b></span></label><input id="t1M" type="range" min="1" max="8" value="1"></div>
+    <div id="t1Svg" class="tsvg"></div>
+    <div id="t1Out" class="step small"></div>
+  </div>
+  </div>
+  <div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
+  <p>„Die Schleife kostet <b>Θ(N)</b>, genau <b>N</b> Operationen; verdoppelt man N, verdoppelt sich die Zeit.“ <b>Beleg:</b> In Schritt ② ist der Summand die Konstante 1, unabhängig von <span class="c-idx">i</span>. Mit fester innerer Schleife: <b>N·M</b>, also das Rechteck im Bild.</p>
+  <p class="small"><b>Kommt vor in:</b> <a href="#master">Master-Anatomie</a> (Rumpf N-mal), <a href="#k1-qf">Quick-Find</a> (union läuft über alle N Einträge), <a href="#k2-search">sequentielle Suche</a> erfolglos (N Vergleiche), <a href="#k1-persp">1.4</a> (M Paare · N Einträge = M·N).</p></div>
+</div>
+
+<div class="card tool" id="sum2">
+  <h3 style="margin-top:0"><span class="tnum">2</span>Gauß-Summe: \(\sum_{i=1}^{N} i = \Res{\frac{N(N+1)}{2}}\) <span class="tshape">Bild: Treppe (halbes Rechteck)</span></h3>
+  <div class="grid2">
+  <div>
+<pre class="cpp" data-roles='{"cnt":"res"}'>int cnt = 0;                      // zählt die abstrakte Operation
+for (int i = 1; i &lt;= N; i++)      // Runde i
+  for (int j = 1; j &lt;= i; j++)    // innere läuft i-mal: wächst mit i
+    cnt++;                        // eine Operation</pre>
+    <p><span class="num">①</span><b>Operation:</b> <code class="inl">cnt++</code>. <span class="num">②</span><b>Summe:</b> Runde <span class="c-idx">i</span> liefert <span class="c-idx">i</span> Operationen.</p>
+    <div class="step">\[ \begin{aligned}
+    \Res{S} &= 1 + 2 + \dots + N && \text{die Summe vorwärts} \\
+    \Res{S} &= N + (N-1) + \dots + 1 && \text{dieselbe Summe rückwärts} \\
+    2\Res{S} &= \underbrace{(N+1) + (N+1) + \dots + (N+1)}_{N \text{ Paare}} && \text{untereinander addiert} \\
+    \Res{S} &= \frac{N(N+1)}{2} \sim \frac{N^2}{2} && \text{durch 2 geteilt}
+    \end{aligned} \]</div>
+    <p class="small"><b>Variante „alle Paare i &lt; j“</b> (<a href="#ex1">Beispiel ①</a>): \(\sum_{i=0}^{N-1} i = \frac{N(N-1)}{2}\), dieselbe Treppe ohne die längste Stufe.</p>
+  </div>
+  <div>
+    <div class="controls"><label>N = <span class="readout"><b id="t2Nv">8</b></span></label><input id="t2N" type="range" min="1" max="30" value="8"><label><input type="checkbox" id="t2Copy" checked> zweite Kopie (Beweis)</label></div>
+    <div id="t2Svg" class="tsvg"></div>
+    <div id="t2Out" class="step small"></div>
+  </div>
+  </div>
+  <div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
+  <p>„Die Schleife kostet <b>Θ(N²)</b>, genauer <b>∼ N²/2</b>; verdoppelt man N, braucht sie etwa <b>4-mal</b> so lange.“ <b>Beleg:</b> Zeile 3 der Rechnung: zwei Treppen ergeben das Rechteck N × (N+1), eine Treppe ist die Hälfte.</p>
+  <p class="small"><b>Kommt vor in:</b> <a href="#ex1">Beispiel ①</a>, <a href="#k2-rec">Formel 2.1</a> (\(C_N = C_{N-1} + N\)), <a href="#k1-qu">Eigenschaft 1.2</a> (Quick-Union-Kette: \(1+2+\dots\) Zeigerschritte), <a href="#k2-search">sequentielle Suche</a> im Mittel \((N+1)/2\).</p></div>
+</div>
+
+<div class="card tool" id="sum3">
+  <h3 style="margin-top:0"><span class="tnum">3</span>Geometrische Reihe: \(N + \frac N2 + \frac N4 + \dots \lt \Res{2N}\) <span class="tshape">Bild: Hälften füllen eine Strecke</span></h3>
+  <div class="grid2">
+  <div>
+<pre class="cpp" data-roles='{"cnt":"res"}'>int cnt = 0;                      // zählt die abstrakte Operation
+for (int i = N; i &gt; 0; i /= 2)    // i = N, N/2, N/4, …, 1
+  for (int j = 0; j &lt; i; j++)     // innere läuft i-mal: schrumpft mit
+    cnt++;                        // eine Operation</pre>
+    <p><span class="num">①</span><b>Operation:</b> <code class="inl">cnt++</code>. <span class="num">②</span><b>Summe:</b> jede Runde ist halb so groß wie die vorige.</p>
+    <div class="step">\[ \begin{aligned}
+    \Res{S} &= N\left(1 + \tfrac12 + \tfrac14 + \dots + \tfrac1{2^k}\right) && \text{N ausgeklammert, k+1 Runden} \\
+    \tfrac12\Res{S} &= N\left(\tfrac12 + \tfrac14 + \dots + \tfrac1{2^{k+1}}\right) && \text{alles halbiert} \\
+    \Res{S} - \tfrac12\Res{S} &= N\left(1 - \tfrac1{2^{k+1}}\right) && \text{Glieder heben sich weg} \\
+    \Res{S} &= 2N\left(1 - \tfrac1{2^{k+1}}\right) \lt 2N && \text{mal 2: immer unter 2N}
+    \end{aligned} \]</div>
+    <p class="small"><b>Exakt mit ganzzahliger Division:</b> \(\texttt{cnt} = 2N - (\text{Anzahl Einsen von N im Binärsystem})\). <b>Verdoppelnde Richtung</b> (\(1 + 2 + 4 + \dots + 2^n = 2^{n+1} - 1\)) ist dasselbe Bild rückwärts gelesen.</p>
+  </div>
+  <div>
+    <div class="controls"><label>N = <span class="readout"><b id="t3Nv">16</b></span></label><input id="t3N" type="range" min="1" max="64" value="16"></div>
+    <div id="t3Svg" class="tsvg"></div>
+    <div id="t3Out" class="step small"></div>
+  </div>
+  </div>
+  <div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
+  <p>„Obwohl zwei Schleifen geschachtelt sind, kostet der Code nur <b>Θ(N)</b>, höchstens <b>2N</b>, und <b>nicht</b> N lg N.“ <b>Beleg:</b> Zeile 4 der Rechnung (Summe &lt; 2N); im Bild füllen die Hälften die Strecke 2N nie ganz.</p>
+  <p class="small"><b>Kommt vor in:</b> <a href="#ex2">Beispiel ②</a> (mit der Falle „Schleifen multiplizieren“), <a href="#k2-rec">Formel 2.3</a> (\(C_N = C_{N/2} + N \Rightarrow 2N\)), später in Teil 3 (Heap-Konstruktion von unten: ebenfalls eine fallende Reihe, also linear).</p></div>
+</div>
+
+<div class="card tool" id="sum4">
+  <h3 style="margin-top:0"><span class="tnum">4</span>Harmonische Summe: \(\sum_{i=1}^{N} \frac Ni = \Res{N H_N} \approx N\ln N\) <span class="tshape">Bild: Säulen unter der Hyperbel N/x</span></h3>
+  <div class="grid2">
+  <div>
+<pre class="cpp" data-roles='{"cnt":"res"}'>int cnt = 0;                      // zählt die abstrakte Operation
+for (int i = 1; i &lt;= N; i++)      // Schrittweite i
+  for (int j = i; j &lt;= N; j += i) // j = i, 2i, 3i, … ≤ N: ⌊N/i⌋-mal
+    cnt++;                        // eine Operation</pre>
+    <p><span class="num">①</span><b>Operation:</b> <code class="inl">cnt++</code>. <span class="num">②</span><b>Summe:</b> Runde <span class="c-idx">i</span> liefert \(\lfloor N/i \rfloor\) Operationen.</p>
+    <div class="step">\[ \begin{aligned}
+    \Res{\texttt{cnt}} &= \sum_{i=1}^{N} \left\lfloor \frac Ni \right\rfloor \approx N \sum_{i=1}^{N} \frac 1i && \text{N ausgeklammert} \\
+    H_N &= 1 + \tfrac12 + \tfrac13 + \dots + \tfrac1N && \text{harmonische Zahl} \\
+    \ln N &\lt H_N \lt \ln N + 1 && \text{Treppe gegen Fläche unter 1/x} \\
+    \Res{\texttt{cnt}} &\approx N(\ln N + 0{,}577) && \text{also } \Theta(N\log N)
+    \end{aligned} \]</div>
+    <p class="small"><b>Warum ln?</b> Die Fläche unter \(1/x\) von 1 bis N ist \(\int_1^N \frac{dx}{x} = \ln N\). Die Säulen der Breite 1 und Höhe \(1/i\) liegen knapp darüber. Umrechnen: \(\ln N \approx 0{,}69 \lg N\).</p>
+  </div>
+  <div>
+    <div class="controls"><label>N = <span class="readout"><b id="t4Nv">16</b></span></label><input id="t4N" type="range" min="1" max="40" value="16"></div>
+    <div id="t4Svg" class="tsvg"></div>
+    <div id="t4Out" class="step small"></div>
+  </div>
+  </div>
+  <div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
+  <p>„Der Code kostet <b>Θ(N log N)</b>, ungefähr <b>N ln N</b>; verdoppelt man N, braucht er etwas mehr als doppelt so lange.“ <b>Beleg:</b> Zeile 3 der Rechnung (H<sub>N</sub> zwischen ln N und ln N + 1); im Bild folgen die Säulen der Kurve N/x.</p>
+  <p class="small"><b>Kommt vor in:</b> <a href="#ex3">Beispiel ③</a>, <a href="#k2-log">2.3b</a> (H<sub>N</sub>, Fig. 2.2), <a href="#k2-O">2.4</a> (innere Schleife N H<sub>N</sub>-mal), später in Teil 3 bei Quicksort (im Mittel ≈ 2N ln N Vergleiche).</p></div>
+</div>
+
+<div class="card tool" id="sum5">
+  <h3 style="margin-top:0"><span class="tnum">5</span>„Halbieren bis 1“: \(\lfloor \lg N \rfloor + 1\) Runden <span class="tshape">Bild: Bits fallen rechts weg</span></h3>
+  <div class="grid2">
+  <div>
+<pre class="cpp" data-roles='{"cnt":"res"}'>int cnt = 0;                      // zählt die Runden
+for (int i = N; i &gt; 0; i /= 2)    // i = N, ⌊N/2⌋, ⌊N/4⌋, …, 1, dann 0: Ende
+  cnt++;                          // eine Operation pro Runde</pre>
+    <p><span class="num">①</span><b>Operation:</b> <code class="inl">cnt++</code>. <span class="num">②</span><b>Keine wachsende Summe</b>, sondern die Frage: wie viele Runden, bis i bei 0 ankommt?</p>
+    <div class="step">\[ \begin{aligned}
+    \Idx{i}_k &= \left\lfloor \frac{N}{2^k} \right\rfloor && \text{nach k Halbierungen} \\
+    \Idx{i}_k \ge 1 &\iff 2^k \le N \iff k \le \lg N && \text{Runde k läuft noch} \\
+    k &= 0, 1, \dots, \lfloor \lg N \rfloor && \text{alle Runden, die laufen} \\
+    \Res{\texttt{cnt}} &= \lfloor \lg N \rfloor + 1 && \text{= Anzahl der Bits von N}
+    \end{aligned} \]</div>
+    <p class="small"><b>Warum Bits?</b> <code class="inl">i /= 2</code> schiebt die Binärzahl um eine Stelle nach rechts. Die Schleife endet, wenn alle Bits weg sind. Beispiel: 13 = 1101₂ hat 4 Bits, also 4 Runden.</p>
+  </div>
+  <div>
+    <div class="controls"><label>N = <span class="readout"><b id="t5Nv">13</b></span></label><input id="t5N" type="range" min="1" max="1024" value="13"></div>
+    <div id="t5Svg" class="tsvg"></div>
+    <div id="t5Out" class="step small"></div>
+  </div>
+  </div>
+  <div class="callout key tclaim"><h3>✔ Aussage, die du treffen darfst</h3>
+  <p>„Die Schleife läuft <b>⌊lg N⌋ + 1</b>-mal, also <b>Θ(log N)</b>; verdoppelt man N, kommt genau <b>eine</b> Runde dazu.“ <b>Beleg:</b> Zeile 2 der Rechnung (\(2^k \le N\)) bzw. das Bit-Bild.</p>
+  <p class="small"><b>Kommt vor in:</b> <a href="#k2-search">binäre Suche</a> (Eigenschaft 2.3, höchstens ⌊lg N⌋ + 1), <a href="#k2-rec">Formel 2.2</a> (\(C_N = C_{N/2} + 1\)), <a href="#k2-log">2.3b</a> (Programm <code class="inl">lgN</code>), <a href="#k1-wqu">Eigenschaft 1.3</a> (Weighted: Tiefe ≤ lg N).</p></div>
+</div>
+
+<div class="card tool" id="sumcmp">
+  <h3 style="margin-top:0"><span class="tnum">⚖</span>Alle fünf im Vergleich</h3>
+  <p class="small"><b>Zum Punkt „·“ in Schritt ③:</b> Er trennt nur die fünf Werkzeuge voneinander, wie ein Komma in einer Aufzählung. Er ist <b>kein</b> Malzeichen. Multipliziert wird nur in einem Fall: wenn die innere Schleife <b>nicht</b> von der äußeren abhängt (Karte 1 mit M).</p>
+  <div class="controls"><label>N = <span class="readout"><b id="tcNv">1024</b></span></label><input id="tcN" type="range" min="1" max="20" value="10"><span class="small muted">(N = 2<sup>Regler</sup>)</span></div>
+  <div id="tcTab" class="scroll"></div>
+  <div id="tcPlot" class="plot sm"></div>
+  <div class="callout warn"><h3>Kombinieren: so setzt du die Werkzeuge zusammen</h3>
+  <p><span class="num">a</span><b>Innere Schleife unabhängig</b> von der äußeren: Runden außen × Kosten innen. Beispiel: außen „halbieren bis 1“ (Karte 5), innen immer N (Karte 1) → <b>N(⌊lg N⌋ + 1) = Θ(N lg N)</b>.</p>
+  <p><span class="num">b</span><b>Innere Schleife hängt von i ab</b>: nie multiplizieren, sondern als \(\sum_i h(i)\) schreiben und das passende Werkzeug suchen. Wächst h mit i → Karte 2; halbiert sich h → Karte 3; ist h = N/i → Karte 4.</p>
+  <p><span class="num">c</span><b>Rekursion</b>: zuerst die Rekurrenz aufstellen (<a href="#k2-rec">2.5</a>), dann beim Teleskopieren landet man wieder bei einem dieser fünf Werkzeuge.</p></div>
+</div>
+<!--/P1Y:werkzeuge-->
+
+<h3>📐 Die Werkzeuge angewendet: drei aufeinander aufbauende Beispiele</h3>
 <div class="card" id="ex1">
   <h3 style="margin-top:0"><span class="num">1</span>Beispiel ① (leicht): alle Paare i &lt; j</h3>
   <div id="trEx1"></div>
@@ -1511,9 +1777,9 @@ int b = N - N / 2;   // ⌈N/2⌉
   </select></label>
   <button id="ugGo">Lösen</button>
 </div>
+<div class="grid2"><div class="card" style="padding:8px 12px"><div id="ugCode"></div></div><div id="ugForest" class="card" style="padding:6px;overflow:auto"></div></div>
 <div id="ugOut" class="scroll"></div>
 <p class="small muted">Zählweise: <b>jedes Lesen und jedes Schreiben</b> eines id[]-Elements zählt 1. Bei QU/W: find mit Pfadlänge d kostet 2d+1 (d+1 Tests <code class="inl">i != id[i]</code> + d Schritte <code class="inl">i = id[i]</code>), union 1 Schreibzugriff. sz[] wird nicht mitgezählt. Wenn deine Vorlesung anders zählt, bleibt das Verhältnis zwischen den Algorithmen gleich.</p>
-<div id="ugForest" class="card" style="padding:6px;overflow:auto"></div>
 </section>
 
 <section id="quiz">
@@ -1683,11 +1949,13 @@ int b = N - N / 2;   // ⌈N/2⌉
 <div class="card sp" id="sp7">
 <h4><span class="spn">7</span>Standardsummen und Spezialfunktionen</h4>
 <div class="step">\[ \begin{aligned}
-\sum_{i=1}^{N} i &= \frac{N(N+1)}{2} && \text{Gauß} \\
+\sum_{i=1}^{N} 1 &= N && \text{konstant (Werkzeug 1)} \\
+\sum_{i=1}^{N} i &= \frac{N(N+1)}{2} && \text{Gauß (Werkzeug 2)} \\
 \sum_{i=0}^{N-1} i &= \frac{N(N-1)}{2} && \text{jedes } i \lt j \text{ einmal} \\
-N + \frac N2 + \frac N4 + \dots &\approx 2N && \text{geometrisch, halbierend} \\
+N + \frac N2 + \frac N4 + \dots &\lt 2N && \text{geometrisch, halbierend (Werkzeug 3)} \\
 \sum_{i=0}^{n} 2^i &= 2^{n+1} - 1 && \text{geometrisch, verdoppelnd} \\
-H_N = \sum_{i=1}^{N}\frac1i &\approx \ln N + 0{,}577 && \text{harmonische Zahl} \\
+\sum_{i=1}^{N}\frac Ni = N H_N &\approx N(\ln N + 0{,}577) && \text{harmonisch (Werkzeug 4)} \\
+\text{halbieren bis 1} &= \lfloor \lg N \rfloor + 1 && \text{Runden (Werkzeug 5)} \\
 \lg N! &\approx N\lg N && \text{Stirling}
 \end{aligned} \]</div>
 <p class="small">\(\lg N = \log_2 N\) = wie oft man N halbieren kann, bis 1 übrig ist. \(\ln N = \log_e N \approx 0{,}69\lg N\). \(\lg^* N\) = wie oft lg anwenden bis ≤ 1 (für alle praktischen N höchstens 5). \(\lg 10^3\approx10\), \(\lg 10^6\approx20\), \(\lg10^9\approx30\).</p>
@@ -1733,7 +2001,8 @@ g \sim f &\iff g/f \to 1 && \text{inklusive Konstante}
 <tr><th>Verfahren</th><th>erfolglos</th><th>erfolgreich (Mittel)</th></tr>
 <tr><td>sequentiell, unsortiert (2.1)</td><td>\(N\)</td><td>\(\frac{N+1}{2}\)</td></tr>
 <tr><td>sequentiell, sortiert (2.2)</td><td>\(\frac N2 + \frac{N}{N+1}\approx\frac N2\)</td><td>\(\frac{N+1}{2}\)</td></tr>
-<tr><td>binär, sortiert (2.3)</td><td colspan="2">höchstens \(\lfloor\lg N\rfloor + 1\), Rekurrenz 2.2</td></tr>
+<tr><td>binär, sortiert (2.3)</td><td>\(\lg(N+1)\)</td><td>\(\approx \lg N - 1\)</td></tr>
+<tr><td colspan="3" class="small">schlechtester Fall binär: \(\lfloor\lg N\rfloor + 1\) (Rekurrenz 2.2) · lineare Suche = sequentielle Suche · <a href="#k2-cmp">Seite an Seite</a></td></tr>
 </table>
 <pre class="cpp" data-roles='{}'>while (r &gt;= l)                    // Bereich nicht leer
   { int m = (l + r) / 2;          // Mitte, abgerundet
@@ -1766,6 +2035,7 @@ T = N^3 &: k^2\text{-mal so lang} && \text{k = 10: 100-mal}
 <p>✗ Mit Halbierung ist jeder Baum flach. ✓ Tiefe bis lg N möglich (Kasten 4).</p>
 <p>✗ \(N \in O(N^2)\) ist falsch. ✓ Wahr, denn O ist nur eine obere Schranke.</p>
 <p>✗ lg = ln. ✓ \(\lg = \log_2\).</p>
+<p>✗ Geschachtelte Schleifen immer multiplizieren. ✓ Nur wenn die innere nicht von der äußeren abhängt; sonst summieren (<a href="#sum3">Werkzeug 3</a>: nur 2N).</p>
 <p>✗ Sortieren hilft der sequentiellen Suche bei Treffern. ✓ Nur erfolglose Suchen werden kürzer (≈ N/2 statt N).</p>
 <p>✗ <code class="inl">cout &lt;&lt; " " &lt;&lt; p</code> ist ein Tippfehler. ✓ Buchstil: Leerzeichen vor jeder Ausgabe.</p>
 </div>
@@ -2930,31 +3200,123 @@ new LB.Tracer({
   sl.addEventListener('input', upd); upd();
 })();
 
-/* ---------- Übungsgenerator ---------- */
+/* ---------- Übungsgenerator: Tabelle + C++-Code mit Zählern pro Zeile + Wald ---------- */
 (function(){
   const go = $('ugGo'); if(!go) return;
-  let states = [];
+  /* Der Code jedes Programms (Schleifenrumpf aus dem Buch). Zeilennummern = Index + 1. */
+  const CODE = {
+    F: {t:'Programm 1.1 · Quick-Find', l:[
+      'while (cin >> p >> q)',
+      '  { int t = id[p];                      // 1 Lesezugriff',
+      '    if (t == id[q]) continue;           // 1 Lesezugriff: schon verbunden?',
+      '    for (i = 0; i < N; i++)             // alle N Einträge durchgehen',
+      '      if (id[i] == t) id[i] = id[q];    // 1 Lesen; bei Treffer: id[q] lesen + schreiben',
+      '    cout << " " << p << " " << q << endl;',
+      '  }']},
+    U: {t:'Programm 1.2 · Quick-Union', l:[
+      'while (cin >> p >> q)',
+      '  { for (i = p; i != id[i]; i = id[i]) ;   // Wurzel von p: Weg d → 2d+1 Zugriffe',
+      '    for (j = q; j != id[j]; j = id[j]) ;   // Wurzel von q',
+      '    if (i == j) continue;                  // gleiche Wurzel: verbunden',
+      '    id[i] = j;                             // Wurzel von p unter Wurzel von q: 1 Schreiben',
+      '    cout << " " << p << " " << q << endl;',
+      '  }']},
+    W: {t:'Programm 1.3 · Weighted Quick-Union', l:[
+      'while (cin >> p >> q)',
+      '  { for (i = p; i != id[i]; i = id[i]) ;   // Wurzel von p: Weg d → 2d+1 Zugriffe',
+      '    for (j = q; j != id[j]; j = id[j]) ;   // Wurzel von q',
+      '    if (i == j) continue;                  // gleiche Wurzel: verbunden',
+      '    if (sz[i] < sz[j])                     // sz[] wird nicht mitgezählt',
+      '      { id[i] = j; sz[j] += sz[i]; }       // kleiner unter größer: 1 Schreiben',
+      '    else { id[j] = i; sz[i] += sz[j]; }    // Gleichstand: q-Wurzel unter p-Wurzel',
+      '    cout << " " << p << " " << q << endl;',
+      '  }']},
+    H: {t:'Programm 1.4 · Weighted + Halbierung', l:[
+      'while (cin >> p >> q)',
+      '  { for (i = p; i != id[i]; i = id[i])     // Test + Schritt: 2d+1 Zugriffe',
+      '      id[i] = id[id[i]];                   // pro Schritt 2 Lesen + 1 Schreiben',
+      '    for (j = q; j != id[j]; j = id[j])',
+      '      id[j] = id[id[j]];',
+      '    if (i == j) continue;',
+      '    if (sz[i] < sz[j])',
+      '      { id[i] = j; sz[j] += sz[i]; }',
+      '    else { id[j] = i; sz[i] += sz[j]; }',
+      '    cout << " " << p << " " << q << endl;',
+      '  }']},
+    P: {t:'Übung 1.16/1.17 · Weighted + volle Kompression', l:[
+      'while (cin >> p >> q)',
+      '  { for (i = p; i != id[i]; i = id[i]) ;   // 1. Pass: Wurzel von p',
+      '    for (j = q; j != id[j]; j = id[j]) ;   // 1. Pass: Wurzel von q',
+      '    for (int k = p; k != i; )              // 2. Pass: jeden Knoten von p …',
+      '      { int nx = id[k]; id[k] = i; k = nx; }  // … direkt an die Wurzel: 2 Zugriffe',
+      '    for (int k = q; k != j; )',
+      '      { int nx = id[k]; id[k] = j; k = nx; }',
+      '    if (i == j) continue;',
+      '    if (sz[i] < sz[j])',
+      '      { id[i] = j; sz[j] += sz[i]; }',
+      '    else { id[j] = i; sz[i] += sz[j]; }',
+      '    cout << " " << p << " " << q << endl;',
+      '  }']}
+  };
+  let states = [], cur = 0, kind = 'F';
   function solve(kind, N, pairs){
     const id = Array.from({length:N}, (_,i) => i), sz = Array(N).fill(1), rows = [];
     for(const [p,q] of pairs){
       let acc = 0; const before = id.slice(); let neu = false;
+      const L = {}, why = [];
+      const tick = (ln, a) => { L[ln] = L[ln] || {x:0, a:0}; L[ln].x++; L[ln].a += a; acc += a; };
+      tick(1, 0);
       if(kind === 'F'){
-        const t = id[p]; acc += 2;
-        if(t !== id[q]){ neu = true; const nq = id[q]; for(let i = 0; i < N; i++){ acc++; if(id[i] === t){ id[i] = nq; acc += 2; } } }
+        const t = id[p]; tick(2, 1); tick(3, 1);
+        why.push('t = id[' + p + '] = ' + t + ', id[' + q + '] = ' + id[q] + ': 2 Zugriffe');
+        if(t !== id[q]){ neu = true; const nq = id[q]; let ch = 0;
+          for(let i = 0; i < N; i++){ tick(4, 0); tick(5, 1); if(id[i] === t){ id[i] = nq; L[5].a += 2; acc += 2; ch++; } }
+          why.push('ungleich: ' + N + ' Einträge gelesen, ' + ch + ' davon auf ' + nq + ' umgeschrieben (je 2): ' + N + ' + 2·' + ch + ' = ' + (N + 2 * ch));
+          tick(6, 0);
+        } else why.push('gleich → continue');
       } else {
-        const find = x => { let i = x; for(;;){ acc++; if(id[i] === i) break; if(kind === 'H'){ id[i] = id[id[i]]; acc += 3; } i = id[i]; acc++; } return i; };
-        const i = find(p), j = find(q);
-        if(kind === 'P'){ let k = p; while(k !== i){ const nx = id[k]; id[k] = i; k = nx; acc += 2; } k = q; while(k !== j){ const nx = id[k]; id[k] = j; k = nx; acc += 2; } }
+        const H = kind === 'H', lp = 2, lq = H ? 4 : 3;
+        const find = (x, ln, nm) => { let i = x, d = 0; const path = [x];
+          for(;;){ tick(ln, 1); if(id[i] === i) break; if(H){ tick(ln + 1, 3); id[i] = id[id[i]]; } i = id[i]; L[ln].a++; acc++; d++; path.push(i); }
+          why.push('find(' + x + '): ' + path.join(' → ') + ' (d = ' + d + '): 2·' + d + '+1 = ' + (2 * d + 1) + (H && d ? ', Halbierung 3·' + d + ' = ' + (3 * d) : '') + ' → ' + nm + ' = ' + i);
+          return i; };
+        const i = find(p, lp, 'i'), j = find(q, lq, 'j');
+        let base = H ? 6 : 4;
+        if(kind === 'P'){ let n = 0; let k = p; while(k !== i){ tick(5, 2); const nx = id[k]; id[k] = i; k = nx; n++; } tick(4, 0);
+          k = q; while(k !== j){ tick(7, 2); const nx = id[k]; id[k] = j; k = nx; n++; } tick(6, 0);
+          if(n) why.push('2. Pass: ' + n + ' Knoten direkt an ihre Wurzel, je 2: ' + (2 * n)); base = 8; }
+        tick(base, 0);
         if(i !== j){ neu = true;
-          if(kind === 'U'){ id[i] = j; acc++; }
-          else if(sz[i] < sz[j]){ id[i] = j; sz[j] += sz[i]; acc++; } else { id[j] = i; sz[i] += sz[j]; acc++; } }
+          if(kind === 'U'){ id[i] = j; tick(5, 1); why.push('id[' + i + '] = ' + j + ': 1 Zugriff'); tick(6, 0); }
+          else { tick(base + 1, 0);
+            if(sz[i] < sz[j]){ id[i] = j; sz[j] += sz[i]; tick(base + 2, 1); why.push('sz[' + i + '] < sz[' + j + '] → id[' + i + '] = ' + j + ': 1 Zugriff'); }
+            else { id[j] = i; sz[i] += sz[j]; tick(base + 3, 1); why.push((sz[i] - sz[j] === sz[j] ? 'Gleichstand' : 'sz[' + i + '] ≥ sz[' + j + ']') + ' → id[' + j + '] = ' + i + ': 1 Zugriff'); }
+            tick(base + 4, 0); }
+        } else why.push('i == j → continue');
       }
-      rows.push({p, q, id:id.slice(), before, sz:sz.slice(), acc, neu});
+      rows.push({p, q, id:id.slice(), before, sz:sz.slice(), acc, neu, L, why});
     }
     return rows;
   }
+  function showCode(t){
+    const c = CODE[kind], r = states[t];
+    let h = '<div class="small" style="margin-bottom:4px"><b>' + c.t + '</b>' + (r ? ' · Paar <b>' + r.p + '-' + r.q + '</b> (Nr. ' + (t + 1) + ')' : '') + '</div><pre class="cpp ugc">';
+    c.l.forEach((src, k) => { const s = r && r.L[k + 1];
+      h += '<span class="row' + (s ? ' on' : '') + '"><span class="lnum">' + (k + 1) + '</span>' + LB.hl(src, {}) +
+        (s ? '<span class="ugcnt">×' + s.x + (s.a ? ' · <b>' + s.a + '</b> id' : '') + '</span>' : '') + '</span>'; });
+    h += '</pre>';
+    if(r){ const sum = Object.values(r.L).reduce((a, s) => a + s.a, 0);
+      h += '<div class="step small">' + r.why.map(w => '• ' + LB.esc(w)).join('<br>') + '<br><b>Summe der Zeilen: ' + sum + ' = ' + r.acc + ' Zugriffe</b> (Spalte „Zugriffe“)</div>'; }
+    $('ugCode').innerHTML = h;
+  }
+  function select(t){
+    cur = t;
+    $('ugOut').querySelectorAll('tr[data-t]').forEach(tr => tr.classList.toggle('ugsel', +tr.dataset.t === t));
+    showCode(t); showF(t);
+  }
   function run(){
-    const N = clampInt($('ugN').value, 2, 30, 10), kind = $('ugAlg').value, pairs = LB.parsePairs($('ugIn').value, N);
+    const N = clampInt($('ugN').value, 2, 30, 10), pairs = LB.parsePairs($('ugIn').value, N);
+    kind = $('ugAlg').value;
     const rows = solve(kind, N, pairs); states = rows;
     const w = (kind !== 'F' && kind !== 'U');
     let h = '<table class="rt"><tr><th>p-q</th>'+Array.from({length:N}, (_,i) => '<th class="r">'+i+'</th>').join('')+'<th>Zugriffe</th><th>Ausgabe</th></tr>';
@@ -2965,15 +3327,17 @@ new LB.Tracer({
         '<td class="r"><b>'+r.acc+'</b></td><td>'+(r.neu ? '<span style="color:#3fb950;font-weight:700">'+r.p+' '+r.q+'</span>' : '<span class="muted">– (verbunden)</span>')+'</td></tr>';
       if(w) h += '<tr><td class="small muted">sz</td>'+r.sz.map((v,i) => '<td class="r small" style="color:#f778ba">'+(r.id[i] === i ? v : '·')+'</td>').join('')+'<td></td><td></td></tr>';
     });
-    h += '<tr><td colspan="'+(N+1)+'" class="r"><b>Summe</b></td><td class="r"><b>'+tot+'</b></td><td></td></tr></table><p class="small muted">Amber = in diesem Schritt geändert. Klicke eine Zeile, um den Wald nach diesem Paar zu sehen.</p>';
+    h += '<tr><td colspan="'+(N+1)+'" class="r"><b>Summe</b></td><td class="r"><b>'+tot+'</b></td><td></td></tr></table><p class="small muted">Amber = in diesem Schritt geändert. <b>Klicke eine Zeile</b>: Der Code oben zeigt dann, welche Zeilen für dieses Paar liefen (×) und wie viele id[]-Zugriffe jede Zeile beigetragen hat; daneben der Wald.</p>';
     $('ugOut').innerHTML = h;
-    $('ugOut').querySelectorAll('tr[data-t]').forEach(tr => tr.addEventListener('click', () => showF(+tr.dataset.t)));
-    showF(rows.length-1);
+    $('ugOut').querySelectorAll('tr[data-t]').forEach(tr => tr.addEventListener('click', () => select(+tr.dataset.t)));
+    if(rows.length) select(Math.min(cur, rows.length - 1)); else { showCode(-1); showF(-1); }
   }
   function showF(t){ if(!states[t]) { $('ugForest').innerHTML = ''; return; } const r = states[t];
     const hi = {}; r.id.forEach((v,i) => { if(v !== r.before[i]) hi[i] = 'chg'; });
     $('ugForest').innerHTML = LB.forest(r.id, hi, {caption:'Wald nach Paar '+r.p+'-'+r.q+' (Nr. '+(t+1)+')', markRoots:true}); }
-  go.addEventListener('click', run); $('ugAlg').addEventListener('change', run); run();
+  go.addEventListener('click', () => { cur = 0; run(); });
+  $('ugAlg').addEventListener('change', run);
+  run();
 })();
 
 /* ---------- Quiz ---------- */
@@ -3070,6 +3434,11 @@ new LB.Tracer({
     ['Rekurrenzen', 'teleskopieren', 'Rekurrenz immer wieder in sich selbst einsetzen, bis eine Summe entsteht', 'k2-rec'],
     ['Rekurrenzen', 'Divide & Conquer', 'in Teilprobleme zerlegen, lösen, kombinieren (Formel 2.4)', 'k2-rec'],
     ['Suchen', 'sequentielle Suche', 'alle Elemente der Reihe nach ansehen, O(N)', 'k2-search'],
+    ['Analyse', 'geometrische Reihe', 'N + N/2 + N/4 + … < 2N: jede Runde halb so groß, Summe bleibt linear', 'sum3'],
+    ['Analyse', 'Gauß-Summe', '1 + 2 + … + N = N(N+1)/2: vorwärts + rückwärts addiert ergibt N-mal (N+1)', 'sum2'],
+    ['O-Notation', 'inverse Ackermann-Funktion α', 'wächst noch langsamer als lg*; Tarjan: Union-Find kostet Θ(M α(M,N)), praktisch α ≤ 4', 'k2-guar'],
+    ['Suchen', 'lineare Suche', 'anderer Name für sequentielle Suche (linear = Laufzeit Θ(N))', 'k2-cmp'],
+    ['Suchen', 'Entscheidungsbaum', 'Baum aller möglichen Vergleichsfolgen; Höhe = Vergleiche im schlechtesten Fall', 'k2-cmp'],
     ['Suchen', 'binäre Suche', 'sortierte Tabelle, Mitte vergleichen, Hälfte verwerfen. ≤ ⌊lg N⌋+1', 'k2-search']
   ];
   const t = $('glossTab'); if(!t) return;
@@ -3276,11 +3645,153 @@ UF.prototype.sets = function(){                     // wie printComponents(): Wu
 })();
 </script>
 <script>
+/* ===== P1Y-ADDON: Werkzeug-Karten (Standardsummen), Vergleich, Suche Seite an Seite ===== */
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const C = {res:'#f85149', chg:'#d29922', rule:'#bc8cff', par:'#58a6ff', idx:'#3fb950', cond:'#56d4dd', mem:'#f778ba', line:'#30363d', mute:'#8b949e', ink:'#e6edf3'};
+const tex = el => { if(window.LB && LB.tex) LB.tex(el); };
+const fmt = x => Number.isInteger(x) ? x.toLocaleString('de-DE') : x.toLocaleString('de-DE', {maximumFractionDigits: 2});
+const pop = n => { let c = 0; while(n){ c += n & 1; n >>>= 1; } return c; };
+const W = 560;                                         // Zeichenbreite aller Bilder
+const svg = (h, body) => '<svg viewBox="0 0 ' + W + ' ' + h + '" style="width:100%;max-width:' + W + 'px;height:auto" role="img">' + body + '</svg>';
+const box = (x, y, w, h, f, s) => '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + Math.max(w, .5).toFixed(1) + '" height="' + Math.max(h, .5).toFixed(1) + '" fill="' + f + '" stroke="' + (s || '#0d1117') + '" stroke-width="1"/>';
+const txt = (x, y, t, c, a, sz) => '<text x="' + x + '" y="' + y + '" fill="' + (c || C.mute) + '" font-size="' + (sz || 11) + '" text-anchor="' + (a || 'start') + '" font-family="Source Sans 3, sans-serif">' + t + '</text>';
+function bind(ids, fn){ ids.forEach(id => { const e = $(id); if(e) e.addEventListener('input', fn); }); fn(); }
+function out(id, ran, formula, label, extra){
+  $(id).innerHTML = 'Programm gelaufen: <b style="color:' + C.res + '">cnt = ' + fmt(ran) + '</b> · Formel ' + label + ' = <b>' + fmt(formula) + '</b> ' +
+    (Math.abs(ran - formula) < 1e-9 ? '<span style="color:' + C.idx + '">✓ gleich</span>' : '<span style="color:' + C.chg + '">(Näherung)</span>') + (extra ? '<br>' + extra : '');
+  tex($(id));
+}
+function dbl(f, N){ const a = f(N), b = f(2 * N); return 'N verdoppelt: cnt(' + (2 * N) + ') / cnt(' + N + ') = ' + fmt(b) + ' / ' + fmt(a) + ' = <b>' + (b / a).toFixed(2) + '</b>'; }
+
+/* Karte 1: konstante Summe */
+const run1 = (N, M) => { let c = 0; for(let i = 1; i <= N; i++) for(let k = 1; k <= M; k++) c++; return c; };
+if($('t1N')) bind(['t1N', 't1M'], () => {
+  const N = +$('t1N').value, M = +$('t1M').value; $('t1Nv').textContent = N; $('t1Mv').textContent = M;
+  const s = Math.min(24, (W - 40) / N), H = M * s + 46;
+  let b = '';
+  for(let k = 0; k < M; k++) for(let i = 0; i < N; i++) b += box(20 + i * s, 18 + k * s, s, s, k === 0 ? 'rgba(88,166,255,.55)' : 'rgba(88,166,255,.3)');
+  b += txt(20, 12, 'Runde i = 1 … ' + N + ' (waagrecht)', C.par);
+  b += txt(20, 18 + M * s + 16, M === 1 ? 'eine Reihe: N Kästchen' : 'Rechteck: N × M = ' + N + ' × ' + M, C.res);
+  $('t1Svg').innerHTML = svg(H, b);
+  out('t1Out', run1(N, M), N * M, M === 1 ? '\\(N\\)' : '\\(N\\cdot M\\)', dbl(n => run1(n, M), N) + ' → linear');
+});
+
+/* Karte 2: Gauß */
+const run2 = N => { let c = 0; for(let i = 1; i <= N; i++) for(let j = 1; j <= i; j++) c++; return c; };
+if($('t2N')) bind(['t2N', 't2Copy'], () => {
+  const N = +$('t2N').value, cp = $('t2Copy').checked; $('t2Nv').textContent = N;
+  const s = Math.min(22, (W - 60) / (N + 1), 300 / N), H = N * s + 40;
+  let b = '';
+  for(let i = 1; i <= N; i++){
+    for(let j = 0; j < i; j++) b += box(30 + j * s, 14 + (i - 1) * s, s, s, 'rgba(248,81,73,.55)');
+    if(cp) for(let j = i; j < N + 1; j++) b += box(30 + j * s, 14 + (i - 1) * s, s, s, 'rgba(188,140,255,.28)');
+    if(N <= 16) b += txt(24, 14 + (i - 1) * s + s * .75, 'i=' + i, C.idx, 'end', 9);
+  }
+  b += txt(30, 14 + N * s + 16, cp ? 'rot + lila = Rechteck N × (N+1) = ' + (N * (N + 1)) + ' · rot allein = Hälfte = ' + (N * (N + 1) / 2) : 'Treppe: Zeile i hat i Kästchen', C.res);
+  $('t2Svg').innerHTML = svg(H, b);
+  out('t2Out', run2(N), N * (N + 1) / 2, '\\(\\frac{N(N+1)}{2}\\)', dbl(run2, N) + ' → nähert sich 4 (quadratisch)');
+});
+
+/* Karte 3: geometrisch */
+const run3 = N => { let c = 0; for(let i = N; i > 0; i = Math.floor(i / 2)) for(let j = 0; j < i; j++) c++; return c; };
+if($('t3N')) bind(['t3N'], () => {
+  const N = +$('t3N').value; $('t3Nv').textContent = N;
+  const sc = (W - 40) / (2 * N); let b = '', x = 20, k = 0, rows = '';
+  b += box(20, 30, 2 * N * sc, 26, 'none', C.mute) + txt(20, 22, 'Strecke der Länge 2N = ' + (2 * N), C.mute);
+  const cols = [C.par, C.idx, C.chg, C.rule, C.cond, C.mem, C.res];
+  for(let i = N; i > 0; i = Math.floor(i / 2), k++){
+    b += box(x, 31, i * sc, 24, cols[k % cols.length], '#0d1117');
+    if(i * sc > 18) b += txt(x + i * sc / 2, 47, String(i), '#0d1117', 'middle', 11);
+    x += i * sc; rows += (rows ? ' + ' : '') + i;
+  }
+  b += txt(20, 76, 'jede Runde ist halb so lang wie die vorige; die Lücke rechts bleibt immer übrig', C.res);
+  $('t3Svg').innerHTML = svg(88, b);
+  out('t3Out', run3(N), 2 * N - pop(N), '\\(2N - \\#\\text{Einsen}(N)\\)', 'Runden: ' + rows + '<br>' + dbl(run3, N) + ' → 2 (linear), obwohl zwei Schleifen');
+});
+
+/* Karte 4: harmonisch */
+const run4 = N => { let c = 0; for(let i = 1; i <= N; i++) for(let j = i; j <= N; j += i) c++; return c; };
+const H = N => { let h = 0; for(let i = 1; i <= N; i++) h += 1 / i; return h; };
+if($('t4N')) bind(['t4N'], () => {
+  const N = +$('t4N').value; $('t4Nv').textContent = N;
+  const s = Math.min(22, (W - 50) / N), hs = Math.min(s, 240 / N), base = 20 + N * hs; let b = '';
+  for(let i = 1; i <= N; i++){
+    const h = Math.floor(N / i);
+    for(let k = 0; k < h; k++) b += box(36 + (i - 1) * s, base - (k + 1) * hs, s, hs, 'rgba(63,185,80,.5)');
+  }
+  let d = '';
+  for(let x = 1; x <= N + 1; x += 0.05){ const y = N / x; d += (d ? ' L' : 'M') + (36 + (x - 1) * s).toFixed(1) + ' ' + (base - y * hs).toFixed(1); }
+  b += '<path d="' + d + '" fill="none" stroke="' + C.res + '" stroke-width="2"/>';
+  b += txt(36, base + 15, 'Säule i hat ⌊N/i⌋ Kästchen · rote Kurve: N/x', C.idx);
+  b += txt(30, base - N * hs + 10, String(N), C.mute, 'end', 10);
+  $('t4Svg').innerHTML = svg(base + 26, b);
+  out('t4Out', run4(N), N * H(N), '\\(N H_N\\)', '\\(N\\ln N\\) = ' + fmt(N * Math.log(N)) + ' · \\(N(\\ln N + 0{,}577)\\) = ' + fmt(N * (Math.log(N) + 0.5772)) + '<br>' + dbl(run4, N) + ' → etwas mehr als 2');
+});
+
+/* Karte 5: halbieren bis 1 */
+const run5 = N => { let c = 0; for(let i = N; i > 0; i = Math.floor(i / 2)) c++; return c; };
+if($('t5N')) bind(['t5N'], () => {
+  const N = +$('t5N').value; $('t5Nv').textContent = N;
+  const bits = N.toString(2).length, sc = (W - 260) / N; let b = '', y = 16, k = 0;
+  for(let i = N; i > 0; i = Math.floor(i / 2), k++){
+    const bin = i.toString(2);
+    b += txt(10, y + 12, 'Runde ' + (k + 1), C.idx);
+    b += txt(80, y + 12, 'i = ' + i, C.par);
+    b += '<text x="150" y="' + (y + 12) + '" font-family="JetBrains Mono, monospace" font-size="12" fill="' + C.ink + '">' + '<tspan fill="#30363d">' + '0'.repeat(bits - bin.length) + '</tspan>' + bin + '</text>';
+    b += box(250, y + 2, i * sc, 12, 'rgba(210,153,34,.6)');
+    y += 18;
+  }
+  b += txt(10, y + 14, 'danach i = 0: Ende · ' + k + ' Runden = ' + bits + ' Bits von ' + N, C.res);
+  $('t5Svg').innerHTML = svg(y + 24, b);
+  out('t5Out', run5(N), Math.floor(Math.log2(N)) + 1, '\\(\\lfloor \\lg N \\rfloor + 1\\)', dbl(run5, N) + ' → genau +1 Runde');
+});
+
+/* Vergleich aller fünf */
+function harmCount(N){ let c = 0; for(let i = 1; i <= N; i++) c += Math.floor(N / i); return c; }
+const T = [
+  {n:'1 · konstant', code:'for i … cnt++', sum:'\\(\\sum 1\\)', f:N => N, th:'Θ(N)', d:'×2', shape:'Reihe', c:C.par},
+  {n:'2 · Gauß', code:'for i, for j ≤ i', sum:'\\(\\sum i\\)', f:N => N * (N + 1) / 2, th:'Θ(N²)', d:'×4', shape:'Treppe', c:C.res},
+  {n:'3 · geometrisch', code:'for (i=N; i>0; i/=2), for j < i', sum:'\\(N+\\frac N2+\\dots\\)', f:N => 2 * N - pop(N), th:'Θ(N)', d:'×2', shape:'Hälften', c:C.chg},
+  {n:'4 · harmonisch', code:'for i, for (j=i; j≤N; j+=i)', sum:'\\(\\sum \\frac Ni\\)', f:harmCount, th:'Θ(N log N)', d:'etwas über ×2', shape:'Hyperbel', c:C.idx},
+  {n:'5 · halbieren', code:'for (i=N; i>0; i/=2)', sum:'Runden', f:N => Math.floor(Math.log2(N)) + 1, th:'Θ(log N)', d:'+1', shape:'Bits', c:C.rule}
+];
+if($('tcN')) bind(['tcN'], () => {
+  const e = +$('tcN').value, N = 2 ** e; $('tcNv').textContent = fmt(N);
+  let h = '<table class="rt"><tr><th>Werkzeug</th><th>Code-Muster</th><th>Summe</th><th>Bild</th><th>Θ</th><th>N ×2 →</th><th class="r">cnt(N)</th><th class="r">cnt(2N)</th><th class="r">Faktor</th></tr>';
+  T.forEach(t => { const a = t.f(N), b = t.f(2 * N);
+    h += '<tr><td><b style="color:' + t.c + '">' + t.n + '</b></td><td class="mono small">' + t.code + '</td><td>' + t.sum + '</td><td>' + t.shape + '</td><td><b>' + t.th + '</b></td><td>' + t.d + '</td><td class="r mono">' + fmt(a) + '</td><td class="r mono">' + fmt(b) + '</td><td class="r"><b>' + (b / a).toFixed(2) + '</b></td></tr>'; });
+  $('tcTab').innerHTML = h + '</table>'; tex($('tcTab'));
+  if(window.Plotly && $('tcPlot')){
+    const xs = []; for(let k = 0; k <= 20; k++) xs.push(2 ** k);
+    Plotly.react('tcPlot', T.map(t => ({x: xs, y: xs.map(t.f), name: t.n, mode: 'lines+markers', line: {color: t.c, width: 2.5}, marker: {size: 5}})).concat([{x: [N, N], y: [1, 6e11], mode: 'lines', name: 'gewähltes N', line: {color: '#8b949e', dash: 'dot'}}]),
+      {margin: {l: 60, r: 10, t: 30, b: 40}, title: {text: 'cnt gegen N (beide Achsen logarithmisch): Steigung = Exponent', font: {size: 13}}, xaxis: {type: 'log', title: 'N'}, yaxis: {type: 'log', title: 'cnt'}, legend: {orientation: 'h', y: -0.25}, paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: {color: '#e6edf3'}},
+      {displayModeBar: false, responsive: true});
+  }
+});
+
+/* 2.6 Suche Seite an Seite */
+if($('scN')) bind(['scN'], () => {
+  const e = +$('scN').value, N = 2 ** e - 1; $('scNv').textContent = fmt(N);
+  const h = e, hit = ((h - 1) * 2 ** h + 1) / N;
+  const rows = [
+    ['sequentiell, unsortiert', N, (N + 1) / 2, N],
+    ['sequentiell, sortiert', N / 2 + N / (N + 1), (N + 1) / 2, N],
+    ['binär (sortiert)', h, hit, h]
+  ];
+  let t = '<table class="rt"><tr><th>N = ' + fmt(N) + '</th><th class="r">erfolglos (Mittel)</th><th class="r">erfolgreich (Mittel)</th><th class="r">schlechtester Fall</th></tr>';
+  rows.forEach(r => { t += '<tr><td>' + r[0] + '</td>' + r.slice(1).map(v => '<td class="r mono">' + fmt(Math.round(v * 100) / 100) + '</td>').join('') + '</tr>'; });
+  $('scTab').innerHTML = t + '</table><p class="small muted">N = 2<sup>h</sup> − 1 gewählt, damit der Entscheidungsbaum der binären Suche voll ist (h = ' + h + ' Ebenen).</p>';
+});
+})();
+</script>
+<script>
 /* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "So liest du die Seite", "Farben, Tracer, Aufbau"], ["bruecke", "Große Brücke", "wo Teil 1 im Buch steht"], ["master", "Master-Anatomie", "Code → Häufigkeit → Formel"], ["cpp", "C++-Werkzeug", "Array, Adresse, Schleife"]]], ["Kapitel 1 · Einführung", [["k1-algo", "1.1 Algorithmus", "Methode + Datenstruktur"], ["k1-problem", "1.2 Konnektivität", "Paare p-q, verbunden?"], ["k1-io", "1.2 cin/cout + Programm", "Ein-/Ausgabe, Mengen ausgeben"], ["k1-qf", "1.3a Quick-Find", "find O(1), union O(N)"], ["k1-qu", "1.3b Quick-Union", "Bäume, find = Weg zur Wurzel"], ["k1-wqu", "1.3c Weighted QU", "kleiner Baum unter großen, lg N"], ["k1-pc", "1.3d Pfadkompression", "Wege halbieren, fast linear"], ["k1-pc-tiefe", "1.3d Tiefe 2, 3 möglich?", "Halbierung ≠ flach, ≤ lg N"], ["k1-lab", "1.3e Labor Tab. 1.1", "Verdopplungs-Experiment"], ["k1-persp", "1.4 Perspektive", "Algorithmus schlägt Hardware"]]], ["Kapitel 2 · Analyse", [["k2-emp", "2.1 Empirisch", "messen, Verdopplung"], ["k2-ana", "2.2 Analyse", "Kosten × Häufigkeit"], ["k2-grow", "2.3 Wachstum", "1, lg N, N, N lg N, N², 2ᴺ"], ["k2-log", "2.3b Spezialfunktionen", "lg, ⌊⌋, H_N, F_N, N!"], ["k2-O", "2.4 O-Notation", "obere Schranke bis auf c₀"], ["k2-rec", "2.5 Rekurrenzen", "Formeln 2.1–2.5, Teleskop"], ["k2-search", "2.6 Suche", "sequentiell N vs. binär lg N"], ["k2-guar", "2.7 Garantien", "worst vs. average, Schranken"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele mit Urteil"], ["abstrakt", "🔧 Abstrakte Anatomie", "Regeln für jedes Kapitel"], ["uebung", "✍️ Übungsgenerator", "Übungen 1.4–1.8, 1.17"], ["quiz", "🎯 Quiz", "Klausurstil"], ["glossar", "📚 Glossar", "nach Themen, mit Suche"], ["weiter", "➡️ Brücke zu Teil 2", "was wiederkommt, woran erkennbar"], ["fazit", "🧾 Spickzettel", "12 Kästen: ganze Klausur Teil 1"]]]];
+const MENU = [["Start", [["start", "So liest du die Seite", "Farben, Tracer, Aufbau"], ["bruecke", "Große Brücke", "wo Teil 1 im Buch steht"], ["master", "Master-Anatomie", "Code → Häufigkeit → Formel"], ["cpp", "C++-Werkzeug", "Array, Adresse, Schleife"]]], ["Kapitel 1 · Einführung", [["k1-algo", "1.1 Algorithmus", "Methode + Datenstruktur"], ["k1-problem", "1.2 Konnektivität", "Paare p-q, verbunden?"], ["k1-io", "1.2 cin/cout + Programm", "Ein-/Ausgabe, Mengen ausgeben"], ["k1-qf", "1.3a Quick-Find", "find O(1), union O(N)"], ["k1-qu", "1.3b Quick-Union", "Bäume, find = Weg zur Wurzel"], ["k1-wqu", "1.3c Weighted QU", "kleiner Baum unter großen, lg N"], ["k1-pc", "1.3d Pfadkompression", "Wege halbieren, fast linear"], ["k1-pc-tiefe", "1.3d Tiefe 2, 3 möglich?", "Halbierung ≠ flach, ≤ lg N"], ["k1-lab", "1.3e Labor Tab. 1.1", "Verdopplungs-Experiment"], ["k1-persp", "1.4 Perspektive", "Algorithmus schlägt Hardware"]]], ["Kapitel 2 · Analyse", [["k2-emp", "2.1 Empirisch", "messen, Verdopplung"], ["k2-ana", "2.2 Analyse", "Kosten × Häufigkeit"], ["k2-grow", "2.3 Wachstum", "1, lg N, N, N lg N, N², 2ᴺ"], ["k2-log", "2.3b Spezialfunktionen", "lg, ⌊⌋, H_N, F_N, N!"], ["k2-O", "2.4 O-Notation", "obere Schranke bis auf c₀"], ["k2-rec", "2.5 Rekurrenzen", "Formeln 2.1–2.5, Teleskop"], ["k2-search", "2.6 Suche", "sequentiell N vs. binär lg N"], ["k2-cmp", "2.6 Seite an Seite", "was wann abweicht"], ["k2-guar", "2.7 Garantien", "worst vs. average, Schranken"]]], ["Training", [["schema", "📐 Schema", "4 Schritte, 3 Beispiele"], ["werkzeuge", "🧰 5 Standardsummen", "Σ1, Gauß, geom., harm., lg N"], ["abstrakt", "🔧 Abstrakte Anatomie", "Regeln für jedes Kapitel"], ["uebung", "✍️ Übungsgenerator", "Übungen 1.4–1.8, 1.17"], ["quiz", "🎯 Quiz", "Klausurstil"], ["glossar", "📚 Glossar", "nach Themen, mit Suche"], ["weiter", "➡️ Brücke zu Teil 2", "was wiederkommt, woran erkennbar"], ["fazit", "🧾 Spickzettel", "12 Kästen: ganze Klausur Teil 1"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "find", "Zusammenhangskomponente*", "Wurzel*", "Laufzeitklasse*"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "union", "Pfadkompression", "Halbierung", "umbenennen"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Quick-Find", "Quick-Union", "Weighted Quick-Union", "gewichtet*", "Baum", "Bäume", "Höhe", "Verdopplung*", "Konnektivität", "Wachstum*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M", "Paar*", "Objekt*"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
