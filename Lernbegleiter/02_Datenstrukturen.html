@@ -300,6 +300,67 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .bltree{font-family:'JetBrains Mono',Consolas,monospace;font-size:.8rem;line-height:1.35;white-space:pre;overflow-x:auto;background:var(--lbpanel2);border:1px solid var(--lbline);border-radius:8px;padding:.4rem .7rem;margin:.35rem 0}
 .blsol svg{width:auto!important;max-width:100%;height:auto;display:block;margin:.3rem 0}
 </style>
+<style>
+/* ===== P2LAB: All-in-one-Labore ===== */
+.figure.labfig{border-color:rgba(188,140,255,.45);background:linear-gradient(160deg,#16121f,#0d1117)}
+.figure.labfig .ttl .n{background:rgba(188,140,255,.16);color:var(--purple);border-color:rgba(188,140,255,.35)}
+.lab{margin-top:.6rem}
+.lab svg{width:auto!important;max-width:100%;height:auto;display:block}
+.lab button{font:inherit;font-size:.86rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:.22rem .6rem}
+.lab button.on{border-color:var(--purple);color:var(--purple);box-shadow:0 0 0 1px rgba(188,140,255,.35) inset}
+.lab-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
+.lab-tabs button{display:flex;flex-direction:column;align-items:flex-start;padding:.35rem .7rem;text-align:left}
+.lab-tabs button small{color:var(--muted);font-size:.72rem}
+.lab-row{display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.45rem .7rem;margin:.35rem 0}
+.lab-row label{font-size:.86rem;font-weight:600}
+.lab-row input{font:inherit;font-family:'JetBrains Mono',monospace;font-size:.84rem;background:#0a0d12;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:.15rem .4rem;max-width:100%}
+.lab-lab{font-size:.8rem;color:var(--muted);min-width:5.6em}
+.lab-ctl .lab-pos{flex:1 1 220px}
+.lab-ctl .lab-big{border-color:var(--orange);color:var(--orange);font-weight:700}
+.lab-hint{border-left:4px solid var(--purple);background:#13101b;border-radius:8px;padding:.45rem .8rem;margin:.35rem 0;font-size:.9rem}
+.lab-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,.95fr);gap:.7rem;margin-top:.5rem}
+.lab-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.7rem;margin-top:.6rem}
+.lab-col{background:#0b0f14;border:1px solid var(--border);border-radius:10px;padding:.55rem .7rem;min-width:0}
+.lab-h{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--purple);margin-bottom:.35rem}
+.lab-h span{color:var(--muted);font-weight:400;letter-spacing:0}
+.lab-code{margin:0;font-size:.8rem}
+.lab-code .row{position:relative;display:block;padding-right:3.2em}
+.lab-code .row.cur{background:rgba(210,153,34,.22);outline:1px solid var(--orange)}
+.lab-code .labhit{position:absolute;right:.3em;top:0;color:var(--green);font-size:.72rem;text-indent:0}
+.lab-mem{overflow:hidden}
+.lab-msg{background:var(--card2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:8px;padding:.4rem .8rem;margin-top:.6rem;font-size:.92rem}
+.lab-claim{border:1.5px solid var(--green);border-radius:8px;padding:.45rem .7rem;background:rgba(63,185,80,.07);font-size:.9rem}
+.lab-math{font-size:.88rem}
+.lab-math .step{margin:.3rem 0}
+.lab-vs{display:grid;grid-template-columns:minmax(0,1.6fr) auto auto auto auto;gap:.15rem .5rem;align-items:baseline;font-size:.84rem;padding:.12rem 0;border-bottom:1px dashed #243040}
+.lab-cmp table.rt tr.on td{background:rgba(188,140,255,.10)}
+.lab-cmp table.rt,.lab-facts table.rt{font-size:.84rem;margin:0}
+.lab-facts{font-size:.88rem}
+.lab-facts p{margin:.3rem 0}
+.lab-cells{display:flex;flex-wrap:wrap;gap:3px;margin:.25rem 0;align-items:center}
+.lab-cells .lab-cl{font-size:.75rem;color:var(--muted);margin-right:.35rem}
+.lab-cells .c{min-width:2rem;text-align:center;border:1px solid var(--border);border-radius:5px;padding:.05rem .2rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;background:var(--card2)}
+.lab-cells .c i{display:block;font-style:normal;font-size:.58rem;font-weight:400;color:var(--muted)}
+.lab-cells .c.m-res{border-color:var(--red);background:rgba(248,81,73,.22)}
+.lab-cells .c.m-chg{border-color:var(--orange);background:rgba(210,153,34,.28)}
+.lab-cells .c.m-idx{border-color:var(--green);background:rgba(63,185,80,.22)}
+.lab-cells .c.m-par{border-color:var(--blue);background:rgba(88,166,255,.22)}
+.lab-cells .c.m-cond{border-color:var(--cyan);background:rgba(86,212,221,.22)}
+.lab-cells .c.m-off{opacity:.3}
+.lab-stack{display:inline-flex;flex-direction:column;gap:2px;min-width:5rem;vertical-align:top;margin:0 .6rem .4rem 0}
+.lab-sti{border:1px solid var(--border);border-radius:5px;padding:.08rem .45rem;font-family:'JetBrains Mono',monospace;font-size:.82rem;background:var(--card2);text-align:center}
+.lab-sti.top{border-color:var(--orange);background:rgba(210,153,34,.22)}
+.lab-frames{display:inline-flex;flex-direction:column;gap:2px;min-width:9rem;vertical-align:top;margin:0 .6rem .4rem 0}
+.lab-fr{border:1px solid var(--border);border-radius:5px;padding:.08rem .5rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--card2)}
+.lab-fr.top{border-color:var(--purple);background:rgba(188,140,255,.16)}
+.lab-out{font-family:'JetBrains Mono',monospace;font-size:.84rem;background:#0a0d12;border:1px solid var(--border);border-radius:6px;padding:.2rem .5rem;margin:.3rem 0;white-space:pre-wrap;word-break:break-word}
+@media(max-width:1500px){.lab-main{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.lab-main>.lab-col:last-child{grid-column:1 / -1}}
+@media(max-width:900px){.lab-main,.lab-bottom{grid-template-columns:minmax(0,1fr)}}
+.lab-math .katex-display>.katex,.lab-facts .katex-display>.katex,.lab-cmp .katex-display>.katex{font-size:.9em}
+.lab-math .katex-display,.lab-facts .katex-display{margin:.3em 0}
+.lab-cmp,.lab-math,.lab-facts{overflow-x:auto}
+.lab-mem table.rt{width:auto}
+</style>
 </head>
 <body>
 
@@ -409,6 +470,7 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
   <span class="bn">Kapitel 3</span><h2>Elementare Datenstrukturen</h2>
   <span class="tp">§3.1–3.7 · Bausteine · Arrays · verkettete Listen · Strings · zusammengesetzte Strukturen</span>
 </div></div>
+<!--P2LAB:link3--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab3">All-in-one-Labor zu Kapitel 3</a> mit allen Programmen, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/P2LAB:link3-->
 
 <!-- ───────────── 3.1 ───────────── -->
 <div class="blatt" id="s31"><div class="kop"><span class="bn">§3.1</span><h2>Bausteine: Typen, struct, Zeiger, Referenzen</h2><span class="tp">Def. 3.1 · Prog. 3.1–3.4</span></div></div>
@@ -974,11 +1036,18 @@ Speicher \(\Res{V+2E}\) · Kante testen: \(O(\text{Grad})\) · alle Nachbarn: \(
 <div class="cap"><b>Das ist der Kern von Teil 2 in einem Programm:</b> Ein Array (Index aus den Koordinaten berechnet, O(1)) enthält Listen (wachsen dynamisch, O(1) einfügen). Die <span class="c-rule">richtige Kombination</span> von Bausteinen macht aus einem quadratischen Algorithmus einen fast linearen. Das Gitter ist (G+2)×(G+2) groß, der Rand verhindert Sonderfälle wie ein Dummy-Knoten.</div>
 </div>
 
+<!--P2LAB:3-->
+<div class="blatt" id="lab3"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 3: Arrays, Listen, Strings, Graphen</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 3</span> Sechs Szenarien aus §3.2–3.7. Jede Variante zeigt eine Abweichung vom Buchcode und was sie kostet.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK3"></div></div>
+<!--/P2LAB:3-->
 <!-- ═════════════════════════════════════ KAPITEL 4 ═════════════════════════════════════ -->
 <div class="blatt part" id="k4"><div class="kop">
   <span class="bn">Kapitel 4</span><h2>Abstrakte Datentypen (ADTs)</h2>
   <span class="tp">Def. 4.1–4.4 · class · Stack · Clients · FIFO · Union-Find als ADT · Duplikate · First-Class</span>
 </div></div>
+<!--P2LAB:link4--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab4">All-in-one-Labor zu Kapitel 4</a> mit allen Programmen, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/P2LAB:link4-->
 
 <!-- ───────────── 4.0 ───────────── -->
 <div class="blatt" id="s40"><div class="kop"><span class="bn">§4 · 4.1</span><h2>ADT = Datentyp hinter einem Interface</h2><span class="tp">Def. 4.1 · Prog. 4.1–4.3 (POINT)</span></div></div>
@@ -1390,11 +1459,18 @@ public:
 <div class="cap"><b>In der Klausur</b> sollten die Queue-Axiome für eine <span class="fw">Prioritätswarteschlange</span> umgebaut werden. Die Frage ist dort: Wann ist das neue <span class="c-par">t</span> das Ergebnis? Nicht mehr „wenn der Rest leer ist“, sondern „wenn t höhere Priorität hat als top(q)“. Das lösen wir ausführlich in der Übungsrunde nach Teil 3 (Kap. 9, Priority Queues).</div>
 </div>
 
+<!--P2LAB:4-->
+<div class="blatt" id="lab4"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 4: Stack, Queue, ADTs</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 4</span> Sechs Szenarien aus §4.2–4.8: Clients, Implementierungen und was hinter dem Interface passiert.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK4"></div></div>
+<!--/P2LAB:4-->
 <!-- ═════════════════════════════════════ KAPITEL 5 ═════════════════════════════════════ -->
 <div class="blatt part" id="k5"><div class="kop">
   <span class="bn">Kapitel 5</span><h2>Rekursion und Bäume</h2>
   <span class="tp">Rekursion · Divide &amp; Conquer · Dynamische Programmierung · Bäume · Traversierung · DFS/BFS</span>
 </div></div>
+<!--P2LAB:link5--><div class="lab-hint" style="margin:.6rem 0 0">🧪 <b>Zum Wiederholen:</b> Am Ende dieses Kapitels steht das <a href="#lab5">All-in-one-Labor zu Kapitel 5</a> mit allen Programmen, Varianten, Formeln und Aussagen in einem interaktiven Bild.</div><!--/P2LAB:link5-->
 
 <!-- ───────────── 5.1 ───────────── -->
 <div class="blatt" id="s51"><div class="kop"><span class="bn">§5.1</span><h2>Rekursive Algorithmen</h2><span class="tp">Prog. 5.1 Fakultät · 5.2 fragwürdig · 5.3 Euklid · 5.4 Präfix · 5.5 Listen</span></div></div>
@@ -1876,6 +1952,12 @@ Eine „Armee von Suchern“ fächert Ebene für Ebene auf. Tauscht man die Queu
 </div>
 
 <!-- ═════════════════════════════════════ TRAINING ═════════════════════════════════════ -->
+<!--P2LAB:5-->
+<div class="blatt" id="lab5"><div class="kop"><span class="bn" style="color:var(--purple);border-color:rgba(188,140,255,.4);background:rgba(188,140,255,.1)">🧪 Labor</span><h2>All-in-one: Kapitel 5: Rekursion, Bäume, Graphen</h2><span class="tp">alles zum Kapitel in einem interaktiven Bild</span></div></div>
+<div class="figure labfig"><div class="ttl"><span class="n">Kapitel 5</span> Sieben Szenarien aus §5.1–5.8: Aufrufstapel, Rekursionsbäume, Traversierungen und ihre Formeln.</div>
+<div class="sub">So benutzt du es: Szenario wählen (oben) → Variante oder Beispiel wählen → mit ▶ Schritt für Schritt. Links der Code (× = wie oft die Zeile schon lief), in der Mitte der Speicher, rechts die Rechnung und die Aussage, die in diesem Moment gilt. Unten: alle Varianten im Vergleich und das Wissen, das immer gilt.</div>
+<div id="labK5"></div></div>
+<!--/P2LAB:5-->
 <div class="blatt part" id="schema"><div class="kop">
   <span class="bn">Training</span><h2>📐 Schema + 3 Beispiele: rekursiven Code in eine Formel übersetzen</h2>
   <span class="tp">Anker · Aufrufe · Arbeit → Rekurrenz → Lösung → O-Klasse</span>
@@ -3503,11 +3585,1248 @@ if($('schPlot')){
 })();
 </script>
 <script>
+/* ===== P2LAB: All-in-one-Labor-Engine (ein Labor pro Kapitel) ===== */
+(function(){
+'use strict';
+const LB = window.LB = window.LB || {};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const clone = o => JSON.parse(JSON.stringify(o));
+const tex = el => { if(LB.tex && el) LB.tex(el); };
+const MAXSNAP = 4000;                                  // höchstens so viele Schritte aufzeichnen
+
+/* Recorder: der Algorithmus läuft einmal komplett, jeder rec.step speichert eine Momentaufnahme */
+function Rec(quiet){
+  this.S = {}; this.c = {}; this.snaps = []; this.quiet = quiet; this.n = 0; this.cut = false; this.lastClaim = '';
+}
+Rec.prototype.add = function(k, v){ this.c[k] = (this.c[k] || 0) + (v === undefined ? 1 : v); };
+Rec.prototype.step = function(line, msg, claim, hi){
+  this.n++;
+  if(claim) this.lastClaim = claim;
+  if(this.quiet) return;
+  if(this.snaps.length >= MAXSNAP){ this.cut = true; return; }
+  this.snaps.push({line, msg, claim: this.lastClaim, hi: hi || {}, S: clone(this.S), c: clone(this.c)});
+};
+
+LB.Lab = function(o){
+  const root = $(o.id); if(!root) return;
+  const L = {o, sc: 0, v: null, inp: {}, rec: null, i: 0, timer: null};
+  root.classList.add('lab');
+  root.innerHTML =
+    '<div class="lab-tabs"></div>' +
+    '<div class="lab-row lab-var"></div>' +
+    '<div class="lab-row lab-ex"></div>' +
+    '<div class="lab-hint"></div>' +
+    '<div class="lab-row lab-ctl"><button data-a="first" title="Anfang">⏮</button><button data-a="prev">◀</button><button data-a="next" class="lab-big">Schritt ▶</button><button data-a="last" title="Ende">⏭</button><button data-a="auto">⏯ auto</button>' +
+      '<input type="range" class="lab-pos" min="0" value="0"><span class="readout lab-cnt"></span></div>' +
+    '<div class="lab-main">' +
+      '<div class="lab-col"><div class="lab-h">① Code <span class="lab-book"></span></div><pre class="cpp lab-code"></pre></div>' +
+      '<div class="lab-col"><div class="lab-h">② Speicher / Struktur jetzt</div><div class="lab-mem"></div></div>' +
+      '<div class="lab-col"><div class="lab-h">③ Mathematik live</div><div class="lab-math"></div>' +
+        '<div class="lab-h" style="margin-top:.6rem">④ Aussage, die jetzt gilt</div><div class="lab-claim"></div></div>' +
+    '</div>' +
+    '<div class="lab-msg"></div>' +
+    '<div class="lab-bottom">' +
+      '<div class="lab-col"><div class="lab-h">⑤ Was wäre wenn? Alle Varianten mit derselben Eingabe</div><div class="lab-cmp"></div></div>' +
+      '<div class="lab-col"><div class="lab-h">⑥ Das musst du hier wissen (gilt immer)</div><div class="lab-facts"></div></div>' +
+    '</div>';
+  const q = s => root.querySelector(s);
+  const S = () => o.scenarios[L.sc];
+
+  function tabs(){
+    q('.lab-tabs').innerHTML = o.scenarios.map((s, k) => '<button data-sc="' + k + '" class="' + (k === L.sc ? 'on' : '') + '"><b>' + s.icon + ' ' + s.name + '</b><small>' + s.book + '</small></button>').join('');
+  }
+  function controls(){
+    const s = S();
+    let h = '<span class="lab-lab">Variante:</span>' + s.vars.map(v => '<button data-v="' + v.k + '" class="' + (v.k === L.v ? 'on' : '') + '" title="' + esc(v.d || '') + '">' + v.name + '</button>').join('');
+    h += (s.ins || []).map(f => '<label>' + f.label + ' <input data-in="' + f.k + '" value="' + esc(L.inp[f.k]) + '" style="width:' + (f.w || 5) + 'rem"></label>').join('');
+    q('.lab-var').innerHTML = h;
+    q('.lab-ex').innerHTML = '<span class="lab-lab">Beispiele:</span>' + (s.presets || []).map((p, k) => '<button data-p="' + k + '">' + p.name + '</button>').join('');
+  }
+  function select(k){
+    const s = o.scenarios[k]; L.sc = k; L.v = s.vars[0].k; L.inp = {};
+    (s.ins || []).forEach(f => L.inp[f.k] = f.def);
+    q('.lab-hint').innerHTML = s.intro || ''; q('.lab-hint').style.display = s.intro ? '' : 'none';
+    tabs(); controls(); run(); tex(q('.lab-hint'));
+  }
+  function runOnce(v, quiet){
+    const s = S(), rec = new Rec(quiet);
+    try { s.run(rec, L.inp, v); }
+    catch(e){ if(!quiet){ rec.S = rec.S || {}; rec.snaps.push({line: 0, msg: '⚠ ' + esc(e.message), claim: '', hi: {}, S: clone(rec.S), c: clone(rec.c)}); } rec.err = e.message; }
+    if(!quiet && !rec.snaps.length) rec.snaps.push({line: 0, msg: '(keine Schritte)', claim: '', hi: {}, S: clone(rec.S), c: clone(rec.c)});
+    return rec;
+  }
+  function run(){
+    stop();
+    const s = S();
+    L.rec = runOnce(L.v, false); L.i = 0;
+    q('.lab-pos').max = L.rec.snaps.length - 1;
+    const code = s.code(L.v, L.inp);
+    q('.lab-book').textContent = (s.vars.find(v => v.k === L.v) || {}).book || s.book;
+    q('.lab-code').innerHTML = code.map((src, k) => '<span class="row" data-l="' + (k + 1) + '"><span class="lnum">' + (k + 1) + '</span>' + (LB.hl ? LB.hl(src.replace(/(\S)\s{3,}\/\//, '$1  //'), s.roles || {}) : esc(src)) + '<span class="labhit"></span></span>').join('');
+    q('.lab-facts').innerHTML = s.facts(L.v, L.inp); tex(q('.lab-facts'));
+    compare();
+    show(0);
+  }
+  function compare(){
+    const s = S(), keys = s.cmp || [];
+    let h = '<table class="rt"><tr><th>Variante</th>' + keys.map(k => '<th class="r">' + k[1] + '</th>').join('') + '<th class="r">Schritte</th></tr>';
+    s.vars.forEach(v => {
+      const r = runOnce(v.k, true);
+      h += '<tr' + (v.k === L.v ? ' class="on"' : '') + '><td><b>' + v.name + '</b>' + (r.err ? ' <span class="small" style="color:var(--res)">⚠ ' + esc(r.err) + '</span>' : '') + '</td>' +
+        keys.map(k => '<td class="r mono">' + (r.c[k[0]] !== undefined ? r.c[k[0]] : (k[2] ? k[2](r) : '–')) + '</td>').join('') + '<td class="r mono">' + r.n + '</td></tr>';
+    });
+    h += '</table>';
+    if(s.cmpNote) h += '<div class="small" style="margin-top:.4rem">' + s.cmpNote(L.inp) + '</div>';
+    q('.lab-cmp').innerHTML = h; tex(q('.lab-cmp'));
+  }
+  function show(i){
+    const s = S(), snaps = L.rec.snaps; i = Math.max(0, Math.min(snaps.length - 1, i)); L.i = i;
+    const sn = snaps[i];
+    q('.lab-pos').value = i;
+    q('.lab-cnt').innerHTML = 'Schritt <b>' + i + '</b> / ' + (snaps.length - 1) + (L.rec.cut ? ' <span title="nur die ersten ' + MAXSNAP + ' Schritte aufgezeichnet">(gekürzt)</span>' : '');
+    const hits = {};
+    for(let k = 0; k <= i; k++){ const l = snaps[k].line; hits[l] = (hits[l] || 0) + 1; }
+    root.querySelectorAll('.lab-code .row').forEach(r => { const l = +r.dataset.l;
+      r.classList.toggle('cur', l === sn.line); r.querySelector('.labhit').textContent = hits[l] ? '×' + hits[l] : ''; });
+    q('.lab-mem').innerHTML = s.view(sn.S, sn, L.inp, L.v);
+    q('.lab-math').innerHTML = s.math(sn.c, L.inp, L.v, i === snaps.length - 1, sn.S); tex(q('.lab-math'));
+    q('.lab-claim').innerHTML = sn.claim || '<span class="muted">Noch nichts passiert: Startzustand.</span>'; tex(q('.lab-claim'));
+    let hist = '';
+    for(let k = Math.max(0, i - 4); k < i; k++) hist += '<div class="muted small">' + k + ': ' + snaps[k].msg + '</div>';
+    q('.lab-msg').innerHTML = hist + '<div><b>' + i + ':</b> ' + sn.msg + '</div>'; tex(q('.lab-msg'));
+  }
+  function stop(){ if(L.timer){ clearInterval(L.timer); L.timer = null; } }
+  root.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b || !root.contains(b)) return;
+    if(b.dataset.sc !== undefined) return select(+b.dataset.sc);
+    if(b.dataset.v !== undefined){ L.v = b.dataset.v; controls(); return run(); }
+    if(b.dataset.p !== undefined){ const p = S().presets[+b.dataset.p];
+      Object.assign(L.inp, p.set || {}); if(p.v) L.v = p.v; controls(); run();
+      q('.lab-hint').style.display = ''; q('.lab-hint').innerHTML = '<b>' + p.name + ':</b> ' + p.hint; tex(q('.lab-hint'));
+      if(p.to === 'end') show(L.rec.snaps.length - 1);
+      return; }
+    const a = b.dataset.a, n = L.rec.snaps.length - 1;
+    if(a === 'first') show(0); else if(a === 'prev') show(L.i - 1); else if(a === 'next') show(L.i + 1); else if(a === 'last') show(n);
+    else if(a === 'auto'){ if(L.timer) return stop(); L.timer = setInterval(() => { if(L.i >= n) stop(); else show(L.i + 1); }, 650); }
+  });
+  root.addEventListener('change', e => { const f = e.target.closest('[data-in]'); if(!f) return; L.inp[f.dataset.in] = f.value; run(); });
+  root.addEventListener('keydown', e => { if(e.target.closest('[data-in]') && e.key === 'Enter'){ L.inp[e.target.dataset.in] = e.target.value; run(); } });
+  q('.lab-pos').addEventListener('input', e => show(+e.target.value));
+  select(0);
+  L.selectScenario = select; L.root = root;
+  (LB.labs = LB.labs || {})[o.id] = L;
+  return L;
+};
+
+/* ---------- gemeinsame Zeichenhelfer ---------- */
+const COL = {res:'#f85149', chg:'#d29922', rule:'#bc8cff', par:'#58a6ff', idx:'#3fb950', cond:'#56d4dd', mem:'#f778ba', line:'#30363d', mute:'#8b949e', ink:'#e6edf3', card:'#161b22'};
+LB.LC = COL;
+/* Zellreihe: a = Werte, mk = {index: 'res'|'chg'|...}, opt.lab = Beschriftung, opt.idx = Indizes zeigen */
+LB.labCells = function(a, mk, opt){
+  opt = opt || {}; mk = mk || {};
+  return '<div class="lab-cells">' + (opt.lab ? '<span class="lab-cl">' + opt.lab + '</span>' : '') + a.map((x, k) => {
+    const c = mk[k]; return '<span class="c' + (c ? ' m-' + c : '') + '">' + esc(x === null || x === undefined ? '' : x) + (opt.idx === false ? '' : '<i>' + (opt.base !== undefined ? opt.base + k : k) + '</i>') + '</span>'; }).join('') + '</div>';
+};
+/* Liste von Knoten als SVG: nodes = [{id, item}], next = {id: id|null}, ptr = {name: id} (Zeiger-Etiketten), circ: Kreis */
+LB.labList = function(order, item, next, ptr, opt){
+  opt = opt || {}; const n = order.length, W = Math.max(320, 74 * n + 40), H = 112, X = k => 26 + k * 74;
+  const pos = {}; order.forEach((id, k) => pos[id] = k);
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto"><defs><marker id="la' + (opt.mid || '') + '" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="' + COL.chg + '"/></marker></defs>';
+  order.forEach((id, k) => {
+    const hl = (opt.hi || {})[id];
+    s += '<rect x="' + X(k) + '" y="38" width="44" height="28" rx="5" fill="' + (hl ? 'rgba(210,153,34,.25)' : COL.card) + '" stroke="' + (hl ? COL.chg : COL.mute) + '" stroke-width="1.5"/>';
+    s += '<line x1="' + (X(k) + 30) + '" y1="38" x2="' + (X(k) + 30) + '" y2="66" stroke="' + COL.line + '"/>';
+    s += '<text x="' + (X(k) + 15) + '" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="' + COL.ink + '">' + esc(item[id]) + '</text>';
+    const nx = next[id];
+    if(nx === null || nx === undefined) s += '<text x="' + (X(k) + 37) + '" y="57" text-anchor="middle" font-size="11" fill="' + COL.mute + '">∅</text>';
+    else if(pos[nx] === k + 1) s += '<line x1="' + (X(k) + 37) + '" y1="52" x2="' + (X(k + 1) - 2) + '" y2="52" stroke="' + COL.chg + '" stroke-width="1.6" marker-end="url(#la' + (opt.mid || '') + ')"/>';
+    else if(pos[nx] !== undefined){ const a = X(k) + 37, b = X(pos[nx]) + 15, up = pos[nx] <= k;
+      s += '<path d="M' + a + ' 66 C ' + a + ' ' + (up ? 104 : 96) + ', ' + b + ' ' + (up ? 104 : 96) + ', ' + b + ' 68" fill="none" stroke="' + (up ? COL.idx : COL.chg) + '" stroke-width="1.5" marker-end="url(#la' + (opt.mid || '') + ')"/>'; }
+  });
+  const lab = {}; Object.keys(ptr || {}).forEach(p => { const id = ptr[p]; if(id === null || id === undefined || pos[id] === undefined) return; (lab[pos[id]] = lab[pos[id]] || []).push(p); });
+  Object.keys(lab).forEach(k => { s += '<text x="' + (X(+k) + 22) + '" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="' + COL.par + '">' + lab[k].join(', ') + ' ↓</text>'; });
+  return s + '</svg>';
+};
+/* Binärbaum als SVG: T = {id: {item, l, r}}, root; mark = {id: farbe}; info = {id: kleiner Text} */
+LB.labTree = function(T, root, mark, info){
+  mark = mark || {}; info = info || {};
+  if(root === null || root === undefined) return '<div class="muted">(leerer Baum)</div>';
+  const pos = {}; let col = 0, maxd = 0;
+  (function place(id, d){ if(id === null || id === undefined) return; maxd = Math.max(maxd, d);
+    place(T[id].l, d + 1); pos[id] = {x: col++, d}; place(T[id].r, d + 1); })(root, 0);
+  const W = Math.max(260, col * 52 + 30), H = (maxd + 1) * 62 + 30, X = c => 26 + c * 52, Y = d => 24 + d * 62;
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+  Object.keys(pos).forEach(id => { ['l', 'r'].forEach(sd => { const c = T[id][sd]; if(c !== null && c !== undefined && pos[c])
+    s += '<line x1="' + X(pos[id].x) + '" y1="' + (Y(pos[id].d) + 15) + '" x2="' + X(pos[c].x) + '" y2="' + (Y(pos[c].d) - 15) + '" stroke="' + COL.mute + '" stroke-width="1.4"/>'; }); });
+  Object.keys(pos).forEach(id => { const p = pos[id], m = mark[id];
+    s += '<circle cx="' + X(p.x) + '" cy="' + Y(p.d) + '" r="16" fill="' + (m ? m + '33' : COL.card) + '" stroke="' + (m || COL.mute) + '" stroke-width="' + (m ? 2.6 : 1.4) + '"/>';
+    s += '<text x="' + X(p.x) + '" y="' + (Y(p.d) + 4.5) + '" text-anchor="middle" font-size="13" font-weight="700" fill="' + COL.ink + '">' + esc(T[id].item) + '</text>';
+    if(info[id] !== undefined) s += '<text x="' + (X(p.x) + 19) + '" y="' + (Y(p.d) - 10) + '" font-size="10" fill="' + COL.cond + '">' + esc(info[id]) + '</text>'; });
+  return s + '</svg>';
+};
+/* Stapel / Schlange als Kästchen, oben = zuletzt */
+LB.labStack = function(items, title, opt){
+  opt = opt || {};
+  return '<div class="lab-stack"><div class="small muted">' + title + '</div>' + (items.length ? items.slice().reverse().map((x, k) => '<div class="lab-sti' + (k === 0 && opt.top ? ' top' : '') + '">' + esc(x) + '</div>').join('') : '<div class="muted small">(leer)</div>') + '</div>';
+};
+/* Aufrufstapel: frames = [{f, args, note}] */
+LB.labFrames = function(frames, title){
+  return '<div class="lab-frames"><div class="small muted">' + (title || 'Aufrufstapel (oben = aktiv)') + '</div>' + (frames.length ? frames.slice().reverse().map((f, k) => '<div class="lab-fr' + (k === 0 ? ' top' : '') + '"><b>' + esc(f.f) + '</b>(' + esc(f.args) + ')' + (f.note ? ' <span class="small">' + esc(f.note) + '</span>' : '') + '</div>').join('') : '<div class="muted small">(leer)</div>') + '</div>';
+};
+/* Zahlenzeile „gemessen gegen Formel“ */
+LB.labVs = function(label, got, want, note){
+  if(want === '…') return '<div class="lab-vs"><span>' + label + '</span><b class="mono">' + got + '</b><span class="muted">Formel</span><b class="mono muted">am Ende</b><span></span></div>';
+  const ok = got === want || (typeof want === 'number' && Math.abs(got - want) < 1e-9);
+  return '<div class="lab-vs"><span>' + label + '</span><b class="mono">' + got + '</b><span class="muted">Formel</span><b class="mono">' + want + '</b>' + (ok ? '<span style="color:var(--idx)">✓</span>' : '<span style="color:var(--chg)">' + (note || '≠') + '</span>') + '</div>';
+};
+})();
+
+/* ===== P2LAB Kapitel 3: Arrays, Listen, Strings, zusammengesetzte Strukturen ===== */
+(function(){
+'use strict';
+const LB = window.LB;
+const C = LB.LC;
+const nums = s => String(s).trim().split(/[\s,]+/).filter(x => x !== '').map(Number).filter(x => !isNaN(x));
+const int = (s, lo, hi, d) => { const v = parseInt(s, 10); return isNaN(v) ? d : Math.max(lo, Math.min(hi, v)); };
+const f2 = x => (Math.round(x * 100) / 100).toLocaleString('de-DE');
+const ln = Math.log, lg = Math.log2;
+
+/* ---------------- 1 · Sieb des Eratosthenes (Prog. 3.5) ---------------- */
+const sieve = {
+  icon:'🧮', name:'Array: Sieb', book:'§3.2 · Prog. 3.5',
+  intro:'Ein <span class="fw">Array</span> als Tabelle „ist k prim?“: Index = Zahl, Wert = 1 (noch Kandidat) oder 0 (gestrichen). Wähle eine Variante, um zu sehen, was die eine Zeile <code class="inl">if (a[i])</code> an Arbeit spart.',
+  vars:[{k:'buch', name:'Buch (mit if)', book:'Prog. 3.5'}, {k:'ohne', name:'ohne if (a[i])', book:'Abweichung: jedes i streicht'}, {k:'wurzel', name:'nur i·i < N', book:'Abweichung: äußere Schleife bis √N'}],
+  ins:[{k:'N', label:'N =', def:'50', w:4}],
+  presets:[{name:'N = 30', set:{N:'30'}, hint:'Klein genug, um jede Streichung nachzurechnen.'},
+           {name:'N = 100', set:{N:'100'}, v:'buch', hint:'Die 25 Primzahlen unter 100 bleiben stehen.'},
+           {name:'100 ohne if', set:{N:'100'}, v:'ohne', hint:'Ohne <code class="inl">if (a[i])</code> streicht auch jede zusammengesetzte Zahl ihre Vielfachen: Summe ≈ N·H<sub>N</sub> statt ≈ N ln ln N.'},
+           {name:'100 nur bis √N', set:{N:'100'}, v:'wurzel', hint:'Ab i·i ≥ N streicht die innere Schleife nichts mehr (j beginnt bei i). Die äußere Schleife darf also früher enden, gleiches Ergebnis.'}],
+  roles:{a:'mem', i:'idx', j:'idx', N:'par'},
+  code(v, inp){ const N = int(inp.N, 4, 120, 50);
+    return ['static const int N = ' + N + ';', 'int main()', '  { int i, a[N];',
+      '    for (i = 2; i < N; i++) a[i] = 1;            // alle Kandidaten',
+      v === 'wurzel' ? '    for (i = 2; i*i < N; i++)                     // nur bis √N' : '    for (i = 2; i < N; i++)                       // jeder Teiler-Kandidat',
+      v === 'ohne' ? '      if (1)                                       // Abweichung: keine Prüfung' : '      if (a[i])                                    // nur Primzahlen streichen',
+      '        for (int j = i; j*i < N; j++) a[i*j] = 0;  // Vielfache i·j streichen',
+      '    for (i = 2; i < N; i++)',
+      '      if (a[i]) cout << " " << i;                // was übrig bleibt, ist prim',
+      '    cout << endl;', '  }']; },
+  run(rec, inp, v){
+    const N = int(inp.N, 4, 120, 50), S = rec.S; S.N = N; S.a = Array(N).fill(null); S.i = -1; S.k = -1; S.out = [];
+    for(let i = 2; i < N; i++){ S.a[i] = 1; rec.add('init'); }
+    rec.step(4, 'Alle Zahlen 2 … ' + (N - 1) + ' sind Kandidaten: a[i] = 1.', 'Noch ist nichts gestrichen. Jede Zahl ≥ 2 könnte prim sein.');
+    for(let i = 2; v === 'wurzel' ? i * i < N : i < N; i++){
+      S.i = i; S.k = -1; rec.add('test');
+      const pass = v === 'ohne' ? true : !!S.a[i];
+      rec.step(6, 'i = ' + i + ': a[' + i + '] = ' + S.a[i] + (v === 'ohne' ? ' (wird nicht geprüft)' : pass ? ' → ' + i + ' ist prim, Vielfache streichen' : ' → schon gestrichen, nichts zu tun'),
+        '\\(\\Rule{\\text{Invariante:}}\\) Jede Zahl \\(< ' + Math.min(N, (i) * (i)) + '\\) mit a[k] = 1 ist prim (sie hat keinen Teiler \\(< ' + i + '\\)).');
+      if(!pass) continue;
+      for(let j = i; j * i < N; j++){
+        S.k = i * j; const was = S.a[i * j]; S.a[i * j] = 0; rec.add('w'); if(was === 0) rec.add('doppelt');
+        rec.step(7, 'a[' + i + '·' + j + '] = a[' + (i * j) + '] = 0' + (was === 0 ? ' (war schon 0: doppelte Arbeit)' : ''));
+      }
+    }
+    S.i = -1; S.k = -1;
+    for(let i = 2; i < N; i++) if(S.a[i]) S.out.push(i);
+    rec.c.prim = S.out.length;
+    rec.step(9, 'Ausgabe: ' + S.out.length + ' Primzahlen unter ' + N + '.', '\\(\\Res{\\text{Fertig:}}\\) a[k] = 1 genau für die Primzahlen k < N.');
+  },
+  view(S){
+    const mk = {};
+    for(let k = 2; k < S.N; k++){ if(S.a[k] === 0) mk[k] = 'off'; else if(S.i < 0 || k < S.i * S.i || k <= S.i) mk[k] = 'idx'; }
+    if(S.i >= 2) mk[S.i] = 'chg'; if(S.k >= 0) mk[S.k] = 'res';
+    const cells = []; for(let k = 2; k < S.N; k++) cells.push(k);
+    return '<div class="small muted">grün = sicher prim · blass = gestrichen · orange = aktuelles i · rot = gerade gestrichen</div>' +
+      LB.labCells(cells, Object.fromEntries(Object.entries(mk).map(([k, c]) => [k - 2, c])), {idx: false}) +
+      (S.out.length ? '<div class="lab-out">' + S.out.join(' ') + '</div>' : '');
+  },
+  math(c, inp, v, done){
+    const N = int(inp.N, 4, 120, 50); let exact = 0;
+    const isP = k => { for(let d = 2; d * d <= k; d++) if(k % d === 0) return false; return k >= 2; };
+    for(let i = 2; i < N; i++){ if(v === 'wurzel' && i * i >= N) break; if(v !== 'ohne' && !isP(i)) continue; exact += Math.max(0, Math.ceil(N / i) - i); }
+    let h = LB.labVs('Streichungen a[i·j] = 0 bis jetzt', c.w || 0, done ? exact : '…') + LB.labVs('davon doppelt', c.doppelt || 0, '–', ' ');
+    h += '<div class="step">\\[ \\begin{aligned} W &= \\sum_{i} \\max\\left(0,\\ \\lceil N/i \\rceil - i\\right) = ' + exact + ' && \\text{exakt (j von i bis } \\lceil N/i\\rceil - 1) \\\\ ' +
+      (v === 'ohne' ? 'W &\\approx N\\,H_N - \\ldots \\approx ' + f2(N * (ln(N) + 0.5772) - N) + ' && \\text{jedes i: harmonisch, Θ(N log N)}'
+                    : 'W &\\approx N \\ln\\ln N = ' + f2(N * ln(ln(N))) + ' && \\text{nur Primzahlen p: } \\textstyle\\sum_p \\frac Np') + ' \\end{aligned} \\]</div>';
+    return h;
+  },
+  cmp:[['w', 'Streichungen'], ['doppelt', 'doppelt'], ['test', 'Tests a[i]'], ['prim', 'Primzahlen']],
+  cmpNote: () => 'Alle drei liefern dieselben Primzahlen. Unterschied nur in der Arbeit: <b>if (a[i])</b> spart alle Streichungen durch zusammengesetzte i; <b>i·i &lt; N</b> spart nur Tests.',
+  facts(){ return '<p>\\(\\Mem{a[i]}\\) ist in \\(O(1)\\) erreichbar: Adresse = Anfang + i·sizeof(int). Das Sieb nutzt den <b>Index als Daten</b>.</p>' +
+    '<div class="step">\\[ \\begin{aligned} \\text{Streichungen} &\\approx \\sum_{p \\le N,\\ p \\text{ prim}} \\frac Np \\approx N \\ln\\ln N && \\text{(Buch, mit if)} \\\\ \\text{ohne if} &\\approx \\sum_{i \\le N} \\frac Ni = N H_N \\approx N \\ln N && \\text{Werkzeug 4 aus Teil 1} \\\\ \\text{Speicher} &= N && \\text{ein Eintrag pro Zahl} \\end{aligned} \\]</div>' +
+    '<p><b>Aussage:</b> Das Sieb ist fast linear; die Zeile <code class="inl">if (a[i])</code> macht den Unterschied zwischen N ln ln N und N ln N.</p>'; }
+};
+
+/* ---------------- 2 · Josephus (Prog. 3.9) ---------------- */
+const jos = {
+  icon:'⭕', name:'Liste: Josephus', book:'§3.3 · Prog. 3.9',
+  intro:'N Personen im Kreis, jede M-te scheidet aus. Die <span class="fw">zyklische Liste</span> löscht in \\(O(1)\\) (ein Zeiger umbiegen), das <span class="fw">Array</span> muss nachrücken. Vergleiche die Arbeit.',
+  vars:[{k:'list', name:'zyklische Liste', book:'Prog. 3.9'}, {k:'arr', name:'Array mit Nachrücken', book:'Abweichung (eigene Umsetzung)'}],
+  ins:[{k:'N', label:'N =', def:'9', w:3.5}, {k:'M', label:'M =', def:'5', w:3.5}],
+  presets:[{name:'Buch N = 9, M = 5', set:{N:'9', M:'5'}, v:'list', hint:'Fig. 3.5: Es bleibt Nr. 8 übrig.'},
+           {name:'M = 1', set:{N:'8', M:'1'}, hint:'Jeder Erste scheidet aus: keine Zeigerschritte, der Letzte (N) bleibt.'},
+           {name:'M = 2 (Zweierschritt)', set:{N:'16', M:'2'}, hint:'Bei N = 2ᵏ bleibt immer Nr. 1 übrig.'},
+           {name:'Array N = 20', set:{N:'20', M:'3'}, v:'arr', hint:'Das Array muss nach jedem Ausscheiden den Rest verschieben.'}],
+  roles:{x:'chg', t:'par', M:'par', N:'par', a:'mem', k:'idx', n:'par'},
+  code(v){ return v === 'list' ? [
+      'struct node { int item; node* next;',
+      '  node(int x, node* t) { item = x; next = t; } };',
+      'typedef node *link;',
+      'link t = new node(1, 0); t->next = t;        // Kreis aus einem Knoten',
+      'link x = t;',
+      'for (i = 2; i <= N; i++)',
+      '  x = (x->next = new node(i, t));             // anhängen, Kreis schließen',
+      'while (x != x->next)                          // mehr als einer übrig',
+      '  { for (i = 1; i < M; i++) x = x->next;      // M−1 Schritte weiter',
+      '    x->next = x->next->next; }                // Nachfolger aushängen: O(1)',
+      'cout << x->item << endl;']
+    : ['int a[N], n = N, k = 0;                      // n = noch im Spiel',
+      'for (int i = 0; i < N; i++) a[i] = i+1;',
+      'while (n > 1)',
+      '  { k = (k + M - 1) % n;                      // Index des Opfers',
+      '    for (int i = k; i < n-1; i++)             // Rest nachrücken: O(n)',
+      '      a[i] = a[i+1];',
+      '    n--; }',
+      'cout << a[0] << endl;']; },
+  run(rec, inp, v){
+    const N = int(inp.N, 1, 26, 9), M = int(inp.M, 1, 40, 5), S = rec.S; S.v = v; S.out = null;
+    if(v === 'list'){
+      S.next = {}; S.order = [1]; S.next[1] = 1; S.x = 1; S.t = 1; S.del = []; rec.add('new');
+      rec.step(4, 'Erster Knoten 1 zeigt auf sich selbst.', 'Die Liste ist ein Kreis: vom letzten Knoten geht es zurück zum ersten.');
+      for(let i = 2; i <= N; i++){ S.next[S.x] = i; S.next[i] = 1; S.order.push(i); S.x = i; rec.add('new');
+        rec.step(7, 'Knoten ' + i + ' anhängen; sein next zeigt auf t = 1.', 'Kreis mit ' + i + ' Knoten; x zeigt auf den letzten.'); }
+      let alive = N;
+      while(S.next[S.x] !== S.x){
+        rec.step(8, 'x = ' + S.x + ', x->next = ' + S.next[S.x] + ' ≠ x: noch ' + alive + ' im Kreis.');
+        for(let i = 1; i < M; i++){ S.x = S.next[S.x]; rec.add('link'); rec.step(9, 'x = x->next → ' + S.x + ' (Schritt ' + i + ' von ' + (M - 1) + ')'); }
+        const vic = S.next[S.x]; S.next[S.x] = S.next[vic]; S.del.push(vic); S.order = S.order.filter(k => k !== vic); delete S.next[vic]; alive--; rec.add('del');
+        rec.step(10, '<b>' + vic + '</b> scheidet aus: x->next = x->next->next (nur ein Zeiger ändert sich).', 'Es sind noch \\(n = ' + alive + '\\) im Kreis. Gelöscht wurden \\(' + (N - alive) + '\\), jeweils nach \\(M - 1 = ' + (M - 1) + '\\) Schritten.');
+      }
+      S.out = S.x; rec.step(11, 'Übrig bleibt <b>' + S.x + '</b>.', '\\(\\Res{\\text{Überlebender: } ' + S.x + '}\\)');
+    } else {
+      S.a = []; S.n = N; S.k = 0; S.del = []; S.hi = -1;
+      for(let i = 0; i < N; i++) S.a.push(i + 1);
+      rec.step(2, 'a = 1 … ' + N + ', n = ' + N + ', k = 0.', 'Das Array hält die noch Lebenden lückenlos in a[0 … n−1].');
+      while(S.n > 1){
+        S.k = (S.k + M - 1) % S.n; S.hi = S.k; rec.add('idx');
+        rec.step(4, 'k = (k + M − 1) mod n = ' + S.k + ' → Opfer a[' + S.k + '] = ' + S.a[S.k], 'Index-Rechnung statt Zeigerschritte: \\(O(1)\\).');
+        const vic = S.a[S.k];
+        for(let i = S.k; i < S.n - 1; i++){ S.a[i] = S.a[i + 1]; rec.add('shift'); }
+        S.a.length = S.n - 1; S.del.push(vic); S.n--; rec.add('del');
+        rec.step(6, '<b>' + vic + '</b> scheidet aus; ' + (S.n - S.k) + ' Einträge rücken nach links.', 'Nachrücken kostet \\(O(n)\\): das ist der Preis des Arrays.');
+      }
+      S.out = S.a[0]; S.hi = 0; rec.step(8, 'Übrig bleibt <b>' + S.a[0] + '</b>.', '\\(\\Res{\\text{Überlebender: } ' + S.a[0] + '}\\)');
+    }
+  },
+  view(S){
+    if(S.v === 'list'){
+      const item = {}; S.order.forEach(k => item[k] = k);
+      return LB.labList(S.order, item, S.next, {x: S.x, t: S.order.indexOf(1) >= 0 ? 1 : null}, {hi: {[S.x]: 1}, mid: 'j'}) +
+        '<div class="small">ausgeschieden: <span class="mono">' + (S.del.join(' ') || '–') + '</span></div>';
+    }
+    return LB.labCells(S.a, {[S.hi]: 'res'}, {lab: 'a[0..n−1]'}) + '<div class="small">ausgeschieden: <span class="mono">' + (S.del.join(' ') || '–') + '</span></div>';
+  },
+  math(c, inp, v, done){
+    const N = int(inp.N, 1, 26, 9), M = int(inp.M, 1, 40, 5);
+    if(v === 'list') return LB.labVs('Zeigerschritte x = x->next', c.link || 0, done ? (N - 1) * (M - 1) : '…') + LB.labVs('Löschungen', c.del || 0, done ? N - 1 : '…') + LB.labVs('new-Aufrufe', c.new || 0, N) +
+      '<div class="step">\\[ \\begin{aligned} \\text{Schritte} &= (N-1)(M-1) = ' + (N - 1) * (M - 1) + ' && \\text{N−1 Runden, je M−1 Schritte} \\\\ \\text{Löschen} &= O(1) && \\text{ein Zeiger} \\\\ \\text{gesamt} &= \\Theta(MN) \\end{aligned} \\]</div>';
+    return LB.labVs('Verschiebungen a[i] = a[i+1]', c.shift || 0, done ? c.shift : '…', ' ') + LB.labVs('Löschungen', c.del || 0, done ? N - 1 : '…') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Index} &= (k + M - 1) \\bmod n && O(1)\\text{, unabhängig von M} \\\\ \\text{Nachrücken} &\\le \\sum_{n=2}^{N} (n-1) = \\tfrac{N(N-1)}{2} = ' + N * (N - 1) / 2 + ' && \\text{Gauß, schlechtester Fall} \\end{aligned} \\]</div>';
+  },
+  cmp:[['link', 'Zeigerschritte'], ['shift', 'Verschiebungen'], ['del', 'Löschungen'], ['out', 'Überlebender', r => r.S.out]],
+  cmpNote: () => 'Gleicher Überlebender. Die Liste bezahlt mit <b>(N−1)(M−1)</b> Zeigerschritten (wächst mit M), das Array mit Verschiebungen bis <b>N²/2</b> (unabhängig von M).',
+  facts(){ return '<p>\\(\\Rule{\\text{Liste (Def. 3.2):}}\\) Knoten = Item + Link. Einfügen und Löschen hinter einem bekannten Knoten: <b>O(1)</b>, nur Zeiger umbiegen. Zugriff auf das k-te Element: <b>O(k)</b>, man muss laufen.</p>' +
+    '<p>\\(\\Rule{\\text{Array:}}\\) Zugriff auf a[k]: <b>O(1)</b>. Löschen in der Mitte: <b>O(n)</b>, alles dahinter rückt nach.</p>' +
+    '<p><b>Aussage:</b> Die Wahl der Datenstruktur verschiebt die Kosten zwischen „finden“ und „ändern“. Bei Josephus dominiert das Laufen \\(\\Theta(MN)\\) bei der Liste und das Nachrücken \\(O(N^2)\\) beim Array.</p>'; }
+};
+
+/* ---------------- 3 · Liste umkehren (Prog. 3.10) ---------------- */
+const rev = {
+  icon:'🔁', name:'Liste umkehren', book:'§3.4 · Prog. 3.10',
+  intro:'Drei Zeiger reichen: <span class="c-par">y</span> = Rest, <span class="c-res">r</span> = schon umgedreht, <span class="c-chg">t</span> = Merker für y->next. Die rekursive Variante macht dasselbe, braucht aber einen Aufrufstapel der Tiefe N.',
+  vars:[{k:'iter', name:'iterativ (Buch)', book:'Prog. 3.10'}, {k:'rek', name:'rekursiv', book:'Abweichung (eigene Umsetzung)'}],
+  ins:[{k:'L', label:'Liste', def:'A B C D E', w:9}],
+  presets:[{name:'5 Knoten', set:{L:'A B C D E'}, hint:'Nach jeder Runde ist ein Knoten mehr umgedreht.'}, {name:'1 Knoten', set:{L:'A'}, hint:'Randfall: eine Runde, r zeigt auf A.'}, {name:'leer', set:{L:''}, hint:'Randfall: while-Bedingung sofort falsch, Ergebnis 0.'}],
+  roles:{y:'par', r:'res', t:'chg', x:'par'},
+  code(v){ return v === 'iter' ? ['link reverse(link x)', '  { link t, y = x, r = 0;', '    while (y != 0)', '      { t = y->next;     // Rest merken', '        y->next = r;     // Knoten umdrehen', '        r = y;           // r wächst um y', '        y = t; }         // weiter im Rest', '    return r;', '  }']
+    : ['link reverse(link x)', '  { if (x == 0 || x->next == 0) return x;  // Anker', '    link r = reverse(x->next);   // Rest umdrehen', '    x->next->next = x;           // Nachfolger zeigt zurück', '    x->next = 0;                 // x wird das Ende', '    return r;', '  }']; },
+  run(rec, inp, v){
+    const items = String(inp.L).trim().split(/\s+/).filter(Boolean).slice(0, 12), S = rec.S;
+    S.order = items.map((_, k) => k); S.item = {}; S.next = {}; items.forEach((x, k) => { S.item[k] = x; S.next[k] = k + 1 < items.length ? k + 1 : null; });
+    S.ptr = {x: items.length ? 0 : null}; S.frames = [];
+    if(v === 'iter'){
+      S.ptr = {y: items.length ? 0 : null, r: null};
+      rec.step(2, 'y = x (Anfang), r = 0 (leere umgedrehte Liste).', 'r ist die Umkehrung der ersten 0 Knoten; y ist der unveränderte Rest.');
+      let y = items.length ? 0 : null, r = null, k = 0;
+      while(y !== null){
+        rec.step(3, 'y ≠ 0: noch Knoten im Rest.');
+        const t = S.next[y]; S.ptr.t = t; rec.step(4, 't = y->next = ' + (t === null ? '0' : S.item[t]));
+        S.next[y] = r; rec.add('link'); rec.step(5, 'y->next = r: Knoten ' + S.item[y] + ' zeigt jetzt ' + (r === null ? 'auf 0' : 'auf ' + S.item[r]) + '.');
+        r = y; S.ptr.r = r; rec.step(6, 'r = y');
+        y = t; S.ptr.y = y; k++; rec.step(7, 'y = t', '\\(\\Rule{\\text{Invariante:}}\\) r ist die umgedrehte Liste der ersten \\(' + k + '\\) Knoten, y der Rest (' + (items.length - k) + ' Knoten).');
+      }
+      rec.step(8, 'return r = ' + (r === null ? '0' : S.item[r]), '\\(\\Res{\\text{Fertig:}}\\) N = ' + items.length + ' Links umgebogen, Zusatzspeicher O(1).');
+    } else {
+      let depth = 0;
+      const R = x => {
+        S.frames.push({f: 'reverse', args: x === null ? '0' : S.item[x]}); depth++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, depth); S.ptr = {x};
+        if(x === null || S.next[x] === null){ rec.step(2, 'Anker: ' + (x === null ? 'leere Liste' : S.item[x] + ' ist das Ende') + ' → return.', 'Stapeltiefe jetzt ' + depth + '.'); S.frames.pop(); depth--; return x; }
+        rec.step(3, 'reverse(' + S.item[S.next[x]] + ') aufrufen: erst den Rest umdrehen.');
+        const r = R(S.next[x]); S.ptr = {x, r};
+        const nx = S.next[x]; S.next[nx] = x; rec.add('link'); rec.step(4, S.item[nx] + '->next = ' + S.item[x] + ' (zeigt zurück).');
+        S.next[x] = null; rec.step(5, S.item[x] + '->next = 0.', 'Die Liste ab ' + S.item[r] + ' ist umgedreht bis einschließlich ' + S.item[x] + '.');
+        S.frames.pop(); depth--; return r;
+      };
+      const r = R(items.length ? 0 : null); S.ptr = {r};
+      rec.step(6, 'Ergebnis r = ' + (r === null ? '0' : S.item[r]), '\\(\\Res{\\text{Fertig:}}\\) N−1 = ' + Math.max(0, items.length - 1) + ' Links umgebogen, aber Stapeltiefe N = ' + items.length + '.');
+    }
+  },
+  view(S){ if(!S.order.length) return '<div class="muted">(leere Liste)</div>';
+    return LB.labList(S.order, S.item, S.next, S.ptr, {hi: S.ptr.y !== undefined ? {[S.ptr.y]: 1} : {[S.ptr.x]: 1}, mid: 'r'}) + (S.frames.length ? LB.labFrames(S.frames) : ''); },
+  math(c, inp, v, done){ const N = String(inp.L).trim().split(/\s+/).filter(Boolean).length;
+    return LB.labVs('Links umgebogen', c.link || 0, done ? (v === 'iter' ? N : Math.max(0, N - 1)) : '…') + (v === 'rek' ? LB.labVs('Aufrufe', c.call || 0, done ? Math.max(1, N) : '…') + LB.labVs('max. Stapeltiefe', c.maxd || 0, done ? Math.max(1, N) : '…') : '') +
+      '<div class="step">\\[ \\begin{aligned} T(N) &= \\Theta(N) && \\text{jeder Knoten einmal} \\\\ \\text{Zusatzspeicher} &= ' + (v === 'iter' ? 'O(1)' : '\\Theta(N)') + ' && ' + (v === 'iter' ? '\\text{drei Zeiger}' : '\\text{ein Stapelrahmen pro Knoten}') + ' \\end{aligned} \\]</div>'; },
+  cmp:[['link', 'Links geändert'], ['call', 'Aufrufe'], ['maxd', 'max. Tiefe']],
+  cmpNote: () => 'Beide Θ(N) Zeit. Die rekursive Version braucht Θ(N) Stapelspeicher; bei sehr langen Listen droht ein Stapelüberlauf.',
+  facts(){ return '<p>\\(\\Rule{\\text{Muster (Def. 3.3):}}\\) Eine Liste ist leer (0) oder ein Knoten, dessen Link auf eine Liste zeigt. Daraus folgen direkt rekursive Programme.</p><p>Reihenfolge der vier Zuweisungen ist entscheidend: erst <code class="inl">t = y->next</code> merken, sonst ist der Rest nach <code class="inl">y->next = r</code> verloren.</p><p><b>Aussage:</b> Umkehren kostet \\(\\Theta(N)\\) Zeit und (iterativ) \\(O(1)\\) Zusatzspeicher.</p>'; }
+};
+
+/* ---------------- 4 · Insertion Sort auf Listen (Prog. 3.11) ---------------- */
+const lsort = {
+  icon:'🧷', name:'Listen-Sortieren', book:'§3.4 · Prog. 3.11',
+  intro:'Prog. 3.11 sucht in der sortierten Liste b <b>von vorne</b> die Einfügestelle. Das Array-Insertion-Sort sucht <b>von hinten</b>. Deshalb sind beste und schlechteste Eingabe genau vertauscht.',
+  vars:[{k:'list', name:'Liste (Prog. 3.11)', book:'Prog. 3.11'}, {k:'arr', name:'Array (von hinten)', book:'Abweichung: Insertion Sort im Array'}],
+  ins:[{k:'A', label:'Zahlen', def:'627 483 912 205 774 391', w:14}],
+  presets:[{name:'zufällig', set:{A:'627 483 912 205 774 391'}, hint:'Typischer Fall.'},
+           {name:'aufsteigend', set:{A:'1 2 3 4 5 6 7 8'}, hint:'Liste: schlechtester Fall (jedes Mal bis ans Ende laufen). Array: bester Fall (ein Vergleich pro Element).'},
+           {name:'absteigend', set:{A:'8 7 6 5 4 3 2 1'}, hint:'Liste: bester Fall (sofort vorne einfügen). Array: schlechtester Fall (alles verschieben).'},
+           {name:'gleiche Werte', set:{A:'5 3 5 3 5 3'}, hint:'Gleiche Werte: die Liste fügt hinter gleichen ein (Test ist >), bleibt also stabil.'}],
+  roles:{t:'chg', x:'par', u:'par', a:'mem', b:'mem', v:'par', j:'idx', i:'idx'},
+  code(v){ return v === 'list' ? ['// Eingabe steht in Liste a (Kopf heada), Ausgabe b', 'node headb(0, 0); link u, x, b = &headb;', 'for (t = a->next; t != 0; t = u)', '  { u = t->next;                        // Rest von a merken', '    for (x = b; x->next != 0; x = x->next)  // von vorne suchen', '      if (x->next->item > t->item) break;   // Vergleich', '    t->next = x->next; x->next = t;     // 2 Links: einfügen', '  }']
+    : ['for (int i = 1; i < N; i++)', '  { int v = a[i], j = i;', '    while (j > 0 && a[j-1] > v)         // von hinten suchen', '      { a[j] = a[j-1]; j--; }           // größere nach rechts', '    a[j] = v;', '  }']; },
+  run(rec, inp, v){
+    const A = nums(inp.A).slice(0, 14), S = rec.S, N = A.length; S.v = v;
+    if(v === 'list'){
+      S.a = A.slice(); S.b = []; S.t = null; S.x = -1;
+      rec.step(2, 'b = leere sortierte Liste (nur der Kopf headb).', 'b ist sortiert (leer).');
+      while(S.a.length){
+        const t = S.a.shift(); S.t = t; rec.step(4, 't = ' + t + ' aus a nehmen, u merkt den Rest.');
+        let x = 0; S.x = 0;
+        while(x < S.b.length){ rec.add('cmp'); const big = S.b[x] > t; S.x = x;
+          rec.step(6, 'x->next->item = ' + S.b[x] + (big ? ' > ' : ' ≤ ') + t + (big ? ' → hier einfügen' : ' → weiter'));
+          if(big) break; x++; }
+        S.b.splice(x, 0, t); S.x = x; S.t = null; rec.add('link', 2);
+        rec.step(7, t + ' an Position ' + x + ' von b einfügen: 2 Links ändern, nichts verschieben.', '\\(\\Rule{\\text{Invariante:}}\\) b ist sortiert und enthält die ersten ' + S.b.length + ' Elemente der Eingabe.');
+      }
+      rec.step(3, 'a ist leer: fertig.', '\\(\\Res{\\text{b ist sortiert.}}\\)');
+    } else {
+      S.a = A.slice(); S.i = 0; S.j = -1;
+      for(let i = 1; i < N; i++){
+        const vv = S.a[i]; let j = i; S.i = i; S.j = j; rec.step(2, 'v = a[' + i + '] = ' + vv);
+        while(j > 0){ rec.add('cmp'); const big = S.a[j - 1] > vv; S.j = j;
+          rec.step(3, 'a[' + (j - 1) + '] = ' + S.a[j - 1] + (big ? ' > ' : ' ≤ ') + vv);
+          if(!big) break; S.a[j] = S.a[j - 1]; j--; rec.add('move'); S.j = j; rec.step(4, 'nach rechts schieben, j = ' + j); }
+        S.a[j] = vv; S.j = j; rec.add('move'); rec.step(5, 'a[' + j + '] = ' + vv, '\\(\\Rule{\\text{Invariante:}}\\) a[0..' + i + '] ist sortiert.');
+      }
+      S.i = N; rec.step(1, 'fertig', '\\(\\Res{\\text{a ist sortiert.}}\\)');
+    }
+  },
+  view(S){
+    if(S.v === 'list'){
+      const mk = {}; if(S.x >= 0 && S.x < S.b.length) mk[S.x] = 'chg';
+      return LB.labCells(S.a, {0: 'par'}, {lab: 'Rest a:', idx: false}) + (S.t !== null ? '<div class="small">t = <b class="mono">' + S.t + '</b></div>' : '') + LB.labCells(S.b, mk, {lab: 'sortiert b:'});
+    }
+    const mk = {}; for(let k = 0; k < S.i && k < S.a.length; k++) mk[k] = 'idx'; if(S.j >= 0) mk[S.j] = 'chg';
+    return LB.labCells(S.a, mk, {lab: 'a:'});
+  },
+  math(c, inp, v, done){ const A = nums(inp.A).slice(0, 14), N = A.length;
+    let inv = 0; for(let i = 0; i < N; i++) for(let j = i + 1; j < N; j++) if(A[i] > A[j]) inv++;
+    let h = LB.labVs('Vergleiche', c.cmp || 0, done ? c.cmp : '…', ' ') + (v === 'list' ? LB.labVs('Links geändert', c.link || 0, done ? 2 * N : '…') : LB.labVs('Schreibzugriffe', c.move || 0, done ? inv + Math.max(0, N - 1) : '…'));
+    h += '<div class="step">\\[ \\begin{aligned} \\text{Inversionen} &= ' + inv + ' && \\text{Paare in falscher Reihenfolge} \\\\ \\text{schlechtester Fall} &= \\tfrac{N(N-1)}{2} = ' + N * (N - 1) / 2 + ' && \\text{Gauß} \\\\ \\text{bester Fall} &= N - 1 = ' + Math.max(0, N - 1) + ' \\end{aligned} \\]</div>';
+    return h; },
+  cmp:[['cmp', 'Vergleiche'], ['link', 'Links'], ['move', 'Verschiebungen']],
+  cmpNote: () => 'Vergleiche: Liste schlecht bei <b>aufsteigend</b>, Array schlecht bei <b>absteigend</b>. Die Liste verschiebt nie Daten (2 Links pro Element), das Array verschiebt so oft, wie es Inversionen gibt.',
+  facts(){ return '<p>\\(\\Rule{\\text{Dummy-Kopf:}}\\) Mit <code class="inl">headb</code> gibt es keinen Sonderfall „vorne einfügen“: x startet beim Kopf, eingefügt wird immer hinter x.</p>' +
+    '<div class="step">\\[ \\begin{aligned} C_{\\text{worst}} &= 0 + 1 + \\dots + (N-1) = \\tfrac{N(N-1)}{2} && \\text{Werkzeug 2 (Gauß)} \\\\ C_{\\text{Mittel}} &\\approx \\tfrac{N^2}{4} && \\text{halbe Länge im Mittel} \\end{aligned} \\]</div>' +
+    '<p><b>Aussage:</b> Insertion Sort ist \\(\\Theta(N^2)\\) im schlechtesten und mittleren Fall, egal ob Liste oder Array; die Liste spart nur die Verschiebungen.</p>'; }
+};
+
+/* ---------------- 5 · Strings: strlen in der Schleife (§3.6) ---------------- */
+const strl = {
+  icon:'🔤', name:'Strings: strlen-Falle', book:'§3.6 · Performance-Bug',
+  intro:'C-Strings enden mit <code class="inl">\'\\0\'</code>. <code class="inl">strlen</code> muss deshalb jedes Mal bis zum Ende laufen. Steht es in der Schleifenbedingung, wird aus linear quadratisch.',
+  vars:[{k:'bug', name:'strlen in der Bedingung', book:'§3.6: der Fehler'}, {k:'fix', name:'strlen einmal vorher', book:'§3.6: die Korrektur'}],
+  ins:[{k:'s', label:'String', def:'a b c d e f', w:12}],
+  presets:[{name:'kurz', set:{s:'a b c'}, hint:'n = 5 Zeichen.'}, {name:'mittel', set:{s:'hallo welt'}, hint:'n = 10.'}, {name:'lang', set:{s:'der schnelle braune fuchs springt'}, hint:'Je länger, desto größer der Abstand: n² gegen 2n.'}],
+  roles:{a:'mem', i:'idx', N:'par', cnt:'res'},
+  code(v){ return v === 'bug' ? ['int count(char *a)                      // zählt Leerzeichen', '  { int cnt = 0;', '    for (int i = 0; i < strlen(a); i++)  // strlen läuft JEDES Mal', "      if (a[i] == ' ') cnt++;", '    return cnt;', '  }']
+    : ['int count(char *a)                      // zählt Leerzeichen', '  { int cnt = 0, N = strlen(a);           // einmal: n+1 Zugriffe', '    for (int i = 0; i < N; i++)', "      if (a[i] == ' ') cnt++;", '    return cnt;', '  }']; },
+  run(rec, inp, v){
+    const s = String(inp.s).slice(0, 40), n = s.length, S = rec.S; S.s = s; S.i = -1; S.scan = -1; S.cnt = 0;
+    if(v === 'fix'){ rec.add('read', n + 1); S.scan = n; rec.step(2, 'strlen(a): liest ' + (n + 1) + ' Zeichen bis \\0, N = ' + n + '.', 'N ist jetzt bekannt; die Schleife muss nicht mehr messen.'); }
+    for(let i = 0; ; i++){
+      S.i = i;
+      if(v === 'bug'){ rec.add('read', n + 1); rec.add('strlen'); S.scan = n; rec.step(3, 'Test i < strlen(a): strlen liest wieder ' + (n + 1) + ' Zeichen (Aufruf ' + (i + 1) + ').', 'Bisher ' + (i + 1) + ' strlen-Aufrufe zu je n+1 = ' + (n + 1) + ' Zugriffen.'); }
+      else rec.step(3, 'Test i < N: ' + i + ' < ' + n + ' (kein Lesen des Strings).');
+      if(i >= n) break;
+      rec.add('read'); if(s[i] === ' '){ S.cnt++; }
+      rec.step(4, "a[" + i + "] = '" + s[i] + "'" + (s[i] === ' ' ? ' → cnt = ' + S.cnt : ''));
+    }
+    S.i = -1; rec.step(5, 'return cnt = ' + S.cnt, '\\(\\Res{' + S.cnt + ' \\text{ Leerzeichen}}\\), insgesamt ' + rec.c.read + ' Zeichenzugriffe.');
+  },
+  view(S){ const a = S.s.split('').map(ch => ch === ' ' ? '␣' : ch).concat(['\\0']); const mk = {}; if(S.i >= 0 && S.i < S.s.length) mk[S.i] = 'chg'; mk[S.s.length] = 'off';
+    return LB.labCells(a, mk, {lab: 'a:'}) + '<div class="small">cnt = <b>' + S.cnt + '</b></div>'; },
+  math(c, inp, v, done){ const n = String(inp.s).slice(0, 40).length;
+    const want = v === 'bug' ? (n + 1) * (n + 1) + n : 2 * n + 1;
+    return LB.labVs('Zeichenzugriffe', c.read || 0, done ? want : '…') + '<div class="step">\\[ \\begin{aligned} ' +
+      (v === 'bug' ? '\\text{Zugriffe} &= \\underbrace{(n+1)}_{\\text{strlen-Aufrufe}} \\cdot \\underbrace{(n+1)}_{\\text{je Aufruf}} + \\underbrace{n}_{\\text{a[i]}} = ' + want + ' && \\Theta(n^2)'
+                   : '\\text{Zugriffe} &= \\underbrace{(n+1)}_{\\text{strlen}} + \\underbrace{n}_{\\text{a[i]}} = ' + want + ' && \\Theta(n)') + ' \\end{aligned} \\]</div>'; },
+  cmp:[['read', 'Zeichenzugriffe'], ['strlen', 'strlen-Aufrufe']],
+  cmpNote: inp => { const n = String(inp.s).slice(0, 40).length; return 'Bei n = ' + n + ': ' + ((n + 1) * (n + 1) + n) + ' gegen ' + (2 * n + 1) + ' Zugriffe. Bei n = 10⁶ wären es etwa 10¹² gegen 2·10⁶.'; },
+  facts(){ return '<p>\\(\\Rule{\\text{C-String:}}\\) char-Array mit Endmarke <code class="inl">\'\\0\'</code>; die Länge steht nirgends, <code class="inl">strlen</code> kostet \\(\\Theta(n)\\).</p><p><b>Werkzeug 1 aus Teil 1:</b> Eine Schleife mit n+1 Runden, deren Test jedes Mal n+1 kostet, ist ein Rechteck \\((n+1)\\cdot(n+1)\\).</p><p><b>Aussage:</b> Teure Funktionsaufrufe gehören vor die Schleife, nicht in ihre Bedingung.</p>'; }
+};
+
+/* ---------------- 6 · Graph: Matrix gegen Listen (Prog. 3.18/3.19) ---------------- */
+const graph = {
+  icon:'🕸', name:'Graph speichern', book:'§3.7 · Prog. 3.18/3.19',
+  intro:'Derselbe Graph in zwei Darstellungen. Die <span class="fw">Adjazenzmatrix</span> beantwortet „Kante u-v?“ in O(1), braucht aber V² Speicher. Die <span class="fw">Adjazenzlisten</span> brauchen nur V + 2E, die Frage kostet dafür den Grad von u.',
+  vars:[{k:'mat', name:'Adjazenzmatrix', book:'Prog. 3.18'}, {k:'lst', name:'Adjazenzlisten', book:'Prog. 3.19'}],
+  ins:[{k:'V', label:'V =', def:'8', w:3.5}, {k:'E', label:'Kanten', def:'0-2 1-4 2-5 3-6 0-4 6-0 1-3', w:14}, {k:'Q', label:'Frage u-v', def:'0-6', w:4}],
+  presets:[{name:'Buch-Folge', set:{V:'8', E:'0-2 1-4 2-5 3-6 0-4 6-0 1-3', Q:'0-6'}, hint:'Ungerichteter Graph: jede Kante steht in beiden Darstellungen zweimal.'},
+           {name:'dünn (Kette)', set:{V:'10', E:'0-1 1-2 2-3 3-4 4-5 5-6 6-7 7-8 8-9', Q:'0-9'}, hint:'E = V−1: die Matrix ist fast nur Nullen (100 Zellen für 9 Kanten).'},
+           {name:'dicht (vollständig 5)', set:{V:'5', E:'0-1 0-2 0-3 0-4 1-2 1-3 1-4 2-3 2-4 3-4', Q:'4-0'}, hint:'E = V(V−1)/2: jetzt sind Listen nicht mehr sparsamer.'}],
+  roles:{adj:'mem', i:'idx', j:'idx', t:'par', V:'par', u:'par', v:'par'},
+  code(v){ return v === 'mat' ? ['int **adj = malloc2d(V, V);              // V·V Zellen', 'for (i = 0; i < V; i++)', '  for (j = 0; j < V; j++) adj[i][j] = 0;', 'for (i = 0; i < V; i++) adj[i][i] = 1;', 'while (cin >> i >> j)', '  { adj[i][j] = 1; adj[j][i] = 1; }       // 2 Einträge pro Kante', 'cout << adj[u][v];                       // Frage: 1 Zugriff']
+    : ['link adj[V];                              // V Listenköpfe', 'for (int i = 0; i < V; i++) adj[i] = 0;', 'while (cin >> i >> j)', '  { adj[j] = new node(i, adj[j]);          // vorne einfügen', '    adj[i] = new node(j, adj[i]); }        // 2 Knoten pro Kante', 'for (link t = adj[u]; t != 0; t = t->next)  // Frage: Grad(u) Schritte', '  if (t->v == v) cout << 1;']; },
+  run(rec, inp, v){
+    const V = int(inp.V, 2, 12, 8), S = rec.S; S.V = V; S.v = v; S.ans = null;
+    const E = []; String(inp.E).replace(/(\d+)\s*-\s*(\d+)/g, (_, a, b) => { a = +a; b = +b; if(a < V && b < V) E.push([a, b]); });
+    const Qm = /(\d+)\s*-\s*(\d+)/.exec(inp.Q || ''); const qu = Qm ? Math.min(+Qm[1], V - 1) : 0, qv = Qm ? Math.min(+Qm[2], V - 1) : 1; S.q = [qu, qv];
+    if(v === 'mat'){
+      S.m = Array.from({length: V}, () => Array(V).fill(0)); rec.add('mem', V * V);
+      rec.step(3, 'V·V = ' + V * V + ' Zellen anlegen und auf 0 setzen.', 'Speicher \\(V^2 = ' + V * V + '\\), egal wie viele Kanten.');
+      for(let i = 0; i < V; i++) S.m[i][i] = 1; rec.step(4, 'Diagonale adj[i][i] = 1 (Buchkonvention).');
+      E.forEach(([a, b]) => { S.m[a][b] = 1; S.m[b][a] = 1; S.last = [a, b]; rec.add('w', 2); rec.step(6, 'Kante ' + a + '-' + b + ': adj[' + a + '][' + b + '] = adj[' + b + '][' + a + '] = 1.', 'Die Matrix ist symmetrisch: jede Kante steht zweimal.'); });
+      S.last = null; rec.add('q'); S.ans = S.m[qu][qv]; rec.step(7, 'Frage adj[' + qu + '][' + qv + '] = ' + S.ans + ' (ein Zugriff).', '\\(\\Res{\\text{Kante } ' + qu + '\\text{-}' + qv + (S.ans ? '\\text{ vorhanden}' : '\\text{ fehlt}') + '}\\) nach \\(O(1)\\).');
+    } else {
+      S.L = Array.from({length: V}, () => []); rec.add('mem', V);
+      rec.step(2, V + ' leere Listenköpfe.', 'Speicher bisher \\(V = ' + V + '\\).');
+      E.forEach(([a, b]) => { S.L[b].unshift(a); S.L[a].unshift(b); S.last = [a, b]; rec.add('mem', 2); rec.add('new', 2); rec.step(5, 'Kante ' + a + '-' + b + ': ' + a + ' vorne in Liste ' + b + ', ' + b + ' vorne in Liste ' + a + '.', 'Speicher \\(V + 2E\\) mit E = ' + (rec.c.new / 2) + '.'); });
+      S.last = null; S.ans = 0;
+      for(const w of S.L[qu]){ rec.add('q'); S.probe = w; rec.step(6, 'Liste ' + qu + ': t->v = ' + w + (w === qv ? ' → gefunden' : '')); if(w === qv){ S.ans = 1; break; } }
+      S.probe = null; rec.step(7, 'Antwort: ' + S.ans, '\\(\\Res{\\text{Kante } ' + qu + '\\text{-}' + qv + (S.ans ? '\\text{ vorhanden}' : '\\text{ fehlt}') + '}\\) nach höchstens Grad(' + qu + ') = ' + S.L[qu].length + ' Schritten.');
+    }
+  },
+  view(S){
+    if(S.v === 'mat'){ let h = '<table class="rt mono" style="width:auto;font-size:.78rem"><tr><th></th>' + S.m.map((_, j) => '<th>' + j + '</th>').join('') + '</tr>';
+      S.m.forEach((row, i) => { h += '<tr><th>' + i + '</th>' + row.map((x, j) => { const last = S.last && ((S.last[0] === i && S.last[1] === j) || (S.last[0] === j && S.last[1] === i)); const q = S.q[0] === i && S.q[1] === j && S.ans !== null;
+        return '<td style="text-align:center;' + (last ? 'background:rgba(210,153,34,.35);' : q ? 'background:rgba(86,212,221,.3);' : x ? 'background:rgba(63,185,80,.18);' : '') + (x ? '' : 'color:#3a4250') + '">' + x + '</td>'; }).join('') + '</tr>'; });
+      return h + '</table>'; }
+    return S.L.map((l, i) => '<div class="lab-cells"><span class="lab-cl mono">adj[' + i + '] →</span>' + (l.length ? l.map(w => '<span class="c' + (S.last && i === S.last[0] && w === S.last[1] || S.last && i === S.last[1] && w === S.last[0] ? ' m-chg' : '') + (S.probe === w && i === S.q[0] ? ' m-cond' : '') + '">' + w + '</span>').join('<span class="muted">→</span>') : '<span class="muted small">0</span>') + '</div>').join('');
+  },
+  math(c, inp, v, done){ const V = int(inp.V, 2, 12, 8); let E = 0; String(inp.E).replace(/(\d+)\s*-\s*(\d+)/g, (_, a, b) => { if(+a < V && +b < V) E++; });
+    return LB.labVs('Speicherzellen', c.mem || 0, done ? (v === 'mat' ? V * V : V + 2 * E) : '…') + LB.labVs('Zugriffe für die Frage', c.q || 0, done ? c.q : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Matrix} &= V^2 = ' + V * V + ' && \\text{Frage } O(1)\\text{, Nachbarn } O(V) \\\\ \\text{Listen} &= V + 2E = ' + (V + 2 * E) + ' && \\text{Frage } O(\\deg u)\\text{, Nachbarn } O(\\deg u) \\\\ E &\\le \\tfrac{V(V-1)}{2} = ' + V * (V - 1) / 2 + ' && \\text{dicht, wenn E nahe daran} \\end{aligned} \\]</div>'; },
+  cmp:[['mem', 'Speicher'], ['q', 'Zugriffe Frage'], ['ans', 'Antwort', r => r.S.ans]],
+  cmpNote: () => 'Faustregel: <b>dünn</b> (E ≪ V²) → Listen; <b>dicht</b> oder viele Kantenfragen → Matrix.',
+  facts(){ return '<p>\\(\\Rule{\\text{Zusammengesetzte Struktur:}}\\) Array von Arrays (Matrix) oder Array von Listen. Beide Bausteine aus §3.2 und §3.3, kombiniert.</p><p><b>Aussage:</b> Die Darstellung bestimmt die Kosten jeder Graph-Operation; DFS/BFS (§5.8) kosten mit Listen \\(O(V + E)\\), mit Matrix \\(O(V^2)\\).</p>'; }
+};
+
+LB.labCh3 = [sieve, jos, rev, lsort, strl, graph];
+})();
+
+/* ===== P2LAB Kapitel 4: Stack, Queue, ADTs ===== */
+(function(){
+'use strict';
+const LB = window.LB;
+const C = LB.LC;
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const int = (s, lo, hi, d) => { const v = parseInt(s, 10); return isNaN(v) ? d : Math.max(lo, Math.min(hi, v)); };
+const isD = ch => ch >= '0' && ch <= '9';
+
+/* Wald aus Elternzeigern (für Union-Find) */
+function forest(id, hi){
+  const kids = id.map(() => []), roots = [];
+  id.forEach((p, x) => { if(p === x) roots.push(x); else kids[p].push(x); });
+  const pos = {}; let col = 0, maxd = 0;
+  (function place(list, d){ list.forEach(x => { maxd = Math.max(maxd, d);
+    if(kids[x].length){ place(kids[x], d + 1); pos[x] = {x: (pos[kids[x][0]].x + pos[kids[x][kids[x].length - 1]].x) / 2, d}; } else pos[x] = {x: col++, d}; }); })(roots, 0);
+  const W = Math.max(240, col * 44 + 24), H = (maxd + 1) * 58 + 24, X = c => 22 + c * 44, Y = d => 22 + d * 58;
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+  id.forEach((p, x) => { if(p !== x) s += '<line x1="' + X(pos[x].x) + '" y1="' + (Y(pos[x].d) - 14) + '" x2="' + X(pos[p].x) + '" y2="' + (Y(pos[p].d) + 14) + '" stroke="' + C.mute + '" stroke-width="1.4"/>'; });
+  id.forEach((p, x) => { const h = hi[x]; s += '<circle cx="' + X(pos[x].x) + '" cy="' + Y(pos[x].d) + '" r="14" fill="' + (p === x ? 'rgba(248,81,73,.16)' : C.card) + '" stroke="' + (h || (p === x ? C.res : C.mute)) + '" stroke-width="' + (h ? 3 : 1.4) + '"/><text x="' + X(pos[x].x) + '" y="' + (Y(pos[x].d) + 4.5) + '" text-anchor="middle" font-size="12" font-weight="700" fill="' + C.ink + '">' + x + '</text>'; });
+  return s + '</svg>';
+}
+
+/* ---------------- 1 · Postfix auswerten (Prog. 4.5) mit Array- oder Listen-Stack ---------------- */
+const POST = ['#include <iostream>', '#include <string.h>', '#include "STACK.cxx"                 // Array (4.7) oder Liste (4.8)', 'int main(int argc, char *argv[])', '  { char *a = argv[1]; int N = strlen(a);',
+  '    STACK<int> save(N);', '    for (int i = 0; i < N; i++)', '      {', "        if (a[i] == '+')", '          save.push(save.pop() + save.pop());', "        if (a[i] == '*')", '          save.push(save.pop() * save.pop());',
+  "        if ((a[i] >= '0') && (a[i] <= '9'))", '          save.push(0);                   // neue Zahl beginnt', "        while ((a[i] >= '0') && (a[i] <= '9'))", "          save.push(10*save.pop() + (a[i++]-'0'));  // Ziffer anhängen", '      }', '    cout << save.pop() << endl;', '  }'];
+const post = {
+  icon:'📚', name:'Stack: Postfix', book:'§4.3 · Prog. 4.5',
+  intro:'Postfix (umgekehrte polnische Notation) braucht keine Klammern: Zahlen kommen auf den Stack, ein Operator nimmt die beiden obersten und legt das Ergebnis zurück. Der <b>Client</b> bleibt gleich, egal ob der Stack als Array oder als Liste gebaut ist.',
+  vars:[{k:'arr', name:'Array-Stack (4.7)', book:'Prog. 4.5 + 4.7'}, {k:'list', name:'Listen-Stack (4.8)', book:'Prog. 4.5 + 4.8'}],
+  ins:[{k:'e', label:'Postfix', def:'5 9 8 + 4 6 * * 7 + *', w:16}],
+  presets:[{name:'Buch: 2075', set:{e:'5 9 8 + 4 6 * * 7 + *'}, hint:'Fig. 4.2: der Ausdruck 5 * (((9 + 8) * (4 * 6)) + 7) = 2075.'},
+           {name:'mehrstellig', set:{e:'12 30 + 2 *'}, hint:'Mehrstellige Zahlen: push(0), dann pro Ziffer push(10·pop() + Ziffer).'},
+           {name:'tiefer Stack', set:{e:'1 2 3 4 5 + + + +'}, hint:'Alle Zahlen zuerst: der Stack wird 5 hoch.'},
+           {name:'flacher Stack', set:{e:'1 2 + 3 + 4 + 5 +'}, hint:'Operator direkt nach jeder Zahl: höchstens 2 Elemente auf dem Stack.'}],
+  roles:{save:'mem', a:'par', i:'idx', N:'par'},
+  code(){ return POST; },
+  run(rec, inp, v){
+    const a = String(inp.e).replace(/[^0-9+* ]/g, '').trim().slice(0, 40), N = a.length, S = rec.S;
+    S.a = a; S.i = -1; S.st = []; S.v = v; S.out = null; S.cap = v === 'arr' ? N : 0; rec.c.maxh = 0;
+    const push = x => { S.st.push(x); rec.add('push'); if(v === 'list') rec.add('new'); rec.c.maxh = Math.max(rec.c.maxh, S.st.length); };
+    const pop = () => { if(!S.st.length) throw new Error('pop auf leerem Stack: Ausdruck fehlerhaft'); rec.add('pop'); if(v === 'list') rec.add('del'); return S.st.pop(); };
+    if(v === 'arr') rec.add('new');
+    rec.step(6, 'STACK save(' + N + '): ' + (v === 'arr' ? 'Array mit ' + N + ' Plätzen reserviert (ein new).' : 'leere Liste, Knoten kommen erst bei push.'), 'Leerer Stack.');
+    for(let i = 0; i < N; i++){
+      S.i = i;
+      if(a[i] === '+'){ const x = pop(), y = pop(); push(x + y); rec.step(10, '+ : pop ' + x + ', pop ' + y + ', push ' + (x + y), 'Oben liegt das Ergebnis des zuletzt geschlossenen Teilausdrucks: ' + (x + y) + '.'); }
+      if(a[i] === '*'){ const x = pop(), y = pop(); push(x * y); rec.step(12, '* : pop ' + x + ', pop ' + y + ', push ' + (x * y), 'Oben liegt das Ergebnis des zuletzt geschlossenen Teilausdrucks: ' + (x * y) + '.'); }
+      if(isD(a[i])){ push(0); rec.step(14, 'Ziffer: neue Zahl beginnt, push(0).'); }
+      while(isD(a[i])){ const t = pop(); push(10 * t + (+a[i])); S.i = i; rec.step(16, 'push(10·' + t + ' + ' + a[i] + ') = ' + (10 * t + (+a[i])) + ', i++'); i++; }
+      if(a[i] === ' ' || i >= N) rec.step(7, i < N ? 'Leerzeichen: nächstes Zeichen.' : 'Ende der Eingabe.', 'Stack enthält ' + S.st.length + ' Wert(e): die Teilergebnisse, die noch auf ihren Operator warten.');
+    }
+    S.i = -1; S.out = pop(); rec.step(18, 'Ergebnis: pop() = <b>' + S.out + '</b>', '\\(\\Res{\\text{Wert} = ' + S.out + '}\\). Der Stack ist ' + (S.st.length ? 'NICHT leer: Ausdruck fehlerhaft' : 'wieder leer') + '.');
+  },
+  view(S){
+    const a = S.a.split('').map(ch => ch === ' ' ? '␣' : ch), mk = {}; if(S.i >= 0) mk[S.i] = 'chg';
+    let h = LB.labCells(a, mk, {lab: 'a:'});
+    if(S.v === 'arr'){ const cells = []; for(let k = 0; k < Math.max(S.cap, 1); k++) cells.push(k < S.st.length ? S.st[k] : '');
+      const m2 = {}; if(S.st.length) m2[S.st.length - 1] = 'chg'; for(let k = S.st.length; k < cells.length; k++) m2[k] = 'off';
+      h += LB.labCells(cells, m2, {lab: 's[ ] (N = ' + S.st.length + ')'}) + '<div class="small muted">Array: ' + S.cap + ' Plätze von Anfang an belegt, benutzt ' + S.st.length + '.</div>'; }
+    else { const order = S.st.map((_, k) => S.st.length - 1 - k), item = {}, next = {};
+      order.forEach((k, j) => { item[k] = S.st[k]; next[k] = j + 1 < order.length ? order[j + 1] : null; });
+      h += order.length ? LB.labList(order, item, next, {head: order[0]}, {mid: 'p', hi: {[order[0]]: 1}}) : '<div class="muted small">head = 0 (leer)</div>';
+      h += '<div class="small muted">Liste: genau ' + S.st.length + ' Knoten, oben = head.</div>'; }
+    if(S.out !== null) h += '<div class="lab-out">Ausgabe: ' + S.out + '</div>';
+    return h;
+  },
+  math(c, inp, v, done){
+    const a = String(inp.e).replace(/[^0-9+* ]/g, '').trim(); const toks = a.split(/\s+/).filter(Boolean);
+    const nums = toks.filter(t => /^\d+$/.test(t)), ops = toks.filter(t => t === '+' || t === '*'), dig = nums.join('').length;
+    return LB.labVs('push', c.push || 0, done ? dig + nums.length + ops.length : '…') + LB.labVs('pop', c.pop || 0, done ? dig + 2 * ops.length + 1 : '…') + LB.labVs('max. Stackhöhe', c.maxh || 0, done ? c.maxh : '…', ' ') +
+      LB.labVs(v === 'arr' ? 'new (einmal, N Plätze)' : 'new (pro push)', c.new || 0, done ? (v === 'arr' ? 1 : dig + nums.length + ops.length) : '…') +
+      '<div class="step">\\[ \\begin{aligned} \\text{push} &= \\underbrace{' + dig + '}_{\\text{Ziff.}} + \\underbrace{' + nums.length + '}_{\\text{Zahlen}} + \\underbrace{' + ops.length + '}_{\\text{Ops}} && \\text{je Ziffer, Zahl, Op.} \\\\ \\text{pop} &= ' + dig + ' + 2\\cdot' + ops.length + ' + 1 && \\text{Ziffer, 2 je Op., Ende} \\\\ \\text{jede Operation} &= O(1) && \\text{Eigenschaft 4.1} \\end{aligned} \\]</div>';
+  },
+  cmp:[['push', 'push'], ['pop', 'pop'], ['new', 'new'], ['maxh', 'max. Höhe'], ['out', 'Ergebnis', r => r.S.out]],
+  cmpNote: () => 'Gleiches Ergebnis, gleiche push/pop-Folge: das ist der Sinn eines <span class="fw">ADT</span>. Unterschied nur im Speicher: Array reserviert N Plätze vorab, die Liste genau so viele Knoten wie gerade nötig (aber ein new pro push).',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. 4.2 Pushdown-Stack:}}\\) push legt oben ab, pop nimmt das <b>zuletzt</b> Abgelegte (LIFO).</p><p>\\(\\Rule{\\text{Eigenschaft 4.1:}}\\) push und pop kosten \\(O(1)\\), mit Array und mit Liste. Array: Größe vorab fest (Überlauf möglich). Liste: Speicher proportional zum Inhalt, dafür new/delete pro Operation.</p><p><b>Aussage:</b> Ein Postfix-Ausdruck mit n Zeichen wird in \\(\\Theta(n)\\) ausgewertet. Das Buchprogramm verlangt Leerzeichen zwischen den Teilen.</p>'; }
+};
+
+/* ---------------- 2 · Infix → Postfix (Prog. 4.6) ---------------- */
+const IN = ['#include <iostream>', '#include <string.h>', '#include "STACK.cxx"', 'int main(int argc, char *argv[])', '  { char *a = argv[1]; int N = strlen(a);', '    STACK<char> ops(N);',
+  '    for (int i = 0; i < N; i++)', '      {', "        if (a[i] == ')')", '          cout << ops.pop() << " ";       // Klammer zu: Operator ausgeben', "        if ((a[i] == '+') || (a[i] == '*'))", '          ops.push(a[i]);                 // Operator merken',
+  "        if ((a[i] >= '0') && (a[i] <= '9'))", '          cout << a[i] << " ";            // Zahl sofort ausgeben', '      }', '    cout << endl;', '  }'];
+const infix = {
+  icon:'🔀', name:'Stack: Infix → Postfix', book:'§4.3 · Prog. 4.6',
+  intro:'Operanden gehen sofort in die Ausgabe, Operatoren warten auf dem Stack, bis ihre schließende Klammer kommt. Das funktioniert nur bei <b>vollständig geklammerten</b> Ausdrücken.',
+  vars:[{k:'buch', name:'Prog. 4.6', book:'Prog. 4.6'}],
+  ins:[{k:'e', label:'Infix', def:'( 5 * ( ( ( 9 + 8 ) * ( 4 * 6 ) ) + 7 ) )', w:22}],
+  presets:[{name:'Buch', set:{e:'( 5 * ( ( ( 9 + 8 ) * ( 4 * 6 ) ) + 7 ) )'}, hint:'Ergebnis 5 9 8 + 4 6 * * 7 + *, genau die Eingabe des Postfix-Szenarios.'},
+           {name:'klein', set:{e:'( ( 1 + 2 ) * 3 )'}, hint:'Zwei Klammerpaare, zwei Operatoren.'},
+           {name:'Falle: Klammer fehlt', set:{e:'( 1 + 2 * 3 )'}, hint:'Nicht vollständig geklammert: Nur ein „)“ für zwei Operatoren. Das + bleibt auf dem Stack liegen, die Ausgabe ist falsch.'}],
+  roles:{ops:'mem', a:'par', i:'idx'},
+  code(){ return IN; },
+  run(rec, inp){
+    const a = String(inp.e).replace(/[^0-9+*() ]/g, '').trim().slice(0, 60), S = rec.S; S.a = a; S.i = -1; S.st = []; S.out = [];
+    rec.step(6, 'Leerer Operator-Stack.', 'Ausgabe leer, Stack leer.');
+    for(let i = 0; i < a.length; i++){ S.i = i; const ch = a[i];
+      if(ch === ')'){ if(!S.st.length) throw new Error('„)“ ohne Operator auf dem Stack'); const o = S.st.pop(); rec.add('pop'); S.out.push(o); rec.step(10, ') → pop und ausgeben: ' + o, 'Der Operator der gerade geschlossenen Klammer steht jetzt hinter seinen beiden Operanden.'); }
+      if(ch === '+' || ch === '*'){ S.st.push(ch); rec.add('push'); rec.step(12, ch + ' auf den Stack.', 'Der Operator wartet, bis seine Klammer schließt.'); }
+      if(isD(ch)){ S.out.push(ch); rec.add('out'); rec.step(14, ch + ' sofort ausgeben.'); }
+    }
+    S.i = -1; rec.step(16, 'Fertig. Ausgabe: ' + S.out.join(' '), S.st.length ? '⚠ Auf dem Stack liegt noch ' + S.st.join(' ') + ': der Ausdruck war nicht vollständig geklammert, die Ausgabe ist falsch.' : '\\(\\Res{\\text{Postfix: }\\texttt{' + S.out.join('\\ ') + '}}\\)');
+  },
+  view(S){ const mk = {}; if(S.i >= 0) mk[S.i] = 'chg';
+    return LB.labCells(S.a.split('').map(ch => ch === ' ' ? '␣' : ch), mk, {lab: 'a:'}) + '<div style="margin-top:.4rem">' + LB.labStack(S.st, 'Operator-Stack ops', {top: true}) + '</div><div class="lab-out">Ausgabe: ' + (S.out.join(' ') || '–') + '</div>'; },
+  math(c, inp, v, done){ const a = String(inp.e); const ops = (a.match(/[+*]/g) || []).length, cl = (a.match(/\)/g) || []).length, d = (a.match(/\d/g) || []).length;
+    return LB.labVs('push (Operatoren)', c.push || 0, done ? ops : '…') + LB.labVs('pop (schließende Klammern)', c.pop || 0, done ? cl : '…') + LB.labVs('Ziffern ausgegeben', c.out || 0, done ? d : '…') +
+      '<div class="step">\\[ \\begin{aligned} \\#\\text{)} &= \\#\\text{Op.} && ' + cl + ' \\text{ gegen } ' + ops + ' \\\\ T(n) &= \\Theta(n) && \\text{jedes Zeichen 1×} \\end{aligned} \\]</div>'; },
+  cmp:[['push', 'push'], ['pop', 'pop'], ['out', 'Ziffern aus']],
+  facts(){ return '<p>\\(\\Rule{\\text{Idee:}}\\) In Postfix steht jeder Operator <b>hinter</b> seinen Operanden. Die schließende Klammer markiert genau den Moment, in dem beide Operanden ausgegeben sind.</p><p><b>Aussage:</b> Infix → Postfix → Auswerten sind zwei Stack-Clients hintereinander, jeder \\(\\Theta(n)\\). So arbeiten Taschenrechner und Compiler.</p>'; }
+};
+
+/* ---------------- 3 · FIFO-Queue: Ringpuffer, Liste, und Stack als Vergleich ---------------- */
+const QRING = ['template <class Item>', 'class QUEUE', '  {', '    private:', '      Item *q; int N, head, tail;', '    public:', '      QUEUE(int maxN)', '        { q = new Item[maxN+1];             // ein Platz mehr!', '          N = maxN+1; head = N; tail = 0; }', '      int empty() const', '        { return head % N == tail; }', '      void put(Item item)', '        { q[tail++] = item; tail = tail % N; }', '      Item get()', '        { head = head % N; return q[head++]; }', '  };'];
+const QLIST = ['template <class Item>', 'class QUEUE', '  {', '    private:', '      struct node { Item item; node* next;', '        node(Item x) { item = x; next = 0; } };', '      typedef node *link;', '      link head, tail;', '    public:', '      QUEUE(int) { head = 0; }', '      int empty() const { return head == 0; }', '      void put(Item x)', '        { link t = tail; tail = new node(x);', '          if (head == 0) head = tail; else t->next = tail; }', '      Item get()', '        { Item v = head->item; link t = head->next;', '          delete head; head = t; return v; }', '  };'];
+const QSTACK = ['template <class Item>', 'class STACK                          // zum Vergleich: LIFO', '  {', '    private:', '      Item *s; int N;', '    public:', '      STACK(int maxN)', '        { s = new Item[maxN]; N = 0; }', '      int empty() const', '        { return N == 0; }', '      void push(Item item)               // statt put', '        { s[N++] = item; }', '      Item pop()                         // statt get', '        { return s[--N]; }', '  };'];
+const queue = {
+  icon:'🚶', name:'FIFO-Queue', book:'§4.6 · Prog. 4.14/4.15',
+  intro:'Buchstabe = <code class="inl">put</code>, Stern = <code class="inl">get</code> (wie Fig. 4.6). Der <span class="fw">Ringpuffer</span> rechnet head und tail modulo N, die <span class="fw">Liste</span> hängt hinten an und nimmt vorne weg. Zum Vergleich dieselbe Folge mit einem Stack.',
+  vars:[{k:'ring', name:'Ringpuffer (4.15)', book:'Prog. 4.15'}, {k:'list', name:'Liste (4.14)', book:'Prog. 4.14'}, {k:'stack', name:'Stack (LIFO) zum Vergleich', book:'Prog. 4.7'}],
+  ins:[{k:'ops', label:'Folge', def:'F I R S * T * I N * * * F I * R S T * * *', w:20}, {k:'max', label:'maxN =', def:'6', w:3}],
+  presets:[{name:'Buch Fig. 4.6', set:{ops:'F I R S * T * I N * * * F I * R S T * * *', max:'6'}, hint:'Ausgabe der Queue: F I R S T I N F I R …: die Reihenfolge des Eintreffens.'},
+           {name:'Umlauf (mod N)', set:{ops:'A B C * * D E F * * G H * * *', max:'3'}, hint:'maxN = 3: tail und head laufen mehrmals um das Array herum (Index modulo 4).'},
+           {name:'Überlauf!', set:{ops:'A B C D E F * *', max:'4'}, hint:'6 put bei maxN = 4: das Buch prüft nicht. Der Ringpuffer überschreibt und hält sich danach für leer.'},
+           {name:'get auf leer', set:{ops:'A * *', max:'4'}, hint:'Zweites get ohne Inhalt: Vorbedingung verletzt, Ergebnis undefiniert.'}],
+  roles:{q:'mem', s:'mem', head:'idx', tail:'idx', N:'par'},
+  code(v){ return v === 'ring' ? QRING : v === 'list' ? QLIST : QSTACK; },
+  run(rec, inp, v){
+    const toks = String(inp.ops).trim().split(/\s+/).filter(Boolean).slice(0, 40), maxN = int(inp.max, 1, 12, 5), S = rec.S;
+    S.v = v; S.out = []; S.cnt = 0; S.warn = '';
+    if(v === 'ring'){ S.N = maxN + 1; S.q = Array(S.N).fill(''); S.head = S.N; S.tail = 0; rec.add('new');
+      rec.step(9, 'Array mit maxN+1 = ' + S.N + ' Plätzen; head = N = ' + S.N + ', tail = 0.', 'Leer, denn head mod N = ' + (S.head % S.N) + ' = tail.');
+      for(const t of toks){
+        if(t !== '*'){ S.q[S.tail] = t; S.tail = (S.tail + 1) % S.N; S.cnt++; rec.add('put');
+          if(S.cnt > maxN){ rec.add('fehler'); S.warn = 'Überlauf: ' + S.cnt + ' Elemente bei maxN = ' + maxN + '. Ältere Daten werden überschrieben, empty() ist jetzt falsch.'; }
+          rec.step(13, 'put(' + t + '): q[tail] = ' + t + ', tail = (tail+1) mod ' + S.N + ' = ' + S.tail, '\\(\\text{Inhalt} = (\\text{tail} - \\text{head} \\bmod N + N) \\bmod N = ' + ((S.tail - S.head % S.N + S.N) % S.N) + '\\)' + (S.warn ? ' · ⚠ ' + S.warn : '')); }
+        else { S.head = S.head % S.N; if(S.cnt <= 0){ rec.add('fehler'); S.warn = 'get auf leerer Queue: Vorbedingung verletzt.'; }
+          const x = S.q[S.head]; S.head++; S.cnt--; rec.add('get'); S.out.push(x || '?');
+          rec.step(15, 'get: head = head mod N, q[head] = ' + (x || '?') + ' zurück, head++ → ' + S.head, 'Herausgekommen ist das <b>älteste</b> Element (FIFO).' + (S.warn ? ' · ⚠ ' + S.warn : '')); }
+      }
+    } else if(v === 'list'){ S.L = []; rec.step(10, 'head = 0: leere Liste.', 'Leer.');
+      for(const t of toks){
+        if(t !== '*'){ S.L.push(t); rec.add('put'); rec.add('new'); rec.step(14, 'put(' + t + '): neuer Knoten hinten, tail zeigt darauf.', 'Liste von head (ältestes) bis tail (neuestes): ' + S.L.length + ' Knoten.'); }
+        else { if(!S.L.length){ rec.add('fehler'); S.out.push('?'); rec.step(16, 'get auf leerer Liste: head->item dereferenziert 0 (Absturz).', '⚠ Vorbedingung !empty() verletzt.'); continue; }
+          const x = S.L.shift(); rec.add('get'); rec.add('del'); S.out.push(x); rec.step(17, 'get: ' + x + ' vorne entfernen, delete, head = head->next.', 'Herausgekommen ist das <b>älteste</b> Element (FIFO).'); }
+      }
+    } else { S.s = []; rec.add('new'); rec.step(8, 'Array-Stack, N = 0.', 'Leer.');
+      for(const t of toks){
+        if(t !== '*'){ S.s.push(t); rec.add('put'); rec.step(12, 'push(' + t + ')', 'Oben liegt das <b>neueste</b> Element.'); }
+        else { if(!S.s.length){ rec.add('fehler'); S.out.push('?'); rec.step(14, 'pop auf leerem Stack.', '⚠ Vorbedingung verletzt.'); continue; }
+          const x = S.s.pop(); rec.add('get'); S.out.push(x); rec.step(14, 'pop: ' + x, 'Herausgekommen ist das <b>neueste</b> Element (LIFO).'); }
+      }
+    }
+    rec.c.ausgabe = S.out.join('');
+  },
+  view(S){
+    let h = '';
+    if(S.v === 'ring'){ const mk = {}; mk[S.head % S.N] = 'par'; mk[S.tail] = mk[S.tail] ? 'cond' : 'chg';
+      h = LB.labCells(S.q, mk, {lab: 'q[0..' + (S.N - 1) + ']'}) + '<div class="small"><span class="c-par">blau</span> = head mod N = ' + (S.head % S.N) + ' · <span style="color:var(--orange)">orange</span> = tail = ' + S.tail + (S.head % S.N === S.tail ? ' · <b>gleich: empty() = true</b>' : '') + '</div>'; }
+    else if(S.v === 'list'){ const order = S.L.map((_, k) => k), item = {}, next = {}; order.forEach(k => { item[k] = S.L[k]; next[k] = k + 1 < S.L.length ? k + 1 : null; });
+      h = order.length ? LB.labList(order, item, next, {head: 0, tail: order.length - 1}, {mid: 'q'}) : '<div class="muted small">head = 0 (leer)</div>'; }
+    else h = LB.labStack(S.s, 'Stack (oben = neuestes)', {top: true});
+    if(S.warn) h += '<div class="small" style="color:var(--red)">⚠ ' + S.warn + '</div>';
+    return h + '<div class="lab-out">Ausgabe: ' + (S.out.join(' ') || '–') + '</div>';
+  },
+  math(c, inp, v, done, S){
+    let h = LB.labVs('put / push', c.put || 0, done ? c.put : '…', ' ') + LB.labVs('get / pop', c.get || 0, done ? c.get : '…', ' ');
+    if(v === 'ring') h += '<div class="step">\\[ \\begin{aligned} \\text{head} \\bmod N &= ' + (S.head % S.N) + ',\\quad \\text{tail} = ' + S.tail + ' && N = \\text{maxN} + 1 = ' + S.N + ' \\\\ \\text{leer} &\\iff \\text{head} \\bmod N = \\text{tail} && \\text{deshalb ein Platz mehr} \\\\ \\text{put, get} &= O(1) && \\text{Eigenschaft 4.2} \\end{aligned} \\]</div>';
+    else if(v === 'list') h += LB.labVs('new / delete', (c.new || 0) + ' / ' + (c.del || 0), (c.new || 0) + ' / ' + (c.del || 0)) + '<div class="step">\\[ \\begin{aligned} \\text{Speicher} &= \\text{aktueller Inhalt} && \\text{kein maxN nötig} \\\\ \\text{put, get} &= O(1) && \\text{tail-Zeiger macht hinten anhängen billig} \\end{aligned} \\]</div>';
+    else h += '<div class="step">\\[ \\text{gleiche Folge, LIFO: Ausgabe umgekehrt je Block} \\]</div>';
+    return h;
+  },
+  cmp:[['put', 'put'], ['get', 'get'], ['fehler', '⚠ Fehler'], ['ausgabe', 'Ausgabe']],
+  cmpNote: () => 'Ringpuffer und Liste liefern dieselbe Ausgabe (FIFO), solange maxN reicht. Der Stack gibt dieselben Elemente in anderer Reihenfolge zurück: <b>nur die Entnahmeregel unterscheidet die ADTs</b> (§4.1).',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. 4.3 FIFO-Queue:}}\\) get liefert das Element, das am <b>längsten</b> drin ist.</p><p>\\(\\Rule{\\text{Ringpuffer:}}\\) Array der Größe maxN+1, Indizes modulo N. Der eine freie Platz unterscheidet „leer“ (head = tail) von „voll“.</p><p>\\(\\Rule{\\text{Eigenschaft 4.2:}}\\) put und get kosten \\(O(1)\\), mit Array und mit Liste.</p><p><b>Aussage:</b> Das Buch prüft weder Überlauf noch leere Queue; das ist Aufgabe des Clients (Vorbedingungen).</p>'; }
+};
+
+/* ---------------- 4 · Union-Find als ADT (Prog. 4.9–4.11) ---------------- */
+const UFC = ['int main(int argc, char *argv[])', '  { int p, q, N = atoi(argv[1]);', '    UF info(N);', '    while (cin >> p >> q)', '      if (!info.find(p, q))                // Interface: verbunden?', '        { info.unite(p, q);                // Interface: vereinigen', '          cout << " " << p << " " << q << endl;', '        }', '  }', '// ---- hinter dem Interface ----'];
+const UFI = {
+  wqu:['class UF                                 // Prog. 4.11', '  { private: int *id, *sz;', '      int find(int x)', '        { while (x != id[x]) x = id[x]; return x; }', '    public:', '      UF(int N)', '        { id = new int[N]; sz = new int[N];', '          for (int i = 0; i < N; i++) { id[i] = i; sz[i] = 1; } }', '      int find(int p, int q)', '        { return (find(p) == find(q)); }', '      void unite(int p, int q)', '        { int i = find(p), j = find(q);', '          if (i == j) return;', '          if (sz[i] < sz[j]) { id[i] = j; sz[j] += sz[i]; }', '          else               { id[j] = i; sz[i] += sz[j]; } }', '  };'],
+  qu:['class UF                                 // Quick-Union dahinter', '  { private: int *id;', '      int find(int x)', '        { while (x != id[x]) x = id[x]; return x; }', '    public:', '      UF(int N)', '        { id = new int[N];', '          for (int i = 0; i < N; i++) id[i] = i; }', '      int find(int p, int q)', '        { return (find(p) == find(q)); }', '      void unite(int p, int q)', '        { int i = find(p), j = find(q);', '          if (i == j) return;', '          id[i] = j;                       // ohne Gewichtung', '                                           // (kein sz[])', '  } };'],
+  qf:['class UF                                 // Quick-Find dahinter', '  { private: int *id, N;', '      int find(int x)', '        { return id[x]; }', '    public:', '      UF(int n)', '        { N = n; id = new int[N];', '          for (int i = 0; i < N; i++) id[i] = i; }', '      int find(int p, int q)', '        { return (find(p) == find(q)); }', '      void unite(int p, int q)', '        { int t = find(p), u = find(q);', '          if (t == u) return;', '          for (int i = 0; i < N; i++)', '            if (id[i] == t) id[i] = u; }', '  };']
+};
+const ufadt = {
+  icon:'🧩', name:'Union-Find als ADT', book:'§4.5 · Prog. 4.9–4.11',
+  intro:'Teil 1 wird zur Klasse: Der <b>Client</b> (oben im Code) kennt nur <code class="inl">find(p, q)</code> und <code class="inl">unite(p, q)</code>. Wechsle die Implementierung dahinter: Der Client bleibt Zeile für Zeile gleich, nur die Kosten ändern sich.',
+  vars:[{k:'wqu', name:'Weighted (4.11)', book:'Prog. 4.9 + 4.11'}, {k:'qu', name:'Quick-Union', book:'Prog. 4.9 + Quick-Union'}, {k:'qf', name:'Quick-Find', book:'Prog. 4.9 + Quick-Find'}],
+  ins:[{k:'N', label:'N =', def:'10', w:3}, {k:'P', label:'Paare', def:'3-4 4-9 8-0 2-3 5-6 2-9 5-9 7-3 4-8 5-6 0-2 6-1', w:20}],
+  presets:[{name:'Buch Fig. 1.1', set:{N:'10', P:'3-4 4-9 8-0 2-3 5-6 2-9 5-9 7-3 4-8 5-6 0-2 6-1'}, hint:'Die Beispielfolge aus Kapitel 1, jetzt durch das Interface.'},
+           {name:'Kette (QU schlecht)', set:{N:'10', P:'0-1 0-2 0-3 0-4 0-5 0-6 0-7 0-8 0-9'}, hint:'Quick-Union baut eine Kette der Tiefe 9; Weighted bleibt bei Tiefe 1.'},
+           {name:'viele Wiederholungen', set:{N:'6', P:'0-1 1-2 2-3 0-3 1-3 0-2 4-5 0-5 1-4'}, hint:'Redundante Paare kosten 2 find; neue Paare 4 find, weil unite noch einmal sucht: der Preis der sauberen Schnittstelle.'}],
+  roles:{info:'rule', id:'mem', sz:'mem', p:'par', q:'par', i:'idx', j:'idx'},
+  code(v){ return UFC.concat(UFI[v]); },
+  run(rec, inp, v){
+    const N = int(inp.N, 2, 16, 10), S = rec.S, off = UFC.length; S.id = Array.from({length: N}, (_, i) => i); S.sz = Array(N).fill(1); S.hi = {}; S.out = [];
+    const pairs = []; String(inp.P).replace(/(\d+)\s*-\s*(\d+)/g, (_, a, b) => { if(+a < N && +b < N) pairs.push([+a, +b]); });
+    rec.step(off + 8, 'UF info(' + N + '): id[i] = i' + (v === 'wqu' ? ', sz[i] = 1' : '') + '.', 'N einzelne Mengen.');
+    const find = x => { rec.add('find'); if(v === 'qf'){ rec.add('acc'); return S.id[x]; } let d = 0; while(true){ rec.add('acc'); if(S.id[x] === x) break; x = S.id[x]; rec.add('acc'); d++; } return x; };
+    for(const [p, q] of pairs){
+      S.hi = {[p]: C.par, [q]: C.par};
+      rec.step(4, 'cin liest ' + p + '-' + q + '.');
+      const a = find(p), b = find(q);
+      rec.step(off + 10, 'info.find(' + p + ', ' + q + '): Wurzeln ' + a + ' und ' + b + (a === b ? ' gleich → verbunden.' : ' verschieden.'));
+      if(a === b){ rec.step(5, 'schon verbunden: nichts ausgeben.', 'Für ein überflüssiges Paar ruft der Client find 2-mal auf.'); continue; }
+      const i = find(p), j = find(q);
+      rec.step(off + 12, 'unite sucht die Wurzeln noch einmal: i = ' + i + ', j = ' + j + '.');
+      if(v === 'qf'){ for(let k = 0; k < N; k++){ rec.add('acc'); if(S.id[k] === i){ S.id[k] = j; rec.add('acc'); S.hi[k] = C.chg; } } rec.step(off + 15, 'Quick-Find: alle Einträge mit ' + i + ' werden ' + j + '.'); }
+      else if(v === 'qu'){ S.id[i] = j; rec.add('acc'); S.hi[i] = C.chg; rec.step(off + 14, 'id[' + i + '] = ' + j + '.'); }
+      else if(S.sz[i] < S.sz[j]){ S.id[i] = j; S.sz[j] += S.sz[i]; rec.add('acc'); S.hi[i] = C.chg; rec.step(off + 14, 'sz[' + i + '] < sz[' + j + ']: id[' + i + '] = ' + j + '.'); }
+      else { S.id[j] = i; S.sz[i] += S.sz[j]; rec.add('acc'); S.hi[j] = C.chg; rec.step(off + 15, 'sz[' + i + '] ≥ sz[' + j + ']: id[' + j + '] = ' + i + '.'); }
+      S.out.push(p + ' ' + q); rec.add('neu');
+      rec.step(7, 'Ausgabe ' + p + ' ' + q + '.', 'Für ein neues Paar ruft der Client find 4-mal auf (2 in find(p,q), 2 in unite). Mengen jetzt: ' + (N - S.out.length) + '.');
+    }
+    S.hi = {}; let mx = 0; S.id.forEach((_, x) => { let d = 0, y = x; while(S.id[y] !== y){ y = S.id[y]; d++; } mx = Math.max(mx, d); }); rec.c.tiefe = mx;
+    rec.step(9, 'Eingabe zu Ende.', '\\(\\Res{' + S.out.length + '}\\) neue Paare, \\(' + (N - S.out.length) + '\\) Komponenten, max. Tiefe ' + mx + '.');
+  },
+  view(S){ return forest(S.id, S.hi) + LB.labCells(S.id, {}, {lab: 'id[ ]'}) + '<div class="lab-out">Ausgabe: ' + (S.out.join(', ') || '–') + '</div>'; },
+  math(c, inp, v, done){ const N = int(inp.N, 2, 16, 10); let P = 0; String(inp.P).replace(/(\d+)\s*-\s*(\d+)/g, (_, a, b) => { if(+a < N && +b < N) P++; });
+    const neu = c.neu || 0;
+    return LB.labVs('find-Aufrufe', c.find || 0, done ? 2 * P + 2 * neu : '…') + LB.labVs('id[]-Zugriffe', c.acc || 0, done ? c.acc : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{find-Aufrufe} &= 2\\cdot\\underbrace{' + P + '}_{\\text{Paare}} + 2\\cdot\\underbrace{' + neu + '}_{\\text{neu}} && \\text{unite sucht noch einmal} \\\\ \\text{pro find} &\\le ' + (v === 'wqu' ? '\\lg N + 1' : v === 'qu' ? 'N' : '1') + ' && ' + (v === 'qf' ? '\\text{dafür unite } O(N)' : '\\text{Tiefe des Baums}') + ' \\end{aligned} \\]</div>'; },
+  cmp:[['find', 'find'], ['acc', 'id[]-Zugriffe'], ['tiefe', 'max. Tiefe'], ['neu', 'Ausgaben']],
+  cmpNote: () => 'Gleiche Ausgabe bei allen drei Implementierungen: Der Client merkt nichts vom Wechsel. Genau das verspricht <span class="fw">Def. 4.1</span>.',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. 4.1 ADT:}}\\) Ein Datentyp, auf den nur über ein Interface zugegriffen wird. Client und Implementierung sind getrennt.</p><p>\\(\\Rule{\\text{Vorteil:}}\\) Implementierung austauschen ohne Client zu ändern (hier QF → QU → WQU).</p><p>\\(\\Rule{\\text{Preis:}}\\) Das Interface verbirgt die Wurzeln; unite muss sie neu suchen. Ein Interface mit „find gibt Wurzel zurück“ wäre schneller, aber weniger abstrakt.</p>'; }
+};
+
+/* ---------------- 5 · Duplikate (Prog. 4.16) ---------------- */
+const DSTD = ['template <class Item>', 'class STACK                              // Duplikate erlaubt', '  {', '    private:', '      Item *s; int N;', '    public:', '      STACK(int maxN) { s = new Item[maxN]; N = 0; }', '      int empty() const { return N == 0; }', '      void push(Item item)', '        {', '          s[N++] = item;', '        }', '      Item pop()', '        { return s[--N]; }', '  };'];
+const DIGN = ['template <class Item>', 'class STACK                              // Prog. 4.16: ignore the new', '  {', '    private:', '      Item *s, *t; int N;                   // t[x] = 1: x ist im Stack', '    public:', '      STACK(int maxN) { s = new Item[maxN]; N = 0; t = new Item[maxN]; for (int i = 0; i < maxN; i++) t[i] = 0; }', '      int empty() const { return N == 0; }', '      void push(Item item)', '        { if (t[item] == 1) return;          // schon drin: neues ignorieren', '          s[N++] = item; t[item] = 1;', '        }', '      Item pop()', '        { t[s[--N]] = 0; return s[N]; }', '  };'];
+const DFOR = ['template <class Item>', 'class STACK                              // forget the old (eigene Umsetzung)', '  {', '    private:', '      Item *s, *t; int N;', '    public:', '      STACK(int maxN) { s = new Item[maxN]; N = 0; t = new Item[maxN]; for (int i = 0; i < maxN; i++) t[i] = 0; }', '      int empty() const { return N == 0; }', '      void push(Item item)', '        { if (t[item] == 1)                  // schon drin: altes entfernen', '            { int k = N-1; while (s[k] != item) k--; for (; k < N-1; k++) s[k] = s[k+1]; N--; }', '          s[N++] = item; t[item] = 1; }', '      Item pop()', '        { t[s[--N]] = 0; return s[N]; }', '  };'];
+const dup = {
+  icon:'♊', name:'Duplikate', book:'§4.7 · Prog. 4.16',
+  intro:'Zahl = push, Stern = pop. Was soll passieren, wenn ein Element schon im Stack ist? Drei Antworten: <b>erlauben</b>, <b>das neue ignorieren</b> (Prog. 4.16) oder <b>das alte vergessen</b> (nach oben holen). Ein Index-Array t[ ] macht die Prüfung O(1).',
+  vars:[{k:'std', name:'Duplikate erlaubt', book:'Prog. 4.7'}, {k:'ign', name:'ignore the new (4.16)', book:'Prog. 4.16'}, {k:'for', name:'forget the old', book:'§4.7 (eigene Umsetzung)'}],
+  ins:[{k:'ops', label:'Folge', def:'1 2 3 2 * 4 1 * * * *', w:16}],
+  presets:[{name:'gemischt', set:{ops:'1 2 3 2 * 4 1 * * * *'}, hint:'2 und 1 kommen doppelt.'}, {name:'nur Duplikate', set:{ops:'5 5 5 5 * *'}, hint:'Ignore: nur eine 5 im Stack, das zweite pop ist ein Fehler. Erlaubt: vier 5er.'}, {name:'altes nach oben', set:{ops:'1 2 3 4 1 * *'}, hint:'Forget: die 1 wandert von unten nach oben (3 Verschiebungen); ignore: die 1 bleibt unten.'}],
+  roles:{s:'mem', t:'mem', N:'par', item:'par'},
+  code(v){ return v === 'std' ? DSTD : v === 'ign' ? DIGN : DFOR; },
+  run(rec, inp, v){
+    const toks = String(inp.ops).trim().split(/\s+/).filter(Boolean).slice(0, 30), S = rec.S; S.s = []; S.t = Array(10).fill(0); S.out = []; S.hi = -1;
+    rec.step(7, 'Leerer Stack; t[ ] = 0 überall.', 'Leer.');
+    for(const tk of toks){
+      if(tk === '*'){ if(!S.s.length){ rec.add('fehler'); rec.step(14, 'pop auf leerem Stack!', '⚠ Vorbedingung verletzt.'); continue; }
+        const x = S.s.pop(); if(v !== 'std') S.t[x] = 0; S.out.push(x); rec.add('pop'); S.hi = -1; rec.step(14, 'pop → ' + x + (v !== 'std' ? ', t[' + x + '] = 0' : ''), 'Oben liegt jetzt ' + (S.s.length ? S.s[S.s.length - 1] : 'nichts') + '.'); continue; }
+      const x = int(tk, 0, 9, 0); rec.add('req');
+      if(v === 'std'){ S.s.push(x); rec.add('push'); S.hi = S.s.length - 1; rec.step(11, 'push(' + x + ')', 'Duplikate sind erlaubt: ' + x + ' kann mehrfach im Stack stehen.'); continue; }
+      if(S.t[x] === 1){
+        if(v === 'ign'){ rec.add('ignoriert'); rec.step(10, 't[' + x + '] = 1: ' + x + ' ist schon drin → neues ignorieren.', 'Jedes Element höchstens einmal; die <b>alte</b> Position bleibt.'); continue; }
+        let k = S.s.lastIndexOf(x); rec.add('such', S.s.length - k); const shifts = S.s.length - 1 - k; S.s.splice(k, 1); rec.add('shift', shifts);
+        S.s.push(x); rec.add('push'); S.hi = S.s.length - 1; rec.step(11, x + ' war an Position ' + k + ': entfernt (' + shifts + ' Verschiebungen) und oben neu abgelegt.', 'Jedes Element höchstens einmal; die <b>neueste</b> Position zählt. Kosten O(N) für das Entfernen.'); continue; }
+      S.s.push(x); S.t[x] = 1; rec.add('push'); S.hi = S.s.length - 1; rec.step(v === 'ign' ? 11 : 12, 'push(' + x + '), t[' + x + '] = 1.', 'Der Stack enthält jedes Element höchstens einmal.');
+    }
+    rec.c.ausgabe = S.out.join(' ');
+  },
+  view(S){ const cells = S.s.slice(), mk = {}; if(S.hi >= 0) mk[S.hi] = 'chg';
+    return LB.labCells(cells.length ? cells : ['–'], mk, {lab: 's[ ] (rechts = oben)'}) + LB.labCells(S.t, Object.fromEntries(S.t.map((x, k) => [k, x ? 'idx' : 'off'])), {lab: 't[ ] (Index = Item)'}) + '<div class="lab-out">pop-Ausgabe: ' + (S.out.join(' ') || '–') + '</div>'; },
+  math(c, inp, v, done){ return LB.labVs('push-Wünsche', c.req || 0, done ? c.req : '…', ' ') + LB.labVs('tatsächlich gespeichert', c.push || 0, done ? (c.req || 0) - (c.ignoriert || 0) : '…') + LB.labVs('Verschiebungen (forget)', c.shift || 0, done ? (c.shift || 0) : '…', ' ') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Test } t[\\text{item}] &= O(1) && \\text{Index-Item} \\\\ \\text{ignore} &= O(1),\\quad \\text{forget} = O(N) && \\text{suchen + schieben} \\end{aligned} \\]</div>'; },
+  cmp:[['push', 'gespeichert'], ['ignoriert', 'ignoriert'], ['shift', 'Verschiebungen'], ['fehler', '⚠'], ['ausgabe', 'pop-Ausgabe']],
+  cmpNote: () => 'Dieselbe Eingabe, drei verschiedene Ausgaben: Die Politik bei Duplikaten gehört zur <b>Spezifikation</b> des ADT, nicht zur Implementierung.',
+  facts(){ return '<p>\\(\\Rule{\\text{Index-Items:}}\\) Sind die Items Zahlen 0 … maxN−1, ersetzt ein Array t[ ] jede Suche: „ist x drin?“ in \\(O(1)\\).</p><p><b>Aussage:</b> ignore-the-new bleibt bei \\(O(1)\\) pro Operation; forget-the-old braucht im Array \\(O(N)\\) (oder eine doppelt verkettete Liste).</p>'; }
+};
+
+/* ---------------- 6 · Kopieren: flach gegen tief (§4.8) ---------------- */
+const KBASE = ['class QUEUE                                // Liste (Prog. 4.14)', '  { private: struct node { Item item; node* next; node(Item x) { item = x; next = 0; } };', '      typedef node *link; link head, tail;', '    public:', '      QUEUE() { head = 0; }', '      void put(Item x)', '        { link t = tail; tail = new node(x);', '          if (head == 0) head = tail; else t->next = tail; }', '      Item get()', '        { Item v = head->item; link t = head->next;', '          delete head; head = t; return v; }', '      ~QUEUE()                                 // Destruktor', '        { while (head != 0) { link t = head->next; delete head; head = t; } }'];
+const KFLAT = KBASE.concat(['      // KEIN eigener Kopierkonstruktor, KEIN operator=:', '      // Q2 = Q1 kopiert nur head und tail, also die ZEIGER', '  };']);
+const KDEEP = KBASE.concat(['      QUEUE(const QUEUE& rhs) { head = 0; *this = rhs; }  // Kopierkonstruktor', '      QUEUE& operator=(const QUEUE& rhs)           // tiefe Kopie', '        { if (this == &rhs) return *this;', '          while (head != 0) { link t = head->next; delete head; head = t; }', '          for (link t = rhs.head; t != 0; t = t->next) put(t->item);', '          return *this; }', '  };']);
+const copy = {
+  icon:'📑', name:'Kopieren: flach/tief', book:'§4.8 · Def. 4.4',
+  intro:'Befehle: <code class="inl">1+a</code> = Q1.put(a), <code class="inl">2-</code> = Q2.get(), <code class="inl">2=1</code> = Q2 = Q1, <code class="inl">~1</code> = Q1 zerstören. Ohne eigenen <code class="inl">operator=</code> teilen sich zwei Objekte dieselben Knoten: das führt zu Lecks, hängenden Zeigern und doppeltem delete.',
+  vars:[{k:'flat', name:'flache Kopie (Standard)', book:'§4.8: das Problem'}, {k:'deep', name:'tiefe Kopie (eigener operator=)', book:'§4.8: Kopierkonstruktor + operator='}],
+  ins:[{k:'cmd', label:'Befehle', def:'1+a 1+b 2=1 2+c 1- 1- 2- 2- 2-', w:20}],
+  presets:[{name:'geteilte Knoten', set:{cmd:'1+a 1+b 2=1 2+c 1- 1- 2- 2- 2-'}, hint:'Flach: Q2.put(c) hängt c auch an Q1s Kette. Q1.get() löscht dann a und b, die Q2 noch für ihre eigenen hält: Q2 liest gelöschten Speicher. Tief: Q1 gibt a b, Q2 gibt a b c, alles sauber.'},
+           {name:'hängender Zeiger', set:{cmd:'1+a 1+b 2=1 ~1 2-'}, hint:'Flach: Q1 wird zerstört, Q2.head zeigt auf gelöschten Speicher. Q2.get() liest Müll.'},
+           {name:'Speicherleck', set:{cmd:'2+x 2+y 1+a 2=1'}, hint:'Flach: Q2 hatte x und y; nach Q2 = Q1 zeigt niemand mehr darauf. Die Knoten sind verloren.'},
+           {name:'doppeltes delete', set:{cmd:'1+a 2=1 ~1 ~2'}, hint:'Flach: Beide Destruktoren löschen denselben Knoten.'}],
+  roles:{head:'idx', tail:'idx', rhs:'par'},
+  code(v){ return v === 'flat' ? KFLAT : KDEEP; },
+  run(rec, inp, v){
+    const toks = String(inp.cmd).trim().split(/\s+/).filter(Boolean).slice(0, 30), S = rec.S;
+    S.nodes = {}; S.Q = {1: {h: null, t: null}, 2: {h: null, t: null}}; S.nid = 0; S.out = []; S.warn = '';
+    const ub = m => { rec.add('ub'); S.warn = m; };
+    const put = (k, x) => { const id = ++S.nid; S.nodes[id] = {item: x, next: null, alive: true}; rec.add('new');
+      const Q = S.Q[k]; if(Q.h === null) Q.h = id; else { const tn = S.nodes[Q.t]; if(!tn.alive) ub('put schreibt in gelöschten Knoten (tail hängt)'); tn.next = id; } Q.t = id; };
+    const reach = h => { const seen = new Set(); let x = h; while(x !== null && !seen.has(x)){ seen.add(x); x = S.nodes[x].next; } return seen; };
+    const destroy = k => { let x = S.Q[k].h; while(x !== null){ const n = S.nodes[x]; if(!n.alive) ub('delete auf schon gelöschtem Knoten (doppeltes delete)'); else rec.add('del'); n.alive = false; x = n.next; } S.Q[k].h = null; S.Q[k].t = null; };
+    rec.step(5, 'Q1 und Q2 leer (head = 0).', 'Keine Knoten.');
+    for(const tk of toks){
+      S.warn = ''; let m;
+      if((m = /^([12])\+(\S+)$/.exec(tk))){ put(+m[1], m[2]); rec.step(7, 'Q' + m[1] + '.put(' + m[2] + ')', 'Q' + m[1] + ' hat ' + reach(S.Q[m[1]].h).size + ' Knoten' + (S.warn ? ' · ⚠ ' + S.warn : '')); }
+      else if((m = /^([12])-$/.exec(tk))){ const Q = S.Q[+m[1]];
+        if(Q.h === null){ ub('get auf leerer Queue'); rec.step(10, 'Q' + m[1] + '.get(): leer!', '⚠ ' + S.warn); continue; }
+        const n = S.nodes[Q.h]; if(!n.alive) ub('get liest gelöschten Knoten (hängender Zeiger)'); else rec.add('del');
+        S.out.push(n.alive ? n.item : '?'); n.alive = false; Q.h = n.next; if(Q.h === null) Q.t = null;
+        rec.step(11, 'Q' + m[1] + '.get() → ' + (S.out[S.out.length - 1]) + ', Knoten gelöscht.', (S.warn ? '⚠ ' + S.warn : 'Q' + m[1] + ' hat noch ' + reach(Q.h).size + ' Knoten.')); }
+      else if((m = /^([12])=([12])$/.exec(tk))){ const a = +m[1], b = +m[2]; if(a === b) continue;
+        if(v === 'flat'){ const lost = [...reach(S.Q[a].h)].filter(x => S.nodes[x].alive && !reach(S.Q[b].h).has(x)); if(lost.length) rec.add('leak', lost.length);
+          S.Q[a].h = S.Q[b].h; S.Q[a].t = S.Q[b].t;
+          rec.step(14, 'Q' + a + ' = Q' + b + ': nur head und tail kopiert.', 'Q' + a + ' und Q' + b + ' teilen sich jetzt dieselben Knoten.' + (lost.length ? ' ⚠ ' + lost.length + ' alte Knoten von Q' + a + ' sind verloren (Leck).' : '')); }
+        else { destroy(a); rec.step(17, 'operator=: zuerst die alten Knoten von Q' + a + ' löschen.');
+          for(const x of [...reach(S.Q[b].h)]) put(a, S.nodes[x].item); rec.step(18, 'dann jedes Item von Q' + b + ' mit put kopieren.', 'Q' + a + ' hat eigene Knoten mit denselben Werten. Änderungen an einer Queue betreffen die andere nicht.'); } }
+      else if((m = /^~([12])$/.exec(tk))){ destroy(+m[1]); rec.step(13, '~Q' + m[1] + '(): Destruktor löscht alle Knoten ab head.', S.warn ? '⚠ ' + S.warn : 'Q' + m[1] + ' ist leer.'); }
+    }
+    const live = Object.values(S.nodes).filter(n => n.alive).length;
+    rec.c.offen = live; rec.c.ausgabe = S.out.join(' ');
+  },
+  view(S){
+    const ids = Object.keys(S.nodes).map(Number), item = {}, next = {};
+    ids.forEach(id => { const n = S.nodes[id]; item[id] = (n.alive ? '' : '✗') + n.item; next[id] = n.next; });
+    let h = ids.length ? LB.labList(ids, item, next, {'Q1': S.Q[1].h, 'Q2': S.Q[2].h}, {mid: 'k', hi: Object.fromEntries(ids.filter(id => !S.nodes[id].alive).map(id => [id, 1]))}) : '<div class="muted small">keine Knoten</div>';
+    h += '<div class="small">✗ = gelöscht (delete) · orange = gelöscht · Q1.head = ' + (S.Q[1].h === null ? '0' : '#' + S.Q[1].h) + ' · Q2.head = ' + (S.Q[2].h === null ? '0' : '#' + S.Q[2].h) + '</div>';
+    if(S.warn) h += '<div class="small" style="color:var(--red)">⚠ ' + S.warn + '</div>';
+    return h + '<div class="lab-out">get-Ausgabe: ' + (S.out.join(' ') || '–') + '</div>';
+  },
+  math(c, inp, v, done){ return LB.labVs('new', c.new || 0, done ? c.new || 0 : '…', ' ') + LB.labVs('delete (gültig)', c.del || 0, done ? c.del || 0 : '…', ' ') + LB.labVs('verlorene Knoten (Leck)', c.leak || 0, done ? 0 : '…', ' ⚠') + LB.labVs('undefiniertes Verhalten', c.ub || 0, done ? 0 : '…', ' ⚠') +
+      '<div class="step">\\[ \\begin{aligned} \\text{new} &= \\text{delete} + \\text{noch lebend} + \\text{Leck} && \\text{Bilanz} \\\\ \\text{tiefe Kopie} &= \\Theta(n) && \\text{jedes Item 1×} \\end{aligned} \\]</div>'; },
+  cmp:[['new', 'new'], ['del', 'delete'], ['leak', 'Leck'], ['ub', '⚠ undefiniert'], ['ausgabe', 'get-Ausgabe']],
+  cmpNote: () => 'Die flache Kopie ist billig (O(1)), aber falsch für Objekte mit Zeigern. Die tiefe Kopie kostet Θ(n), dafür verhalten sich Q1 und Q2 wie eigenständige Werte: das meint <span class="fw">First-Class-ADT</span>.',
+  facts(){ return '<p>\\(\\Rule{\\text{Def. 4.4 First-Class-ADT:}}\\) Objekte lassen sich wie eingebaute Typen benutzen: kopieren, zuweisen, als Argument übergeben.</p><p>\\(\\Rule{\\text{Regel der Drei:}}\\) Wer einen Destruktor braucht, braucht auch Kopierkonstruktor und operator=.</p><p><b>Aussage:</b> Ohne eigene Kopierfunktionen kopiert C++ nur die Zeiger. Folgen: geteilte Knoten, Speicherlecks, hängende Zeiger, doppeltes delete.</p>'; }
+};
+
+LB.labCh4 = [post, infix, queue, ufadt, dup, copy];
+})();
+
+/* ===== P2LAB Kapitel 5: Rekursion, Bäume, Graphen ===== */
+(function(){
+'use strict';
+const LB = window.LB;
+const C = LB.LC;
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const int = (s, lo, hi, d) => { const v = parseInt(s, 10); return isNaN(v) ? d : Math.max(lo, Math.min(hi, v)); };
+const nums = s => String(s).trim().split(/[\s,]+/).filter(x => x !== '').map(Number).filter(x => !isNaN(x));
+const FIB = [0, 1]; for(let i = 2; i < 50; i++) FIB.push(FIB[i - 1] + FIB[i - 2]);
+
+/* Baum aus Buchstaben bauen: Einfügen in einen binären Suchbaum in Lesereihenfolge */
+function bst(str){
+  const T = {}; let root = null, n = 0;
+  String(str).trim().split(/\s+/).filter(Boolean).slice(0, 15).forEach(x => {
+    const id = ++n; T[id] = {item: x, l: null, r: null};
+    if(root === null){ root = id; return; }
+    let h = root; for(;;){ const sd = x < T[h].item ? 'l' : 'r'; if(T[h][sd] === null){ T[h][sd] = id; break; } h = T[h][sd]; }
+  });
+  return {T, root, N: n};
+}
+function treeStats(T, root){
+  let I = 0, E = 0, h = -1;
+  (function go(x, d){ if(x === null){ E += d; return; } I += d; h = Math.max(h, d); go(T[x].l, d + 1); go(T[x].r, d + 1); })(root, 0);
+  return {I, E, h};
+}
+const TREES = [{name:'Fig. 5.26', v:'E D B A C H F G', hint:'Der Beispielbaum des Buchs (als Suchbaum gebaut).'}, {name:'Kette (entartet)', v:'A B C D E F', hint:'Jeder Knoten hat nur ein rechtes Kind: Höhe N−1, wie eine Liste.'}, {name:'vollständig 7', v:'D B F A C E G', hint:'Perfekt balanciert: Höhe lg(N+1) − 1 = 2.'}, {name:'vollständig 15', v:'H D L B F J N A C E G I K M O', hint:'15 Knoten, Höhe 3: das Minimum.'}];
+
+/* ---------------- 1 · Rekursion und Aufrufstapel (Prog. 5.1, 5.3) ---------------- */
+const rek = {
+  icon:'🪆', name:'Rekursion & Stapel', book:'§5.1 · Prog. 5.1/5.3',
+  intro:'Jeder Aufruf bekommt einen eigenen <span class="fw">Stapelrahmen</span> mit seinen Parametern. Der <span class="fw">Rekursionsanker</span> beendet das Absteigen, danach werden die Rahmen in umgekehrter Reihenfolge abgebaut.',
+  vars:[{k:'fact', name:'Fakultät rekursiv (5.1)', book:'Prog. 5.1'}, {k:'iter', name:'Fakultät mit Schleife', book:'Abweichung: ohne Rekursion'}, {k:'gcd', name:'Euklid ggT (5.3)', book:'Prog. 5.3'}],
+  ins:[{k:'N', label:'N =', def:'5', w:3}, {k:'mn', label:'m n =', def:'1071 462', w:7}],
+  presets:[{name:'N = 5', set:{N:'5'}, v:'fact', hint:'5! = 120: sechs Aufrufe, der letzte ist der Anker N = 0.'}, {name:'N = 0', set:{N:'0'}, v:'fact', hint:'Nur der Anker: ein Aufruf.'},
+           {name:'ggT 1071 462', set:{mn:'1071 462'}, v:'gcd', hint:'Klassisches Beispiel: ggT = 21 nach 4 Aufrufen.'}, {name:'ggT Fibonacci 89 55', set:{mn:'89 55'}, v:'gcd', hint:'Aufeinanderfolgende Fibonacci-Zahlen sind der schlechteste Fall für Euklid.'}],
+  roles:{N:'par', m:'par', n:'par', t:'res', i:'idx'},
+  code(v){ return v === 'fact' ? ['int factorial(int N)', '  {', '    if (N == 0) return 1;              // Anker', '    return N*factorial(N-1);           // kleineres Problem', '  }']
+    : v === 'iter' ? ['int factorial(int N)', '  { int t = 1;', '    for (int i = 1; i <= N; i++) t *= i;  // Schleife statt Stapel', '    return t;', '  }']
+    : ['int gcd(int m, int n)', '  {', '    if (n == 0) return m;              // Anker', '    return gcd(n, m % n);              // Rest ist kleiner als n', '  }']; },
+  run(rec, inp, v){
+    const S = rec.S; S.fr = []; S.res = null; S.v = v; let d = 0;
+    const enter = (f, a) => { S.fr.push({f, args: a}); d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d); };
+    const leave = () => { S.fr.pop(); d--; };
+    if(v === 'fact'){ const N = int(inp.N, 0, 12, 5);
+      const f = n => { enter('factorial', n); rec.step(3, 'factorial(' + n + '): Test N == 0? ' + (n === 0 ? 'ja' : 'nein'), 'Stapeltiefe ' + d + '. Noch offen: ' + S.fr.map(x => x.args).join(', '));
+        if(n === 0){ S.fr[S.fr.length - 1].note = '= 1'; rec.step(3, 'Anker: return 1', 'Ab jetzt wird zurückgerechnet.'); leave(); return 1; }
+        rec.step(4, 'factorial(' + n + ') ruft factorial(' + (n - 1) + ') auf und wartet.');
+        const r = f(n - 1); rec.add('mul'); S.fr[S.fr.length - 1].note = '= ' + n + '·' + r + ' = ' + n * r;
+        rec.step(4, 'zurück in factorial(' + n + '): ' + n + ' · ' + r + ' = ' + n * r, n + '! = ' + n * r + ' ist fertig.'); leave(); return n * r; };
+      S.res = f(N); rec.step(5, 'Ergebnis ' + N + '! = ' + S.res, '\\(\\Res{' + N + '! = ' + S.res + '}\\)'); }
+    else if(v === 'iter'){ const N = int(inp.N, 0, 12, 5); enter('factorial', N); let t = 1; S.t = t;
+      rec.step(2, 't = 1', 'Ein einziger Stapelrahmen.');
+      for(let i = 1; i <= N; i++){ t *= i; S.t = t; rec.add('mul'); rec.step(3, 'i = ' + i + ': t = ' + t, '\\(t = ' + i + '! = ' + t + '\\)'); }
+      S.res = t; rec.step(4, 'return ' + t, '\\(\\Res{' + N + '! = ' + t + '}\\) mit Stapeltiefe 1.'); leave(); }
+    else { const [m0, n0] = nums(inp.mn).concat([462, 0]).slice(0, 2).map(x => Math.max(0, Math.min(1e7, Math.floor(x))));
+      const g = (m, n) => { enter('gcd', m + ', ' + n); rec.step(3, 'gcd(' + m + ', ' + n + '): n == 0? ' + (n === 0 ? 'ja' : 'nein'), 'ggT(' + m + ', ' + n + ') = ggT(' + n + ', ' + m + ' mod ' + n + ')' + (n ? ' = ggT(' + n + ', ' + (m % n) + ')' : ''));
+        if(n === 0){ S.fr[S.fr.length - 1].note = '= ' + m; rec.step(3, 'Anker: return ' + m); leave(); return m; }
+        rec.add('mod'); rec.step(4, m + ' mod ' + n + ' = ' + (m % n) + ' → gcd(' + n + ', ' + (m % n) + ')');
+        const r = g(n, m % n); S.fr[S.fr.length - 1].note = '= ' + r; rec.step(4, 'gcd(' + m + ', ' + n + ') gibt ' + r + ' unverändert weiter (Endrekursion).'); leave(); return r; };
+      S.res = g(m0, n0); rec.step(5, 'ggT = ' + S.res, '\\(\\Res{\\text{ggT}(' + m0 + ', ' + n0 + ') = ' + S.res + '}\\)'); }
+  },
+  view(S){ return LB.labFrames(S.fr) + (S.t !== undefined && S.v === 'iter' ? '<div class="lab-out">t = ' + S.t + '</div>' : '') + (S.res !== null ? '<div class="lab-out">Ergebnis: ' + S.res + '</div>' : ''); },
+  math(c, inp, v, done){
+    if(v === 'gcd'){ const [m, n] = nums(inp.mn).concat([462, 0]).slice(0, 2); const b = 2 * Math.floor(Math.log2(Math.max(m, n, 1))) + 2;
+      return LB.labVs('Aufrufe', c.call || 0, done ? c.call : '…', ' ') + '<div class="step">\\[ \\begin{aligned} \\text{Aufrufe} &\\le 2\\lfloor \\lg \\max(m,n) \\rfloor + 2 = ' + b + ' && \\text{2 Schritte: m halbiert} \\\\ T &= O(\\log n) \\end{aligned} \\]</div>'; }
+    const N = int(inp.N, 0, 12, 5);
+    return LB.labVs('Aufrufe', c.call || 0, done ? (v === 'fact' ? N + 1 : 1) : '…') + LB.labVs('max. Stapeltiefe', c.maxd || 0, done ? (v === 'fact' ? N + 1 : 1) : '…') + LB.labVs('Multiplikationen', c.mul || 0, done ? N : '…') +
+      '<div class="step">\\[ \\begin{aligned} C_N &= C_{N-1} + 1,\\ C_0 = 1 \\Rightarrow C_N = N + 1 && \\text{Aufrufe} \\\\ \\text{Speicher} &= ' + (v === 'fact' ? '\\Theta(N)\\ \\text{Rahmen}' : 'O(1)') + ' \\end{aligned} \\]</div>'; },
+  cmp:[['call', 'Aufrufe'], ['maxd', 'max. Tiefe'], ['mul', 'Mult.'], ['res', 'Ergebnis', r => r.S.res]],
+  cmpNote: () => 'Fakultät rekursiv und mit Schleife rechnen gleich viel, aber die Rekursion braucht N+1 Stapelrahmen. Jede Rekursion lässt sich mit einem expliziten Stapel (oder hier einer Schleife) ersetzen.',
+  facts(){ return '<p>\\(\\Rule{\\text{Rekursives Programm:}}\\) 1. Anker (kleinster Fall direkt), 2. Aufruf mit <b>kleinerem</b> Argument. Fehlt eines davon, terminiert es nicht.</p><p>\\(\\Rule{\\text{Kosten:}}\\) Aufrufe → Rekurrenz (Teil 1, §2.5); Speicher = maximale Stapeltiefe.</p><p><b>Aussage:</b> Fakultät: \\(\\Theta(N)\\) Zeit und Tiefe. Euklid: \\(O(\\log n)\\), weil \\(m \\bmod n \\lt m/2\\) für \\(n \\le m\\).</p>'; }
+};
+
+/* ---------------- 2 · Divide and Conquer: Maximum (Prog. 5.6) ---------------- */
+const maxdc = {
+  icon:'✂️', name:'Teile & herrsche: Max', book:'§5.2 · Prog. 5.6',
+  intro:'Teilen in zwei Hälften, beide lösen, Ergebnisse kombinieren. Für das Maximum ist das nicht schneller als eine Schleife (beide N−1 Vergleiche), zeigt aber das Muster, das später Mergesort und Quicksort schnell macht.',
+  vars:[{k:'dc', name:'rekursiv halbieren (5.6)', book:'Prog. 5.6'}, {k:'loop', name:'Schleife', book:'Abweichung: linear'}],
+  ins:[{k:'A', label:'a =', def:'3 9 2 7 5 8 1 6', w:14}],
+  presets:[{name:'N = 8', set:{A:'3 9 2 7 5 8 1 6'}, hint:'Zweierpotenz: der Aufrufbaum ist voll, Tiefe lg 8 + 1 = 4.'}, {name:'N = 11', set:{A:'4 1 7 3 9 2 8 6 5 10 0'}, hint:'Keine Zweierpotenz: Hälften ungleich, Tiefe ⌈lg 11⌉ + 1 = 5.'}, {name:'N = 1', set:{A:'42'}, hint:'Nur der Anker.'}],
+  roles:{a:'mem', l:'par', r:'par', m:'idx', u:'res', v:'res', t:'res'},
+  code(v){ return v === 'dc' ? ['Item max(Item a[], int l, int r)', '  {', '    if (l == r) return a[l];          // Anker: ein Element', '    int m = (l+r)/2;                  // teilen', '    Item u = max(a, l, m);            // linke Hälfte lösen', '    Item v = max(a, m+1, r);          // rechte Hälfte lösen', '    if (u > v) return u; else return v;  // kombinieren: 1 Vergleich', '  }']
+    : ['Item max(Item a[], int l, int r)', '  { Item t = a[l];', '    for (int i = l+1; i <= r; i++)', '      if (a[i] > t) t = a[i];         // 1 Vergleich je Element', '    return t;', '  }']; },
+  run(rec, inp, v){
+    const A = nums(inp.A).slice(0, 16); if(!A.length) A.push(0); const S = rec.S; S.a = A; S.hl = [-1, -1]; S.T = {}; S.root = null; S.info = {}; S.cur = null; S.res = null;
+    if(v === 'dc'){ let n = 0, d = 0;
+      const f = (l, r, par, sd) => { const id = ++n; S.T[id] = {item: l === r ? String(l) : l + '…' + r, l: null, r: null}; if(par) S.T[par][sd] = id; else S.root = id;
+        d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d); S.hl = [l, r]; S.cur = id;
+        if(l === r){ S.info[id] = A[l]; rec.step(3, 'max(' + l + ', ' + r + '): Anker, return a[' + l + '] = ' + A[l]); d--; return A[l]; }
+        const m = (l + r) >> 1; rec.step(4, 'max(' + l + ', ' + r + '): m = ' + m + ', teilen in [' + l + ', ' + m + '] und [' + (m + 1) + ', ' + r + '].');
+        const u = f(l, m, id, 'l'); S.cur = id; S.hl = [l, r]; rec.step(5, 'linke Hälfte fertig: u = ' + u);
+        const w = f(m + 1, r, id, 'r'); S.cur = id; S.hl = [l, r]; rec.add('cmp'); const res = u > w ? u : w; S.info[id] = res;
+        rec.step(7, 'u = ' + u + ', v = ' + w + ' → ' + res, 'max(a[' + l + '..' + r + ']) = ' + res + ': richtig, weil das Maximum in einer der beiden Hälften liegt.'); d--; return res; };
+      S.res = f(0, A.length - 1, null); S.cur = null; S.hl = [-1, -1]; rec.step(8, 'Ergebnis: ' + S.res, '\\(\\Res{\\max = ' + S.res + '}\\)'); }
+    else { rec.add('call'); rec.c.maxd = 1; let t = A[0]; S.t = t; S.hl = [0, 0]; rec.step(2, 't = a[0] = ' + t, 't ist das Maximum von a[0..0].');
+      for(let i = 1; i < A.length; i++){ rec.add('cmp'); S.hl = [i, i]; if(A[i] > t) t = A[i]; S.t = t; rec.step(4, 'a[' + i + '] = ' + A[i] + ' → t = ' + t, '\\(\\Rule{\\text{Invariante:}}\\) t = max(a[0..' + i + ']) = ' + t + '.'); }
+      S.res = t; rec.step(5, 'return ' + t, '\\(\\Res{\\max = ' + t + '}\\)'); }
+  },
+  view(S){ const mk = {}; for(let k = S.hl[0]; k >= 0 && k <= S.hl[1]; k++) mk[k] = 'chg';
+    let h = LB.labCells(S.a, mk, {lab: 'a:'});
+    if(S.root) h += '<div class="small muted">Aufrufbaum (Bereich l…r, blau = Rückgabewert):</div>' + LB.labTree(S.T, S.root, S.cur ? {[S.cur]: C.chg} : {}, S.info);
+    if(S.t !== undefined) h += '<div class="lab-out">t = ' + S.t + '</div>';
+    return h; },
+  math(c, inp, v, done){ const N = Math.max(1, nums(inp.A).slice(0, 16).length);
+    return LB.labVs('Vergleiche', c.cmp || 0, done ? N - 1 : '…') + LB.labVs('Aufrufe', c.call || 0, done ? (v === 'dc' ? 2 * N - 1 : 1) : '…') + LB.labVs('max. Tiefe', c.maxd || 0, done ? (v === 'dc' ? Math.ceil(Math.log2(N)) + 1 : 1) : '…') +
+      (v === 'dc' ? '<div class="step">\\[ \\begin{aligned} C_N &= C_{\\lceil N/2 \\rceil} + C_{\\lfloor N/2 \\rfloor} + 1 && \\text{Vergl., } C_1 = 0 \\\\ C_N &= N - 1 && \\text{1 Verlierer je Vergleich} \\\\ \\text{Aufrufe} &= 2N - 1 && \\text{N Blätter + N−1 innere} \\end{aligned} \\]</div>' : '<div class="step">\\[ C_N = N - 1 \\text{ Vergleiche, Tiefe 1} \\]</div>'); },
+  cmp:[['cmp', 'Vergleiche'], ['call', 'Aufrufe'], ['maxd', 'max. Tiefe'], ['res', 'Max', r => r.S.res]],
+  cmpNote: () => 'Gleich viele Vergleiche (N−1 ist optimal fürs Maximum). D&C bezahlt mit 2N−1 Aufrufen und lg N Stapeltiefe; der Gewinn kommt erst, wenn das Kombinieren schlau ist (Mergesort, Teil 3).',
+  facts(){ return '<p>\\(\\Rule{\\text{Divide and Conquer:}}\\) teilen → zwei Teilprobleme rekursiv → kombinieren. Kosten: \\(C_N = 2C_{N/2} + \\text{Kombinieren}\\).</p><p>\\(\\Rule{\\text{Eigenschaft 5.1:}}\\) Prog. 5.6 macht N−1 Vergleiche und 2N−1 Aufrufe.</p><p><b>Aussage:</b> Kombinieren in O(1) → \\(\\Theta(N)\\) (Formel 2.5); Kombinieren in O(N) → \\(\\Theta(N\\log N)\\) (Formel 2.4).</p>'; }
+};
+
+/* ---------------- 3 · Türme von Hanoi (Prog. 5.7) ---------------- */
+const hanoi = {
+  icon:'🗼', name:'Türme von Hanoi', book:'§5.2 · Prog. 5.7',
+  intro:'Die Scheiben 1 (klein) bis N wandern; <code class="inl">shift(k, d)</code> bewegt Scheibe k einen Stab nach rechts (d = +1) oder links (d = −1), im Kreis. Die Folge der bewegten Scheiben ist das <span class="fw">Lineal-Muster</span> 1 2 1 3 1 2 1 4 …',
+  vars:[{k:'rek', name:'rekursiv (5.7)', book:'Prog. 5.7'}, {k:'lin', name:'iterativ nach Lineal', book:'Abweichung: gleiche Züge ohne Rekursion'}],
+  ins:[{k:'N', label:'N =', def:'3', w:3}],
+  presets:[{name:'N = 3', set:{N:'3'}, hint:'7 Züge.'}, {name:'N = 4', set:{N:'4'}, hint:'15 Züge; Scheibe 1 bewegt sich 8-mal.'}, {name:'N = 5', set:{N:'5'}, hint:'31 Züge; jeder zweite Zug bewegt die kleinste Scheibe.'}],
+  roles:{N:'par', d:'chg', k:'idx', s:'res'},
+  code(v){ return v === 'rek' ? ['void hanoi(int N, int d)', '  {', '    if (N == 0) return;               // Anker', '    hanoi(N-1, -d);                   // N−1 Scheiben aus dem Weg', '    shift(N, d);                      // größte Scheibe bewegen', '    hanoi(N-1, -d);                   // N−1 Scheiben wieder drauf', '  }']
+    : ['for (int k = 1; k < (1 << N); k++)       // 2^N − 1 Züge', '  { int s = 1;                           // Scheibe = Lineal(k)', '    for (int x = k; x % 2 == 0; x /= 2) s++;  // Nullen am Ende zählen', '    shift(s, (N - s) % 2 == 0 ? d : -d);  // jede Scheibe hat ihre feste Richtung', '  }']; },
+  run(rec, inp, v){
+    const N = int(inp.N, 1, 6, 3), S = rec.S; S.N = N; S.pegs = [[], [], []]; for(let k = N; k >= 1; k--) S.pegs[0].push(k); S.last = null; S.seq = []; S.fr = []; S.per = Array(N + 1).fill(0);
+    const shift = (k, d) => { const from = S.pegs.findIndex(p => p[p.length - 1] === k); if(from < 0) throw new Error('Scheibe ' + k + ' liegt nicht oben'); const to = (from + d + 3) % 3; const tp = S.pegs[to];
+      if(tp.length && tp[tp.length - 1] < k) throw new Error('Scheibe ' + k + ' auf kleinere Scheibe'); S.pegs[from].pop(); tp.push(k); S.last = [k, from, to]; S.seq.push(k); S.per[k]++; rec.add('move'); };
+    rec.step(v === 'rek' ? 1 : 1, 'Start: alle ' + N + ' Scheiben auf Stab 0. Ziel: der Turm soll einen Stab weiter (d = +1).', 'Regel: nie eine größere auf eine kleinere Scheibe.');
+    if(v === 'rek'){ let dep = 0;
+      const h = (n, d) => { S.fr.push({f: 'hanoi', args: n + ', ' + (d > 0 ? '+1' : '−1')}); dep++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, dep);
+        if(n === 0){ rec.step(3, 'hanoi(0, …): Anker.'); S.fr.pop(); dep--; return; }
+        rec.step(4, 'hanoi(' + n + ', ' + d + '): erst ' + (n - 1) + ' Scheiben mit Richtung ' + (-d) + ' wegräumen.');
+        h(n - 1, -d); shift(n, d); rec.step(5, 'shift(' + n + ', ' + (d > 0 ? '+1' : '−1') + '): Scheibe ' + n + ' von Stab ' + S.last[1] + ' nach ' + S.last[2] + '.', 'Zug ' + rec.c.move + ' von \\(2^{' + N + '} - 1 = ' + (2 ** N - 1) + '\\). Bisherige Folge: ' + S.seq.join(' '));
+        h(n - 1, -d); S.fr.pop(); dep--; };
+      h(N, 1); }
+    else { rec.add('call'); rec.c.maxd = 1;
+      for(let k = 1; k < (1 << N); k++){ let s = 1; for(let x = k; x % 2 === 0; x /= 2) s++; shift(s, (N - s) % 2 === 0 ? 1 : -1);
+        rec.step(4, 'k = ' + k + ' = ' + k.toString(2) + '₂: ' + (s - 1) + ' Nullen am Ende → Scheibe ' + s + ' von Stab ' + S.last[1] + ' nach ' + S.last[2] + '.', 'Scheibe s bewegt sich immer in dieselbe Richtung. Folge: ' + S.seq.join(' ')); } }
+    S.fr = []; rec.step(v === 'rek' ? 7 : 5, 'Fertig: ' + rec.c.move + ' Züge.', '\\(\\Res{' + rec.c.move + ' = 2^{' + N + '} - 1}\\) Züge, der Turm steht auf Stab ' + S.pegs.findIndex(p => p.length === N) + '.');
+    rec.c.folge = S.seq.join('');
+  },
+  view(S){ const W = 520, H = 40 + S.N * 18, X = p => 90 + p * 170; let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+    for(let p = 0; p < 3; p++){ s += '<line x1="' + X(p) + '" y1="16" x2="' + X(p) + '" y2="' + (H - 12) + '" stroke="' + C.mute + '" stroke-width="3"/><text x="' + X(p) + '" y="12" text-anchor="middle" font-size="11" fill="' + C.mute + '">Stab ' + p + '</text>';
+      S.pegs[p].forEach((k, j) => { const w = 24 + k * 22, y = H - 14 - (j + 1) * 18, hot = S.last && S.last[0] === k;
+        s += '<rect x="' + (X(p) - w / 2) + '" y="' + y + '" width="' + w + '" height="16" rx="5" fill="' + (hot ? 'rgba(210,153,34,.6)' : 'rgba(88,166,255,.45)') + '" stroke="' + (hot ? C.chg : C.par) + '"/><text x="' + X(p) + '" y="' + (y + 12) + '" text-anchor="middle" font-size="11" font-weight="700" fill="' + C.ink + '">' + k + '</text>'; }); }
+    s += '<line x1="10" y1="' + (H - 12) + '" x2="' + (W - 10) + '" y2="' + (H - 12) + '" stroke="' + C.mute + '"/></svg>';
+    return s + (S.fr.length ? LB.labFrames(S.fr) : '') + '<div class="lab-out">Scheibenfolge: ' + (S.seq.join(' ') || '–') + '</div>'; },
+  math(c, inp, v, done, S){ const N = int(inp.N, 1, 6, 3);
+    let h = LB.labVs('Züge', c.move || 0, done ? 2 ** N - 1 : '…') + (v === 'rek' ? LB.labVs('Aufrufe', c.call || 0, done ? 2 ** (N + 1) - 1 : '…') + LB.labVs('max. Tiefe', c.maxd || 0, done ? N + 1 : '…') : '');
+    h += '<table class="rt" style="margin:.3rem 0"><tr><th>Scheibe k</th>' + S.per.slice(1).map((_, k) => '<td>' + (k + 1) + '</td>').join('') + '</tr><tr><th>Züge bisher</th>' + S.per.slice(1).map(x => '<td>' + x + '</td>').join('') + '</tr><tr><th>Formel 2<sup>N−k</sup></th>' + S.per.slice(1).map((_, k) => '<td>' + 2 ** (N - k - 1) + '</td>').join('') + '</tr></table>';
+    return h + '<div class="step">\\[ \\begin{aligned} T_N &= 2T_{N-1} + 1,\\ T_0 = 0 && \\text{zweimal N−1, einmal die große} \\\\ T_N &= 2^N - 1 = ' + (2 ** N - 1) + ' && \\text{Eigenschaft 5.2} \\end{aligned} \\]</div>'; },
+  cmp:[['move', 'Züge'], ['call', 'Aufrufe'], ['maxd', 'max. Tiefe'], ['folge', 'Scheibenfolge']],
+  cmpNote: () => 'Beide erzeugen <b>dieselbe</b> Zugfolge: die bewegte Scheibe im Zug k ist „Anzahl der Nullen am Ende von k (binär) + 1“, das Lineal aus §5.2.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 5.2:}}\\) \\(2^N - 1\\) Züge, und weniger geht nicht: Die größte Scheibe muss einmal ziehen, vorher und nachher müssen N−1 Scheiben komplett umziehen.</p><p><b>Aussage:</b> Exponentiell: N = 64 Scheiben bräuchten \\(\\approx 1{,}8\\cdot 10^{19}\\) Züge. Das kommt aus der Rekurrenz \\(T_N = 2T_{N-1} + 1\\), nicht aus schlechtem Code.</p>'; }
+};
+
+/* ---------------- 4 · Fibonacci: naiv, memoisiert, bottom-up (Prog. 5.10/5.11) ---------------- */
+const fib = {
+  icon:'🌀', name:'Fibonacci & DP', book:'§5.3 · Prog. 5.10/5.11',
+  intro:'Die naive Rekursion berechnet dieselben Werte immer wieder: Der Aufrufbaum wächst wie \\(\\varphi^N\\). <span class="fw">Dynamische Programmierung</span> speichert jedes Teilergebnis einmal: top-down (memoisiert) oder bottom-up.',
+  vars:[{k:'naiv', name:'naiv (5.10)', book:'Prog. 5.10'}, {k:'memo', name:'top-down memo (5.11)', book:'Prog. 5.11'}, {k:'bu', name:'bottom-up', book:'§5.3 bottom-up'}],
+  ins:[{k:'N', label:'N =', def:'6', w:3}],
+  presets:[{name:'N = 5', set:{N:'5'}, hint:'Naiv: 15 Aufrufe. Der Baum ist noch klein genug zum Nachzählen.'}, {name:'N = 8', set:{N:'8'}, hint:'Naiv 67 Aufrufe, memoisiert 15, bottom-up 7 Additionen.'}, {name:'N = 14', set:{N:'14'}, v:'naiv', hint:'Naiv schon 1219 Aufrufe für F(14) = 377.'}],
+  roles:{i:'par', t:'res', knownF:'mem', F:'mem'},
+  code(v){ return v === 'naiv' ? ['int F(int i)', '  {', '    if (i < 1) return 0;', '    if (i == 1) return 1;', '    return F(i-1) + F(i-2);           // zwei Aufrufe: Baum', '  }']
+    : v === 'memo' ? ['int F(int i)', '  { static int knownF[maxN];', '    if (knownF[i] != 0) return knownF[i];  // schon bekannt', '    int t = i;', '    if (i < 0) return 0;', '    if (i > 1) t = F(i-1) + F(i-2);', '    return knownF[i] = t;              // merken', '  }']
+    : ['int F(int N)', '  { int F[maxN]; F[0] = 0; F[1] = 1;', '    for (int i = 2; i <= N; i++)', '      F[i] = F[i-1] + F[i-2];          // jede Zahl genau einmal', '    return F[N];', '  }']; },
+  run(rec, inp, v){
+    const N = int(inp.N, 0, v === 'naiv' ? 16 : 30, 6), S = rec.S; S.v = v; S.fr = []; S.T = {}; S.root = null; S.cur = null; S.info = {}; S.known = Array(N + 1).fill(0); S.res = null; let n = 0, d = 0;
+    const node = (i, par, sd) => { const id = ++n; if(n <= 63){ S.T[id] = {item: i, l: null, r: null}; if(par && S.T[par]) S.T[par][sd] = id; else if(!par) S.root = id; } return id; };
+    if(v === 'naiv'){
+      const f = (i, par, sd) => { const id = node(i, par, sd); S.cur = id; S.fr.push({f: 'F', args: i}); d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d);
+        rec.step(i < 1 ? 3 : i === 1 ? 4 : 5, 'F(' + i + ')' + (i < 1 ? ' → 0' : i === 1 ? ' → 1' : ' ruft F(' + (i - 1) + ') und F(' + (i - 2) + ')'), 'Bisher ' + rec.c.call + ' Aufrufe.');
+        let r; if(i < 1) r = 0; else if(i === 1) r = 1; else { const a = f(i - 1, id, 'l'), b = f(i - 2, id, 'r'); r = a + b; rec.add('add'); S.cur = id; rec.step(5, 'F(' + i + ') = ' + a + ' + ' + b + ' = ' + r); }
+        S.info[id] = r; S.fr.pop(); d--; return r; };
+      S.res = f(N, null); }
+    else if(v === 'memo'){
+      const f = i => { S.fr.push({f: 'F', args: i}); d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d);
+        if(i >= 0 && S.known[i] !== 0){ rec.step(3, 'F(' + i + '): knownF[' + i + '] = ' + S.known[i] + ' schon bekannt → sofort zurück.', 'Jeder Wert wird nur einmal berechnet.'); S.fr.pop(); d--; return S.known[i]; }
+        let t = i; if(i < 0){ S.fr.pop(); d--; return 0; }
+        if(i > 1){ rec.step(6, 'F(' + i + '): noch unbekannt, berechne F(' + (i - 1) + ') + F(' + (i - 2) + ').'); t = f(i - 1) + f(i - 2); rec.add('add'); }
+        S.known[i] = t; rec.step(7, 'knownF[' + i + '] = ' + t, 'Bekannt: F(0..' + i + ') soweit berechnet.'); S.fr.pop(); d--; return t; };
+      S.res = f(N); }
+    else { rec.add('call'); rec.c.maxd = 1; S.known = Array(Math.max(2, N + 1)).fill(''); S.known[0] = 0; S.known[1] = 1;
+      rec.step(2, 'F[0] = 0, F[1] = 1', 'Tabelle beginnt mit den zwei Ankern.');
+      for(let i = 2; i <= N; i++){ S.known[i] = S.known[i - 1] + S.known[i - 2]; rec.add('add'); S.cur = i; rec.step(4, 'F[' + i + '] = ' + S.known[i - 1] + ' + ' + S.known[i - 2] + ' = ' + S.known[i], '\\(\\Rule{\\text{Invariante:}}\\) F[0..' + i + '] ist richtig.'); }
+      S.res = N <= 1 ? N : S.known[N]; }
+    S.cur = null; S.fr = []; rec.step(v === 'bu' ? 5 : v === 'memo' ? 7 : 5, 'F(' + N + ') = ' + S.res, '\\(\\Res{F_{' + N + '} = ' + S.res + '}\\) mit ' + rec.c.call + ' Aufruf' + (rec.c.call === 1 ? '' : 'en') + '.');
+  },
+  view(S){ let h = '';
+    if(S.v === 'naiv' && S.root){ const nn = Object.keys(S.T).length; h += '<div class="small muted">Aufrufbaum (Zahl = i, blau = Rückgabewert)' + (nn >= 63 ? ', nur die ersten 63 Aufrufe gezeichnet' : '') + ':</div>' + LB.labTree(S.T, S.root, S.cur ? {[S.cur]: C.chg} : {}, S.info); }
+    if(S.v !== 'naiv') h += LB.labCells(S.known, S.cur !== null && S.v === 'bu' ? {[S.cur]: 'chg'} : {}, {lab: S.v === 'memo' ? 'knownF[ ]' : 'F[ ]'});
+    if(S.fr.length) h += LB.labFrames(S.fr);
+    return h + (S.res !== null ? '<div class="lab-out">Ergebnis: ' + S.res + '</div>' : ''); },
+  math(c, inp, v, done){ const N = int(inp.N, 0, v === 'naiv' ? 16 : 30, 6);
+    const want = v === 'naiv' ? 2 * FIB[N + 1] - 1 : v === 'memo' ? Math.max(1, 2 * N - 1) : 1;
+    return LB.labVs('Aufrufe', c.call || 0, done ? want : '…') + LB.labVs('Additionen', c.add || 0, done ? (v === 'naiv' ? FIB[N + 1] - 1 : Math.max(0, N - 1)) : '…') +
+      '<div class="step">\\[ \\begin{aligned} ' + (v === 'naiv' ? 'C_N &= C_{N-1} + C_{N-2} + 1 && \\text{Aufrufe} \\\\ C_N &= 2F_{N+1} - 1 = ' + want + ' \\approx \\varphi^N && \\varphi = 1{,}618\\ldots'
+        : v === 'memo' ? 'C_N &= 2N - 1 = ' + want + ' && \\text{1× rechnen, 1× nachsehen}' : '\\text{Additionen} &= N - 1 && \\text{eine pro Tabelleneintrag}') +
+      ' \\\\ F_N &\\approx \\varphi^N/\\sqrt5 && F_{' + N + '} = ' + FIB[N] + ' \\end{aligned} \\]</div>'; },
+  cmp:[['call', 'Aufrufe'], ['add', 'Additionen'], ['maxd', 'max. Tiefe'], ['res', 'F(N)', r => r.S.res]],
+  cmpNote: inp => { const N = int(inp.N, 0, 30, 6); return 'Bei N = ' + N + ': naiv ' + (2 * FIB[Math.min(N, 40) + 1] - 1) + ' Aufrufe, memoisiert ' + Math.max(1, 2 * N - 1) + ', bottom-up eine Schleife. Exponentiell gegen linear: das ist der ganze Gewinn der dynamischen Programmierung.'; },
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 5.3:}}\\) Dynamische Programmierung macht aus exponentieller Zeit (überlappende Teilprobleme) lineare, indem jedes Teilergebnis gespeichert wird.</p><p>\\(\\Rule{\\text{top-down:}}\\) rekursiv wie vorher, aber zuerst in der Tabelle nachsehen. \\(\\Rule{\\text{bottom-up:}}\\) Tabelle von klein nach groß füllen.</p><p><b>Aussage:</b> Naiv \\(\\Theta(\\varphi^N)\\), DP \\(\\Theta(N)\\) Zeit und \\(\\Theta(N)\\) Speicher (bottom-up geht auch mit 2 Variablen).</p>'; }
+};
+
+/* ---------------- 5 · Baum-Traversierung (Prog. 5.14–5.16) ---------------- */
+const TCODE = {
+  pre:['void traverse(link h, void visit(link))', '  {', '    if (h == 0) return;', '    visit(h);                          // erst die Wurzel', '    traverse(h->l, visit);', '    traverse(h->r, visit);', '  }'],
+  in:['void traverse(link h, void visit(link))', '  {', '    if (h == 0) return;', '    traverse(h->l, visit);', '    visit(h);                          // Wurzel in der Mitte', '    traverse(h->r, visit);', '  }'],
+  post:['void traverse(link h, void visit(link))', '  {', '    if (h == 0) return;', '    traverse(h->l, visit);', '    traverse(h->r, visit);', '    visit(h);                          // Wurzel zuletzt', '  }'],
+  stack:['void traverse(link h, void visit(link))', '  { STACK<link> s(max);', '    s.push(h);', '    while (!s.empty())', '      {', '        visit(h = s.pop());', '        if (h->r != 0) s.push(h->r);     // rechts zuerst rein …', '        if (h->l != 0) s.push(h->l);     // … damit links zuerst raus', '      }', '  }'],
+  queue:['void traverse(link h, void visit(link))', '  { QUEUE<link> q(max);', '    q.put(h);', '    while (!q.empty())', '      {', '        visit(h = q.get());', '        if (h->l != 0) q.put(h->l);', '        if (h->r != 0) q.put(h->r);', '      }', '  }']
+};
+const trav = {
+  icon:'🌳', name:'Baum-Traversierung', book:'§5.6 · Prog. 5.14–5.16',
+  intro:'Dieselbe Rekursion, nur die Zeile <code class="inl">visit(h)</code> wandert: davor = Preorder, dazwischen = Inorder, danach = Postorder. Mit explizitem Stack entsteht Preorder ohne Rekursion, mit Queue Level-Order.',
+  vars:[{k:'pre', name:'Preorder', book:'Prog. 5.14'}, {k:'in', name:'Inorder', book:'Prog. 5.14 (visit verschoben)'}, {k:'post', name:'Postorder', book:'Prog. 5.14 (visit verschoben)'}, {k:'stack', name:'Preorder mit Stack', book:'Prog. 5.15'}, {k:'queue', name:'Level-Order mit Queue', book:'Prog. 5.16'}],
+  ins:[{k:'T', label:'Baum (Einfügefolge)', def:'E D B A C H F G', w:16}],
+  presets:TREES.map(t => ({name: t.name, set: {T: t.v}, hint: t.hint})),
+  roles:{h:'par', s:'rule', q:'rule'},
+  code(v){ return TCODE[v]; },
+  run(rec, inp, v){
+    const {T, root, N} = bst(inp.T), S = rec.S; S.T = T; S.root = root; S.ord = {}; S.out = []; S.cur = null; S.fr = []; S.st = []; S.v = v; let d = 0;
+    const visit = (h, line) => { S.out.push(T[h].item); S.ord[h] = S.out.length; S.cur = h; rec.add('visit'); rec.step(line, 'visit(' + T[h].item + ') → Ausgabe ' + S.out.join(' '), CLAIM[v](T[h].item, S.out.length, N)); };
+    if(['pre', 'in', 'post'].includes(v)){
+      const line = {pre: [4, 5, 6], in: [5, 4, 6], post: [6, 4, 5]}[v];
+      const t = h => { S.fr.push({f: 'traverse', args: h === null ? '0' : T[h].item}); d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d); S.cur = h;
+        if(h === null){ rec.add('null'); rec.step(3, 'traverse(0): leerer Teilbaum, return.'); S.fr.pop(); d--; return; }
+        rec.step(2, 'traverse(' + T[h].item + ')');
+        const seq = v === 'pre' ? ['v', 'l', 'r'] : v === 'in' ? ['l', 'v', 'r'] : ['l', 'r', 'v'];
+        seq.forEach(x => { if(x === 'v') visit(h, line[0]); else { S.cur = h; rec.step(x === 'l' ? line[1] : line[2], 'traverse(' + T[h].item + '->' + x + ')'); t(T[h][x]); S.cur = h; } });
+        S.fr.pop(); d--; };
+      t(root);
+    } else if(v === 'stack'){
+      if(root !== null){ S.st.push(root); rec.add('push'); rec.c.maxs = 1; rec.step(3, 's.push(' + T[root].item + ')'); }
+      while(S.st.length){ const h = S.st.pop(); visit(h, 6);
+        if(T[h].r !== null){ S.st.push(T[h].r); rec.add('push'); rec.step(7, 'rechtes Kind ' + T[T[h].r].item + ' auf den Stack'); }
+        if(T[h].l !== null){ S.st.push(T[h].l); rec.add('push'); rec.step(8, 'linkes Kind ' + T[T[h].l].item + ' auf den Stack (kommt zuerst wieder raus)'); }
+        rec.c.maxs = Math.max(rec.c.maxs || 0, S.st.length); }
+    } else {
+      if(root !== null){ S.st.push(root); rec.add('push'); rec.c.maxs = 1; rec.step(3, 'q.put(' + T[root].item + ')'); }
+      while(S.st.length){ const h = S.st.shift(); visit(h, 6);
+        if(T[h].l !== null){ S.st.push(T[h].l); rec.add('push'); rec.step(7, 'q.put(' + T[T[h].l].item + ')'); }
+        if(T[h].r !== null){ S.st.push(T[h].r); rec.add('push'); rec.step(8, 'q.put(' + T[T[h].r].item + ')'); }
+        rec.c.maxs = Math.max(rec.c.maxs || 0, S.st.length); }
+    }
+    S.cur = null; rec.c.ausgabe = S.out.join(''); rec.step(v === 'stack' || v === 'queue' ? 10 : 7, 'Fertig: ' + S.out.join(' '), '\\(\\Res{\\text{' + NAME[v] + ': ' + S.out.join('\\ ') + '}}\\)');
+  },
+  view(S){ const mk = {}; if(S.cur !== null && S.cur !== undefined) mk[S.cur] = C.chg; Object.keys(S.ord).forEach(k => { if(+k !== S.cur) mk[k] = C.idx; });
+    let h = LB.labTree(S.T, S.root, mk, S.ord);
+    if(S.v === 'stack') h += LB.labStack(S.st.map(x => S.T[x].item), 'Stack s (oben = nächster)', {top: true});
+    else if(S.v === 'queue') h += '<div class="small muted">Queue q (links = nächster): <span class="mono">' + (S.st.map(x => S.T[x].item).join(' ← ') || 'leer') + '</span></div>';
+    else h += LB.labFrames(S.fr);
+    return h + '<div class="lab-out">Ausgabe: ' + (S.out.join(' ') || '–') + '</div>'; },
+  math(c, inp, v, done){ const {T, root, N} = bst(inp.T), st = treeStats(T, root);
+    if(['pre', 'in', 'post'].includes(v)) return LB.labVs('visit', c.visit || 0, done ? N : '…') + LB.labVs('Aufrufe', c.call || 0, done ? 2 * N + 1 : '…') + LB.labVs('davon leere Teilbäume', c.null || 0, done ? N + 1 : '…') + LB.labVs('max. Stapeltiefe', c.maxd || 0, done ? (N ? st.h + 2 : 1) : '…') +
+      '<div class="step">\\[ \\begin{aligned} \\text{Aufrufe} &= \\underbrace{N}_{\\text{Knoten}} + \\underbrace{N+1}_{\\text{Null-Links}} = 2N + 1 && \\text{Eigenschaft 5.5} \\\\ \\text{Tiefe} &= h + 2 = ' + (st.h + 2) + ' && h = ' + st.h + '\\ \\text{(Höhe)} \\end{aligned} \\]</div>';
+    return LB.labVs('visit', c.visit || 0, done ? N : '…') + LB.labVs(v === 'stack' ? 'push' : 'put', c.push || 0, done ? N : '…') + LB.labVs('max. Größe ' + (v === 'stack' ? 'Stack' : 'Queue'), c.maxs || 0, done ? c.maxs || 0 : '…', ' ') +
+      '<div class="step">\\[ \\text{jeder Knoten genau einmal hinein und heraus: } \\Theta(N) \\]</div>'; },
+  cmp:[['visit', 'visit'], ['call', 'Aufrufe'], ['maxd', 'max. Tiefe'], ['maxs', 'max. Stack/Queue'], ['ausgabe', 'Reihenfolge']],
+  cmpNote: () => 'Alle besuchen jeden Knoten genau einmal (Θ(N)); nur die <b>Reihenfolge</b> unterscheidet sich. Preorder rekursiv und mit Stack liefern dieselbe Folge. Inorder auf einem Suchbaum liefert die sortierte Folge.',
+  facts(){ return '<p>\\(\\Rule{\\text{Preorder}}\\) Wurzel, links, rechts · \\(\\Rule{\\text{Inorder}}\\) links, Wurzel, rechts · \\(\\Rule{\\text{Postorder}}\\) links, rechts, Wurzel · \\(\\Rule{\\text{Level-Order}}\\) Ebene für Ebene.</p><p>\\(\\Rule{\\text{Stack ↔ Rekursion:}}\\) Der Aufrufstapel ist ein Stack; ersetzt man ihn durch einen expliziten, wird die Rekursion zur Schleife (Prog. 5.15). Ersetzt man den Stack durch eine Queue, wird aus Preorder Level-Order (Prog. 5.16).</p><p><b>Aussage:</b> Jede Traversierung kostet \\(\\Theta(N)\\); der Zusatzspeicher ist \\(O(h)\\) (Stack) bzw. \\(O(\\text{Breite})\\) (Queue).</p>'; }
+};
+const NAME = {pre: 'Preorder', in: 'Inorder', post: 'Postorder', stack: 'Preorder (Stack)', queue: 'Level-Order'};
+const CLAIM = {
+  pre: (x, k, N) => x + ' ist besucht, <b>bevor</b> einer seiner Nachkommen besucht wird. ' + k + ' von ' + N + '.',
+  in: (x, k, N) => 'Alles links von ' + x + ' ist schon ausgegeben, alles rechts noch nicht. Bei einem Suchbaum: die Ausgabe ist sortiert. ' + k + ' von ' + N + '.',
+  post: (x, k, N) => 'Beide Teilbäume von ' + x + ' sind fertig, erst jetzt kommt ' + x + '. ' + k + ' von ' + N + '.',
+  stack: (x, k, N) => 'Gleiche Reihenfolge wie Preorder rekursiv: der Stack ersetzt den Aufrufstapel. ' + k + ' von ' + N + '.',
+  queue: (x, k, N) => 'Ebene für Ebene: alle Knoten mit kleinerer Tiefe sind schon besucht. ' + k + ' von ' + N + '.'
+};
+
+/* ---------------- 6 · Baum-Mathematik: count, height, Pfadlängen (Prog. 5.17, Eig. 5.5–5.9) ---------------- */
+const tmath = {
+  icon:'📐', name:'Baum-Mathematik', book:'§5.5/5.7 · Prog. 5.17',
+  intro:'Rekursive Funktionen auf Bäumen rechnen <b>von unten nach oben</b>: Ein Knoten kennt seinen Wert erst, wenn beide Kinder geantwortet haben (Postorder). Rechts stehen die Eigenschaften 5.5–5.9 mit den Zahlen dieses Baums.',
+  vars:[{k:'count', name:'count (Knoten zählen)', book:'Prog. 5.17'}, {k:'height', name:'height (Höhe)', book:'Prog. 5.17'}],
+  ins:[{k:'T', label:'Baum (Einfügefolge)', def:'E D B A C H F G', w:16}],
+  presets:TREES.map(t => ({name: t.name, set: {T: t.v}, hint: t.hint})),
+  roles:{h:'par', u:'res', v:'res'},
+  code(v){ return v === 'count' ? ['int count(link h)', '  {', '    if (h == 0) return 0;             // leerer Baum: 0 Knoten', '    return count(h->l) + count(h->r) + 1;', '  }']
+    : ['int height(link h)', '  {', '    if (h == 0) return -1;            // leerer Baum: Höhe −1', '    int u = height(h->l), v = height(h->r);', '    if (u > v) return u+1; else return v+1;', '  }']; },
+  run(rec, inp, v){
+    const {T, root} = bst(inp.T), S = rec.S; S.T = T; S.root = root; S.val = {}; S.cur = null; S.fr = []; let d = 0;
+    const f = h => { S.fr.push({f: v, args: h === null ? '0' : T[h].item}); d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d); S.cur = h;
+      if(h === null){ const r = v === 'count' ? 0 : -1; rec.step(3, v + '(0) = ' + r); S.fr.pop(); d--; return r; }
+      rec.step(4, v + '(' + T[h].item + '): erst die Kinder fragen.');
+      const a = f(T[h].l), b = f(T[h].r); S.cur = h;
+      const r = v === 'count' ? a + b + 1 : Math.max(a, b) + 1; S.val[h] = r;
+      rec.step(v === 'count' ? 4 : 5, v + '(' + T[h].item + ') = ' + (v === 'count' ? a + ' + ' + b + ' + 1' : 'max(' + a + ', ' + b + ') + 1') + ' = ' + r, 'Der Teilbaum ab ' + T[h].item + ' hat ' + (v === 'count' ? r + ' Knoten' : 'Höhe ' + r) + ': bekannt, weil beide Teilbäume fertig sind.');
+      S.fr.pop(); d--; return r; };
+    S.res = f(root); S.cur = null; rec.step(5, 'Ergebnis: ' + v + ' = ' + S.res, '\\(\\Res{\\text{' + v + '} = ' + S.res + '}\\)');
+  },
+  view(S){ return LB.labTree(S.T, S.root, S.cur !== null && S.cur !== undefined ? {[S.cur]: C.chg} : {}, S.val) + LB.labFrames(S.fr); },
+  math(c, inp, v, done){ const {T, root, N} = bst(inp.T), st = treeStats(T, root);
+    return LB.labVs('Aufrufe', c.call || 0, done ? 2 * N + 1 : '…') +
+      '<table class="rt" style="margin:.3rem 0"><tr><th>Größe</th><th>Wert</th><th>Formel / Eigenschaft</th></tr>' +
+      '<tr><td>Knoten N</td><td>' + N + '</td><td>count(root)</td></tr><tr><td>Links</td><td>' + Math.max(0, N - 1) + '</td><td>N − 1 (5.5)</td></tr><tr><td>Null-Links (extern)</td><td>' + (N + 1) + '</td><td>N + 1 (5.5)</td></tr>' +
+      '<tr><td>Höhe h</td><td>' + st.h + '</td><td>\\(\\lceil\\lg(N+1)\\rceil - 1 = ' + (N ? Math.ceil(Math.log2(N + 1)) - 1 : -1) + ' \\le h \\le N - 1 = ' + (N - 1) + '\\) (5.8)</td></tr>' +
+      '<tr><td>innere Pfadlänge I</td><td>' + st.I + '</td><td>Summe der Knotentiefen</td></tr><tr><td>äußere Pfadlänge E</td><td>' + st.E + '</td><td>\\(E = I + 2N = ' + (st.I + 2 * N) + '\\) (5.7) ' + (st.E === st.I + 2 * N ? '✓' : '≠') + '</td></tr></table>'; },
+  cmp:[['call', 'Aufrufe'], ['maxd', 'max. Tiefe'], ['res', 'Ergebnis', r => r.S.res]],
+  cmpNote: () => 'Beide Funktionen haben dieselbe Form (Postorder, 2N+1 Aufrufe) und unterscheiden sich nur im Kombinieren: <b>+</b> gegen <b>max</b>.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 5.5:}}\\) Ein Binärbaum mit N inneren Knoten hat N+1 externe Knoten (Null-Links) und N−1 Links zwischen inneren Knoten.</p><p>\\(\\Rule{\\text{Eigenschaft 5.7:}}\\) \\(E = I + 2N\\). \\(\\Rule{\\text{Eigenschaft 5.8:}}\\) Höhe zwischen \\(\\lceil\\lg(N+1)\\rceil - 1\\) und \\(N-1\\).</p><p><b>Aussage:</b> Alle Kosten in Bäumen hängen an der <b>Höhe</b>: balanciert \\(\\Theta(\\log N)\\), entartet \\(\\Theta(N)\\). Das ist der Grund für balancierte Suchbäume in Teil 4.</p>'; }
+};
+
+/* ---------------- 7 · Graph: DFS und BFS (Prog. 5.21/5.22) ---------------- */
+const gtrav = {
+  icon:'🧭', name:'Graph: DFS/BFS', book:'§5.8 · Prog. 5.21/5.22',
+  intro:'Tiefensuche ist rekursiv (der Aufrufstapel merkt sich den Weg zurück), Breitensuche nutzt eine Queue (erst alle Nachbarn, dann deren Nachbarn). Gleicher Graph, anderer Baum: DFS geht tief, BFS findet kürzeste Wege (in Kanten).',
+  vars:[{k:'dfs', name:'DFS rekursiv (5.21)', book:'Prog. 5.21'}, {k:'bfs', name:'BFS mit Queue (5.22)', book:'Prog. 5.22'}],
+  ins:[{k:'V', label:'V =', def:'8', w:3}, {k:'E', label:'Kanten', def:'0-2 0-5 0-7 1-7 2-6 3-4 3-5 4-5 4-6 4-7', w:20}],
+  presets:[{name:'Buch-Graph', set:{V:'8', E:'0-2 0-5 0-7 1-7 2-6 3-4 3-5 4-5 4-6 4-7'}, hint:'8 Knoten, 10 Kanten. Adjazenzlisten wie Prog. 3.19 (vorne einfügen), daher Nachbarn in umgekehrter Einfügereihenfolge.'},
+           {name:'Kreis', set:{V:'6', E:'0-1 1-2 2-3 3-4 4-5 5-0'}, hint:'DFS läuft einmal ganz herum (Tiefe 6), BFS geht in beide Richtungen gleichzeitig.'},
+           {name:'Stern', set:{V:'7', E:'0-1 0-2 0-3 0-4 0-5 0-6'}, hint:'BFS: alle Nachbarn sofort in der Queue. DFS: Tiefe nur 2.'},
+           {name:'nicht zusammenhängend', set:{V:'6', E:'0-1 1-2 3-4 4-5'}, hint:'Ab 0 erreicht man nur 0, 1, 2. Für alle Komponenten braucht man eine äußere Schleife über alle Knoten.'}],
+  roles:{k:'par', t:'idx', visited:'mem', adj:'mem', q:'rule'},
+  code(v){ return v === 'dfs' ? ['void traverse(int k, void visit(int))', '  { visit(k); visited[k] = 1;', '    for (link t = adj[k]; t != 0; t = t->next)  // alle Nachbarn', '      if (!visited[t->v]) traverse(t->v, visit);   // tiefer', '  }']
+    : ['void traverse(int k, void visit(int))', '  {', '    QUEUE<int> q(V*V);', '    q.put(k);', '    while (!q.empty())', '      if (visited[k = q.get()] == 0)', '        {', '          visit(k); visited[k] = 1;', '          for (link t = adj[k]; t != 0; t = t->next)', '            if (visited[t->v] == 0) q.put(t->v);', '        }', '  }']; },
+  run(rec, inp, v){
+    const V = int(inp.V, 2, 12, 8), S = rec.S; S.V = V; S.adj = Array.from({length: V}, () => []); S.E = []; S.vis = Array(V).fill(0); S.ord = []; S.tree = []; S.cur = null; S.fr = []; S.q = []; S.v = v;
+    String(inp.E).replace(/(\d+)\s*-\s*(\d+)/g, (_, a, b) => { a = +a; b = +b; if(a < V && b < V && a !== b){ S.E.push([a, b]); S.adj[b].unshift(a); S.adj[a].unshift(b); } });
+    rec.step(1, 'Adjazenzlisten gebaut (vorne eingefügt).', 'Noch kein Knoten besucht.');
+    if(v === 'dfs'){ let d = 0;
+      const t = (k, from) => { S.fr.push({f: 'traverse', args: k}); d++; rec.add('call'); rec.c.maxd = Math.max(rec.c.maxd || 0, d); S.vis[k] = 1; S.ord.push(k); S.cur = k; if(from !== null) S.tree.push([from, k]); rec.add('visit');
+        rec.step(2, 'visit(' + k + ')', 'Besucht: ' + S.ord.join(' ') + '. Der Stapel enthält genau den Weg von 0 nach ' + k + '.');
+        for(const w of S.adj[k]){ rec.add('edge'); S.cur = k; rec.step(4, 'Kante ' + k + '-' + w + ': ' + (S.vis[w] ? w + ' schon besucht' : w + ' neu → tiefer'));
+          if(!S.vis[w]) t(w, k); S.cur = k; }
+        S.fr.pop(); d--; };
+      t(0, null); }
+    else { S.q.push(0); rec.add('put'); rec.step(4, 'q.put(0)');
+      while(S.q.length){ const k = S.q.shift(); rec.add('get'); S.cur = k;
+        if(S.vis[k]){ rec.step(6, 'q.get() = ' + k + ': schon besucht, überspringen.'); continue; }
+        S.vis[k] = 1; S.ord.push(k); rec.add('visit'); const par = S.parent && S.parent[k]; if(par !== undefined) S.tree.push([par, k]);
+        rec.step(8, 'visit(' + k + ')', 'Besucht: ' + S.ord.join(' ') + '. Knoten werden in der Reihenfolge ihres Abstands von 0 besucht.');
+        for(const w of S.adj[k]){ rec.add('edge'); if(!S.vis[w]){ S.q.push(w); rec.add('put'); S.parent = S.parent || {}; if(S.parent[w] === undefined) S.parent[w] = k; rec.step(10, 'Nachbar ' + w + ' unbesucht → q.put(' + w + ')'); } }
+        rec.c.maxq = Math.max(rec.c.maxq || 0, S.q.length); } }
+    S.cur = null; rec.c.ausgabe = S.ord.join(' '); rec.step(v === 'dfs' ? 5 : 12, 'Fertig: ' + S.ord.length + ' Knoten erreicht.', '\\(\\Res{\\text{Reihenfolge: } ' + S.ord.join('\\ ') + '}\\)' + (S.ord.length < V ? ' · nicht erreicht: ' + S.vis.map((x, k) => x ? null : k).filter(x => x !== null).join(', ') : ''));
+  },
+  view(S){ const W = 420, H = 300, cx = 210, cy = 150, R = 115, P = k => [cx + R * Math.sin(2 * Math.PI * k / S.V), cy - R * Math.cos(2 * Math.PI * k / S.V)];
+    const tr = new Set(S.tree.map(([a, b]) => Math.min(a, b) + '-' + Math.max(a, b)));
+    let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" style="max-width:100%;height:auto">';
+    S.E.forEach(([a, b]) => { const [x1, y1] = P(a), [x2, y2] = P(b), t = tr.has(Math.min(a, b) + '-' + Math.max(a, b)); s += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" stroke="' + (t ? C.idx : C.line) + '" stroke-width="' + (t ? 3 : 1.4) + '"/>'; });
+    for(let k = 0; k < S.V; k++){ const [x, y] = P(k), o = S.ord.indexOf(k);
+      s += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="16" fill="' + (k === S.cur ? 'rgba(210,153,34,.45)' : S.vis[k] ? 'rgba(63,185,80,.3)' : C.card) + '" stroke="' + (k === S.cur ? C.chg : S.vis[k] ? C.idx : C.mute) + '" stroke-width="2"/><text x="' + x.toFixed(1) + '" y="' + (y + 4.5).toFixed(1) + '" text-anchor="middle" font-size="13" font-weight="700" fill="' + C.ink + '">' + k + '</text>' + (o >= 0 ? '<text x="' + (x + 17).toFixed(1) + '" y="' + (y - 12).toFixed(1) + '" font-size="10" fill="' + C.cond + '">' + (o + 1) + '.</text>' : ''); }
+    s += '</svg>';
+    let h = s + (S.v === 'dfs' ? LB.labFrames(S.fr) : '<div class="small muted">Queue (links = nächster): <span class="mono">' + (S.q.join(' ← ') || 'leer') + '</span></div>');
+    h += '<div class="small">' + S.adj.map((l, k) => '<span class="mono">adj[' + k + ']: ' + (l.join(' ') || '–') + '</span>').join(' · ') + '</div>';
+    return h + '<div class="lab-out">Besuchsreihenfolge: ' + (S.ord.join(' ') || '–') + '</div>'; },
+  math(c, inp, v, done, S){ const reach = S.ord.length; let degSum = 0; S.vis.forEach((x, k) => { if(x) degSum += S.adj[k].length; });
+    return LB.labVs('besuchte Knoten', c.visit || 0, done ? reach : '…') + LB.labVs('geprüfte Kanten-Enden', c.edge || 0, done ? degSum : '…') + (v === 'bfs' ? LB.labVs('put', c.put || 0, done ? c.put : '…', ' ') + LB.labVs('max. Queue', c.maxq || 0, done ? c.maxq || 0 : '…', ' ') : LB.labVs('max. Stapeltiefe', c.maxd || 0, done ? c.maxd || 0 : '…', ' ')) +
+      '<div class="step">\\[ \\begin{aligned} \\sum_{\\text{besucht}} \\deg(k) &= ' + degSum + ' && = 2E\\text{, falls zus.-hängend} \\\\ T &= O(V + E) && \\text{Listen, Eig. 5.10} \\end{aligned} \\]</div>'; },
+  cmp:[['visit', 'besucht'], ['edge', 'Kanten-Enden'], ['maxd', 'max. Stapel'], ['maxq', 'max. Queue'], ['ausgabe', 'Reihenfolge']],
+  cmpNote: () => 'Gleich viel Arbeit (jede Kante zweimal), andere Reihenfolge und anderer Baum (grün). BFS-Baum: Wege mit möglichst wenigen Kanten; DFS-Baum: lange Pfade.',
+  facts(){ return '<p>\\(\\Rule{\\text{Eigenschaft 5.10:}}\\) DFS und BFS mit Adjazenzlisten kosten \\(O(V + E)\\), mit Matrix \\(O(V^2)\\).</p><p>\\(\\Rule{\\text{Struktur:}}\\) DFS = Stack (rekursiv), BFS = Queue. Genau wie Preorder gegen Level-Order beim Baum.</p><p><b>Aussage:</b> Von einem Startknoten aus erreicht man genau seine Zusammenhangskomponente (vgl. Union-Find in Teil 1).</p>'; }
+};
+
+LB.labCh5 = [rek, maxdc, hanoi, fib, trav, tmath, gtrav];
+})();
+
+document.addEventListener('DOMContentLoaded', () => {LB.Lab({id:'labK3', scenarios:LB.labCh3});LB.Lab({id:'labK4', scenarios:LB.labCh4});LB.Lab({id:'labK5', scenarios:LB.labCh5});});
+</script>
+<script>
 /* ===== UX-ADDON: Menü + farbige Schlüsselwörter ===== */
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["gp-p2-thread", "★ Klausur: Fädelung", "Gedächtnisprotokoll A1 d"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"], ["lab3", "🧪 Labor Kap. 3", "alles in einem interaktiven Bild"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"], ["lab4", "🧪 Labor Kap. 4", "alles in einem interaktiven Bild"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["gp-p2-thread", "★ Klausur: Fädelung", "Gedächtnisprotokoll A1 d"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"], ["lab5", "🧪 Labor Kap. 5", "alles in einem interaktiven Bild"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Überlebende*", "Wurzel"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "push", "pop", "put", "get", "insert", "delete", "new"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Stack", "Queue", "FIFO", "LIFO", "Binärbaum*", "Baum", "Bäume", "Traversierung", "Preorder", "Inorder", "Postorder", "Level-Order", "Divide & Conquer", "Teile und Herrsche", "Memoisierung", "dynamische Programmierung", "Klasse*", "Template", "Axiom*", "Tiefensuche", "Breitensuche", "Graph*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Null-Link"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger", "Links", "Kopfknoten", "Dummy", "Heap-Speicher", "Stackframe*", "Ringpuffer", "Adjazenzliste*", "Adjazenzmatrix"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
