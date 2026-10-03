@@ -471,6 +471,29 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .lab-cmp table.rt tr.on td:first-child{box-shadow:inset 3px 0 0 var(--purple)}
 .lab-code .row.cur .lnum{color:var(--orange);font-weight:800}
 </style>
+<style>
+/* ===== SPICK: Spickzettel-Raster + Druck ===== */
+.spick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,640px),1fr));gap:14px;align-items:start;margin-top:.8rem}
+.spick .sp{border:1px solid var(--border);border-top:3px solid var(--pink);border-radius:12px;background:var(--card);padding:12px 16px;min-width:0;overflow-x:auto}
+.spick .sp h4{margin:0 0 .5rem;font-size:1.02rem;display:flex;align-items:center;gap:.5rem}
+.spick .spn{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;background:var(--pink);color:#0d1117;font-weight:800;font-size:.85rem}
+.spick p{margin:.35rem 0;line-height:1.5}
+.spick table.rt{font-size:.82rem;margin:.4rem 0}
+.spick table.rt td.mono{font-size:.76rem;line-height:1.45;font-family:'JetBrains Mono',monospace}
+.spick .step{padding:4px 10px;margin:6px 0}
+.spick pre.cpp{font-size:.76rem}
+.spick .num{width:auto;min-width:1.6em;padding:0 .35em;border-radius:9px}
+.spick .katex-display>.katex{font-size:.92em}
+.sppr{font:inherit;font-size:.85rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--pink);border-radius:8px;padding:.2rem .7rem;margin-left:.4rem}
+@media print{
+  body.print-spick *{visibility:hidden}
+  body.print-spick #spickfig, body.print-spick #spickfig *{visibility:visible}
+  body.print-spick #spickfig{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
+  body.print-spick .sppr, body.print-spick #spickfig > p{display:none!important}
+  body.print-spick .spick{grid-template-columns:1fr 1fr}
+  body.print-spick .sp{break-inside:avoid}
+}
+</style>
 </head>
 <body>
 
@@ -3918,6 +3941,205 @@ for (N = 1; N &lt; maxN; N++)
 <div class="excard"><span class="lb r">Für die Klausur</span>Die Prüfungstabelle oben ist die Antwort auf die Worst-Case-Aufgabe. Die Von-null-Karten in jedem Abschnitt sind Aufgaben im Klausurstil mit vollständigem Lösungsweg.</div>
 </div>
 </div>
+
+<!--SPICK-->
+<!-- ═════════════════════════════════════ SPICKZETTEL ═════════════════════════════════════ -->
+<div class="blatt" id="spick"><div class="kop"><span class="bn" style="color:var(--pink);border-color:rgba(247,120,186,.4);background:rgba(247,120,186,.1)">🧾 Spickzettel</span><h2>Spickzettel Teil 4: alles für die Klausur auf einen Blick</h2><span class="tp">Kap. 12–16 · Symboltabellen, BST, AVL, Hashing, Tries, B-Baum</span></div></div>
+<div class="figure" id="spickfig">
+<p>14 Kästen, jeder <b>von null</b> lesbar: erst die Begriffe, dann das Rezept, dann die Formeln. Erkenne zuerst den <b>Aufgabentyp</b> (Kasten 0), dann gehst du direkt zum passenden Kasten.<button class="sppr" id="spPrint">🖨 nur den Spickzettel drucken</button></p>
+<div class="spick">
+<div class="sp" id="sp4-0">
+<h4><span class="spn">0</span>Aufgabentyp erkennen → Kasten</h4>
+<table class="rt">
+<tr><th>Die Aufgabe sagt …</th><th>Kasten</th></tr>
+<tr><td>„Welche Symboltabelle wann? Kosten von search/insert?“</td><td>1</td></tr>
+<tr><td>„Binäre Suche: welche Elemente werden angesehen?“</td><td>2</td></tr>
+<tr><td>„Füge in einen BST ein / lösche aus einem BST“, „Preorder danach“</td><td>3</td></tr>
+<tr><td>„Rotiere um x“, „Einfügen an der Wurzel“</td><td>4</td></tr>
+<tr><td>„AVL: füge ein …, welche Rotation, Wurzel, Preorder?“</td><td>5</td></tr>
+<tr><td>„AVL: lösche … (Nachfolger / Vorgänger)“</td><td>6</td></tr>
+<tr><td>„Maximale Höhe eines AVL-Baums mit N Knoten?“</td><td>7</td></tr>
+<tr><td>„2-3-4-Baum, Rot-Schwarz, Splay, randomisiert“</td><td>8</td></tr>
+<tr><td>„Hashtabelle nach dem Einfügen von …“, „Sonden?“</td><td>9</td></tr>
+<tr><td>„Löschen beim Hashing“, „dynamische Tabelle“, „Hashing oder Baum?“</td><td>10</td></tr>
+<tr><td>„Trie / DST / Patricia / TST zeichnen“</td><td>11</td></tr>
+<tr><td>„B-Baum mit t = … einfügen“, „erweiterbares Hashing“</td><td>12</td></tr>
+<tr><td>Quiz: „eine, mehrere oder keine richtig“</td><td>13</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp4-1">
+<h4><span class="spn">1</span>Symboltabellen: alle Implementierungen (Tab. 12.1, 13.1, 14.1)</h4>
+<table class="rt">
+<tr><th>Implementierung</th><th>search</th><th>insert</th><th>schlechtester Fall</th><th>Ordnung (select, sortiert)</th></tr>
+<tr><td>Key-Indexed (Schlüssel klein)</td><td>1</td><td>1</td><td>1</td><td>ja</td></tr>
+<tr><td>Feld ungeordnet</td><td>N/2 (Treffer)</td><td>1</td><td>N</td><td>nein</td></tr>
+<tr><td>Feld geordnet + binär</td><td>lg N</td><td>N/2</td><td>N (insert)</td><td>ja</td></tr>
+<tr><td>BST</td><td>\(\approx 1{,}39\lg N\)</td><td>\(\approx 1{,}39\lg N\)</td><td>N</td><td>ja</td></tr>
+<tr><td>AVL / Rot-Schwarz</td><td>\(\le 1{,}44\lg N\) / \(\le 2\lg N\)</td><td>gleich</td><td>\(O(\log N)\)</td><td>ja</td></tr>
+<tr><td>Hashing</td><td>\(O(1)\) im Mittel</td><td>\(O(1)\)</td><td>N</td><td>nein</td></tr>
+<tr><td>B-Baum (Platte)</td><td>\(\log_{M/2} N\) Sonden</td><td>gleich</td><td>\(O(\log_M N)\)</td><td>ja</td></tr>
+</table>
+<p class="small"><b>Faustregel:</b> nur suchen/einfügen, Reihenfolge egal → Hashing. Bereichsanfragen, Minimum, sortiert ausgeben → balancierter Baum. Daten auf Platte → B-Baum.</p>
+</div>
+
+<div class="sp" id="sp4-2">
+<h4><span class="spn">2</span>Binäre Suche (§12.4, Prog. 12.7)</h4>
+<pre class="cpp" data-roles='{"l":"par","r":"par","m":"idx","v":"res"}'>Item searchR(int l, int r, Key v)
+  { if (l &gt; r) return nullItem;
+    int m = (l+r)/2;                        // Mitte, abgerundet
+    if (v == st[m].key()) return st[m];
+    if (l == r) return nullItem;
+    if (v &lt; st[m].key()) return searchR(l, m-1, v);
+    else                 return searchR(m+1, r, v); }</pre>
+<div class="step">\[ \begin{aligned}
+C_N &\le \lfloor\lg N\rfloor + 1 && \text{Treffer und Fehlschlag (Eig. 12.5)} \\
+\text{Interpolation} &: m = l + \tfrac{(v - a[l])(r - l)}{a[r] - a[l]} && \approx \lg\lg N \text{ bei gleichmäßigen Schlüsseln}
+\end{aligned} \]</div>
+<p class="small"><b>Von Hand:</b> Liste der angesehenen Indizes m aufschreiben; jedes Mal den Bereich [l..r] neu notieren.</p>
+</div>
+
+<div class="sp" id="sp4-3">
+<h4><span class="spn">3</span>BST: einfügen, suchen, löschen (§12.5–12.9)</h4>
+<pre class="cpp" data-roles='{"h":"mem","x":"par"}'>void insertR(link&amp; h, Item x)
+  { if (h == 0) { h = new node(x); return; }   // leerer Link: hier
+    if (x.key() &lt; h-&gt;item.key()) insertR(h-&gt;l, x);
+    else                         insertR(h-&gt;r, x); }</pre>
+<p><span class="num">L</span><b>Löschen:</b> Blatt → weg. Ein Kind → Kind rückt hoch. Zwei Kinder → Schlüssel durch den <b>symmetrischen Nachfolger</b> (kleinster im rechten Teilbaum: einmal rechts, dann ganz links) ersetzen und diesen dort löschen. Wenn verlangt: <b>Vorgänger</b> (einmal links, dann ganz rechts).</p>
+<div class="step">\[ \begin{aligned}
+\bar C_{\text{Treffer}} &= 1 + \tfrac{\text{IPL}}{N} \approx \Res{2\ln N \approx 1{,}39\lg N} && \text{zufällige Reihenfolge (Eig. 12.6)} \\
+C_{\text{worst}} &= N && \text{sortierte Eingabe: Liste}
+\end{aligned} \]</div>
+<p class="small"><b>Probe:</b> Die Inorder-Folge ist immer sortiert. Die Form hängt nur von der Einfügereihenfolge ab.</p>
+</div>
+
+<div class="sp" id="sp4-4">
+<h4><span class="spn">4</span>Rotationen und Einfügen an der Wurzel (§12.8)</h4>
+<pre class="cpp" data-roles='{"h":"mem","x":"chg"}'>void rotR(link&amp; h) { link x = h-&gt;l; h-&gt;l = x-&gt;r; x-&gt;r = h; h = x; }
+void rotL(link&amp; h) { link x = h-&gt;r; h-&gt;r = x-&gt;l; x-&gt;l = h; h = x; }
+void insertT(link&amp; h, Item x)               // neuer Schlüssel wird Wurzel
+  { if (h == 0) { h = new node(x); return; }
+    if (x.key() &lt; h-&gt;item.key()) { insertT(h-&gt;l, x); rotR(h); }
+    else                         { insertT(h-&gt;r, x); rotL(h); } }</pre>
+<p><b>Rechtsrotation um h:</b> das linke Kind x wird neue Wurzel, h wird rechtes Kind von x, der rechte Teilbaum von x wird linker Teilbaum von h. Es ändern sich genau <b>3 Zeiger</b>; die Inorder bleibt gleich.</p>
+</div>
+
+<div class="sp" id="sp4-5">
+<h4><span class="spn">5</span>AVL einfügen (Vorlesung)</h4>
+<p><span class="fw">Balancefaktor</span> BF = h(rechts) − h(links); leerer Baum h = −1, Blatt h = 0. Erlaubt: −1, 0, +1. Einfügen wie im BST, dann auf dem Rückweg BF prüfen; am <b>tiefsten</b> Knoten mit ±2 reparieren.</p>
+<table class="rt">
+<tr><th>BF Knoten</th><th>BF Kind</th><th>Fall</th><th>Rotation</th></tr>
+<tr><td>−2</td><td>≤ 0</td><td>LL</td><td>rechts um den Knoten</td></tr>
+<tr><td>−2</td><td>+1</td><td>LR</td><td>links um das Kind, dann rechts um den Knoten</td></tr>
+<tr><td>+2</td><td>≥ 0</td><td>RR</td><td>links um den Knoten</td></tr>
+<tr><td>+2</td><td>−1</td><td>RL</td><td>rechts um das Kind, dann links um den Knoten</td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel} &: 30, 10, 40, 5, 20, 15, 50, 60, 70 && \text{Übungsblatt A10} \\
+\text{Rotationen} &: \Chg{LR,\ RR,\ RR} && \\
+\text{Preorder} &: \Res{20\ 10\ 5\ 15\ 40\ 30\ 60\ 50\ 70} && \text{Wurzel 20}
+\end{aligned} \]</div>
+<p class="small"><b>Beim Einfügen</b> genügt immer <b>eine</b> (Einfach- oder Doppel-)Rotation; danach ist der ganze Baum wieder AVL.</p>
+</div>
+
+<div class="sp" id="sp4-6">
+<h4><span class="spn">6</span>AVL löschen (Vorlesung)</h4>
+<p><b>Rezept:</b> wie im BST löschen (zwei Kinder: Nachfolger, wenn verlangt Vorgänger). Dann auf dem <b>ganzen</b> Rückweg bis zur Wurzel BF prüfen und rotieren. Es können <b>mehrere</b> Rotationen nötig sein.</p>
+<p><b>Besonderheit:</b> Das Kind des kritischen Knotens kann BF 0 haben (beim Einfügen unmöglich). Dann Einfachrotation (LL bzw. RR).</p>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel} &: \text{Baum } 30\,20\,40\,10\,25\,50\,5,\ \text{lösche } 40 && \text{Übungsblatt L7} \\
+\text{BF}(30) &= -2,\ \text{BF}(20) = -1 \Rightarrow \Chg{LL} && \\
+\text{Preorder} &: \Res{20\ 10\ 5\ 30\ 25\ 50} && \text{Wurzel 20}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp4-7">
+<h4><span class="spn">7</span>AVL-Mathematik</h4>
+<div class="step">\[ \begin{aligned}
+N_{\min}(h) &= N_{\min}(h-1) + N_{\min}(h-2) + 1 && \text{Fibonacci-Bäume} \\
+N_{\min}(0..5) &= 1,\ 2,\ 4,\ 7,\ 12,\ 20 && \text{kleinster AVL-Baum der Höhe h} \\
+h &\le 1{,}44\lg(N + 2) && \text{Satz (Vorlesung)} \\
+\text{Operationen} &: O(\log N) && \text{suchen, einfügen, löschen}
+\end{aligned} \]</div>
+<p class="small"><b>Klausurtrick:</b> „Größte Höhe bei N = 7 Knoten?“ → größtes h mit N_min(h) ≤ 7, also h = 3.</p>
+</div>
+
+<div class="sp" id="sp4-8">
+<h4><span class="spn">8</span>2-3-4, Rot-Schwarz, Splay, randomisiert (Kap. 13)</h4>
+<table class="rt">
+<tr><th>Baum</th><th>Idee</th><th>Garantie</th></tr>
+<tr><td>2-3-4 (top-down)</td><td>4-Knoten auf dem Weg nach unten teilen, mittleren Schlüssel hochschieben</td><td>alle Blätter gleich tief, Höhe ≤ lg N</td></tr>
+<tr><td>Rot-Schwarz</td><td>2-3-4 als BST: rote Kante = gleicher 2-3-4-Knoten</td><td>Höhe ≤ 2 lg N (Eig. 13.8)</td></tr>
+<tr><td>Splay</td><td>gesuchten/neuen Schlüssel mit Doppelrotationen an die Wurzel</td><td>amortisiert O(log N)</td></tr>
+<tr><td>randomisiert</td><td>mit W. 1/(N+1) an der Wurzel einfügen</td><td>wie zufällige Eingabe, unabhängig von der Reihenfolge</td></tr>
+<tr><td>Skip-Liste</td><td>Ebenen mit W. 1/2 (bzw. 1/t)</td><td>erwartet O(log N)</td></tr>
+</table>
+<p class="small"><b>Rot-Schwarz-Regeln:</b> Wurzel schwarz; kein Rot auf Rot; jeder Weg zu einem leeren Link hat gleich viele schwarze Knoten.</p>
+</div>
+
+<div class="sp" id="sp4-9">
+<h4><span class="spn">9</span>Hashing von Hand (Kap. 14)</h4>
+<p><b>Hashfunktion:</b> \(h(k) = k \bmod M\), M prim. Strings mit Horner: \(h = (a\cdot h + c) \bmod M\) Zeichen für Zeichen.</p>
+<table class="rt">
+<tr><th>Verfahren</th><th>Kollision</th><th>Treffer</th><th>Fehlschlag</th></tr>
+<tr><td>Verkettung</td><td>vorne in Liste h(k)</td><td>\(1 + \alpha/2\)</td><td>\(\alpha\)</td></tr>
+<tr><td>lineare Sondierung</td><td>i = (i+1) % M</td><td>\(\tfrac12(1 + \tfrac{1}{1-\alpha})\)</td><td>\(\tfrac12(1 + \tfrac{1}{(1-\alpha)^2})\)</td></tr>
+<tr><td>Doppel-Hashing</td><td>i = (i + h₂(k)) % M</td><td>\(\tfrac1\alpha\ln\tfrac1{1-\alpha}\)</td><td>\(\tfrac{1}{1-\alpha}\)</td></tr>
+</table>
+<p><b>Rezept:</b> Für jeden Schlüssel h(k) ausrechnen, Platz belegt → nach der Regel weiter, Sonden mitzählen (der freie Platz zählt mit). α = N/M. Bei offener Adressierung muss N &lt; M bleiben; h₂(k) ≠ 0 und teilerfremd zu M.</p>
+</div>
+
+<div class="sp" id="sp4-10">
+<h4><span class="spn">10</span>Löschen, dynamische Tabellen, Hashing gegen Bäume</h4>
+<p><span class="num">L</span><b>Löschen bei linearer Sondierung:</b> Platz leeren <b>und</b> alle folgenden Schlüssel des Clusters herausnehmen und neu einfügen (Prog. 14.5). Nur leeren ist falsch: Die Suche bricht an der Lücke ab.</p>
+<p><span class="num">D</span><b>Dynamisch:</b> bei N ≥ M/2 Tabelle verdoppeln und alles neu hashen. Insgesamt &lt; 2N Neueinfügungen: amortisiert O(1).</p>
+<div class="step">\[ \begin{aligned}
+\text{Hashing} &: O(1), \text{ aber keine Ordnung} && \text{kein select, kein Bereich} \\
+\text{Baum} &: O(\log N), \text{ dafür sortiert} && \text{min, max, Bereich, Rang}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp4-11">
+<h4><span class="spn">11</span>Radix-Suche (Kap. 15)</h4>
+<table class="rt">
+<tr><th>Struktur</th><th>Schlüssel stehen</th><th>verzweigt nach</th><th>Kosten</th></tr>
+<tr><td>Digitaler Suchbaum</td><td>in jedem Knoten</td><td>Bit d auf Tiefe d</td><td>≈ lg N, Höhe ≤ b Bits</td></tr>
+<tr><td>Trie</td><td>nur in Blättern</td><td>Bit d; Form unabhängig von der Reihenfolge</td><td>≈ lg N Bits + 1 Vergleich, ≈ 1,44 N Knoten</td></tr>
+<tr><td>Patricia</td><td>in N Knoten</td><td>gespeicherter Bitindex, Rückwärtslinks</td><td>≈ lg N Bits, genau N Knoten</td></tr>
+<tr><td>Mehrweg-Trie</td><td>Wortende-Markierung</td><td>Zeichen (R Links je Knoten)</td><td>Wortlänge; viel leerer Speicher</td></tr>
+<tr><td>TST</td><td>Wortende-Knoten</td><td>kleiner | gleich | größer</td><td>≈ ln N + Wortlänge</td></tr>
+</table>
+<p class="small"><b>Von Hand (Buchstaben):</b> A = 00001 … Z = 11010; Bit 0 ist das <b>linke</b> (höchste) Bit. 0 = links, 1 = rechts.</p>
+</div>
+
+<div class="sp" id="sp4-12">
+<h4><span class="spn">12</span>B-Baum und erweiterbares Hashing (Kap. 16)</h4>
+<p><b>B-Baum (Vorlesung, Mindestgrad t):</b> jeder Knoten außer der Wurzel hat t−1 … 2t−1 Schlüssel; alle Blätter gleich tief. Einfügen: auf dem Weg nach unten jeden <b>vollen</b> Knoten (2t−1) teilen, der Median wandert in den Elternknoten; volle Wurzel ⇒ neue Wurzel, Baum wächst oben.</p>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel } t = 2 &: 10, 20, 5, 6, 12, 30, 7, 17 && \text{Splits bei 6 und 17} \\
+\text{Ergebnis} &: \Res{[10\ 20]} \to [5\ 6\ 7]\ [12\ 17]\ [30] && \text{2 Sonden je Suche} \\
+h &\le \log_t \tfrac{N+1}{2} && \text{Vorlesung; Buch: Ordnung } M = 2t
+\end{aligned} \]</div>
+<p><b>Erweiterbares Hashing:</b> die ersten d Bits wählen einen von 2^d Verzeichniseinträgen → Seite (≤ M Schlüssel). Seite voll → nach dem nächsten Bit teilen; nur wenn ihre lokale Tiefe = d ist, verdoppelt sich das Verzeichnis. Suche: 2 Sonden, Seiten ≈ 1,44 N/M.</p>
+</div>
+
+<div class="sp" id="sp4-13">
+<h4><span class="spn">13</span>Quiz-Fallen Teil 4</h4>
+<table class="rt">
+<tr><th>Aussage</th><th>stimmt?</th></tr>
+<tr><td>„Jeder AVL-Baum ist ein Rot-Schwarz-Baum (färbbar)“</td><td>ja</td></tr>
+<tr><td>„AVL-Löschen braucht höchstens eine Rotation“</td><td>nein: bis zu einer je Ebene</td></tr>
+<tr><td>„Ein BST hat garantiert Höhe O(log N)“</td><td>nein: bis N − 1</td></tr>
+<tr><td>„Hashing liefert die Schlüssel sortiert“</td><td>nein</td></tr>
+<tr><td>„Lineare Sondierung ist bei α = 0,9 noch schnell“</td><td>nein: Fehlschlag ≈ 50 Sonden</td></tr>
+<tr><td>„Die Form eines Tries hängt von der Einfügereihenfolge ab“</td><td>nein (beim BST und DST schon)</td></tr>
+<tr><td>„Ein B-Baum mit t = 2 ist ein 2-3-4-Baum“</td><td>ja</td></tr>
+<tr><td>„Die Rotation ändert die Inorder“</td><td>nein</td></tr>
+</table>
+</div>
+</div>
+</div>
+<!--/SPICK-->
 
 <div class="foot">Lernbegleiter Teil 4 · nach R. Sedgewick, <i>Algorithms in C++, Parts 1–4</i> (3. Aufl.), Kap. 12–16 · Programmcode wie im Buch (Header modernisiert, einzelne Zeilen zur Schrittanzeige umbrochen, Abweichungen im Text begründet) · AVL-Teil nach Vorlesungsskript und Übungsblättern, an den Musterlösungen geprüft · Bildatlas-Stil</div>
 </div><!-- /wrap -->
@@ -7543,7 +7765,7 @@ document.addEventListener('DOMContentLoaded', () => {if(LB.labCh12) LB.Lab({id:'
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 4 steht"], ["master", "Master-Anatomie", "Start + Test + nächster Kandidat"], ["erkennen", "Woran erkennbar?", "Such-Kino: 4 Verfahren"]]], ["Kapitel 12 · Symboltabellen & BST", [["s121", "12.1 ST-ADT", "insert, search, Tab. 12.1"], ["s122", "12.2 Key-indexed", "Schlüssel = Index, O(1)"], ["s123", "12.3 Sequentiell", "N/2 Treffer, N Fehlschlag"], ["s124", "12.4 Binäre Suche", "⌊lg N⌋ + 1"], ["s125", "12.5 BST", "links kleiner, rechts größer"], ["s126", "12.6 BST-Leistung", "2 ln N, worst N"], ["s127", "12.7 Index", "Text-Index mit Suffixen"], ["s128", "12.8 Wurzel-Einfügen", "Rotationen rotR, rotL"], ["s129", "12.9 select/remove", "Rang, Nachfolger, join"], ["lab12", "🧪 Labor Kap. 12", "alles in einem interaktiven Bild"]]], ["Kapitel 13 · Balancierte Bäume", [["s131", "13.1 Randomisiert", "Wurzel mit W. 1/(N+1)"], ["s132", "13.2 Splay", "zig-zig, amortisiert"], ["s133", "13.3 2-3-4-Baum", "top-down splitten"], ["s134", "13.4 Rot-Schwarz", "rote Links, &lt; 2 lg N"], ["savl", "★ AVL (Vorlesung)", "BF, LL/RR/LR/RL, Löschen"], ["s135", "13.5 Skip-Liste", "Ebenen mit W. 1/2ʲ"], ["s136", "13.6 Vergleich", "Messung aller Bäume"], ["lab13", "🧪 Labor Kap. 13", "alles in einem interaktiven Bild"]]], ["Kapitel 14 · Hashing", [["s141", "14.1 Hashfunktion", "mod M, Horner, universell"], ["s142", "14.2 Verkettung", "Listen, N/M"], ["s143", "14.3 Linear", "Cluster, ½(1+1/(1−α)²)"], ["s144", "14.4 Doppel-Hashing", "zweite Schrittweite"], ["s145", "14.5 Dynamisch", "verdoppeln, amortisiert"], ["s146", "14.6 Perspektive", "Hashing vs. Bäume"], ["lab14", "🧪 Labor Kap. 14", "alles in einem interaktiven Bild"]]], ["Kapitel 15 · Radix-Suche", [["s151", "15.1 DST", "Bits lenken, lg N"], ["s152", "15.2 Trie", "Blätter tragen Schlüssel"], ["s153", "15.3 Patricia", "nur trennende Bits"], ["s154", "15.4 TST", "3-Wege-Trie für Strings"], ["s155", "15.5 Text-Index", "Suffixe in TST/Array"], ["lab15", "🧪 Labor Kap. 15", "alles in einem interaktiven Bild"]]], ["Kapitel 16 · Extern", [["s161", "16.1 Spielregeln", "Seiten, Sonden"], ["s162", "16.2 Index-sequentiell", "M-äres Index-Array"], ["s163", "16.3 B-Baum", "Split, log_M N"], ["s164", "16.4 Erweiterbar", "Verzeichnis 2ᵈ"], ["s165", "16.5 Perspektive", "alles im Vergleich"], ["lab16", "🧪 Labor Kap. 16", "alles in einem interaktiven Bild"]]], ["Übungsblätter gelöst", [["bl-avlins", "AVL einfügen", "17 Aufgaben, alle Rotationsfälle"], ["bl-avldel", "AVL löschen", "21 Aufgaben, Nachfolger/Vorgänger"], ["bl-avlgen", "AVL löschen (2)", "21 Aufgaben, generiertes Blatt"], ["gp-p4-avl", "Klausur: AVL", "Gedächtnisprotokoll A2"], ["gp-p4-trie", "Klausur: Tries", "Gedächtnisprotokoll A1 a–c"], ["gp-p4-hash", "Klausur: Hashtabelle", "Gedächtnisprotokoll A1 e"], ["gp-p4-worst", "Klausur: Worst Case", "Gedächtnisprotokoll A3"]]], ["Training", [["schema", "📐 Schema", "3 Such-Beispiele"], ["werkbank", "🛠 Werkbank", "AVL-, BST-, Hash-, B-Baum-Blätter"], ["pruefung", "🎯 Prüfungstabelle", "Worst Case aller Strukturen"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "alle 4 Teile"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 4 steht"], ["master", "Master-Anatomie", "Start + Test + nächster Kandidat"], ["erkennen", "Woran erkennbar?", "Such-Kino: 4 Verfahren"]]], ["Kapitel 12 · Symboltabellen & BST", [["s121", "12.1 ST-ADT", "insert, search, Tab. 12.1"], ["s122", "12.2 Key-indexed", "Schlüssel = Index, O(1)"], ["s123", "12.3 Sequentiell", "N/2 Treffer, N Fehlschlag"], ["s124", "12.4 Binäre Suche", "⌊lg N⌋ + 1"], ["s125", "12.5 BST", "links kleiner, rechts größer"], ["s126", "12.6 BST-Leistung", "2 ln N, worst N"], ["s127", "12.7 Index", "Text-Index mit Suffixen"], ["s128", "12.8 Wurzel-Einfügen", "Rotationen rotR, rotL"], ["s129", "12.9 select/remove", "Rang, Nachfolger, join"], ["lab12", "🧪 Labor Kap. 12", "alles in einem interaktiven Bild"]]], ["Kapitel 13 · Balancierte Bäume", [["s131", "13.1 Randomisiert", "Wurzel mit W. 1/(N+1)"], ["s132", "13.2 Splay", "zig-zig, amortisiert"], ["s133", "13.3 2-3-4-Baum", "top-down splitten"], ["s134", "13.4 Rot-Schwarz", "rote Links, &lt; 2 lg N"], ["savl", "★ AVL (Vorlesung)", "BF, LL/RR/LR/RL, Löschen"], ["s135", "13.5 Skip-Liste", "Ebenen mit W. 1/2ʲ"], ["s136", "13.6 Vergleich", "Messung aller Bäume"], ["lab13", "🧪 Labor Kap. 13", "alles in einem interaktiven Bild"]]], ["Kapitel 14 · Hashing", [["s141", "14.1 Hashfunktion", "mod M, Horner, universell"], ["s142", "14.2 Verkettung", "Listen, N/M"], ["s143", "14.3 Linear", "Cluster, ½(1+1/(1−α)²)"], ["s144", "14.4 Doppel-Hashing", "zweite Schrittweite"], ["s145", "14.5 Dynamisch", "verdoppeln, amortisiert"], ["s146", "14.6 Perspektive", "Hashing vs. Bäume"], ["lab14", "🧪 Labor Kap. 14", "alles in einem interaktiven Bild"]]], ["Kapitel 15 · Radix-Suche", [["s151", "15.1 DST", "Bits lenken, lg N"], ["s152", "15.2 Trie", "Blätter tragen Schlüssel"], ["s153", "15.3 Patricia", "nur trennende Bits"], ["s154", "15.4 TST", "3-Wege-Trie für Strings"], ["s155", "15.5 Text-Index", "Suffixe in TST/Array"], ["lab15", "🧪 Labor Kap. 15", "alles in einem interaktiven Bild"]]], ["Kapitel 16 · Extern", [["s161", "16.1 Spielregeln", "Seiten, Sonden"], ["s162", "16.2 Index-sequentiell", "M-äres Index-Array"], ["s163", "16.3 B-Baum", "Split, log_M N"], ["s164", "16.4 Erweiterbar", "Verzeichnis 2ᵈ"], ["s165", "16.5 Perspektive", "alles im Vergleich"], ["lab16", "🧪 Labor Kap. 16", "alles in einem interaktiven Bild"]]], ["Übungsblätter gelöst", [["bl-avlins", "AVL einfügen", "17 Aufgaben, alle Rotationsfälle"], ["bl-avldel", "AVL löschen", "21 Aufgaben, Nachfolger/Vorgänger"], ["bl-avlgen", "AVL löschen (2)", "21 Aufgaben, generiertes Blatt"], ["gp-p4-avl", "Klausur: AVL", "Gedächtnisprotokoll A2"], ["gp-p4-trie", "Klausur: Tries", "Gedächtnisprotokoll A1 a–c"], ["gp-p4-hash", "Klausur: Hashtabelle", "Gedächtnisprotokoll A1 e"], ["gp-p4-worst", "Klausur: Worst Case", "Gedächtnisprotokoll A3"]]], ["Training", [["schema", "📐 Schema", "3 Such-Beispiele"], ["werkbank", "🛠 Werkbank", "AVL-, BST-, Hash-, B-Baum-Blätter"], ["pruefung", "🎯 Prüfungstabelle", "Worst Case aller Strukturen"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "alle 4 Teile"], ["spick", "🧾 Spickzettel", "alles für die Klausur Teil 4"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Treffer", "Fehlschlag", "Fehlschläge", "search hit", "search miss", "gefunden", "Suchkosten", "Sonde*", "Sondierung*", "Wurzel", "Hashwert*", "symmetrische* Nachfolger*", "Nachfolger", "Rang"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "Rotation*", "rotieren", "rotiert", "Rechtsrotation*", "Linksrotation*", "Doppelrotation*", "Einfache Rotation", "Split", "Splits", "splitten", "gesplittet", "aufteilen", "aufgeteilt", "Umfärben", "umgefärbt", "umfärben", "Verdopplung", "verdoppeln", "verdoppelt", "löschen", "gelöscht", "Löschen", "Rebalancierung", "rebalancieren", "hochrotieren", "hochrotiert"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "BST", "BSTs", "Suchbaum", "Suchbäume", "Symboltabelle*", "Binärbaum*", "AVL-Baum", "AVL-Bäume", "AVL-Eigenschaft", "AVL-Kriterium", "Balancefaktor*", "balanciert*", "Rot-Schwarz-Baum", "Rot-Schwarz-Bäume", "2-3-4-Baum", "2-3-4-Bäume", "B-Baum", "B-Bäume", "Trie", "Tries", "Patricia", "TST", "TSTs", "Skip-Liste*", "Splay-Baum", "Splay-Bäume", "Hashing", "Hashfunktion*", "Kollision*", "Cluster*", "Primärcluster", "Belegungsfaktor", "Lastfaktor", "amortisiert*", "randomisiert*", "Inorder", "Präfix", "Suffix*", "Höhe", "Blatt", "Blätter", "Seite*", "Verzeichnis", "Heap-Ordnung"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M", "Schlüssel", "Suchschlüssel", "Tabellengröße"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife", "Tiefe", "Bitposition", "Ebene*"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Bittest*", "Bit", "Bits", "leerer Link", "leere Link*", "Nullzeiger", "Gleichheit"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger", "Tabelle*", "Links", "Teilbaum", "Teilbäume", "Kind", "Kinder", "Elternknoten", "Verkettung", "Kopf", "head", "Wurzelseite"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
@@ -7589,6 +7811,11 @@ function patch(){
 }
 window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
+</script>
+<script>
+/* ===== SPICK: nur den Spickzettel drucken ===== */
+(function(){ const b = document.getElementById('spPrint'); if(!b) return;
+  b.addEventListener('click', () => { document.body.classList.add('print-spick'); window.print(); setTimeout(() => document.body.classList.remove('print-spick'), 500); }); })();
 </script>
 </body>
 </html>

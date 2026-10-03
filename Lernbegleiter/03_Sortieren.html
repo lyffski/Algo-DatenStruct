@@ -433,6 +433,29 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .lab-cmp table.rt tr.on td:first-child{box-shadow:inset 3px 0 0 var(--purple)}
 .lab-code .row.cur .lnum{color:var(--orange);font-weight:800}
 </style>
+<style>
+/* ===== SPICK: Spickzettel-Raster + Druck ===== */
+.spick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,640px),1fr));gap:14px;align-items:start;margin-top:.8rem}
+.spick .sp{border:1px solid var(--border);border-top:3px solid var(--pink);border-radius:12px;background:var(--card);padding:12px 16px;min-width:0;overflow-x:auto}
+.spick .sp h4{margin:0 0 .5rem;font-size:1.02rem;display:flex;align-items:center;gap:.5rem}
+.spick .spn{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;background:var(--pink);color:#0d1117;font-weight:800;font-size:.85rem}
+.spick p{margin:.35rem 0;line-height:1.5}
+.spick table.rt{font-size:.82rem;margin:.4rem 0}
+.spick table.rt td.mono{font-size:.76rem;line-height:1.45;font-family:'JetBrains Mono',monospace}
+.spick .step{padding:4px 10px;margin:6px 0}
+.spick pre.cpp{font-size:.76rem}
+.spick .num{width:auto;min-width:1.6em;padding:0 .35em;border-radius:9px}
+.spick .katex-display>.katex{font-size:.92em}
+.sppr{font:inherit;font-size:.85rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--pink);border-radius:8px;padding:.2rem .7rem;margin-left:.4rem}
+@media print{
+  body.print-spick *{visibility:hidden}
+  body.print-spick #spickfig, body.print-spick #spickfig *{visibility:visible}
+  body.print-spick #spickfig{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
+  body.print-spick .sppr, body.print-spick #spickfig > p{display:none!important}
+  body.print-spick .spick{grid-template-columns:1fr 1fr}
+  body.print-spick .sp{break-inside:avoid}
+}
+</style>
 </head>
 <body>
 
@@ -3100,6 +3123,223 @@ for (k = N/2; k &gt;= 1; k--)
 <div class="excard"><span class="lb r">Für die Übungsblätter</span>Quicksort-, Mergesort-, Heapsort-, Heap-Erkennung- und Heap-Konstruktion-Blätter lassen sich mit den Vorlesungs-Tracern und der Werkbank Schritt für Schritt nachrechnen. AVL-Blätter folgen mit Teil 4.</div>
 </div>
 </div>
+
+<!--SPICK-->
+<!-- ═════════════════════════════════════ SPICKZETTEL ═════════════════════════════════════ -->
+<div class="blatt" id="spick"><div class="kop"><span class="bn" style="color:var(--pink);border-color:rgba(247,120,186,.4);background:rgba(247,120,186,.1)">🧾 Spickzettel</span><h2>Spickzettel Teil 3: alles für die Klausur auf einen Blick</h2><span class="tp">Kap. 6–11 · alle Sortierverfahren, Übungsblatt-Rezepte, Formeln, Schranken</span></div></div>
+<div class="figure" id="spickfig">
+<p>14 Kästen, jeder <b>von null</b> lesbar: erst die Begriffe, dann das Rezept, dann die Formeln. Erkenne zuerst den <b>Aufgabentyp</b> (Kasten 0), dann gehst du direkt zum passenden Kasten.<button class="sppr" id="spPrint">🖨 nur den Spickzettel drucken</button></p>
+<div class="spick">
+<div class="sp" id="sp3-0">
+<h4><span class="spn">0</span>Aufgabentyp erkennen → Kasten</h4>
+<table class="rt">
+<tr><th>Die Aufgabe sagt …</th><th>Kasten</th></tr>
+<tr><td>„stabil? in-place? adaptiv? Welches Verfahren wann?“</td><td>1</td></tr>
+<tr><td>„Zustand nach jedem Durchlauf“ (Selection, Insertion, Bubble, Shell)</td><td>2, 3</td></tr>
+<tr><td>„Erste Partition / Anzahl Vergleiche bei Quicksort“</td><td>4</td></tr>
+<tr><td>„Laufzeit Quicksort, schlechtester Fall, Median-of-3, Duplikate“</td><td>5</td></tr>
+<tr><td>„Zustand nach dem ersten/letzten Merge, Anzahl Merges“</td><td>6</td></tr>
+<tr><td>„Untere Schranke für vergleichsbasiertes Sortieren“</td><td>7</td></tr>
+<tr><td>„Ist das ein Heap?“, „Heap aufbauen (bottom-up / sift-up)“</td><td>8</td></tr>
+<tr><td>„Anfangsheap, Zwischenheaps, Anzahl Vertauschungen bei Heapsort“</td><td>9</td></tr>
+<tr><td>„PQ: Kosten von insert/getmax“, „Axiome der PQ“</td><td>10</td></tr>
+<tr><td>„Radixsort / Key-Indexed Counting von Hand“</td><td>11</td></tr>
+<tr><td>„Sortiernetz, externes Sortieren, Läufe, Durchläufe“</td><td>12</td></tr>
+<tr><td>Quiz: „eine, mehrere oder keine richtig“</td><td>13</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp3-1">
+<h4><span class="spn">1</span>Begriffe und alle Verfahren auf einen Blick</h4>
+<p><span class="fw">stabil</span>: gleiche Schlüssel behalten ihre Reihenfolge. <span class="fw">in-place</span>: nur O(1) (bzw. O(log N) Stack) Zusatzspeicher. <span class="fw">adaptiv</span>: schneller bei fast sortierter Eingabe. <span class="fw">Inversion</span>: Paar i &lt; j mit a[i] &gt; a[j]; höchstens N(N−1)/2.</p>
+<table class="rt">
+<tr><th>Verfahren</th><th>Vergleiche Mittel</th><th>schlechtester Fall</th><th>stabil</th><th>in-place</th></tr>
+<tr><td>Selection</td><td>\(N^2/2\)</td><td>\(N^2/2\), nur \(N-1\) Tausche</td><td>nein</td><td>ja</td></tr>
+<tr><td>Insertion</td><td>\(N^2/4\)</td><td>\(N^2/2\); sortiert: \(N-1\)</td><td>ja</td><td>ja</td></tr>
+<tr><td>Bubble</td><td>\(N^2/2\)</td><td>\(N^2/2\), Tausche = Inversionen</td><td>ja</td><td>ja</td></tr>
+<tr><td>Shellsort (3h+1)</td><td>≈ \(N^{1{,}25}\)</td><td>\(O(N^{3/2})\)</td><td>nein</td><td>ja</td></tr>
+<tr><td>Quicksort</td><td>\(2N\ln N \approx 1{,}39 N\lg N\)</td><td>\(N^2/2\)</td><td>nein</td><td>ja (Stack)</td></tr>
+<tr><td>Mergesort</td><td>\(\approx N\lg N\)</td><td>\(N\lg N\)</td><td>ja</td><td>nein (N)</td></tr>
+<tr><td>Heapsort</td><td>\(\approx 2N\lg N\)</td><td>\(\lt 2N\lg N\)</td><td>nein</td><td>ja</td></tr>
+<tr><td>Key-Indexed / LSD</td><td>\(N + R\) bzw. \(W(N+R)\)</td><td>gleich</td><td>ja</td><td>nein</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp3-2">
+<h4><span class="spn">2</span>Elementare Verfahren: Kerncode und Rezept (Kap. 6)</h4>
+<pre class="cpp" data-roles='{"a":"mem","i":"idx","j":"idx","min":"res"}'>for (i = l; i &lt; r; i++)                    // Selection
+  { int min = i;
+    for (j = i+1; j &lt;= r; j++) if (a[j] &lt; a[min]) min = j;
+    exch(a[i], a[min]); }
+for (i = l+1; i &lt;= r; i++)                  // Insertion
+  for (j = i; j &gt; l &amp;&amp; a[j] &lt; a[j-1]; j--) exch(a[j-1], a[j]);
+for (i = l; i &lt; r; i++)                     // Bubble
+  for (j = r; j &gt; i; j--) compexch(a[j-1], a[j]);</pre>
+<p><span class="num">S</span>Nach Durchlauf i stehen die i+1 kleinsten <b>endgültig</b> vorne. <span class="num">I</span>Nach Durchlauf i ist a[l..i] sortiert, aber noch nicht endgültig. <span class="num">B</span>Das Kleinste „blubbert“ von rechts nach vorne.</p>
+<p class="small"><b>Insertion = Inversionen:</b> jede Verschiebung baut genau eine Inversion ab, also Bewegungen = Inversionen der Eingabe.</p>
+</div>
+
+<div class="sp" id="sp3-3">
+<h4><span class="spn">3</span>Shellsort und Key-Indexed Counting (§6.6, §6.10)</h4>
+<pre class="cpp" data-roles='{"h":"par","a":"mem"}'>for (h = 1; h &lt;= (r-l)/9; h = 3*h+1) ;      // 1, 4, 13, 40, …
+for ( ; h &gt; 0; h /= 3)
+  for (i = l+h; i &lt;= r; i++)                // h-sortieren = Insertion mit Abstand h
+    { int j = i; Item v = a[i];
+      while (j &gt;= l+h &amp;&amp; v &lt; a[j-h]) { a[j] = a[j-h]; j -= h; }
+      a[j] = v; }</pre>
+<p><b>Von Hand:</b> Für jedes h die Teilfolgen a[k], a[k+h], a[k+2h] … einzeln sortieren. Der letzte Durchlauf (h = 1) ist ein normaler Insertion Sort auf fast sortierter Datei.</p>
+<p><b>Key-Indexed Counting</b> (Schlüssel 0 … M−1): zählen → Präfixsummen (Startpositionen) → stabil in aux verteilen → zurückkopieren. Kosten \(N + M\), <b>stabil</b>.</p>
+</div>
+
+<div class="sp" id="sp3-4">
+<h4><span class="spn">4</span>Quicksort von Hand (Vorlesung, Pivot = erstes Element)</h4>
+<pre class="cpp" data-roles='{"p":"res","i":"idx","j":"idx","l":"par","r":"par"}'>int p = a[l], i = l+1, j = r;
+for (;;)
+  { while (i &lt;= r &amp;&amp; a[i] &lt;= p) i++;      // je Test 1 Vergleich
+    while (j &gt; l &amp;&amp; a[j] &gt; p) j--;          // je Test 1 Vergleich
+    if (i &gt;= j) break;
+    exch(a[i], a[j]); i++; j--; }
+exch(a[l], a[j]);                           // Pivot an seinen Endplatz j</pre>
+<p><b>Rezept:</b> <span class="c-idx">i</span> läuft von links über alles ≤ p, <span class="c-idx">j</span> von rechts über alles &gt; p. Beide stehen: tauschen und weiter. Gekreuzt: Pivot mit a[j] tauschen. Dann links [l..j−1] und rechts [j+1..r] rekursiv.</p>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel} &: [12, 3, 56, 18, 32, 19, 1, 21] && \text{Übungsblatt A1} \\
+\text{1. Partition} &: \Res{[1, 3, 12, 18, 32, 19, 56, 21]} && \text{12 an Position 2} \\
+\text{Vergleiche gesamt} &= \Res{23} && \text{jeden Test zählen, auch den letzten}
+\end{aligned} \]</div>
+<p class="small"><b>Buch</b> (Prog. 7.2) nimmt dagegen a[r] als Pivot und zählt anders. In der Klausur gilt die Konvention der Aufgabe.</p>
+</div>
+
+<div class="sp" id="sp3-5">
+<h4><span class="spn">5</span>Quicksort: Analyse und Verbesserungen (Kap. 7)</h4>
+<div class="step">\[ \begin{aligned}
+C_N &= N + 1 + \tfrac{1}{N}\textstyle\sum_{k=1}^{N}(C_{k-1} + C_{N-k}) && \text{Eig. 7.2} \\
+\bar C_N &\approx \Res{2N\ln N \approx 1{,}39\,N\lg N} && \text{zufällige Eingabe} \\
+C_{\text{worst}} &\approx \Res{N^2/2} && \text{sortiert, Pivot am Rand (Eig. 7.1)} \\
+\text{Stack} &\le \lg N && \text{kleineren Teil zuerst (Eig. 7.3)} \\
+\text{Selektion} &\approx 2N \ldots 3{,}39N && \text{k-kleinstes, linear (Eig. 7.4)}
+\end{aligned} \]</div>
+<table class="rt">
+<tr><th>Verbesserung</th><th>Wirkung</th></tr>
+<tr><td>Median-of-3</td><td>kein Quadratfall bei sortierter Eingabe, ≈ 1,19 N lg N</td></tr>
+<tr><td>Cutoff M (kleine Teile mit Insertion)</td><td>spart viele Aufrufe, ≈ 20 % schneller</td></tr>
+<tr><td>3-Wege-Partition</td><td>viele gleiche Schlüssel: \(O(N\log D)\), D = verschiedene Werte</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp3-6">
+<h4><span class="spn">6</span>Mergesort von Hand (Kap. 8, Vorlesung)</h4>
+<pre class="cpp" data-roles='{"b":"mem","i":"idx","j":"idx","m":"par"}'>void mergesort(int a[], int l, int r)
+  { if (l &gt;= r) return;
+    int m = (l+r)/2;                        // m = ⌊(l+r)/2⌋
+    mergesort(a, l, m); mergesort(a, m+1, r);
+    merge(a, l, m, r); }                    // b[k++] = (a[i] &lt;= a[j]) ? a[i++] : a[j++]</pre>
+<p><b>Rezept:</b> erst die <b>linke</b> Hälfte ganz fertig, dann die rechte, dann mischen. Der erste Merge betrifft die zwei Elemente ganz links (a[0], a[1]). Bei Gleichheit links nehmen (≤): stabil.</p>
+<div class="step">\[ \begin{aligned}
+\#\text{Merges} &= \Res{N - 1} && \text{innere Knoten des Teile-Baums} \\
+\text{Vergleiche je Merge} &\in [\min(n_1, n_2),\ n_1 + n_2 - 1] && \text{bis eine Hälfte leer ist} \\
+C_N &\le N\lceil\lg N\rceil - 2^{\lceil\lg N\rceil} + 1 && \text{schlechtester Fall} \\
+\text{Speicher} &: N && \text{Hilfsfeld b}
+\end{aligned} \]</div>
+<p class="small"><b>Bottom-up</b> (Prog. 8.5): Läufe der Länge 1, 2, 4 … nebeneinander mischen; ebenfalls N − 1 Merges, keine Rekursion.</p>
+</div>
+
+<div class="sp" id="sp3-7">
+<h4><span class="spn">7</span>Untere Schranke (§8.6)</h4>
+<p>Jedes Verfahren, das nur durch <b>Vergleiche</b> sortiert, ist ein Entscheidungsbaum. Er braucht mindestens N! Blätter (eins je Permutation), also Höhe ≥ lg N!.</p>
+<div class="step">\[ \begin{aligned}
+C_{\text{worst}} &\ge \lceil\lg N!\rceil && \text{Eig. 8.3} \\
+\lg N! &\approx N\lg N - 1{,}44\,N && \text{Stirling} \\
+\text{Beispiel } N = 8 &: \lceil\lg 40320\rceil = \Res{16} && \text{keiner schafft 8 Zahlen garantiert mit 15}
+\end{aligned} \]</div>
+<p class="small">Mergesort ist damit asymptotisch optimal. Radixsort umgeht die Schranke, weil er Ziffern ansieht statt zu vergleichen.</p>
+</div>
+
+<div class="sp" id="sp3-8">
+<h4><span class="spn">8</span>Heaps: Definition, Erkennung, Aufbau (§9.2–9.4)</h4>
+<table class="rt">
+<tr><th></th><th>0-basiert (Vorlesung)</th><th>1-basiert (Buch)</th></tr>
+<tr><td>Kinder von i</td><td>2i+1, 2i+2</td><td>2i, 2i+1</td></tr>
+<tr><td>Eltern von i</td><td>⌊(i−1)/2⌋</td><td>⌊i/2⌋</td></tr>
+<tr><td>letzter Elternknoten</td><td>⌊n/2⌋ − 1</td><td>⌊n/2⌋</td></tr>
+</table>
+<p><span class="num">E</span><b>Heap erkennen</b> (Max-Heap): jeden Elternknoten mit seinen Kindern vergleichen; <b>ein</b> Kind größer ⇒ kein Heap. Absteigend sortiert ⇒ immer Max-Heap.</p>
+<p><span class="num">B</span><b>Bottom-up:</b> siftdown für i = letzter Elternknoten … 0. Höchstens 2N Vergleiche (linear).</p>
+<p><span class="num">U</span><b>Sift-up:</b> nacheinander einfügen, jedes neue Element steigt, solange es größer als sein Elternknoten ist. Bis N lg N; liefert oft einen <b>anderen</b> Heap als bottom-up.</p>
+</div>
+
+<div class="sp" id="sp3-9">
+<h4><span class="spn">9</span>Heapsort von Hand (Vorlesung, 0-basiert)</h4>
+<pre class="cpp" data-roles='{"a":"mem","i":"idx","c":"idx","n":"par"}'>void siftdown(int a[], int i, int n)
+  { while (2*i+1 &lt; n)
+      { int c = 2*i+1;
+        if (c+1 &lt; n &amp;&amp; a[c+1] &gt; a[c]) c++;   // größeres Kind
+        if (a[i] &gt;= a[c]) break;
+        exch(a[i], a[c]); i = c; } }
+for (i = n/2; i &gt;= 0; i--) siftdown(a, i, n);           // Phase 1
+for (i = n-1; i &gt;= 1; i--) { exch(a[0], a[i]); siftdown(a, 0, i); }</pre>
+<p><b>Rezept:</b> Phase 1 liefert den Anfangsheap. Phase 2: Wurzel (Maximum) mit dem letzten Heap-Element tauschen, Heap um 1 kürzer, Wurzel versickern. Die Zwischenheaps Heap(n−1) … sind jeweils a[0..i−1].</p>
+<div class="step">\[ \begin{aligned}
+\text{Beispiel} &: [2, 1, 5, 3, 4, 8, 7, 6] && \text{Übungsblatt A2} \\
+\text{Anfangsheap} &: \Res{[8, 6, 7, 3, 4, 5, 2, 1]} && \text{} \\
+\text{Vertauschungen} &= \Res{22} && \text{inkl. } N - 1 = 7 \text{ Wurzeltausche}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp3-10">
+<h4><span class="spn">10</span>Prioritätswarteschlangen (§9.1, Tab. 9.1)</h4>
+<table class="rt">
+<tr><th>Implementierung</th><th>insert</th><th>getmax</th></tr>
+<tr><td>ungeordnetes Feld</td><td>1</td><td>N</td></tr>
+<tr><td>geordnetes Feld</td><td>N</td><td>1</td></tr>
+<tr><td>Heap</td><td>lg N (fixUp)</td><td>2 lg N (fixDown)</td></tr>
+<tr><td>Binomial-Queue</td><td>lg N (amortisiert 1)</td><td>lg N, join in lg N</td></tr>
+</table>
+<pre class="cpp" data-roles='{"pq":"mem","k":"idx","N":"par"}'>void insert(Item v) { pq[++N] = v; fixUp(pq, N); }
+Item getmax() { exch(pq[1], pq[N]); fixDown(pq, 1, N-1); return pq[N--]; }</pre>
+<p class="small"><b>Axiome (Klausur):</b> getmax(insert(leer, x)) = x; nach insert ist empty falsch; getmax liefert immer das größte noch enthaltene Element.</p>
+</div>
+
+<div class="sp" id="sp3-11">
+<h4><span class="spn">11</span>Radixsort (Kap. 10)</h4>
+<table class="rt">
+<tr><th>Verfahren</th><th>Idee</th><th>Kosten</th></tr>
+<tr><td>LSD</td><td>letzte Stelle zuerst, jede Stelle <b>stabil</b> (Key-Indexed)</td><td>\(W(N+R)\)</td></tr>
+<tr><td>MSD</td><td>erste Stelle, dann rekursiv je Fach</td><td>≈ \(N\log_R N\) Zeichen; R Zähler je Aufruf</td></tr>
+<tr><td>3-Wege-Radix-Quicksort</td><td>kleiner | gleich | größer beim Zeichen d</td><td>≈ \(2N\ln N\) Zeichenvergleiche</td></tr>
+<tr><td>binärer Quicksort</td><td>nach Bit d teilen: 0 vorne, 1 hinten</td><td>≈ \(N\lg N\) Bittests</td></tr>
+</table>
+<p><b>LSD von Hand:</b> Spalte für Spalte von rechts; innerhalb gleicher Ziffer die bisherige Reihenfolge <b>behalten</b>. Nach Durchlauf k ist nach den letzten k Stellen sortiert.</p>
+</div>
+
+<div class="sp" id="sp3-12">
+<h4><span class="spn">12</span>Sortiernetze und externes Sortieren (Kap. 11)</h4>
+<div class="step">\[ \begin{aligned}
+\text{0-1-Prinzip} &: \text{sortiert alle 0-1-Folgen} \Rightarrow \text{sortiert alles} && \text{Eig. 11.1} \\
+\text{Batcher} &: \approx \tfrac14 N\lg^2 N \text{ Komparatoren } (N = 8\!: 19) && \text{Eig. 11.3} \\
+\text{parallele Schritte} &: \tfrac12\lg N(\lg N + 1) && N = 8\!: 6 \\
+\text{Durchläufe extern} &= 1 + \lceil\log_P(N/M)\rceil && \text{P-Wege-Mischen (Eig. 11.4)} \\
+\text{Ersetzungsauswahl} &: \text{Läufe} \approx 2M && \text{statt M (Eig. 11.5)}
+\end{aligned} \]</div>
+<p class="small"><b>Extern:</b> Phase 1 erzeugt sortierte Läufe (Speicherladungen oder Ersetzungsauswahl), Phase 2 mischt sie P-Wege-weise. Gezählt werden Durchläufe über die Platte, nicht Vergleiche.</p>
+</div>
+
+<div class="sp" id="sp3-13">
+<h4><span class="spn">13</span>Quiz-Fallen Teil 3</h4>
+<table class="rt">
+<tr><th>Aussage</th><th>stimmt?</th></tr>
+<tr><td>„Quicksort ist im schlechtesten Fall O(N log N)“</td><td>nein: \(N^2/2\) (sortiert, Pivot am Rand)</td></tr>
+<tr><td>„Mergesort braucht keinen Zusatzspeicher“</td><td>nein: Hilfsfeld der Größe N</td></tr>
+<tr><td>„Heapsort ist stabil“</td><td>nein</td></tr>
+<tr><td>„Insertion Sort ist auf sortierter Eingabe linear“</td><td>ja: N − 1 Vergleiche</td></tr>
+<tr><td>„Selection Sort macht O(N²) Tausche“</td><td>nein: genau N − 1</td></tr>
+<tr><td>„Ein Heap ist sortiert“</td><td>nein: nur jeder Wurzel-Blatt-Weg</td></tr>
+<tr><td>„Kein Sortierverfahren ist schneller als N lg N“</td><td>nur für <b>vergleichsbasierte</b>, schlechtester Fall</td></tr>
+<tr><td>„LSD funktioniert mit jedem Verfahren pro Stelle“</td><td>nein: es muss stabil sein</td></tr>
+</table>
+</div>
+</div>
+</div>
+<!--/SPICK-->
 
 <div class="foot">Lernbegleiter Teil 3 · nach R. Sedgewick, <i>Algorithms in C++, Parts 1–4</i> (3. Aufl.), Kap. 6–11 · Programmcode wie im Buch (Header modernisiert, einzelne Zeilen zur Schrittanzeige umbrochen, Abweichungen im Text begründet) · Vorlesungs-Varianten an den Musterlösungen der Übungsblätter geprüft · Bildatlas-Stil · als Nächstes Teil 4: Suchen</div>
 </div><!-- /wrap -->
@@ -6657,7 +6897,7 @@ document.addEventListener('DOMContentLoaded', () => {if(LB.labCh6) LB.Lab({id:'l
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 3 steht"], ["master", "Master-Anatomie", "Invariante + Vergleich + Bewegung"], ["erkennen", "Woran erkennbar?", "Sortier-Kino"]]], ["Kapitel 6 · Elementar", [["s61", "6.1 Spielregeln", "stabil, in-place, Prog 6.1"], ["s62", "6.2 Selection", "Minimum nach vorne, N²/2"], ["s63", "6.3 Insertion", "einfügen, N²/4, Inversionen"], ["s64", "6.4 Bubble", "Nachbarn tauschen, N²/2"], ["s65", "6.5 Vergleich", "Tab. 6.1, Stabilität"], ["s66", "6.6 Shellsort", "h-sortieren, N^1,5"], ["s68", "6.7–6.8 Index-Sort", "Zeiger tauschen, in-situ"], ["s69", "6.9 Listen", "Selection auf Liste"], ["s610", "6.10 Zählen", "Key-Indexed Counting, linear"], ["lab6", "🧪 Labor Kap. 6", "alles in einem interaktiven Bild"]]], ["Kapitel 7 · Quicksort", [["s71", "7.1 Quicksort", "partition um a[r]"], ["s72", "7.2 Analyse", "2N ln N, worst N²/2"], ["s73", "7.3 Stack", "kleiner Teil zuerst, lg N"], ["s74", "7.4–7.5 Verbesserungen", "Cutoff, Median-of-3"], ["s76", "7.6 Duplikate", "3-Wege-Partition"], ["s78", "7.8 Selektion", "k-kleinstes, linear"], ["lab7", "🧪 Labor Kap. 7", "alles in einem interaktiven Bild"]]], ["Kapitel 8 · Mergesort", [["s81", "8.1–8.2 Mischen", "merge, bitonisch"], ["s83", "8.3 Top-down", "N lg N, N−1 Merges"], ["s85", "8.5 Bottom-up", "Blöcke 1, 2, 4 …"], ["s86", "8.6 Analyse", "exakt, untere Schranke"], ["s87", "8.7 Listen", "Links mischen"], ["lab8", "🧪 Labor Kap. 8", "alles in einem interaktiven Bild"]]], ["Kapitel 9 · Heaps", [["s91", "9.1 PQ-ADT", "insert, getmax, Tab. 9.1"], ["s92", "9.2 Heap", "Baum im Array, 2k, 2k+1"], ["s93", "9.3 fixUp/fixDown", "lg N reparieren"], ["s94", "9.4 Heapsort", "bauen < 2N, < 2N lg N"], ["s96", "9.5–9.7 Erweiterungen", "Index-PQ, Binomial"], ["lab9", "🧪 Labor Kap. 9", "alles in einem interaktiven Bild"]]], ["Kapitel 10 · Radix", [["s101", "10.1 Bits", "digit(A, B), Radix R"], ["s102", "10.2 Binär-Quick", "nach Bits teilen"], ["s103", "10.3 MSD", "Fächer, rekursiv"], ["s104", "10.4 3-Wege-Radix", "Zeichen-Quicksort"], ["s105", "10.5 LSD", "hinten zuerst, stabil"], ["s106", "10.6 Analyse", "linear vs. N lg N"], ["lab10", "🧪 Labor Kap. 10", "alles in einem interaktiven Bild"]]], ["Kapitel 11 · Spezial", [["s111", "11.1 Batcher", "0-1-Prinzip, Odd-Even"], ["s112", "11.2 Netzwerke", "Komparatoren, parallel"], ["s113", "11.3–11.5 Extern", "Runs, P-Wege-Mischen"], ["lab11", "🧪 Labor Kap. 11", "alles in einem interaktiven Bild"]]], ["Übungsblätter gelöst", [["bl-quick", "Quicksort", "6 Aufgaben, Pivot erstes Element"], ["bl-merge", "Mergesort", "6 Aufgaben, N−1 Merges"], ["bl-heaperk", "Heap-Erkennung", "12 Aufgaben Multiple Choice"], ["bl-heapkon", "Heap-Konstruktion", "16 Aufgaben bottom-up / sift-up"], ["bl-heapsort", "Heapsort", "6 Aufgaben, Zwischenheaps"], ["gp-p3-pq", "Klausur: PQ-Axiome", "Gedächtnisprotokoll A4"], ["gp-p3-isect", "Klausur: Schnittmenge C++", "Gedächtnisprotokoll A6"], ["gp-p3-lb", "Klausur: untere Schranke", "Gedächtnisprotokoll A5"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele"], ["werkbank", "🛠 Werkbank", "Übungsblätter lösen"], ["pruefung", "🎯 Prüfungstabelle", "alle Verfahren"], ["quiz", "Quiz", "33 Fragen"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 4"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 3 steht"], ["master", "Master-Anatomie", "Invariante + Vergleich + Bewegung"], ["erkennen", "Woran erkennbar?", "Sortier-Kino"]]], ["Kapitel 6 · Elementar", [["s61", "6.1 Spielregeln", "stabil, in-place, Prog 6.1"], ["s62", "6.2 Selection", "Minimum nach vorne, N²/2"], ["s63", "6.3 Insertion", "einfügen, N²/4, Inversionen"], ["s64", "6.4 Bubble", "Nachbarn tauschen, N²/2"], ["s65", "6.5 Vergleich", "Tab. 6.1, Stabilität"], ["s66", "6.6 Shellsort", "h-sortieren, N^1,5"], ["s68", "6.7–6.8 Index-Sort", "Zeiger tauschen, in-situ"], ["s69", "6.9 Listen", "Selection auf Liste"], ["s610", "6.10 Zählen", "Key-Indexed Counting, linear"], ["lab6", "🧪 Labor Kap. 6", "alles in einem interaktiven Bild"]]], ["Kapitel 7 · Quicksort", [["s71", "7.1 Quicksort", "partition um a[r]"], ["s72", "7.2 Analyse", "2N ln N, worst N²/2"], ["s73", "7.3 Stack", "kleiner Teil zuerst, lg N"], ["s74", "7.4–7.5 Verbesserungen", "Cutoff, Median-of-3"], ["s76", "7.6 Duplikate", "3-Wege-Partition"], ["s78", "7.8 Selektion", "k-kleinstes, linear"], ["lab7", "🧪 Labor Kap. 7", "alles in einem interaktiven Bild"]]], ["Kapitel 8 · Mergesort", [["s81", "8.1–8.2 Mischen", "merge, bitonisch"], ["s83", "8.3 Top-down", "N lg N, N−1 Merges"], ["s85", "8.5 Bottom-up", "Blöcke 1, 2, 4 …"], ["s86", "8.6 Analyse", "exakt, untere Schranke"], ["s87", "8.7 Listen", "Links mischen"], ["lab8", "🧪 Labor Kap. 8", "alles in einem interaktiven Bild"]]], ["Kapitel 9 · Heaps", [["s91", "9.1 PQ-ADT", "insert, getmax, Tab. 9.1"], ["s92", "9.2 Heap", "Baum im Array, 2k, 2k+1"], ["s93", "9.3 fixUp/fixDown", "lg N reparieren"], ["s94", "9.4 Heapsort", "bauen < 2N, < 2N lg N"], ["s96", "9.5–9.7 Erweiterungen", "Index-PQ, Binomial"], ["lab9", "🧪 Labor Kap. 9", "alles in einem interaktiven Bild"]]], ["Kapitel 10 · Radix", [["s101", "10.1 Bits", "digit(A, B), Radix R"], ["s102", "10.2 Binär-Quick", "nach Bits teilen"], ["s103", "10.3 MSD", "Fächer, rekursiv"], ["s104", "10.4 3-Wege-Radix", "Zeichen-Quicksort"], ["s105", "10.5 LSD", "hinten zuerst, stabil"], ["s106", "10.6 Analyse", "linear vs. N lg N"], ["lab10", "🧪 Labor Kap. 10", "alles in einem interaktiven Bild"]]], ["Kapitel 11 · Spezial", [["s111", "11.1 Batcher", "0-1-Prinzip, Odd-Even"], ["s112", "11.2 Netzwerke", "Komparatoren, parallel"], ["s113", "11.3–11.5 Extern", "Runs, P-Wege-Mischen"], ["lab11", "🧪 Labor Kap. 11", "alles in einem interaktiven Bild"]]], ["Übungsblätter gelöst", [["bl-quick", "Quicksort", "6 Aufgaben, Pivot erstes Element"], ["bl-merge", "Mergesort", "6 Aufgaben, N−1 Merges"], ["bl-heaperk", "Heap-Erkennung", "12 Aufgaben Multiple Choice"], ["bl-heapkon", "Heap-Konstruktion", "16 Aufgaben bottom-up / sift-up"], ["bl-heapsort", "Heapsort", "6 Aufgaben, Zwischenheaps"], ["gp-p3-pq", "Klausur: PQ-Axiome", "Gedächtnisprotokoll A4"], ["gp-p3-isect", "Klausur: Schnittmenge C++", "Gedächtnisprotokoll A6"], ["gp-p3-lb", "Klausur: untere Schranke", "Gedächtnisprotokoll A5"]]], ["Training", [["schema", "📐 Schema", "3 Beispiele"], ["werkbank", "🛠 Werkbank", "Übungsblätter lösen"], ["pruefung", "🎯 Prüfungstabelle", "alle Verfahren"], ["quiz", "Quiz", "33 Fragen"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 4"], ["spick", "🧾 Spickzettel", "alles für die Klausur Teil 3"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Pivot*", "Partitionselement", "gewinnt"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "Partitionieren", "partitionieren", "partitioniert", "Partition", "Mischen", "mischen", "gemischt", "versickern", "Versickern", "befördern", "Beförderung*", "Durchlauf", "Durchläufe", "verteilen", "verteilt"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "stabil", "instabil", "nicht stabil", "in-place", "adaptiv", "nicht-adaptiv", "nicht adaptiv", "Inversion*", "Wächter*", "Heap-Bedingung", "heap-geordnet", "Heap*", "Prioritätswarteschlange*", "bitonisch*", "h-sortiert", "Sortiernetz*", "Komparator*", "0-1-Prinzip", "Entscheidungsbaum*", "Run", "Runs", "Radix", "Ziffer*", "Fach", "Fächer", "Teile und Herrsche", "Teile-und-Herrsche-Baum"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife", "Zeiger", "Zeiger i", "Zeiger j"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Cutoff", "gekreuzt", "kreuzen"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "aux", "Band", "Bänder", "Puffer"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
@@ -6703,6 +6943,11 @@ function patch(){
 }
 window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
+</script>
+<script>
+/* ===== SPICK: nur den Spickzettel drucken ===== */
+(function(){ const b = document.getElementById('spPrint'); if(!b) return;
+  b.addEventListener('click', () => { document.body.classList.add('print-spick'); window.print(); setTimeout(() => document.body.classList.remove('print-spick'), 500); }); })();
 </script>
 </body>
 </html>

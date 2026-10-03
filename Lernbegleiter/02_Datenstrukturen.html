@@ -401,6 +401,29 @@ table.codet td.src{white-space:pre-wrap;word-break:break-word}
 .lab-cmp table.rt tr.on td:first-child{box-shadow:inset 3px 0 0 var(--purple)}
 .lab-code .row.cur .lnum{color:var(--orange);font-weight:800}
 </style>
+<style>
+/* ===== SPICK: Spickzettel-Raster + Druck ===== */
+.spick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,640px),1fr));gap:14px;align-items:start;margin-top:.8rem}
+.spick .sp{border:1px solid var(--border);border-top:3px solid var(--pink);border-radius:12px;background:var(--card);padding:12px 16px;min-width:0;overflow-x:auto}
+.spick .sp h4{margin:0 0 .5rem;font-size:1.02rem;display:flex;align-items:center;gap:.5rem}
+.spick .spn{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;background:var(--pink);color:#0d1117;font-weight:800;font-size:.85rem}
+.spick p{margin:.35rem 0;line-height:1.5}
+.spick table.rt{font-size:.82rem;margin:.4rem 0}
+.spick table.rt td.mono{font-size:.76rem;line-height:1.45;font-family:'JetBrains Mono',monospace}
+.spick .step{padding:4px 10px;margin:6px 0}
+.spick pre.cpp{font-size:.76rem}
+.spick .num{width:auto;min-width:1.6em;padding:0 .35em;border-radius:9px}
+.spick .katex-display>.katex{font-size:.92em}
+.sppr{font:inherit;font-size:.85rem;cursor:pointer;background:var(--card2);color:var(--text);border:1px solid var(--pink);border-radius:8px;padding:.2rem .7rem;margin-left:.4rem}
+@media print{
+  body.print-spick *{visibility:hidden}
+  body.print-spick #spickfig, body.print-spick #spickfig *{visibility:visible}
+  body.print-spick #spickfig{position:absolute;left:0;top:0;width:100%;border:0;background:#fff;color:#000}
+  body.print-spick .sppr, body.print-spick #spickfig > p{display:none!important}
+  body.print-spick .spick{grid-template-columns:1fr 1fr}
+  body.print-spick .sp{break-inside:avoid}
+}
+</style>
 </head>
 <body>
 
@@ -2098,6 +2121,210 @@ Hanoi <i>muss</i> exponentiell viele Züge ausgeben, die Ausgabe ist eben so gro
 <div class="excard"><span class="lb r">Für die Übungsblätter</span>Heap-, AVL-, Quick- und Mergesort-Blätter bauen auf §5.4–5.7 (Bäume, Höhe, Traversierung) und §5.2 (Divide &amp; Conquer) auf.</div>
 </div>
 </div>
+
+<!--SPICK-->
+<!-- ═════════════════════════════════════ SPICKZETTEL ═════════════════════════════════════ -->
+<div class="blatt" id="spick"><div class="kop"><span class="bn" style="color:var(--pink);border-color:rgba(247,120,186,.4);background:rgba(247,120,186,.1)">🧾 Spickzettel</span><h2>Spickzettel Teil 2: alles für die Klausur auf einen Blick</h2><span class="tp">Kap. 3–5 · Zeiger, Arrays, Listen, Strings, ADTs, Rekursion, Bäume, Graphen</span></div></div>
+<div class="figure" id="spickfig">
+<p>14 Kästen, jeder <b>von null</b> lesbar: erst die Begriffe, dann das Rezept, dann die Formeln. Erkenne zuerst den <b>Aufgabentyp</b> (Kasten 0), dann gehst du direkt zum passenden Kasten.<button class="sppr" id="spPrint">🖨 nur den Spickzettel drucken</button></p>
+<div class="spick">
+<div class="sp" id="sp2-0">
+<h4><span class="spn">0</span>Aufgabentyp erkennen → Kasten</h4>
+<table class="rt">
+<tr><th>Die Aufgabe sagt …</th><th>Kasten</th></tr>
+<tr><td>„Was steht nach dieser Zeile in p, *p, a[i]? Zeichne den Speicher“</td><td>1</td></tr>
+<tr><td>„Primzahlen mit dem Sieb“, „2D-Array / Matrix“</td><td>2</td></tr>
+<tr><td>„Knoten einfügen/löschen“, „Liste umkehren“, „Josephus“</td><td>3, 4</td></tr>
+<tr><td>„Warum ist diese Schleife quadratisch?“ (Strings)</td><td>5</td></tr>
+<tr><td>„Werte den Postfix-Ausdruck aus“, „Infix → Postfix“, „Stack-Inhalt nach …“</td><td>6</td></tr>
+<tr><td>„Queue als Ringpuffer: head, tail nach …“</td><td>7</td></tr>
+<tr><td>„Was passiert bei Kopie/Zuweisung?“, „Axiome des ADT“</td><td>8</td></tr>
+<tr><td>„Wie viele Aufrufe? Löse die Rekurrenz“, „Hanoi“, „Fibonacci“</td><td>9</td></tr>
+<tr><td>„Wie viele Knoten/Blätter/Kanten? Höhe? Pfadlänge?“</td><td>10</td></tr>
+<tr><td>„Gib Pre-/In-/Post-/Levelorder an“, „Baum aus Traversierungen“</td><td>11</td></tr>
+<tr><td>„DFS/BFS-Reihenfolge ab Knoten s“</td><td>12</td></tr>
+<tr><td>Quiz: „eine, mehrere oder keine richtig“</td><td>13</td></tr>
+</table>
+</div>
+
+<div class="sp" id="sp2-1">
+<h4><span class="spn">1</span>Zeiger und Speicherbild (§3.1)</h4>
+<table class="rt">
+<tr><th>Schreibweise</th><th>heißt</th><th>Beispiel</th></tr>
+<tr><td class="mono">&amp;x</td><td>Adresse von x</td><td class="mono">int *p = &amp;x;</td></tr>
+<tr><td class="mono">*p</td><td>Wert an der Adresse p</td><td class="mono">*p = 5;  // x ist jetzt 5</td></tr>
+<tr><td class="mono">p-&gt;next</td><td>Abkürzung für (*p).next</td><td class="mono">t = t-&gt;next;</td></tr>
+<tr><td class="mono">a[i]</td><td>dasselbe wie *(a+i)</td><td class="mono">a[3] == *(a+3)</td></tr>
+<tr><td class="mono">new / delete</td><td>Speicher holen / zurückgeben</td><td class="mono">link t = new node(x); … delete t;</td></tr>
+</table>
+<p><b>Rezept Speicherbild:</b> für jede Variable ein Kasten, für jeden Zeiger ein Pfeil. Zeile für Zeile: nur der Kasten links vom <code class="inl">=</code> ändert sich. Bei <code class="inl">p = q</code> zeigen danach <b>beide</b> auf dasselbe Objekt (keine Kopie).</p>
+<p class="small"><b>Falle:</b> Ein Zeiger nach <code class="inl">delete</code> zeigt ins Leere (dangling). Ein Knoten, auf den kein Zeiger mehr zeigt, ist ein Speicherleck.</p>
+</div>
+
+<div class="sp" id="sp2-2">
+<h4><span class="spn">2</span>Arrays: Index in O(1), Sieb des Eratosthenes (§3.2)</h4>
+<pre class="cpp" data-roles='{"a":"mem","i":"idx","j":"idx","N":"par"}'>for (i = 2; i &lt; N; i++) a[i] = 1;        // alle Kandidaten
+for (i = 2; i &lt; N; i++)
+  if (a[i])                                 // i ist Primzahl
+    for (j = i; i*j &lt; N; j++) a[i*j] = 0;   // Vielfache streichen</pre>
+<div class="step">\[ \begin{aligned}
+\text{Streichungen} &\approx N\Bigl(\tfrac12 + \tfrac13 + \tfrac15 + \dots\Bigr) \approx \Res{N \ln\ln N} && \text{nur Primzahlen } i \\
+\text{2D-Array} &: \Par{a[i][j]} \text{ in } O(1),\ \text{Speicher } \Mem{M \cdot N} && \text{Zeile } i \text{, Spalte } j
+\end{aligned} \]</div>
+<p class="small"><b>Von Hand:</b> Am Ende ist a[k] = 1 genau für die Primzahlen k. Eine Zahl wird mehrfach gestrichen (12 von 2 und von 3).</p>
+</div>
+
+<div class="sp" id="sp2-3">
+<h4><span class="spn">3</span>Verkettete Listen: umhängen in O(1) (§3.3–3.4)</h4>
+<pre class="cpp" data-roles='{"x":"mem","t":"mem","y":"mem","r":"res"}'>struct node { Item item; node* next; };
+typedef node *link;
+t-&gt;next = x-&gt;next; x-&gt;next = t;            // t hinter x einfügen
+t = x-&gt;next; x-&gt;next = t-&gt;next;            // Nachfolger von x löschen
+link reverse(link x)                        // Liste umkehren
+  { link t, y = x, r = 0;
+    while (y != 0)
+      { t = y-&gt;next; y-&gt;next = r; r = y; y = t; }
+    return r; }</pre>
+<table class="rt">
+<tr><th></th><th>Array</th><th>Liste</th></tr>
+<tr><td>k-tes Element</td><td>\(O(1)\)</td><td>\(O(k)\) (laufen)</td></tr>
+<tr><td>einfügen/löschen (Stelle bekannt)</td><td>\(O(N)\) (verschieben)</td><td>\(O(1)\) (2 Zeiger)</td></tr>
+<tr><td>Speicher</td><td>N</td><td>N Items + N Zeiger</td></tr>
+</table>
+<p class="small"><b>Reihenfolge beim Einfügen:</b> erst <code class="inl">t-&gt;next</code> setzen, dann <code class="inl">x-&gt;next</code>. Umgekehrt geht der Rest der Liste verloren.</p>
+</div>
+
+<div class="sp" id="sp2-4">
+<h4><span class="spn">4</span>Josephus und zirkuläre Listen (§3.3)</h4>
+<p>N Personen im Kreis, jede <b>M-te</b> scheidet aus. Zirkuläre Liste: der letzte Knoten zeigt auf den ersten.</p>
+<pre class="cpp" data-roles='{"x":"mem","N":"par","M":"par","i":"idx"}'>for (i = 2; i &lt;= N; i++) x = (x-&gt;next = new node(i, t));
+x-&gt;next = t;                                // Kreis schließen
+while (x != x-&gt;next)                        // mehr als einer übrig
+  { for (i = 1; i &lt; M; i++) x = x-&gt;next;    // M−1 Schritte
+    x-&gt;next = x-&gt;next-&gt;next; N--; }         // den M-ten aushängen
+cout &lt;&lt; x-&gt;item;                            // Überlebender</pre>
+<div class="step">\[ \begin{aligned}
+\text{Kosten} &= \Res{(N-1)\,M} \text{ Schritte} && \text{je Ausscheiden M Schritte} \\
+\text{Beispiel} &: N = 9,\ M = 5 \Rightarrow \Res{8} && \text{Reihenfolge } 5\,1\,7\,4\,3\,6\,9\,2
+\end{aligned} \]</div>
+<p class="small"><b>Von Hand:</b> Zahlen im Kreis aufschreiben, abzählen, Ausgeschiedene durchstreichen; beim nächsten weiterzählen.</p>
+</div>
+
+<div class="sp" id="sp2-5">
+<h4><span class="spn">5</span>Strings: die strlen-Falle (§3.6)</h4>
+<p>Ein String ist ein char-Array, das mit <code class="inl">'\0'</code> endet. <code class="inl">strlen</code> muss bis zur 0 <b>laufen</b>: \(O(N)\).</p>
+<pre class="cpp" data-roles='{"a":"mem","i":"idx"}'>for (i = 0; i &lt; strlen(a); i++) …         // strlen bei JEDEM Test: N²
+for (i = 0, n = strlen(a); i &lt; n; i++) …   // einmal: N
+for (i = 0; a[i] != 0; i++) …              // ohne strlen: N</pre>
+<div class="step">\[ \begin{aligned}
+\text{Falle} &= \textstyle\sum_{i=0}^{N} N \approx \Res{N^2} && \text{Bedingung läuft N+1-mal} \\
+\text{richtig} &= \Idx{N} && \text{Länge einmal merken}
+\end{aligned} \]</div>
+</div>
+
+<div class="sp" id="sp2-6">
+<h4><span class="spn">6</span>Stack: Postfix auswerten, Infix → Postfix (§4.2–4.4)</h4>
+<pre class="cpp" data-roles='{"s":"mem","N":"par"}'>void push(Item x) { s[N++] = x; }           // Array-Stack
+Item pop()        { return s[--N]; }        // LIFO: zuletzt rein, zuerst raus</pre>
+<p><span class="num">P</span><b>Postfix auswerten:</b> Zahl → push. Operator → <code class="inl">b = pop(); a = pop(); push(a op b)</code>. Am Ende steht das Ergebnis allein auf dem Stack. Achtung bei − und /: zuerst gepoppt ist der <b>rechte</b> Operand.</p>
+<p><span class="num">I</span><b>Infix → Postfix</b> (voll geklammert): Zahl → ausgeben. Operator → push. <code class="inl">)</code> → pop und ausgeben. <code class="inl">(</code> → ignorieren.</p>
+<p class="small"><b>Probe:</b> In einem gültigen Postfix-Ausdruck gilt immer: #Zahlen = #Operatoren + 1. Beispiel 5 9 8 + 4 6 * * 7 + * = 2075.</p>
+</div>
+
+<div class="sp" id="sp2-7">
+<h4><span class="spn">7</span>FIFO-Queue als Ringpuffer (§4.6)</h4>
+<pre class="cpp" data-roles='{"q":"mem","head":"idx","tail":"idx","N":"par"}'>void put(Item x) { q[tail++] = x; tail = tail % N; }
+Item get()       { Item t = q[head++]; head = head % N; return t; }
+int empty()      { return head % N == tail; }</pre>
+<p><b>Rezept:</b> zwei Indizes; <span class="c-idx">tail</span> = nächster freier Platz, <span class="c-idx">head</span> = ältestes Element. Beide laufen nur vorwärts und springen mit <code class="inl">% N</code> an den Anfang.</p>
+<p class="small"><b>Falle:</b> head == tail heißt <b>leer</b>. Deshalb ist die Queue bei N−1 Elementen schon „voll“ (Buch: Array der Größe maxN+1).</p>
+</div>
+
+<div class="sp" id="sp2-8">
+<h4><span class="spn">8</span>ADT, Kopiersemantik und Axiome (§4.1, §4.8)</h4>
+<p><span class="fw">ADT</span>: Daten nur über das Interface (public) erreichbar, die Darstellung ist private. Gleicher Client-Code für Array- und Listen-Implementierung.</p>
+<table class="rt">
+<tr><th>Fall</th><th>ohne eigene Funktionen</th><th>Lösung</th></tr>
+<tr><td class="mono">Stack b = a;</td><td>flache Kopie: beide teilen die Knoten</td><td>Kopierkonstruktor</td></tr>
+<tr><td class="mono">b = a;</td><td>flach + alte Knoten von b verloren (Leck)</td><td>operator= (erst freigeben, dann tief kopieren)</td></tr>
+<tr><td>Ende des Blocks</td><td>Knoten bleiben liegen</td><td>Destruktor</td></tr>
+</table>
+<div class="step">\[ \begin{aligned}
+\Rule{\text{Axiome Stack}} &: \text{pop}(\text{push}(s, t)) = s, \quad \text{top}(\text{push}(s, t)) = t && \text{LIFO} \\
+\text{empty}(\text{new}) &= \text{true}, \quad \text{empty}(\text{push}(s, t)) = \text{false} && \text{leer genau am Anfang}
+\end{aligned} \]</div>
+<p class="small"><b>Faustregel (Rule of Three):</b> Braucht die Klasse einen Destruktor, braucht sie auch Kopierkonstruktor und Zuweisung.</p>
+</div>
+
+<div class="sp" id="sp2-9">
+<h4><span class="spn">9</span>Rekursion und Divide &amp; Conquer (§5.1–5.3)</h4>
+<p><b>Jede Rekursion:</b> ein Anker (ohne Aufruf) und Aufrufe mit <b>kleinerem</b> Problem. Aufrufe zählen = Rekurrenz aufstellen.</p>
+<table class="rt">
+<tr><th>Programm</th><th>Rekurrenz</th><th>Lösung</th></tr>
+<tr><td>Fakultät, N!</td><td>\(C_N = C_{N-1} + 1\)</td><td>N Aufrufe</td></tr>
+<tr><td>Maximum teilen (5.6)</td><td>\(C_N = C_{\lceil N/2\rceil} + C_{\lfloor N/2\rfloor} + 1\)</td><td>\(2N-1\) Aufrufe, Tiefe \(\lceil\lg N\rceil + 1\)</td></tr>
+<tr><td>Hanoi (5.7)</td><td>\(T_N = 2T_{N-1} + 1\)</td><td>\(2^N - 1\) Züge, \(2^{N+1}-1\) Aufrufe</td></tr>
+<tr><td>Fibonacci naiv</td><td>\(C_N = C_{N-1} + C_{N-2} + 1\)</td><td>\(2F_{N+1} - 1\) Aufrufe, exponentiell</td></tr>
+<tr><td>Fibonacci mit Memo (DP)</td><td>jedes \(F_k\) einmal</td><td>\(2N - 1\) Aufrufe, linear</td></tr>
+</table>
+<p class="small"><b>Dynamische Programmierung:</b> Teilergebnisse merken, wenn dieselben Teilprobleme mehrfach vorkommen (Fibonacci, Rucksack). Bei D&amp;C sind die Teile disjunkt: Merken bringt nichts.</p>
+</div>
+
+<div class="sp" id="sp2-10">
+<h4><span class="spn">10</span>Baum-Mathematik (§5.4–5.5)</h4>
+<div class="step">\[ \begin{aligned}
+\text{Baum mit } N \text{ Knoten} &: \Res{N - 1} \text{ Kanten} && \text{jeder außer der Wurzel hat einen Elternknoten} \\
+\text{Binärbaum, } N \text{ innere} &: \Res{N + 1} \text{ externe Knoten} && \text{Eig. 5.6} \\
+\text{Pfadlängen} &: \Res{E = I + 2N} && \text{extern = intern + 2N (Eig. 5.7)} \\
+\text{Höhe} &: \lfloor \lg N \rfloor \le h \le N - 1 && \text{vollständig … entartet} \\
+\text{Ebene } k &: \le 2^k \text{ Knoten},\ \text{Höhe } h: \le 2^{h+1} - 1 && \text{voller Binärbaum}
+\end{aligned} \]</div>
+<p class="small"><b>Begriffe:</b> Höhe = längster Weg Wurzel → Blatt (Kanten). Tiefe eines Knotens = Kanten bis zur Wurzel. Interne Pfadlänge I = Summe aller Tiefen der inneren Knoten.</p>
+</div>
+
+<div class="sp" id="sp2-11">
+<h4><span class="spn">11</span>Traversierungen (§5.6)</h4>
+<pre class="cpp" data-roles='{"h":"mem"}'>void traverse(link h)
+  { if (h == 0) return;
+    visit(h);              // hier: Preorder  (Wurzel, L, R)
+    traverse(h-&gt;l);        // hier: Inorder   (L, Wurzel, R)
+    traverse(h-&gt;r);        // hier: Postorder (L, R, Wurzel)
+  }</pre>
+<p><span class="num">L</span><b>Levelorder:</b> mit Queue statt Rekursion: Wurzel rein; solange nicht leer: holen, besuchen, Kinder hinten anstellen.</p>
+<p><span class="num">R</span><b>Baum rekonstruieren:</b> Preorder liefert die Wurzel (erstes Element), in der Inorder steht links davon der linke, rechts der rechte Teilbaum. Rekursiv weiter. Pre + Post allein reicht <b>nicht</b> eindeutig.</p>
+<p class="small"><b>Klausur (Fädelung):</b> In einem gefädelten Baum zeigen leere rechte Links auf den Inorder-Nachfolger; Inorder geht dann ohne Stack.</p>
+</div>
+
+<div class="sp" id="sp2-12">
+<h4><span class="spn">12</span>Graphen: DFS und BFS (§5.8, §3.7)</h4>
+<table class="rt">
+<tr><th></th><th>DFS (Tiefensuche)</th><th>BFS (Breitensuche)</th></tr>
+<tr><td>Hilfsstruktur</td><td>Stack bzw. Rekursion</td><td>Queue</td></tr>
+<tr><td>Reihenfolge</td><td>so tief wie möglich, dann zurück</td><td>Schicht für Schicht nach Abstand</td></tr>
+<tr><td>liefert</td><td>Erreichbarkeit, Zusammenhang</td><td>kürzeste Wege (Kantenzahl)</td></tr>
+<tr><td>Kosten (Adjazenzliste)</td><td>\(O(V + E)\)</td><td>\(O(V + E)\)</td></tr>
+</table>
+<p><b>Von Hand:</b> Nachbarn in der Reihenfolge der Adjazenzliste abarbeiten (meist aufsteigend). Besuchte Knoten markieren, sonst Endlosschleife.</p>
+<p class="small"><b>Speicher:</b> Adjazenzmatrix \(V^2\) Bits, Adjazenzliste \(V + 2E\) Einträge (ungerichtet: jede Kante zweimal).</p>
+</div>
+
+<div class="sp" id="sp2-13">
+<h4><span class="spn">13</span>Quiz-Fallen Teil 2</h4>
+<table class="rt">
+<tr><th>Aussage</th><th>stimmt?</th></tr>
+<tr><td>„Einfügen in eine Liste ist immer O(1)“</td><td>nur wenn die Stelle (Vorgänger) bekannt ist; Suchen kostet O(N)</td></tr>
+<tr><td>„a[i] und *(a+i) sind dasselbe“</td><td>ja</td></tr>
+<tr><td>„Rekursion braucht keinen Speicher“</td><td>nein: Aufrufstapel, Tiefe × Rahmen</td></tr>
+<tr><td>„Ein Binärbaum mit N Knoten hat N+1 leere Links“</td><td>ja</td></tr>
+<tr><td>„Inorder eines BST ist sortiert“</td><td>ja</td></tr>
+<tr><td>„BFS findet kürzeste Wege in gewichteten Graphen“</td><td>nein, nur nach Kantenzahl</td></tr>
+<tr><td>„b = a kopiert einen listenbasierten Stack“</td><td>nein, nur den Zeiger (flach), solange kein operator= definiert ist</td></tr>
+<tr><td>„Hanoi mit N Scheiben braucht 2ᴺ − 1 Züge“</td><td>ja, und das ist optimal</td></tr>
+</table>
+</div>
+</div>
+</div>
+<!--/SPICK-->
 
 <div class="foot">Lernbegleiter Teil 2 · nach R. Sedgewick, <i>Algorithms in C++, Parts 1–4</i> (3. Aufl.), Kap. 3–5 · Programmcode wie im Buch (Header modernisiert, einzelne Zeilen zur Schrittanzeige umbrochen) · Axiome: Prüfungsergänzung · Bildatlas-Stil · als Nächstes Teil 3: Sortieren.</div>
 </div><!-- /wrap -->
@@ -4900,7 +5127,7 @@ document.addEventListener('DOMContentLoaded', () => {LB.Lab({id:'labK3', scenari
 (function(){
 'use strict';
 const LB = window.LB = window.LB || {};
-const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"], ["lab3", "🧪 Labor Kap. 3", "alles in einem interaktiven Bild"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"], ["lab4", "🧪 Labor Kap. 4", "alles in einem interaktiven Bild"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["gp-p2-thread", "★ Klausur: Fädelung", "Gedächtnisprotokoll A1 d"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"], ["lab5", "🧪 Labor Kap. 5", "alles in einem interaktiven Bild"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"]]]];
+const MENU = [["Start", [["start", "Start", "Legende, Bedienung"], ["bruecke", "Große Brücke", "wo Teil 2 steht"], ["master", "Master-Anatomie", "Werte + Operationen + Kosten"]]], ["Kapitel 3 · Bausteine", [["s31", "3.1 Bausteine", "Typ, struct, Zeiger"], ["s32", "3.2 Arrays", "Index → O(1), Sieb"], ["s33", "3.3 Listen", "Links umhängen O(1), Josephus"], ["s34", "3.4 Listenverarbeitung", "umkehren, Insertion Sort"], ["s35", "3.5 Speicher", "new/delete, Freiliste"], ["s36", "3.6 Strings", "char-Array, strlen-Falle"], ["s37", "3.7 Zusammengesetzt", "2D-Array, Adjazenzliste"], ["lab3", "🧪 Labor Kap. 3", "alles in einem interaktiven Bild"]]], ["Kapitel 4 · ADTs", [["s40", "4.0 ADT & Klasse", "Interface, private, public"], ["s41", "4.1 Gen. Queues", "insert + remove-Regel"], ["s42", "4.2–4.3 Stack & Clients", "LIFO, Postfix, Infix"], ["s44", "4.4 Stack-Impl.", "Array s[N++], Liste"], ["s45", "4.5 UF als ADT", "Union-Find hinter Interface"], ["s46", "4.6 FIFO-Queue", "Ringpuffer mod N"], ["s47", "4.7 Duplikate", "Index-Tabelle t[]"], ["s48", "4.8 First-Class", "Kopie, Zuweisung, Destruktor"], ["axiome", "★ Axiome", "pop(push(s,t)) = s"], ["lab4", "🧪 Labor Kap. 4", "alles in einem interaktiven Bild"]]], ["Kapitel 5 · Rekursion & Bäume", [["s51", "5.1 Rekursion", "Anker + kleiner werden"], ["s52", "5.2 Divide & Conquer", "max, Hanoi, 2ᴺ−1"], ["s53", "5.3 Dyn. Progr.", "Fibonacci, Rucksack"], ["s54", "5.4 Bäume", "Begriffe, Binärbaum"], ["s55", "5.5 Baum-Mathe", "N+1 extern, E = I + 2N"], ["s56", "5.6 Traversierung", "pre/in/post/level"], ["gp-p2-thread", "★ Klausur: Fädelung", "Gedächtnisprotokoll A1 d"], ["s57", "5.7 Baum-Rekursion", "count, height"], ["s58", "5.8 Graphen", "DFS Stack, BFS Queue"], ["lab5", "🧪 Labor Kap. 5", "alles in einem interaktiven Bild"]]], ["Training", [["schema", "📐 Schema", "3 Rekursions-Beispiele"], ["pruefung", "🎯 Prüfungstabelle", "Operation × Struktur"], ["quiz", "Quiz", "Klausurstil"], ["glossar", "Glossar", "Fachwörter"], ["faden", "★ Roter Faden", "Brücke zu Teil 3"], ["spick", "🧾 Spickzettel", "alles für die Klausur Teil 2"]]]];
 const KW = {"res": ["Ergebnis*", "Laufzeit*", "Kosten", "Komplexität", "gesucht*", "Rückgabewert*", "worst case", "Worst Case", "schlechtesten Fall*", "schlechtester Fall", "Minimum", "Maximum", "Median", "Überlebende*", "Wurzel"], "chg": ["Änderung*", "tauschen", "getauscht", "Tausch*", "vertauscht", "Vertauschung*", "Bewegung*", "bewegt", "verschieben", "verschoben", "Verschiebung*", "einfügen", "eingefügt", "Einfügen", "entfernen", "entfernt", "Entfernen", "umhängen", "umgehängt", "Zuweisung*", "Schreibzugriff*", "überschreiben", "überschrieben", "push", "pop", "put", "get", "insert", "delete", "new"], "rule": ["Invariante*", "Rekursion", "rekursiv*", "Rekurrenz*", "Induktion", "O-Notation", "Fachwort", "Regel*", "Definition", "Teleskop*", "teleskopiert", "harmonische Zahl", "Gauß-Summe", "geometrische Reihe", "obere Schranke", "untere Schranke", "Schranke*", "Abstraktion", "Interface", "ADT", "ADTs", "Stack", "Queue", "FIFO", "LIFO", "Binärbaum*", "Baum", "Bäume", "Traversierung", "Preorder", "Inorder", "Postorder", "Level-Order", "Divide & Conquer", "Teile und Herrsche", "Memoisierung", "dynamische Programmierung", "Klasse*", "Template", "Axiom*", "Tiefensuche", "Breitensuche", "Graph*"], "par": ["Eingabe*", "Eingabegröße", "Parameter", "N", "M"], "idx": ["Laufvariable*", "Index", "Indizes", "Schleife*", "innere Schleife", "äußere Schleife"], "cond": ["Vergleich*", "vergleichen", "verglichen", "vergleicht", "Bedingung*", "Test*", "Anker", "Rekursionsanker", "Basisfall", "Abbruch", "Null-Link"], "mem": ["Speicher", "Array*", "Arrays", "Adresse*", "Zusatzspeicher", "Hilfsarray*", "Knoten", "Link", "Liste", "Listen", "verkettete Liste", "Zeiger", "Links", "Kopfknoten", "Dummy", "Heap-Speicher", "Stackframe*", "Ringpuffer", "Adjazenzliste*", "Adjazenzmatrix"]};
 /* ---------- Menü ---------- */
 const menu = document.getElementById('lbMenu');
@@ -4946,6 +5173,11 @@ function patch(){
 }
 window.addEventListener('load', () => { patch(); setTimeout(() => LB.kwColor(document.querySelector('.lb-main') || document.body), 30); });
 })();
+</script>
+<script>
+/* ===== SPICK: nur den Spickzettel drucken ===== */
+(function(){ const b = document.getElementById('spPrint'); if(!b) return;
+  b.addEventListener('click', () => { document.body.classList.add('print-spick'); window.print(); setTimeout(() => document.body.classList.remove('print-spick'), 500); }); })();
 </script>
 </body>
 </html>
